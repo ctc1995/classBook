@@ -1,0 +1,61 @@
+<!--home.wxml-->
+<view class="container">
+  <view class="userinfo" wx:if="{{!hasUserInfo && canIUse}}">
+    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 进入典书 </button>
+  </view>
+  <view class="mod_home" wx:else>
+    <!-- 搜索区域 -->
+    <view class='mod_search'>
+      <view class='searchItem'>
+        <image src='../../assets/images/search.png'/>
+        <input placeholder='搜索关键词'></input>
+      </view>
+    </view>
+    <!-- 轮播图区域
+      TODO: 点击指示点切换轮播图
+     -->
+    <view class="mod_swiper">
+      <swiper autoplay="true" interval="3000" circular="true" current="current" bindchange="swiperChange">
+        <block wx:for="{{swiperPics}}" wx:key="{{index}}">
+          <swiper-item>
+            <view class="swiper-item">
+              <image src='../../assets/images/{{item}}'></image>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <!--重置小圆点的样式  -->
+      <view class="dots">
+          <block wx:for="{{swiperPics}}" wx:key="{{index}}">  
+              <view class="dot {{index == current?'active':''}}"></view>  
+          </block>  
+      </view>
+    </view>
+    <!-- 导航区域 -->
+    <view class="mod_navbar">
+      <navigator class="navbar_item" wx:for="{{navBar}}" wx:key="{{index}}" url="{{item.href}}">
+        <image src="../../assets/images/home/{{item.icon}}"></image>
+        <p>{{item.label}}</p>
+      </navigator>
+    </view>
+    <!-- 推荐书单 -->
+    <view class="mod_recommend">
+      <h2 class="title">
+        推荐书单
+        <span class="more">更多书单</span>
+      </h2>
+      <div class="book_list">
+        <navigator class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" url="../logs/logs?bookId={{item.bookId}}">
+          <image class="book_pic" src="../../assets/images/{{item.pic}}"></image>
+          <p class="like {{item.like? 'active' : ''}}">
+            <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like2x.png'}}"></image>
+            {{item.likeCount}}
+          </p>
+          <p class="book_title">
+            {{item.title}}
+          </p>
+        </navigator>
+      </div>
+    </view>
+  </view>
+</view>

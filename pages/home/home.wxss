@@ -1,0 +1,156 @@
+/**home.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo button {
+  color: #f4b800;
+}
+/* 搜索 */
+view.mod_search {
+  display: flex;
+  flex-direction: row;
+  height: 60rpx;
+  align-items: center;
+  font-size: 24rpx;
+  margin-bottom: 30rpx;
+}
+
+view.searchItem {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+view.searchItem image {
+  height: 30rpx;
+  width: 30rpx;
+  align-self: center;
+  position: absolute;
+  left: 18rpx;
+}
+
+view.searchItem input {
+  width: 616rpx;
+  flex: 1;
+  padding-left: 62rpx;
+  border-radius: 50rpx;
+  border: 1px solid #dedede;
+  background-color: #f5f5f5;
+}
+
+/* 轮播图 */
+.mod_swiper{
+  max-height: 238rpx;
+  margin-bottom: 54rpx;
+  position: relative;
+}
+.swiper-item{
+  border-radius: 15rpx;
+  z-index: 0;
+}
+.swiper-item image{
+  width: 678rpx;
+  height: 238rpx;
+  max-width: 678rpx;
+  max-height: 238rpx;
+}
+/* 自定义轮播图指示点样式 */
+.mod_swiper .dots{
+  width: 678rpx;
+  height: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  bottom: 10rpx;
+}
+/* 未选中时的小圆点样式 */
+.mod_swiper .dot{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background-color: rgba(51,51,51,.5);
+}
+.mod_swiper .dot+.dot{margin-left: 20rpx;}
+/* 选中以后的小圆点样式 */
+.mod_swiper .active{
+  background-color: #fff;
+} 
+
+/* 导航栏 */
+.mod_navbar{
+  width: 678rpx;
+  font-size: 24rpx;
+  color: #333;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 60rpx;
+}
+.mod_navbar .navbar_item{
+  width: 100rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.navbar_item image{
+  width: 84rpx;
+  height: 72rpx;
+  margin-bottom: 15rpx;
+}
+
+/* 推荐书单 */
+.book_list{
+  width: 678rpx;
+  font-size: 24rpx;
+  color: #999;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60rpx;
+}
+.book_item{
+  width: 178rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.book_item .book_pic{
+  width: 178rpx;
+  height:236rpx;
+  max-width: 178rpx;
+  max-height: 236rpx;
+}
+.book_item .like{
+  height: 32rpx;
+  background-color: rgba(0,0,0,.7);
+  font-size: 14rpx;
+  padding-right: 8rpx;
+  border-top-right-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  position: absolute;
+  left: 0;
+  top: 188rpx;
+  display: flex;
+  align-items: center;
+}
+.like.active{color: #f4b800;}
+.like image{
+  width: 22rpx;
+  height: 18rpx;
+  margin-left: 8rpx;
+  margin-right: 4rpx;
+}
+.book_item .book_title{
+  padding-top: 10rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

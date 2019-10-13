@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/logs/logs",
+    "pages/discovery/discovery",
+    "pages/shopCar/shopCar",
+    "pages/about/about"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "典书",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#f4b800",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "assets/images/tabbar/home2x.png",
+        "selectedIconPath": "assets/images/tabbar/sel-home2x.png"
+      },
+      {
+        "pagePath": "pages/discovery/discovery",
+        "text": "发现",
+        "iconPath": "assets/images/tabbar/discovery2x.png",
+        "selectedIconPath": "assets/images/tabbar/sel-discovery2x.png"
+      },
+      {
+        "pagePath": "pages/shopCar/shopCar",
+        "text": "购物车",
+        "iconPath": "assets/images/tabbar/shopcar2x.png",
+        "selectedIconPath": "assets/images/tabbar/sel-shopcar2x.png"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "我的",
+        "iconPath": "assets/images/tabbar/about2x.png",
+        "selectedIconPath": "assets/images/tabbar/sel-about2x.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

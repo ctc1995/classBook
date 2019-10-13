@@ -1,0 +1,29 @@
+/**app.wxss**/
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 36rpx;
+  box-sizing: border-box;
+} 
+
+.title{
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+.title .more{
+  line-height: 32rpx;
+  font-size: 24rpx;
+  color: #999;
+  font-weight: unset;
+  padding: 0 13rpx;
+  border: 1px solid #999;
+  border-radius: 20rpx;
+}
