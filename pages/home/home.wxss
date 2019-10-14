@@ -102,7 +102,7 @@ view.searchItem input {
 }
 
 /* 推荐书单 */
-.book_list{
+.mod_recommend .book_list{
   width: 678rpx;
   font-size: 24rpx;
   color: #999;
@@ -110,7 +110,7 @@ view.searchItem input {
   justify-content: space-between;
   margin-bottom: 60rpx;
 }
-.book_item{
+.mod_recommend .book_item{
   width: 178rpx;
   display: flex;
   flex-direction: column;
@@ -118,16 +118,16 @@ view.searchItem input {
   align-items: center;
   position: relative;
 }
-.book_item .book_pic{
+.mod_recommend .book_item .book_pic{
   width: 178rpx;
   height:236rpx;
   max-width: 178rpx;
   max-height: 236rpx;
 }
-.book_item .like{
+.mod_recommend .book_item .like{
   height: 32rpx;
   background-color: rgba(0,0,0,.7);
-  font-size: 14rpx;
+  font-size: 16rpx;
   padding-right: 8rpx;
   border-top-right-radius: 20rpx;
   border-bottom-right-radius: 20rpx;
@@ -137,14 +137,14 @@ view.searchItem input {
   display: flex;
   align-items: center;
 }
-.like.active{color: #f4b800;}
-.like image{
+.mod_recommend .like.active{color: #f4b800;}
+.mod_recommend .like image{
   width: 22rpx;
   height: 18rpx;
   margin-left: 8rpx;
   margin-right: 4rpx;
 }
-.book_item .book_title{
+.mod_recommend .book_item .book_title{
   padding-top: 10rpx;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
@@ -153,4 +153,72 @@ view.searchItem input {
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+/* 好书推荐 */
+.mod_good .book_list{
+  width: 678rpx;
+  height: 196rpx;
+  font-size: 24rpx;
+  color: #999;
+  display: flex;
+  flex-direction: column;
+}
+.mod_good .book_list .book_item{
+  display: flex;
+  align-items: center;
+  padding-bottom: 30rpx;
+}
+.mod_good .book_list .book_item+.book_item{
+  padding-top: 30rpx;
+  border-top: 1px solid #eaeaea;
+}
+
+.mod_good .book_list .book_item .book_content{
+  width: 636rpx;
+  display: flex;
+}
+.mod_good .book_list .book_item .book_content image{
+  width: 152rpx;
+  height: 196rpx;
+  max-width: 152rpx;
+  max-height: 196rpx;
+  margin-right: 26rpx;
+}
+.mod_good .book_list .book_item .book_content .book_detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.mod_good .book_list .book_item .book_content .book_detail .book_info{
+  width: 458rpx;
+  display: flex;
+  flex-direction: column;
+}
+.mod_good .book_list .book_item .book_content .book_detail .book_info .book_title{
+  width: 458rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  overflow: hidden;/*超出部分隐藏*/
+  text-overflow:ellipsis;/* 超出部分显示省略号 */
+  white-space: nowrap;/*规定段落中的文本不进行换行 */
+}
+.mod_good .book_list .book_item .book_content .book_detail .book_info p+p{
+  margin-top: 15rpx;
+}
+.mod_good .book_list .book_item .book_content .book_detail .book_price .price_unit{
+  font-size: 20rpx;
+  color: #e50101;
+}
+.mod_good .book_list .book_item .book_content .book_detail .book_price .real_price{
+  font-size: 32rpx;
+  color: #e50101;
+}
+.mod_good .book_list .book_item .add_car{
+  width: 42rpx;
+}
+
+.mod_good .book_list .book_item .add_car image{
+  width: 42rpx;
+  height: 37rpx;
 }

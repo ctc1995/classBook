@@ -1,19 +1,18 @@
-<!--home.wxml-->
+<!-- home.wxml -->
 <view class="container">
   <view class="userinfo" wx:if="{{!hasUserInfo && canIUse}}">
-    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 进入典书 </button>
+    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">进入典书</button>
   </view>
   <view class="mod_home" wx:else>
     <!-- 搜索区域 -->
     <view class='mod_search'>
       <view class='searchItem'>
-        <image src='../../assets/images/search.png'/>
+        <image src='../../assets/images/search.png' />
         <input placeholder='搜索关键词'></input>
       </view>
     </view>
     <!-- 轮播图区域
-      TODO: 点击指示点切换轮播图
-     -->
+      TODO: 点击指示点切换轮播图 -->
     <view class="mod_swiper">
       <swiper autoplay="true" interval="3000" circular="true" current="current" bindchange="swiperChange">
         <block wx:for="{{swiperPics}}" wx:key="{{index}}">
@@ -24,11 +23,11 @@
           </swiper-item>
         </block>
       </swiper>
-      <!--重置小圆点的样式  -->
+      <!-- 重置小圆点的样式 -->
       <view class="dots">
-          <block wx:for="{{swiperPics}}" wx:key="{{index}}">  
-              <view class="dot {{index == current?'active':''}}"></view>  
-          </block>  
+        <block wx:for="{{swiperPics}}" wx:key="{{index}}">
+          <view class="dot {{index == current?'active':''}}"></view>
+        </block>
       </view>
     </view>
     <!-- 导航区域 -->
@@ -51,10 +50,37 @@
             <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like2x.png'}}"></image>
             {{item.likeCount}}
           </p>
-          <p class="book_title">
-            {{item.title}}
-          </p>
+          <p class="book_title">{{item.title}}</p>
         </navigator>
+      </div>
+    </view>
+    <!-- 好书推荐 -->
+    <view class="mod_good">
+      <h2 class="title">
+        好书推荐
+        <span class="more">更多书单</span>
+      </h2>
+      <div class="book_list">
+        <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
+          <navigator class="book_content" url="../logs/logs?bookId={{item.bookId}}">
+            <image src="../../assets/images/{{item.pic}}"></image>
+            <section class="book_detail">
+              <section class="book_info">
+                <p class="book_title">{{item.title}}</p>
+                <p class="book_auth">{{item.auth}}</p>
+                <p class="book_rate">豆瓣评分：{{item.rate}}</p>
+              </section>
+              <p class="book_price">
+                <span class="price_unit">￥</span>
+                <span class="real_price">{{item.realPrice}}</span>
+                <span>/{{item.price}}</span>
+              </p>
+            </section>
+          </navigator>
+          <section class="add_car">
+            <image src="../../assets/images/add-car2x.png" />
+          </section>
+        </section>
       </div>
     </view>
   </view>

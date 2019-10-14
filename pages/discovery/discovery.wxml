@@ -1,2 +1,4 @@
 <!--pages/discovery.wxml-->
-<text>pages/discovery.wxml</text>
+<view class="mod_discovery">
+    
+</view>
