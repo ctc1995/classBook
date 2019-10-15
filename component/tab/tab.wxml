@@ -1,0 +1,6 @@
+<!-- tab.wxml -->
+<view class="mod_tabnav">
+  <div class="tabnav_item {{index === curTabIndex ? 'current' : ''}}" wx:for="{{tabList}}" wx:key="{{index}}" bindtap="changeTabNav" data-item="{{item}}" data-index="{{index}}">
+    <span>{{item.tabName}}</span>
+  </div>
+</view>

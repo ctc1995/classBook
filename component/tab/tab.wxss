@@ -1,0 +1,22 @@
+/* tab.wxss */
+.mod_tabnav{
+  font-size: 30rpx;
+  color: #999;
+  /* border-top: 1px solid #eaeaea; */
+  border-bottom: 1px solid #eaeaea;
+}
+.mod_tabnav .tabnav_item{
+  width: 375rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  display: inline-block;
+}
+.mod_tabnav .tabnav_item.current{
+  color: #f4b800;
+  font-weight: bold;
+}
+.mod_tabnav .tabnav_item.current span{
+  display: inline-block;
+  border-bottom: 2px solid #f4b800;
+}

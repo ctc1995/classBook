@@ -1,4 +1,32 @@
 <!--pages/discovery.wxml-->
 <view class="mod_discovery">
-    
+  <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
+  <view class="mod_rank" wx:if="{{curTabId==='rank'}}">
+    <h2 class="title">官方榜</h2>
+    <section class="rank_item" wx:for="{{rankList}}" wx:key="{{index}}">
+      <image src="../../assets/images/discovery/{{item.image}}" />
+      <section class="list">
+        <p wx:for="{{item.list}}" wx:key="{{index}}">{{index+1}}.{{item.name}}</p>
+      </section>
+    </section>
+  </view>
+  <view class="mod_auth" wx:if="{{curTabId==='auth'}}">
+    <!-- 搜索区域 -->
+    <view class='mod_search'>
+      <view class='searchItem'>
+        <image src='../../assets/images/search.png' />
+        <input placeholder='搜索关键词'></input>
+      </view>
+    </view>
+    <view class="auth_item" wx:for="{{authList}}" wx:key="{{index}}">
+      <image class="auth_ava" src="../../assets/images/discovery/{{item.image}}"/>
+      <p class="auth_name">
+        <span title="{{item.name}}">{{item.name}}</span>
+        <span class="{{item.like? 'like': ''}}">
+          {{item.likeCount}}
+          <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like22x.png'}}"/>
+        </span>
+      </p>
+    </view>
+  </view>
 </view>

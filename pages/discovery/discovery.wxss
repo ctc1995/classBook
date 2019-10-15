@@ -1,1 +1,66 @@
 /* pages/discovery.wxss */
+.mod_rank{
+  width: 750rpx;
+  padding: 60rpx 36rpx 30rpx;
+  font-size: 28rpx;
+  color: #555;
+}
+.mod_rank .rank_item{
+  margin-bottom: 30rpx;
+  display: flex;
+}
+.mod_rank .rank_item image{
+  width: 202rpx;
+  height: 202rpx;
+  margin-right: 36rpx;
+}
+.mod_rank .rank_item .list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.mod_rank .rank_item p+p{
+  margin-top: 28rpx;
+}
+
+.mod_auth{
+  width: 750rpx;
+  padding: 30rpx 36rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+.mod_auth .auth_item{
+  width: 212rpx;
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 30rpx;
+  border-bottom: 1px solid #eaeaea;
+}
+.mod_auth .auth_item + .auth_item{
+  padding-left: 21rpx;
+}
+.mod_auth .auth_item:nth-child(3n+2){
+  padding-left: 0; 
+}
+.mod_auth .auth_item .auth_ava{
+  width: 212rpx;
+  height: 212rpx;
+}
+.mod_auth .auth_item .auth_name{
+  margin: 30rpx 0;
+  display: flex;
+  justify-content: space-between;
+}
+.mod_auth .auth_item .auth_name span{
+  min-width: 100rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mod_auth .auth_item .auth_name .like{
+  color: #f4b800;
+}
+.mod_auth .auth_item .auth_name image{
+  width: 22rpx;
+  height: 18rpx;
+}

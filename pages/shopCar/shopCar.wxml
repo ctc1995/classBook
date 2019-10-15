@@ -1,2 +1,7 @@
 <!--pages/shopCar/shopCar.wxml-->
-<text>pages/shopCar/shopCar.wxml</text>
+<view class="mod_shopcar">
+  <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
+  <view class="goods-list">
+      
+  </view>
+</view>

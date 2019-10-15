@@ -5,9 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tabList: [
+      {
+        "tabId": "all",
+        "tabName": "全部",
+      },
+      {
+        "tabId": "tip",
+        "tabName": "到货提醒"
+      }
+    ],
+    curTabId: "all",
   },
 
+  // 切换TabNav事件
+  changeTabNav: function (e){
+    this.setData({
+      curTabId: e.detail.tabId
+    })
+    console.log(e.detail);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
