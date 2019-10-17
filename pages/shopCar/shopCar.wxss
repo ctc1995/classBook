@@ -1,1 +1,148 @@
 /* pages/shopCar/shopCar.wxss */
+
+.mod_shopcar {
+  min-height: 100vh;
+  background-color: #f3f3f3;
+}
+
+/* checkbox样式 */
+
+.mod_shopcar checkbox {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 30rpx;
+}
+
+.mod_shopcar checkbox .wx-checkbox-input {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+}
+
+.mod_shopcar checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #f4b800;
+}
+
+.mod_shopcar checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 38rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.mod_shopcar .goods_list {
+  width: 678rpx;
+  font-size: 24rpx;
+  color: #999;
+  background-color: #fff;
+  padding: 30rpx 36rpx 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mod_shopcar .goods_list .book_item {
+  width: 678rpx;
+  display: flex;
+  align-items: center;
+  padding-bottom: 30rpx;
+}
+
+.mod_shopcar .goods_list .book_item+.book_item {
+  padding-top: 30rpx;
+  border-top: 1px solid #eaeaea;
+}
+
+.mod_shopcar .goods_list .book_item image {
+  width: 152rpx;
+  height: 196rpx;
+  max-width: 152rpx;
+  max-height: 196rpx;
+  border: 1px solid #eaeaea;
+  border-radius: 8rpx;
+  margin-right: 26rpx;
+}
+
+.mod_shopcar .goods_list .book_item .book_detail {
+  height: 196rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mod_shopcar .goods_list .book_item .book_detail .book_info {
+  width: 438rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.mod_shopcar .goods_list .book_item .book_detail .book_info .book_title {
+  width: 438rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  overflow: hidden; /*超出部分隐藏*/
+  text-overflow: ellipsis; /* 超出部分显示省略号 */
+  white-space: nowrap; /*规定段落中的文本不进行换行 */
+}
+
+.mod_shopcar .goods_list .book_item .book_detail .book_info p+p {
+  margin-top: 15rpx;
+}
+
+.mod_shopcar .goods_list .book_item .book_detail .book_price .price_unit {
+  font-size: 20rpx;
+  color: #e50101;
+}
+
+.mod_shopcar .goods_list .book_item .book_detail .book_price .real_price {
+  font-size: 32rpx;
+  color: #e50101;
+}
+
+.mod_shopcar .goods_total {
+  position: fixed;
+  bottom: 0;
+  width: 750rpx;
+  height: 88rpx;
+  background-color: #fff;
+  padding: 0 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.sel_all {
+  font-size: 28rpx;
+  color: #999;
+  margin-right: 20rpx;
+}
+
+.sel_all span {
+  margin-left: -10rpx;
+}
+
+.total_money {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.total_money span {
+  font-size: 32rpx;
+  color: #e50101;
+}
+
+.buy {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background-color: #f4b800;
+  border-radius: 30rpx;
+  margin: 0;
+}

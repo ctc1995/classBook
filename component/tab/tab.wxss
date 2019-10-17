@@ -4,6 +4,7 @@
   color: #999;
   /* border-top: 1px solid #eaeaea; */
   border-bottom: 1px solid #eaeaea;
+  background-color: #fff;
 }
 .mod_tabnav .tabnav_item{
   width: 375rpx;

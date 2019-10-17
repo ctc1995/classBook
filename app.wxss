@@ -8,9 +8,9 @@
   justify-content: space-between;
   padding: 30rpx 36rpx;
   box-sizing: border-box;
-} 
+}
 
-.title{
+.title {
   font-size: 30rpx;
   color: #333;
   font-weight: bold;
@@ -18,7 +18,8 @@
   justify-content: space-between;
   margin-bottom: 30rpx;
 }
-.title .more{
+
+.title .more {
   height: 32rpx;
   line-height: 32rpx;
   font-size: 24rpx;
@@ -30,6 +31,7 @@
 }
 
 /* 搜索 */
+
 view.mod_search {
   display: flex;
   flex-direction: row;
@@ -60,4 +62,46 @@ view.searchItem input {
   border-radius: 50rpx;
   border: 1px solid #dedede;
   background-color: #f5f5f5;
+}
+
+.book_price {
+  position: relative;
+}
+
+/*主容器*/
+
+.stepper {
+  width: 180rpx;
+  height: 54rpx;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  position: absolute;
+  right: 10rpx;
+  bottom: 0;
+}
+
+/*加号和减号*/
+
+.stepper .oprate {
+  float: left;
+  width: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #ccc;
+  display: inline-block;
+}
+
+/*数值*/
+
+.stepper input {
+  display: inline-block;
+  width: 38px;
+  height: 50rpx;
+  float: left;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 12px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  color: #333;
 }

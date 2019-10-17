@@ -77,7 +77,7 @@
               </p>
             </section>
           </navigator>
-          <section class="add_car">
+          <section class="add_car" bindtap="addShopCar" data-book="{{item}}">
             <image src="../../assets/images/add-car2x.png" />
           </section>
         </section>

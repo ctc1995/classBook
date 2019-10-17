@@ -1,7 +1,46 @@
 <!--pages/shopCar/shopCar.wxml-->
 <view class="mod_shopcar">
   <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
-  <view class="goods-list">
-      
+  <view class="goods_list">
+    <section class="book_item" wx:for="{{shopCarList}}" wx:key="{{index}}">
+      <checkbox value="{{item.bookId}}" checked="{{item.sel}}" bindtap="selGoods" data-index="{{index}}" />
+      <navigator url="../logs/logs?bookId={{item.bookId}}">
+        <image src="../../assets/images/{{item.pic}}"></image>
+      </navigator>
+      <section class="book_detail">
+        <navigator url="../logs/logs?bookId={{item.bookId}}">
+          <section class="book_info">
+            <p class="book_title">{{item.title}}</p>
+            <p class="book_auth">{{item.auth}}</p>
+            <p class="book_rate">豆瓣评分：{{item.rate}}</p>
+          </section>
+        </navigator>
+        <p class="book_price">
+          <span class="price_unit">￥</span>
+          <span class="real_price">{{item.realPrice}}</span>
+          <span>/{{item.price}}</span>
+          <view class='stepper'>
+            <view class="oprate" catchtap='bindMinus' data-index='{{index}}'>-</view>
+            <input bindinput='bindManual' type="number" maxlength="3" value='{{item.sum}}' data-index='{{index}}'></input>
+            <view class="oprate" catchtap='bindPlus' data-index='{{index}}'>+</view>
+          </view>
+        </p>
+      </section>
+    </section>
+  </view>
+  <view class="goods_total">
+    <view>
+      <label class="sel_all">
+        <checkbox data-checked="{{checkAllGoods}}" checked="{{checkAllGoods}}" bindtap="selAllGoods" />
+        <span>全选</span>
+      </label>
+      <span class="total_money" wx:if="{{totalMoney>0}}">
+        合计:
+        <span>￥{{totalMoney}}</span>
+      </span>
+    </view>
+    <button class="buy" bindtap="buy">去结算
+      <span wx:if="{{totalGoods>0}}">({{totalGoods}})</span>
+    </button>
   </view>
 </view>

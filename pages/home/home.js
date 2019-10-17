@@ -65,6 +65,7 @@ Page({
     // 好书推荐
     goodList:[
       {
+        bookId: 1,
         pic: 'book.jpg',
         title: '我是个年轻人，我的脾气不太好',
         auth: '金庸',
@@ -73,6 +74,7 @@ Page({
         price: "558.00"
       },
       {
+        bookId: 2,
         pic: 'book.jpg',
         title: '我是个年轻人，我的脾气不太好',
         auth: '金庸',
@@ -128,6 +130,32 @@ Page({
     this.setData({
       current: e.detail.current
     })
+  },
+  // 加购
+  addShopCar(e){
+    console.log(e);
+    try {
+      var shopCar = wx.getStorageSync('shopCar') || {
+        "list": [],
+        "idList": [],
+      };
+      if (shopCar) {
+        // Do something with return value
+        if (shopCar.idList.indexOf(e.currentTarget.dataset.book.bookId) === -1){
+          shopCar.list.push(e.currentTarget.dataset.book);
+          shopCar.idList.push(e.currentTarget.dataset.book.bookId);
+        }
+      }
+      try {
+        console.log(shopCar);
+        wx.setStorageSync('shopCar', shopCar);
+      } catch (e) {
+        console.log(e);
+      }
+    } catch (e) {
+      // Do something when catch error
+      console.log(e);
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
