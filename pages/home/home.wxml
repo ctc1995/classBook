@@ -6,10 +6,10 @@
   <view class="mod_home" wx:else>
     <!-- 搜索区域 -->
     <view class='mod_search'>
-      <view class='searchItem'>
+      <navigator class='searchItem' url="../../pages/search/search">
         <image src='../../assets/images/search.png' />
         <input placeholder='搜索关键词'></input>
-      </view>
+      </navigator>
     </view>
     <!-- 轮播图区域
       TODO: 点击指示点切换轮播图 -->
@@ -41,10 +41,10 @@
     <view class="mod_recommend">
       <h2 class="title">
         推荐书单
-        <span class="more">更多书单</span>
+        <navigator class="more" url="../bookMenuList/bookMenuList">更多书单</navigator>
       </h2>
       <div class="book_list">
-        <navigator class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" url="../logs/logs?bookId={{item.bookId}}">
+        <navigator class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" url="../bookMenu/bookMenu?bookMenuId={{item.bookId}}">
           <image class="book_pic" src="../../assets/images/{{item.pic}}"></image>
           <p class="like {{item.like? 'active' : ''}}">
             <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like2x.png'}}"></image>
@@ -58,11 +58,11 @@
     <view class="mod_good">
       <h2 class="title">
         好书推荐
-        <span class="more">更多书单</span>
+        <navigator class="more" url="../allClass/allClass">更多好书</navigator>
       </h2>
       <div class="book_list">
         <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
-          <navigator class="book_content" url="../logs/logs?bookId={{item.bookId}}">
+          <navigator class="book_content" url="../goods/goods?bookId={{item.bookId}}">
             <image src="../../assets/images/{{item.pic}}"></image>
             <section class="book_detail">
               <section class="book_info">
@@ -73,7 +73,8 @@
               <p class="book_price">
                 <span class="price_unit">￥</span>
                 <span class="real_price">{{item.realPrice}}</span>
-                <span>/{{item.price}}</span>
+                <span>/</span>
+                <span class="price">{{item.price}}</span>
               </p>
             </section>
           </navigator>

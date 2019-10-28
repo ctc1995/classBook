@@ -1,43 +1,45 @@
-// pages/about/about.js
+// pages/discovery.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo:{
-      "name": '岂止年少,也是有为',
-      "phone": null,
+    goods:{
+      picUrl: [],
+      price: 999.99,
+      realPrice: 399.99,
+      title: '我是个年轻人，我的脾气不太好',
+      auth: '金庸',
+      publicHome: '全球国际-联合出版社出版',
+      publicTime: '2010-09-16',
+      buildType: '平装',
+      server: [1,2],
+      ID: '10010',
+      type: 'wenxue',
+      buyTime: '2018-09-09',
+      format: '32',
     },
-    urlList:[
+    goodsServer: [
       {
-        "icon": 'book-shelf.png',
-        "title": '我的书架',
-        "href": '../logs/logs'
+        "icon": '',
+        "name": '消毒清洁'
       },
       {
-        "icon": 'coupon.png',
-        "title": '我的优惠',
-        "href": '../logs/logs'
-      },
-      {
-        "icon": 'task.png',
-        "title": '任务中心',
-        "href": '../logs/logs'
-      },
-      {
-        "icon": 'setting.png',
-        "title": '设置',
-        "href": '../logs/logs'
-      },
-      {
-        "icon": 'aboutme.png',
-        "title": '关于我们',
-        "href": '../logs/logs'
+        "icon": '',
+        "name": '官方自营'
       },
     ],
+    goodsType:{
+      "wenxue":"文学"
+    }
   },
 
+  swiperChange: function (e) {
+    this.setData({
+      current: e.detail.current
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

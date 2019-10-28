@@ -1,39 +1,39 @@
-// pages/about/about.js
+// pages/bookMenuList.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo:{
-      "name": '岂止年少,也是有为',
-      "phone": null,
-    },
-    urlList:[
+    // 推荐书单
+    recommendList: [
       {
-        "icon": 'book-shelf.png',
-        "title": '我的书架',
-        "href": '../logs/logs'
+        bookId: 1,
+        pic: "book.png",
+        title: "传奇，独自从矿山中走出",
+        like: true,
+        likeCount: 10000,
       },
       {
-        "icon": 'coupon.png',
-        "title": '我的优惠',
-        "href": '../logs/logs'
+        bookId: 2,
+        pic: "book.png",
+        title: "心通万古，踏上了一条传奇之路",
+        like: false,
+        likeCount: 10000,
       },
       {
-        "icon": 'task.png',
-        "title": '任务中心',
-        "href": '../logs/logs'
+        bookId: 3,
+        pic: "book.png",
+        title: "宇文轩，武当山上一名杰出的道教弟子",
+        like: true,
+        likeCount: 10000,
       },
       {
-        "icon": 'setting.png',
-        "title": '设置',
-        "href": '../logs/logs'
-      },
-      {
-        "icon": 'aboutme.png',
-        "title": '关于我们',
-        "href": '../logs/logs'
+        bookId: 4,
+        pic: "book.png",
+        title: "宇文轩，武当山上一名杰出的道教弟子",
+        like: true,
+        likeCount: 10000,
       },
     ],
   },

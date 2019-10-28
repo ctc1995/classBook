@@ -1,0 +1,48 @@
+<!-- pages/bookMenu.wxml -->
+<view class="page_book_menu">
+  <view class="header">
+    <p class="book_menu_title">{{bookMenu.title}}</p>
+    <p class="book_menu_info">{{bookMenu.info}}</p>
+    <view class="book_menu_opration">
+      <p class="opration_item">
+        <image mode="aspectFit" wx:if="{{bookMenu.like}}" src="../../assets/images/bookmenu/sel-like.png" />
+        <image mode="aspectFit" wx:else src="../../assets/images/bookmenu/like.png" />
+        <span>{{bookMenu.likeCount}}</span>
+      </p>
+      <p class="opration_item">
+        <image mode="aspectFit" src="../../assets/images/bookmenu/share.png" />
+        <span>{{bookMenu.shareCount}}</span>
+      </p>
+      <p class="opration_item">
+        <image mode="aspectFit" src="../../assets/images/bookmenu/add-car.png" />
+        <span>购买</span>
+      </p>
+    </view>
+  </view>
+  <i class="line"></i>
+  <view class="mod_good">
+    <div class="book_list">
+      <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
+        <navigator class="book_content" url="../logs/logs?bookId={{item.bookId}}">
+          <image src="../../assets/images/{{item.pic}}"></image>
+          <section class="book_detail">
+            <section class="book_info">
+              <p class="book_title">{{item.title}}</p>
+              <p class="book_auth">{{item.auth}}</p>
+              <p class="book_rate">豆瓣评分：{{item.rate}}</p>
+            </section>
+            <p class="book_price">
+              <span class="price_unit">￥</span>
+              <span class="real_price">{{item.realPrice}}</span>
+              <span>/</span>
+              <span class="price">{{item.price}}</span>
+            </p>
+          </section>
+        </navigator>
+        <section class="add_car" bindtap="addShopCar" data-book="{{item}}">
+          <image src="../../assets/images/add-car2x.png" />
+        </section>
+      </section>
+    </div>
+  </view>
+</view>

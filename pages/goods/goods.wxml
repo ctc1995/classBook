@@ -1,0 +1,80 @@
+<!--pages/goods/goods.wxml-->
+<view class="page_goods">
+  <view class="pic_title_price">
+    <view class="mod_swiper">
+      <swiper autoplay="true" interval="3000" circular="true" current="current" bindchange="swiperChange">
+        <block wx:for="{{goods.picUrl}}" wx:key="{{index}}">
+          <swiper-item>
+            <view class="swiper-item">
+              <image src='../../assets/images/{{item}}' mode="widthFix"></image>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <!-- 重置小圆点的样式 -->
+      <view class="dots">
+        <block wx:for="{{goods.picUrl}}" wx:key="{{index}}">
+          <view class="dot {{index == current?'active':''}}"></view>
+        </block>
+      </view>
+    </view>
+    <p class="price">
+      <span>{{goods.price}}</span>
+      {{goods.realPrice}}
+    </p>
+    <p class="title">{{goods.title}}</p>
+  </view>
+  <i class="line"></i>
+  <view class="goods_detail">
+    <p class="detail_item">
+      <span class="unit">作者</span>
+      <span class="txt">{{goods.auth}}</span>
+    </p>
+    <p class="detail_item">
+      <span class="unit">出版社</span>
+      <span class="txt">{{goods.publicHome}}</span>
+    </p>
+    <p class="detail_item">
+      <span class="unit">出版时间</span>
+      <span class="txt">{{goods.publicTime}}</span>
+    </p>
+    <p class="detail_item">
+      <span class="unit">装帧</span>
+      <span class="txt">{{goods.buildType}}</span>
+    </p>
+    <p class="detail_item">
+      <span class="unit">服务</span>
+      <view class="txt" wx:for="{{goods.server}}" wx:key="{{index}}">
+        <image src="{{goodsServer[item+1].icon}}"></image>
+        {{goodsServer[item+1].name}}
+      </view>
+    </p>
+  </view>
+  <i class="line"></i>
+  <view class="good_action">
+    <p class="need_link_icon action">
+      更多品相
+    </p>
+    <p class="need_link_icon action">
+      送至
+    </p>
+  </view>
+  <view class="goods_detail">
+    <p class="detail_item">
+      <span class="unit">货号</span>
+      <span class="txt">{{goods.ID}}</span>
+    </p>
+    <p class="detail_item">
+      <span class="unit">商品分类</span>
+      <span class="txt">{{goodsType[goods.type]}}</span>
+    </p>
+    <p class="detail_item">
+      <span class="unit">上书时间</span>
+      <span class="txt">{{goods.buyTime}}</span>
+    </p>
+    <p class="detail_item">
+      <span class="unit">开本</span>
+      <span class="txt">{{goods.format}}开</span>
+    </p>
+  </view>
+</view>

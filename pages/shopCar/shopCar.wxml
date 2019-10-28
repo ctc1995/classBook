@@ -2,8 +2,8 @@
 <view class="mod_shopcar">
   <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
   <view class="goods_list">
-    <section class="book_item" wx:for="{{shopCarList}}" wx:key="{{index}}">
-      <checkbox value="{{item.bookId}}" checked="{{item.sel}}" bindtap="selGoods" data-index="{{index}}" />
+    <section class="book_item {{item.stock<=0?'out_stock':''}}" wx:for="{{shopCarList}}" wx:key="{{index}}" wx:if="{{curTabId == 'all' || item.stock<=0}}">
+      <checkbox value="{{item.bookId}}" checked="{{item.sel}}" bindtap="selGoods" data-index="{{index}}"/>
       <navigator url="../logs/logs?bookId={{item.bookId}}">
         <image src="../../assets/images/{{item.pic}}"></image>
       </navigator>
@@ -19,11 +19,12 @@
           <span class="price_unit">￥</span>
           <span class="real_price">{{item.realPrice}}</span>
           <span>/{{item.price}}</span>
-          <view class='stepper'>
+          <view class='stepper' wx:if="{{item.stock>0}}">
             <view class="oprate" catchtap='bindMinus' data-index='{{index}}'>-</view>
             <input bindinput='bindManual' type="number" maxlength="3" value='{{item.sum}}' data-index='{{index}}'></input>
             <view class="oprate" catchtap='bindPlus' data-index='{{index}}'>+</view>
           </view>
+          <span class="stock" wx:else>无货</span>
         </p>
       </section>
     </section>
@@ -34,13 +35,17 @@
         <checkbox data-checked="{{checkAllGoods}}" checked="{{checkAllGoods}}" bindtap="selAllGoods" />
         <span>全选</span>
       </label>
-      <span class="total_money" wx:if="{{totalMoney>0}}">
+      <span class="total_money" wx:if="{{totalMoney>0  && curTabId == 'all'}}">
         合计:
         <span>￥{{totalMoney}}</span>
       </span>
     </view>
-    <button class="buy" bindtap="buy">去结算
+    <button class="buy" bindtap="buy" wx:if="{{curTabId == 'all'}}">去结算
       <span wx:if="{{totalGoods>0}}">({{totalGoods}})</span>
+    </button>
+    <button class="buy" disabled="{{totalMoney<=0}}" bindtap="remind" wx:if="{{curTabId == 'remind'}}">
+      <span wx:if="{{!remindGoods}}">到货提醒</span>
+      <span wx:else>取消提醒</span>
     </button>
   </view>
 </view>

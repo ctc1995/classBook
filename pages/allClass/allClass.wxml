@@ -1,0 +1,11 @@
+<!--pages/allClass/allClass.wxml-->
+<view class="page_all_class">
+    <view class="mod_book_list" wx:for="{{allClassList}}">
+      <h2 class="title">{{item.className}}</h2>
+      <div class="list">
+        <navigator class="item" wx:for="{{item.classList}}" url="../../pages/home/home?{{item.id}}">
+          {{item.name}}
+        </navigator>
+      </div>
+    </view>
+</view>

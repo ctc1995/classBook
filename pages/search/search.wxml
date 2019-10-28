@@ -1,0 +1,47 @@
+<!--pages/search/search.wxml-->
+<view class="page_search">
+    <!-- 搜索区域 -->
+    <view class='mod_search'>
+      <navigator class='searchItem' url="../../pages/search/search">
+        <image src='../../assets/images/search.png' />
+        <input placeholder='搜索关键词'></input>
+      </navigator>
+    </view>
+    <view class="mod_book_list">
+      <h2 class="title">官方书单</h2>
+      <div class="list">
+        <navigator class="item" wx:for="{{bookList}}" url="../../pages/home/home?{{item.id}}">
+          {{item.name}}
+        </navigator>
+      </div>
+    </view>
+    <view class="mod_good">
+      <h2 class="title">
+        好书推荐
+        <span class="more">全部分类</span>
+      </h2>
+      <div class="book_list">
+        <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
+          <navigator class="book_content" url="../home/home?bookId={{item.bookId}}">
+            <image src="../../assets/images/{{item.pic}}"></image>
+            <section class="book_detail">
+              <section class="book_info">
+                <p class="book_title">{{item.title}}</p>
+                <p class="book_auth">{{item.auth}}</p>
+                <p class="book_rate">豆瓣评分：{{item.rate}}</p>
+              </section>
+              <p class="book_price">
+                <span class="price_unit">￥</span>
+                <span class="real_price">{{item.realPrice}}</span>
+                <span>/</span>
+                <span class="price">{{item.price}}</span>
+              </p>
+            </section>
+          </navigator>
+          <section class="add_car" bindtap="addShopCar" data-book="{{item}}">
+            <image src="../../assets/images/add-car2x.png" />
+          </section>
+        </section>
+      </div>
+    </view>
+</view>

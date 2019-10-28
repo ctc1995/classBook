@@ -1,1 +1,90 @@
 /* pages/about/about.wxss */
+.mod_about{
+    background-color: #fff;
+    padding: 0 36rpx;
+    margin-bottom: 30rpx;
+}
+.mod_about .user_info{
+    padding: 68rpx 0 48rpx;
+    display: flex;
+    align-items: center;
+}
+.mod_about .user_info image{
+    width: 94rpx;
+    height: 94rpx;
+    max-width: 94rpx;
+    max-height: 94rpx;
+    border-radius: 50%;
+    border: 1px solid rgb(250,247,239);
+}
+.mod_about .user_info .name_phone{
+    margin-left: 20rpx;
+    display: flex;
+    flex-direction: column;
+}
+.mod_about .user_info .name_phone .name{
+    color: #333;
+    font-size: 32rpx;
+    margin-bottom: 10rpx;
+}
+.mod_about .user_info .name_phone .phone{
+    color: #999;
+    font-size: 24rpx;
+}
+.mod_about .about_banner{
+    width: 678rpx;
+    height: 120rpx;
+    border-radius: 20rpx;
+}
+.mod_about .my_order .title{
+    color: #333;
+    font-size: 30rpx;
+    font-weight: bold;
+    padding: 34rpx 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+.mod_about .my_order .title .all_order{
+    font-size: 20rpx;
+    font-weight: unset;
+    color: #999;
+    padding: 5rpx 25rpx;
+    border: 1px solid #eee;
+    border-radius: 20rpx;
+}
+.mod_about .my_order .order_modules{
+    color: #999;
+    font-size: 24rpx;
+    padding: 26rpx 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mod_about .my_order .order_modules .order_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mod_about .my_order .order_modules .order_item image{
+    width: 60rpx;
+    height: 60rpx;
+}
+.mod_about .url_list{
+    color: #999;
+    font-size: 30rpx;
+}
+.mod_about .url_list .url_item{
+    height: 100rpx;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.mod_about .url_list .url_item + .url_item{
+    border-top: 1px solid rgb(234,234,234);
+}
+.mod_about .url_list .url_item image{
+    width: 42rpx;
+    height: 42rpx;
+    margin-right: 20rpx;
+}

@@ -1,2 +1,44 @@
 <!--pages/about/about.wxml-->
-<text>pages/about/about.wxml</text>
+<view class="mod_about">
+  <view class="need_link_icon user_info">
+    <image src="../../assets/images/about/ava2x.png"></image>
+    <div class="name_phone">
+      <p class="name">{{userInfo.name || "太白书局"}}</p>
+      <p class="phone">{{userInfo.phone || '绑定手机号，到货早知道'}}</p>
+    </div>
+  </view>
+  <image class="about_banner" src="../../assets/images/about/banner2x.png"></image>
+  <view class="my_order">
+    <p class="title">
+      我的订单
+      <span class="all_order">全部</span>
+    </p>
+    <view class="order_modules">
+    <!-- TODO: 切换成跳转链接 -->
+      <p class="order_item">
+        <image src="../../assets/images/about/fukuan.png" />
+        待付款
+      </p>
+      <p class="order_item">
+        <image src="../../assets/images/about/daishouhuo.png" />
+        待收货
+      </p>
+      <p class="order_item">
+        <image src="../../assets/images/about/yishouhuo.png" />
+        已收货
+      </p>
+      <p class="order_item">
+        <image src="../../assets/images/about/tuikuan.png" />
+        退款/售后
+      </p>
+    </view>
+  </view>
+  <i class="line"></i>
+  <view class="url_list">
+    <!-- TODO: 切换成跳转链接 -->
+    <p class="need_link_icon url_item" wx:for="{{urlList}}">
+      <image src="../../assets/images/about/{{item.icon}}" />
+      <span>{{item.title}}</span>
+    </p>
+  </view>
+</view>

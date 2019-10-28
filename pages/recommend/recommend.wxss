@@ -1,0 +1,74 @@
+/* pages/recommend/recommend.wxss */
+.page_recommend{
+  padding: 0 36rpx;
+}
+.mod_filter{
+  width: 750rpx;
+  height: 80rpx;
+  margin-left: -36rpx;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.mod_filter .filter_item{
+  width: 187.5rpx;
+  color: rgb(100,100,100);
+  font-size: 24rpx;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mod_filter .filter_item .sort{
+  height: 80rpx;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10rpx;
+}
+.mod_filter .filter_item .sort image{
+  width: 19rpx;
+  height: 10rpx;
+}
+.mod_filter .filter_item .sort image+image{
+  margin-top: 4rpx;
+}
+.mod_filter .class_panel{
+  width: 750rpx;
+  height: calc(100vh - 80rpx);
+  background-color: rgba(0,0,0,0.15);
+  position: absolute;
+  top: 80rpx;
+  z-index: 9;
+}
+.mod_filter .class_panel .list{
+  width: 750rpx;
+  background-color: #fff;
+  padding: 30rpx 36rpx;
+  padding-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.mod_filter .class_panel .item{
+  width: 212rpx;
+  height: 36rpx;
+  color: #999;
+  font-size: 26rpx;
+  padding: 10rpx 0;
+  margin-bottom: 30rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  background-color: #f3f3f3;
+}
+.mod_good{
+  margin-top: 30rpx;
+}
+.mod_good .book_list .book_item{
+  border-bottom: 1px solid #eaeaea;
+}
+.mod_good .book_list .book_item+.book_item{
+  border-top: unset;
+}

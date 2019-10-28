@@ -1,0 +1,18 @@
+<!--pages/bookMenuList/bookMenuList.wxml-->
+<view class="page_book_menu_list">
+    <view class="mod_recommend">
+      <h2 class="title">
+        官方书单
+      </h2>
+      <div class="book_list">
+        <navigator class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" url="../logs/logs?bookId={{item.bookId}}">
+          <image class="book_pic" src="../../assets/images/{{item.pic}}"></image>
+          <p class="like {{item.like? 'active' : ''}}">
+            <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like2x.png'}}"></image>
+            {{item.likeCount}}
+          </p>
+          <p class="book_title">{{item.title}}</p>
+        </navigator>
+      </div>
+    </view>
+</view>

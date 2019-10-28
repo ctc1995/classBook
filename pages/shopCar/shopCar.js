@@ -11,7 +11,7 @@ Page({
         "tabName": "全部",
       },
       {
-        "tabId": "tip",
+        "tabId": "remind",
         "tabName": "到货提醒"
       }
     ],
@@ -19,6 +19,8 @@ Page({
     shopCarList: [],
     curGoods: [],
     checkAllGoods: false,
+    // 到货提醒
+    remindGoods: false,
     totalGoods: 0,
     totalMoney: 0,
   },
@@ -37,8 +39,14 @@ Page({
       if (value) {
         let list = [];
         value.list.map(item=>{
-          list.push(Object.assign({ sum: 1, sel: false }, item))
+          list.push(Object.assign({ 
+            sum: 1, 
+            sel: false,
+            remind: false,
+            stock: 20
+          }, item))
         })
+        list[0].stock = 0;
         console.log(list);
         this.setData({
           shopCarList: list
@@ -58,6 +66,11 @@ Page({
       checkAllGoods: this.data.shopCarList.length === totalGoods
     })
     this.countMoney();
+    if (this.data.shopCarList[e.target.dataset.index].stock < 0) {
+      this.setData({
+        remindGoods: !this.data.remindGoods
+      })
+    }
   },
   /*点击减号*/
   bindMinus: function (e) {
@@ -119,6 +132,25 @@ Page({
     this.setData({
       totalMoney: sum
     })
+  },
+  // 到货提醒
+  remind: function() {
+    var list = [];
+    this.data.shopCarList.map(item=>{
+      if(item.sel && item.stock<=0){
+        item.remind = !item.remind
+      }
+      list.push(item);
+    })
+    this.setData({
+      shopCarList: list,
+      remindGoods: !this.data.remindGoods
+    })
+    console.log(this.data.shopCarList);
+  },
+  // 结算
+  buy: function () {
+    console.log(this.data.shopCarList);
   },
   /**
    * 生命周期函数--监听页面加载

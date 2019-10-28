@@ -1,0 +1,56 @@
+<!--pages/recommend/recommend.wxml-->
+<view class="page_recommend">
+  <view class="mod_filter" wx:if="type==='collection'">
+    <p class="filter_item">
+      综合
+    </p>
+    <p class="filter_item">
+      <span>价格</span><view class="sort">
+        <image src="../../assets/images/up-arrow.png"></image>
+        <image src="../../assets/images/down-arrow.png"></image>
+      </view>
+    </p>
+    <p class="filter_item">
+      <span>出版</span><view class="sort">
+        <image src="../../assets/images/up-arrow.png"></image>
+        <image src="../../assets/images/down-arrow.png"></image>
+      </view>
+    </p>
+    <p class="filter_item" bindtap="toggleClassPanel">
+      <span>分类</span>
+      <image style="width:24rpx;height:13rpx;margin-left: 10rpx;" src="../../assets/images/{{showClassPanel ?  'expand.png' : 'collapse.png'}}" />
+    </p>
+    <section class="class_panel {{showClassPanel? '' : 'disabled'}}">
+      <div class="list">
+        <span class="item {{item.sel?'current':''}}" wx:for="{{bookClass}}">
+          {{item.name}}
+        </span>
+      </div>
+    </section>
+  </view>
+  <view class="mod_good">
+    <div class="book_list">
+      <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
+        <navigator class="book_content" url="../home/home?bookId={{item.bookId}}">
+          <image src="../../assets/images/{{item.pic}}"></image>
+          <section class="book_detail">
+            <section class="book_info">
+              <p class="book_title">{{item.title}}</p>
+              <p class="book_auth">{{item.auth}}</p>
+              <p class="book_rate">豆瓣评分：{{item.rate}}</p>
+            </section>
+            <p class="book_price">
+              <span class="price_unit">￥</span>
+              <span class="real_price">{{item.realPrice}}</span>
+              <span>/</span>
+              <span class="price">{{item.price}}</span>
+            </p>
+          </section>
+        </navigator>
+        <section class="add_car" bindtap="addShopCar" data-book="{{item}}">
+          <image src="../../assets/images/add-car2x.png" />
+        </section>
+      </section>
+    </div>
+  </view>
+</view>

@@ -20,22 +20,22 @@ Page({
       {
         icon: "new2x.png",
         label: "最新上架",
-        href: "../logs/logs"
+        href: "../recommend/recommend?type=new"
       },
       {
         icon: "recommend2x.png",
         label: "每日推荐",
-        href: "../logs/logs"
+        href: "../recommend/recommend?type=day"
       },
       {
         icon: "collection2x.png",
         label: "珍品孤本",
-        href: "../logs/logs"
+        href: "../recommend/recommend?type=collection"
       },
       {
         icon: "all2x.png",
         label: "全部分类",
-        href: "../logs/logs"
+        href: "../allClass/allClass"
       },
     ],
     // 推荐书单

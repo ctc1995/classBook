@@ -1,13 +1,20 @@
 {
   "pages": [
-    "pages/shopCar/shopCar",
+    "pages/goods/goods",
     "pages/home/home",
-    "pages/logs/logs",
+    "pages/recommend/recommend",
+    "pages/search/search",
     "pages/discovery/discovery",
-    "pages/about/about"
+    "pages/shopCar/shopCar",
+    "pages/about/about",
+    "pages/logs/logs",
+    "pages/allClass/allClass",
+    "pages/bookMenu/bookMenu",
+    "pages/bookMenuList/bookMenuList"
   ],
   "window": {
     "backgroundTextStyle": "light",
+    "backgroundColor": "#eeeeee",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "典书",
     "navigationBarTextStyle": "black"

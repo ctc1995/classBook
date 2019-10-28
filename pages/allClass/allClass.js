@@ -1,39 +1,52 @@
-// pages/about/about.js
+// pages/allClass/allClass.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo:{
-      "name": '岂止年少,也是有为',
-      "phone": null,
-    },
-    urlList:[
+    allClassList: [
       {
-        "icon": 'book-shelf.png',
-        "title": '我的书架',
-        "href": '../logs/logs'
+        className: "官方书单",
+        classList: [
+          {
+            id: 1,
+            name: '职场必读'
+          },
+          {
+            id: 2,
+            name: '提高文学'
+          },
+          {
+            id: 3,
+            name: '放眼世界'
+          },
+          {
+            id: 4,
+            name: '管理必读'
+          },
+        ],
       },
       {
-        "icon": 'coupon.png',
-        "title": '我的优惠',
-        "href": '../logs/logs'
-      },
-      {
-        "icon": 'task.png',
-        "title": '任务中心',
-        "href": '../logs/logs'
-      },
-      {
-        "icon": 'setting.png',
-        "title": '设置',
-        "href": '../logs/logs'
-      },
-      {
-        "icon": 'aboutme.png',
-        "title": '关于我们',
-        "href": '../logs/logs'
+        className: "官方书单",
+        classList: [
+          {
+            id: 1,
+            name: '职场必读'
+          },
+          {
+            id: 2,
+            name: '提高文学'
+          },
+          {
+            id: 3,
+            name: '放眼世界'
+          },
+          {
+            id: 4,
+            name: '管理必读'
+          },
+        ],
       },
     ],
   },

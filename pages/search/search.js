@@ -1,41 +1,50 @@
-// pages/about/about.js
+// pages/search/search.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo:{
-      "name": '岂止年少,也是有为',
-      "phone": null,
-    },
-    urlList:[
+    // 官方书单
+    bookList: [
       {
-        "icon": 'book-shelf.png',
-        "title": '我的书架',
-        "href": '../logs/logs'
+        id: 1,
+        name: '职场必读'
       },
       {
-        "icon": 'coupon.png',
-        "title": '我的优惠',
-        "href": '../logs/logs'
+        id: 2,
+        name: '提高文学'
       },
       {
-        "icon": 'task.png',
-        "title": '任务中心',
-        "href": '../logs/logs'
+        id: 3,
+        name: '放眼世界'
       },
       {
-        "icon": 'setting.png',
-        "title": '设置',
-        "href": '../logs/logs'
-      },
-      {
-        "icon": 'aboutme.png',
-        "title": '关于我们',
-        "href": '../logs/logs'
+        id: 4,
+        name: '管理必读'
       },
     ],
+    // 好书推荐
+    goodList:[
+      {
+        bookId: 1,
+        pic: 'book.jpg',
+        title: '我是个年轻人，我的脾气不太好',
+        auth: '金庸',
+        rate: 8.7,
+        realPrice: "388.00",
+        price: "558.00"
+      },
+      {
+        bookId: 2,
+        pic: 'book.jpg',
+        title: '我是个年轻人，我的脾气不太好',
+        auth: '金庸',
+        rate: 8.7,
+        realPrice: "388.00",
+        price: "558.00"
+      },
+    ]
   },
 
   /**
