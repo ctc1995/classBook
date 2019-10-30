@@ -6,7 +6,7 @@
         <block wx:for="{{goods.picUrl}}" wx:key="{{index}}">
           <swiper-item>
             <view class="swiper-item">
-              <image src='../../assets/images/{{item}}' mode="widthFix"></image>
+              <image src='../../assets/images/{{item}}' mode="aspectFit"></image>
             </view>
           </swiper-item>
         </block>
@@ -19,8 +19,8 @@
       </view>
     </view>
     <p class="price">
-      <span>{{goods.price}}</span>
-      {{goods.realPrice}}
+      <span>￥{{goods.realPrice}}</span>
+      /原价 {{goods.price}} 
     </p>
     <p class="title">{{goods.title}}</p>
   </view>
@@ -46,7 +46,7 @@
       <span class="unit">服务</span>
       <view class="txt" wx:for="{{goods.server}}" wx:key="{{index}}">
         <image src="{{goodsServer[item+1].icon}}"></image>
-        {{goodsServer[item+1].name}}
+        {{goodsServer[item-1].name}}
       </view>
     </p>
   </view>
@@ -56,9 +56,15 @@
       更多品相
     </p>
     <p class="need_link_icon action">
-      送至
+      <image src="../../assets/images/dingwei.png"></image>
+      <picker class="address" mode="region" bindchange="bindRegionChange" value="{{region}}">
+        <view class="picker">
+          送至：{{region[0]}} {{region[1]}} {{region[2]}}
+        </view>
+      </picker>
     </p>
   </view>
+  <h2 class="line_title">图文详情</h2>
   <view class="goods_detail">
     <p class="detail_item">
       <span class="unit">货号</span>
@@ -76,5 +82,53 @@
       <span class="unit">开本</span>
       <span class="txt">{{goods.format}}开</span>
     </p>
+  </view>
+  <view class="goods_detail_image">
+    <image src="../../assets/images/book.jpg" mode="widthFix"></image>
+    <image src="../../assets/images/test_detail_image.png" mode="widthFix"></image>
+  </view>
+  <view class="mod_good">
+    <h2 class="title">
+      相关推荐
+    </h2>
+    <div class="book_list">
+      <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
+        <navigator class="book_content" url="../goods/goods?bookId={{item.bookId}}">
+          <image src="../../assets/images/{{item.pic}}"></image>
+          <section class="book_detail">
+            <section class="book_info">
+              <p class="book_title">{{item.title}}</p>
+              <p class="book_auth">{{item.auth}}</p>
+              <p class="book_rate">豆瓣评分：{{item.rate}}</p>
+            </section>
+            <p class="book_price">
+              <span class="price_unit">￥</span>
+              <span class="real_price">{{item.realPrice}}</span>
+              <span>/</span>
+              <span class="price">{{item.price}}</span>
+            </p>
+          </section>
+        </navigator>
+        <section class="add_car" bindtap="addShopCar" data-book="{{item}}">
+          <image src="../../assets/images/add-car2x.png" />
+        </section>
+      </section>
+    </div>
+  </view>
+  <view class="goods_footer">
+    <view class="click">
+      <p bindtap="share">
+        <image src="../../assets/images/share.png"></image>
+        <span>分享</span>
+      </p>
+      <p bindtap="shoucang">
+        <image src="../../assets/images/shoucang.png"></image>
+        <span>收藏</span>
+      </p>
+    </view>
+    <view class="button">
+      <button class="addCar" bindtap="addCar">加入购物车</button>
+      <button class="shop" bindtap="shop">立即购买</button>
+    </view>
   </view>
 </view>

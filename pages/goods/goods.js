@@ -6,9 +6,9 @@ Page({
    */
   data: {
     goods:{
-      picUrl: [],
-      price: 999.99,
+      picUrl: ['swiper.png', 'book.png', 'swiper.png'],
       realPrice: 399.99,
+      price: 999.99,
       title: '我是个年轻人，我的脾气不太好',
       auth: '金庸',
       publicHome: '全球国际-联合出版社出版',
@@ -20,6 +20,27 @@ Page({
       buyTime: '2018-09-09',
       format: '32',
     },
+    // 相关推荐
+    goodList: [
+      {
+        bookId: 1,
+        pic: 'book.jpg',
+        title: '我是个年轻人，我的脾气不太好',
+        auth: '金庸',
+        rate: 8.7,
+        realPrice: "388.00",
+        price: "558.00"
+      },
+      {
+        bookId: 2,
+        pic: 'book.jpg',
+        title: '我是个年轻人，我的脾气不太好',
+        auth: '金庸',
+        rate: 8.7,
+        realPrice: "388.00",
+        price: "558.00"
+      },
+    ],
     goodsServer: [
       {
         "icon": '',
@@ -32,12 +53,19 @@ Page({
     ],
     goodsType:{
       "wenxue":"文学"
-    }
+    },
+    region: ['', '', ''],
   },
 
   swiperChange: function (e) {
     this.setData({
       current: e.detail.current
+    })
+  },
+  bindRegionChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      region: e.detail.value
     })
   },
   /**

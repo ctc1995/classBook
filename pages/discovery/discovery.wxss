@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
 }
-.mod_rank .rank_item p+p{
+.mod_rank .rank_item navigator+navigator{
   margin-top: 28rpx;
 }
 

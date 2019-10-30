@@ -4,11 +4,11 @@
   <view class="goods_list">
     <section class="book_item {{item.stock<=0?'out_stock':''}}" wx:for="{{shopCarList}}" wx:key="{{index}}" wx:if="{{curTabId == 'all' || item.stock<=0}}">
       <checkbox value="{{item.bookId}}" checked="{{item.sel}}" bindtap="selGoods" data-index="{{index}}"/>
-      <navigator url="../logs/logs?bookId={{item.bookId}}">
+      <navigator url="../goods/goods?bookId={{item.bookId}}">
         <image src="../../assets/images/{{item.pic}}"></image>
       </navigator>
       <section class="book_detail">
-        <navigator url="../logs/logs?bookId={{item.bookId}}">
+        <navigator url="../goods/goods?bookId={{item.bookId}}">
           <section class="book_info">
             <p class="book_title">{{item.title}}</p>
             <p class="book_auth">{{item.auth}}</p>

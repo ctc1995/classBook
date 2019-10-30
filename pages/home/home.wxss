@@ -8,44 +8,6 @@
   color: #f4b800;
 }
 
-/* 轮播图 */
-.mod_swiper{
-  max-height: 238rpx;
-  margin-bottom: 54rpx;
-  position: relative;
-}
-.swiper-item{
-  border-radius: 15rpx;
-  z-index: 0;
-}
-.swiper-item image{
-  width: 678rpx;
-  height: 238rpx;
-  max-width: 678rpx;
-  max-height: 238rpx;
-}
-/* 自定义轮播图指示点样式 */
-.mod_swiper .dots{
-  width: 678rpx;
-  height: 30rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  position: absolute;
-  bottom: 10rpx;
-}
-/* 未选中时的小圆点样式 */
-.mod_swiper .dot{
-  width: 20rpx;
-  height: 20rpx;
-  border-radius: 50%;
-  background-color: rgba(51,51,51,.5);
-}
-.mod_swiper .dot+.dot{margin-left: 20rpx;}
-/* 选中以后的小圆点样式 */
-.mod_swiper .active{
-  background-color: #fff;
-} 
 
 /* 导航栏 */
 .mod_navbar{
