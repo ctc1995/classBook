@@ -1,0 +1,16 @@
+<!--pages/order/orderConfirm/orderConfirm.wxml-->
+<view class="page_order_confirm">
+  <view class="need_link_icon order_delivery">
+    <p class="name_phone">
+      <span>张三丰</span>
+      <span>18977837849</span>
+    </p>
+    <p class="address">广东省深圳市南山区粤海街道9109号三诺智慧大厦</p>
+  </view>
+  <i class"line"></i>
+  <view class="order_detail">
+    <view class="goods_list">
+    
+    </view>
+  </view>
+</view>

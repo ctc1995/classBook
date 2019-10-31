@@ -125,7 +125,7 @@ Page({
   countMoney: function(){
     var sum = 0;
     this.data.shopCarList.map(item=>{
-      if (item.sel){
+      if (item.sel && item.stock > 0){
         sum += item.sum * item.realPrice
       }
     })
@@ -151,6 +151,16 @@ Page({
   // 结算
   buy: function () {
     console.log(this.data.shopCarList);
+    var buyGoodsList = [];
+    this.data.shopCarList.map(item=>{
+      if (item.sel && item.stock > 0) buyGoodsList.push(item)
+    })
+    wx.navigateTo({
+      url: '../order/orderConfirm/orderConfirm',
+      success: function(res){
+        res.eventChannel.emit("acceptBuyGoodsList", { data: buyGoodsList})
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
