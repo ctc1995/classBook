@@ -246,3 +246,43 @@ h2.title {
   width: 42rpx;
   height: 37rpx;
 }
+
+.buy {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background-color: #f4b800;
+  border-radius: 30rpx;
+  margin: 0;
+}
+/* 订单页收货地址样式 */
+.order_delivery{
+  width: 750rpx;
+  min-height: 138rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30rpx 70rpx 30rpx 38rpx;
+  box-sizing: border-box;
+}
+.order_delivery .name_phone{
+  color: #333333;
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+.order_delivery .name_phone span+span{
+  margin-left: 20rpx;
+}
+.order_delivery .address{
+  color: #999;
+  font-size: 24rpx;
+  word-break: break-all;
+}
+
+.line_title{
+  color: #333;
+  font-size: 24rpx;
+}

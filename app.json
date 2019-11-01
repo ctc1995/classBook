@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/order/orderConfirm/orderConfirm",
     "pages/shopCar/shopCar",
     "pages/home/home",
     "pages/recommend/recommend",
@@ -11,7 +12,6 @@
     "pages/allClass/allClass",
     "pages/bookMenu/bookMenu",
     "pages/bookMenuList/bookMenuList",
-    "pages/order/orderConfirm/orderConfirm",
     "pages/order/toPaid/toPaid",
     "pages/order/orderReceipt/orderReceipt",
     "pages/order/orderDelivery/orderDelivery",

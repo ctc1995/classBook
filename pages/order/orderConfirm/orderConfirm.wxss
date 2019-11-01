@@ -1,1 +1,87 @@
 /* pages/order/orderConfirm/orderConfirm.wxss */
+.page_order_confirm{
+  min-height: 99vh;
+  background-color: #f3f3f3;
+  border-top: 1px solid #eaeaea;
+  position: relative;
+}
+.page_order_confirm .line{
+  margin-left: 0;
+}
+.need_link_icon::after{
+  right: 28rpx;
+}
+.order_detail{
+  width: 750rpx;
+  color: #999;
+  font-size: 30rpx;
+  background-color: #fff;
+  padding: 32rpx 36rpx;
+  box-sizing: border-box;
+}
+.delivery_method, .remakes{
+  height: 70rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+}
+.delivery_method{
+  justify-content: space-between;
+}
+.remakes input{
+  flex: 1;
+  padding-left: 30rpx;
+}
+.goods_total{
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  padding: 30rpx 0;
+  border-top: 1px solid #eaeaea;
+}
+.goods_total .money{
+  color: #e50101;
+  padding: 0 4rpx;
+}
+.tips{
+  width: 750rpx;
+  line-height: 40rpx;
+  color: #bbb;
+  font-size: 22rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  display: inline-block;
+}
+.tips .title{
+  font-size: 26rpx;
+  margin-bottom: 10rpx;
+}
+.order_footer{
+  width: 750rpx;
+  height: 100rpx;
+  background-color: #fff;
+  padding: 0 30rpx;
+  border-top: 1px solid #eaeaea;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  box-sizing: border-box;
+}
+.total_money .money{
+  color: #e50101;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.total_money .money .unit{
+  font-size: 24rpx;
+  font-weight: 300;
+}
+.total_money .total_tips{
+  font-size: 20rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 6rpx;
+}

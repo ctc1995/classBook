@@ -143,12 +143,3 @@
   color: #e50101;
 }
 
-.buy {
-  height: 60rpx;
-  line-height: 60rpx;
-  font-size: 28rpx;
-  color: #fff;
-  background-color: #f4b800;
-  border-radius: 30rpx;
-  margin: 0;
-}

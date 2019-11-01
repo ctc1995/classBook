@@ -5,30 +5,61 @@ Page({
    * 页面的初始数据
    */
   data: {
-    buyGoodsList: [],
+    buyGoodsList: [{
+      auth: "金庸",
+      bookId: 2,
+      pic: "book.jpg",
+      price: "558.00",
+      rate: 8.7,
+      realPrice: "388.00",
+      remind: false,
+      sel: true,
+      stock: 20,
+      sum: 1,
+      title: "我是个年轻人，我的脾气不太好",
+    }, {
+        auth: "金庸",
+        bookId: 2,
+        pic: "book.jpg",
+        price: "558.00",
+        rate: 8.7,
+        realPrice: "388.00",
+        remind: false,
+        sel: true,
+        stock: 20,
+        sum: 1,
+        title: "我是个年轻人，我的脾气不太好",
+      }],
+    remakes: '',
+    totalMoney: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const eventChannel = this.getOpenerEventChannel();
-    var self = this;
-    eventChannel.on('acceptBuyGoodsList', function (data) {
-      self.setData({
-        buyGoodsList: data
-      })
-    })
-    console.log(this.data.buyGoodsList)
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    // const eventChannel = this.getOpenerEventChannel();
+    // var self = this;
+    // eventChannel.on('acceptBuyGoodsList', function (data) {
+    //   self.setData({
+    //     buyGoodsList: data
+    //   })
+    // })
+    console.log(this.data.buyGoodsList)
   },
-
+  
+  bindKeyRemakes(e){
+    this.setData({
+      remakes: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

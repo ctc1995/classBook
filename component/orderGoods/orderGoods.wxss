@@ -1,0 +1,50 @@
+/* 订单页商品样式 */
+.goods_list{
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50rpx;
+}
+.goods_list .goods{
+  display: flex;
+}
+.goods_list .goods+.goods{
+  margin-top: 32rpx;
+  padding-top: 32rpx;
+  border-top: 1px solid #eaeaea;
+}
+.goods_list .goods text{
+  display: inline-block;
+}
+.goods_list .goods image{
+  width: 120rpx;
+  min-width: 120rpx;
+  height: 156rpx;
+  min-height: 156rpx;
+}
+.goods_list .goods .title_attr{
+  margin-left: 26rpx;
+}
+.goods_list .goods .title_attr .good_title{
+	font-size: 30rpx;
+	color: #444444;
+  margin-bottom: 10rpx;
+}
+.goods_list .goods .title_attr .good_attr{
+  font-size: 24rpx;
+  color: #777;
+}
+.goods_list .goods .price_sum{
+  min-width: 130rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.goods_list .goods .price_sum .price{
+  color: #e50101;
+  font-size: 32rpx;
+}
+.goods_list .goods .price_sum .price .unit{
+  font-size: 24rpx;
+}

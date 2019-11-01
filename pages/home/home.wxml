@@ -8,7 +8,7 @@
     <view class='mod_search'>
       <navigator class='searchItem' url="../../pages/search/search">
         <image src='../../assets/images/search.png' />
-        <input placeholder='搜索关键词'></input>
+        <input placeholder='搜索关键词' confirm-type="search"></input>
       </navigator>
     </view>
     <!-- 轮播图区域

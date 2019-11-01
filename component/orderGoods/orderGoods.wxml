@@ -1,0 +1,15 @@
+<!--component/orderGoods/orderGoods.wxml-->
+<view class="goods_list">
+  <view class="goods" wx:for="{{buyGoodsList}}" wx:key="{{index}}">
+    <image src="../../assets/images/{{item.pic}}"></image>
+    <view class="title_attr">
+      <text class="good_title">{{item.title}}</text>
+      <text class="good_attr">{{item.attr || "品相良好"}}</text>
+    </view>
+    <view class="price_sum">
+      <text class="price"><text class="unit">￥</text>{{item.realPrice}}</text>
+      <text class="sum">x {{item.sum}}</text>
+      <text class="sum">　</text>
+    </view>
+  </view>
+</view>

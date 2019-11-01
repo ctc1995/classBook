@@ -7,10 +7,46 @@
     </p>
     <p class="address">广东省深圳市南山区粤海街道9109号三诺智慧大厦</p>
   </view>
-  <i class"line"></i>
+  <i class="line"></i>
   <view class="order_detail">
-    <view class="goods_list">
-    
+      <orderGoods buy-goods-list="{{buyGoodsList}}"></orderGoods>
+      <!-- <view class="goods" wx:for="{{buyGoodsList}}" wx:key="{{index}}">
+        <image src="../../../assets/images/{{item.pic}}"></image>
+        <view class="title_attr">
+          <text class="good_title">{{item.title}}</text>
+          <text class="good_attr">{{item.attr || "品相良好"}}</text>
+        </view>
+        <view class="price_sum">
+          <text class="price"><text class="unit">￥</text>{{item.realPrice}}</text>
+          <text class="sum">x {{item.sum}}</text>
+          <text class="sum">　</text>
+        </view>
+      </view> -->
+    <view class="delivery_method">
+      <text class="line_title">配送方式</text>
+      <text class="method">快递：{{item.delivery || '￥6.00'}}</text>
     </view>
+    <view class="remakes">
+      <text class="line_title">订单备注</text>
+      <input maxlength="100" placeholder="选填，请先和商家协商一致"bindinput="bindKeyRemakes"></input>
+    </view>
+    <view class="goods_total">
+        共计 {{buyGoodsList.length}} 件商品，应付总金额<text class="money">￥{{totalMoney}}</text>元
+    </view>
+  </view>
+  <view class="tips">
+    <text class="title">重要提示：</text>
+    <text class="content">
+      基于本网所售商品的特殊性及古旧书行业的具体情况，非十品（非全新）商品为有瑕疵商品，按照国家有关规定，不支持7天无理由退货。请认真考虑，确定同意在提交订单。
+    </text>
+  </view>
+  <view class="order_footer">
+    <view class="total_money">
+      <view class="money">
+        <text class="unit">￥</text>{{totalMoney}}
+      </view>
+      <text class="total_tips">不计运费</text>
+    </view>
+    <button class="buy" bindtap="buy">去支付</button>
   </view>
 </view>
