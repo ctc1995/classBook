@@ -40,10 +40,10 @@
         <span>￥{{totalMoney}}</span>
       </span>
     </view>
-    <button class="buy" bindtap="buy" disabled="{{totalMoney<=0}}" wx:if="{{curTabId == 'all'}}">去结算
+    <button class="btn btn_primary" bindtap="buy" disabled="{{totalMoney<=0}}" wx:if="{{curTabId == 'all'}}">去结算
       <span wx:if="{{totalGoods>0}}">({{totalGoods}})</span>
     </button>
-    <button class="buy" disabled="{{totalMoney<=0}}" bindtap="remind" wx:if="{{curTabId == 'remind'}}">
+    <button class="btn btn_primary" disabled="{{totalMoney<=0}}" bindtap="remind" wx:if="{{curTabId == 'remind'}}">
       <span wx:if="{{!remindGoods}}">到货提醒</span>
       <span wx:else>取消提醒</span>
     </button>

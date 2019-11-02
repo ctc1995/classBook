@@ -52,12 +52,30 @@ Page({
     //     buyGoodsList: data
     //   })
     // })
+    var totalMoney = 0;
+    this.data.buyGoodsList.map(item=>{
+      totalMoney += item.sum * parseFloat(item.realPrice);
+    })
+    this.setData({
+      totalMoney: totalMoney
+    })
     console.log(this.data.buyGoodsList)
   },
   
   bindKeyRemakes(e){
     this.setData({
       remakes: e.detail.value
+    })
+  },
+
+  // 调起微信支付
+  buy(){
+    var self = this;
+    wx.navigateTo({
+      url: '../orderReceipt/orderReceipt',
+      success: function (res) {
+        res.eventChannel.emit("acceptBuyGoodsList", self.data.buyGoodsList)
+      }
     })
   },
   /**

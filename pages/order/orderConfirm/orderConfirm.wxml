@@ -47,6 +47,6 @@
       </view>
       <text class="total_tips">不计运费</text>
     </view>
-    <button class="buy" bindtap="buy">去支付</button>
+    <button class="btn btn_primary" bindtap="buy">去支付</button>
   </view>
 </view>

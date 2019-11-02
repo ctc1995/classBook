@@ -1,5 +1,4 @@
 /**app.wxss**/
-
 .container {
   height: 100%;
   display: flex;
@@ -246,15 +245,21 @@ h2.title {
   width: 42rpx;
   height: 37rpx;
 }
-
-.buy {
+.btn{
   height: 60rpx;
   line-height: 60rpx;
   font-size: 28rpx;
-  color: #fff;
-  background-color: #f4b800;
   border-radius: 30rpx;
   margin: 0;
+}
+.btn_default {
+  background-color: transparent;
+  color: #999999;
+  border: 1px solid #999999;
+}
+.btn_primary {
+  background-color: #f4b800;
+  color: #fff;
 }
 /* 订单页收货地址样式 */
 .order_delivery{
