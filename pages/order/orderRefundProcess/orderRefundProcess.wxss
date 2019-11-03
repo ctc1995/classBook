@@ -1,1 +1,140 @@
-/* pages/order/orderRefundProcess/orderRefundProcess.wxss */
+/* pages/order/orderReceipt/orderReceipt.wxss */
+.page_receipt{
+  width: 750rpx;
+  min-height: 100vh;
+  padding-bottom: 100rpx;
+  background-color: #f3f3f3;
+  position: relative;
+}
+.logistics,
+.order_detail,
+.order_info{
+  background-color: #fff;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.order_status{
+  width: 750rpx;
+  height: 190rpx;
+  color: #fff;
+  padding: 0 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+}
+.order_status .status{
+	font-size: 32rpx;
+  margin-bottom: 18rpx;
+}
+.order_status .status_info{
+	font-size: 24rpx;
+}
+.order_status .countdown{
+  width: 220rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  right: 100rpx;
+}
+.order_status .countdown image{
+  width: 36rpx;
+  height: 36rpx;
+  margin-bottom: 18rpx;
+}
+.refund_info{
+  width: 750rpx;
+  color: #999999;
+  font-size: 30rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.refund_info view{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30rpx 0;
+}
+.refund_info view+view{
+  border-top: 1px solid #eaeaea;
+}
+.refund_info view.his text{
+  color: #333;
+}
+.refund_info .process .title{
+  font-size: 30rpx;
+  color: #333;
+  padding-bottom: 30rpx;
+  border-bottom: 1px solid #eaeaea;
+}
+.refund_info .process .content{
+  font-size: 24rpx;
+  margin-top: 20rpx;
+}
+.need_link_icon::after{
+  right: 30rpx; 
+}
+.order_detail{
+  width: 750rpx;
+  color: #999;
+  font-size: 30rpx;
+  padding: 32rpx 36rpx;
+}
+.order_info{
+  font-size: 24rpx;
+  color: #777;
+}
+.order_info text{
+  display: block;
+}
+.order_info text{
+  margin-top: 16rpx;
+}
+.order_info .number{
+  color: #333;
+}
+.order_info .number .btn{
+  height: 40rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  padding: 0 10rpx;
+}
+.order_info .info_action{
+  color: #555;
+  font-size: 28rpx;
+  border-top: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.order_info .info_action button{
+  color: #555;
+  font-size: 28rpx;
+  background-color: transparent;
+  border: 0;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.order_info .info_action button::after{
+  content: unset;
+}
+.order_info .info_action button+button{
+  border-left: 1px solid #eaeaea;
+}
+.order_info .info_action button image{
+  width: 26rpx;
+  height: 26rpx;
+  display: inline-block;
+  margin-right: 16rpx;
+}

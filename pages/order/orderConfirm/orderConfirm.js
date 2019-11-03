@@ -72,7 +72,7 @@ Page({
   buy(){
     var self = this;
     wx.navigateTo({
-      url: '../orderReceipt/orderReceipt',
+      url: '../orderCancel/orderCancel',
       success: function (res) {
         res.eventChannel.emit("acceptBuyGoodsList", self.data.buyGoodsList)
       }

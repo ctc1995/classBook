@@ -291,3 +291,9 @@ h2.title {
   color: #333;
   font-size: 24rpx;
 }
+.order_status{
+	background-color: #999999;
+}
+.order_status.status_primary{
+	background-color: #f4b800;
+}

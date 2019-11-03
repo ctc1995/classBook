@@ -7,7 +7,15 @@ Component({
     buyGoodsList: {
       type: Array,
       value: []
-    }
+    },
+    money: {
+      type: Boolean,
+      value: true
+    },
+    attr: {
+      type: Boolean,
+      value: true
+    },
   },
 
   /**
@@ -21,6 +29,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    hihi(){
+      console.log(this.data.needMoney)
+      console.log(this.data.needAttr)
+    }
   }
 })

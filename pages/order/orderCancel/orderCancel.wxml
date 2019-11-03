@@ -1,2 +1,50 @@
-<!--pages/order/orderCancel/orderCancel.wxml-->
-<text>pages/order/orderCancel/orderCancel.wxml</text>
+<!-- 订单完成，订单取消 -->
+<view class="page_receipt">
+  <view class="order_status {{orderInfo.status == '3'?'status_primary':''}}">
+    <text class="status">{{orderStatus[orderInfo.status].title}}</text>
+    <text class="status_info">{{orderStatus[orderInfo.status].tips}}</text>
+  </view>
+  <view class="order_delivery">
+    <p class="name_phone">
+      <span>{{orderInfo.delivery.name}}</span>
+      <span>{{orderInfo.delivery.phone}}</span>
+    </p>
+    <p class="address">{{orderInfo.delivery.address}}</p>
+  </view>
+  <i class="line" wx:if="{{orderInfo.status == '3'}}"></i>
+  <view class="need_link_icon logistics" wx:if="{{orderInfo.status == '3'}}">
+    <text class="title">物流信息</text>
+    <text class="info">{{orderInfo.logistics[0]}}</text>
+  </view>
+  <i class="line"></i>
+  <view class="order_detail">
+    <orderGoods buy-goods-list="{{buyGoodsList}}"></orderGoods>
+    <view class="logistics_money">
+      <text class="line_title">快递</text>
+      <text class="money">￥{{orderInfo.logisticsPrice || '6.00'}}</text>
+    </view>
+    <view class="order_total">
+      共{{buyGoodsList.length}}件，小计：￥<text class="price">{{orderInfo.orderTotal}}</text>
+    </view>
+  </view>
+  <i class="line"></i>
+  <view class="order_info">
+    <view class="number">
+      订单编号： {{orderInfo.id}}
+      <button class="btn btn_default">复制</button>
+    </view>
+    <text>创建时间： {{orderInfo.ctime}}</text>
+    <text wx:if="order.ptime !== ''">付款时间： {{orderInfo.ptime}}</text>
+    <text wx:if="order.stime !== ''">发货时间： {{orderInfo.stime}}</text>
+    <view class="info_action">
+      <button bindtap="callPhone">
+        <image src="../../../assets/images/phone.png" mode="aspectFit"></image>
+          联系客服
+      </button>
+      <button bindtap="callPhone">
+        <image src="../../../assets/images/message.png" mode="aspectFit"></image>
+          拨打电话
+      </button>
+    </view>
+  </view>
+</view>

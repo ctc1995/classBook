@@ -1,2 +1,52 @@
-<!--pages/order/orderRefundProcess/orderRefundProcess.wxml-->
-<text>pages/order/orderRefundProcess/orderRefundProcess.wxml</text>
+<!-- 退款等待，填写运单号 -->
+<view class="page_receipt">
+  <view class="order_status status_primary}}">
+    <text class="status">{{orderStatus[orderInfo.status].title}}</text>
+    <text class="status_info">{{orderInfo.status == '5' ? orderInfo.rtime : countDown}}</text>
+    <view class="countdown" wx:if="{{orderInfo.status == '5'}}">
+      <image src="../../../assets/images/countdown.png"></image>
+      <text>{{countDown}}</text>
+    </view>
+  </view>
+  <view class="refund_info">
+    <view class="process">
+      <text class="title">{{process[orderInfo.status].title}}</text>
+      
+      <view class="order_delivery">
+        <p class="name_phone">
+          <span>{{orderInfo.tuihuo.name}}</span>
+          <span>{{orderInfo.tuihuo.phone}}</span>
+        </p>
+        <p class="address">{{orderInfo.tuihuo.address}}</p>
+      </view>
+      <i class="line"></i>
+      <text class="content" wx:for="{{process[orderInfo.status].content}}">{{item}}</text>
+    </view>
+    <view class="need_link_icon his">
+      <text>协商历史</text>
+    </view>
+  </view>
+  <i class="line"></i>
+  <view class="order_detail">
+    <orderGoods buy-goods-list="{{buyGoodsList}}" money="{{false}}" attr="{{false}}" ></orderGoods>
+  </view>
+  <i class="line"></i>
+  <view class="order_info">
+    <view class="number" style="padding-top:30rpx;">
+      退款编号： {{orderInfo.id}}
+    </view>
+    <text>退款原因： {{orderInfo.info}}</text>
+    <text>退款金额： ￥{{orderInfo.money}}</text>
+    <text style="margin-bottom:30rpx;">申请时间： {{orderInfo.ctime}}</text>
+    <view class="info_action">
+      <button bindtap="callPhone">
+        <image src="../../../assets/images/phone.png" mode="aspectFit"></image>
+        联系客服
+      </button>
+      <button bindtap="callPhone">
+        <image src="../../../assets/images/message.png" mode="aspectFit"></image>
+        拨打电话
+      </button>
+    </view>
+  </view>
+</view>

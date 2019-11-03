@@ -12,11 +12,11 @@
     <p class="address">{{orderInfo.delivery.address}}</p>
   </view>
   <i class="line"></i>
-  <view class="need_link_icon logistics">
+  <view class="need_link_icon logistics" wx:if="{{orderInfo.status == '2'}}">
     <text class="title">物流信息</text>
     <text class="info">{{orderInfo.logistics[0]}}</text>
   </view>
-  <i class="line"></i>
+  <i class="line" wx:if="{{orderInfo.status == '2'}}"></i>
   <view class="order_detail">
     <orderGoods buy-goods-list="{{buyGoodsList}}"></orderGoods>
     <view class="logistics_money">
@@ -27,8 +27,9 @@
       共{{buyGoodsList.length}}件，小计：￥<text class="price">{{orderInfo.orderTotal}}</text>
     </view>
     <view class="order_action">
-      <button class="btn btn_default">申请退款</button>
-      <button class="btn btn_default">查看物流</button>
+      <button class="btn btn_default" wx:if="{{orderInfo.status == '0'}}">取消订单</button>
+      <button class="btn btn_default" wx:if="{{orderInfo.status == '2' || orderInfo.status == '1'}}">申请退款</button>
+      <button class="btn btn_default" wx:if="{{orderInfo.status == '2'}}">查看物流</button>
     </view>
   </view>
   <i class="line"></i>
@@ -38,17 +39,26 @@
       <button class="btn btn_default">复制</button>
     </view>
     <text>创建时间： {{orderInfo.ctime}}</text>
-    <text v-if="order.ptime">付款时间： {{orderInfo.ptime}}</text>
-    <text v-if="order.stime">发货时间： {{orderInfo.stime}}</text>
+    <text wx:if="order.ptime !== ''">付款时间： {{orderInfo.ptime}}</text>
+    <text wx:if="order.stime !== ''">发货时间： {{orderInfo.stime}}</text>
     <view class="info_action">
-      <button>
-      <image src="../../../assets/images/phone.png" mode="aspectFit"></image>
-        联系客服
+      <button bindtap="callPhone">
+        <image src="../../../assets/images/phone.png" mode="aspectFit"></image>
+          联系客服
       </button>
-      <button>
-      <image src="../../../assets/images/message.png" mode="aspectFit"></image>
-        拨打电话
+      <button bindtap="callPhone">
+        <image src="../../../assets/images/message.png" mode="aspectFit"></image>
+          拨打电话
       </button>
     </view>
+  </view>
+  <view class="order_footer" wx:if="{{orderInfo.status == '0'}}">
+    <view class="total_money">
+      <view class="money">
+        <text class="unit">￥</text>{{orderInfo.orderTotal}}
+      </view>
+      <text class="total_tips">不计运费</text>
+    </view>
+    <button class="btn btn_primary" bindtap="buy">立即支付</button>
   </view>
 </view>

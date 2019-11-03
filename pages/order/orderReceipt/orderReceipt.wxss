@@ -2,6 +2,7 @@
 .page_receipt{
   width: 750rpx;
   min-height: 100vh;
+  padding-bottom: 100rpx;
   background-color: #f3f3f3;
   position: relative;
 }
@@ -144,4 +145,33 @@
   height: 26rpx;
   display: inline-block;
   margin-right: 16rpx;
+}
+
+.order_footer{
+  width: 750rpx;
+  height: 100rpx;
+  background-color: #fff;
+  padding: 0 30rpx;
+  border-top: 1px solid #eaeaea;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  box-sizing: border-box;
+}
+.total_money .money{
+  color: #e50101;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.total_money .money .unit{
+  font-size: 24rpx;
+  font-weight: 300;
+}
+.total_money .total_tips{
+  font-size: 20rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 6rpx;
 }

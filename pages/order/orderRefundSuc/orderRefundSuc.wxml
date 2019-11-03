@@ -1,2 +1,43 @@
-<!--pages/order/orderRefundSuc/orderRefundSuc.wxml-->
-<text>pages/order/orderRefundSuc/orderRefundSuc.wxml</text>
+<!-- 换货成功，退货成功 -->
+<view class="page_receipt">
+  <view class="order_status {{orderInfo.status != '8' ? 'status_primary': ''}}">
+    <text class="status">{{orderStatus[orderInfo.status].title}}</text>
+    <text class="status_info">{{orderInfo.rtime}}</text>
+  </view>
+  <view class="refund_info">
+    <view wx:if="{{orderInfo.status == '7'}}">
+      <text>退款金额</text>
+      <text>￥{{orderInfo.money}}</text>
+    </view>
+    <view wx:if="{{orderInfo.status == '7'}}">
+      <text>退回微信</text>
+      <text>￥{{orderInfo.money}}</text>
+    </view>
+    <view class="need_link_icon his">
+      <text>协商历史</text>
+    </view>
+  </view>
+  <i class="line"></i>
+  <view class="order_detail">
+    <orderGoods buy-goods-list="{{buyGoodsList}}" money="{{false}}" attr="{{false}}" ></orderGoods>
+  </view>
+  <i class="line" wx:if="{{orderInfo.status != '8'}}"></i>
+  <view class="order_info">
+    <view class="number" wx:if="{{orderInfo.status != '8'}}" style="padding-top:30rpx;">
+      退款编号： {{orderInfo.id}}
+    </view>
+    <text wx:if="{{orderInfo.status != '8'}}">退款原因： {{orderInfo.info}}</text>
+    <text wx:if="{{orderInfo.status != '8'}}">退款金额： ￥{{orderInfo.money}}</text>
+    <text wx:if="{{orderInfo.status != '8'}}" style="margin-bottom:30rpx;">申请时间： {{orderInfo.ctime}}</text>
+    <view class="info_action">
+      <button bindtap="callPhone">
+        <image src="../../../assets/images/phone.png" mode="aspectFit"></image>
+        联系客服
+      </button>
+      <button bindtap="callPhone">
+        <image src="../../../assets/images/message.png" mode="aspectFit"></image>
+        拨打电话
+      </button>
+    </view>
+  </view>
+</view>
