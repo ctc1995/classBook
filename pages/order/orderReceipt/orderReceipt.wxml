@@ -28,7 +28,7 @@
     </view>
     <view class="order_action">
       <button class="btn btn_default" wx:if="{{orderInfo.status == '0'}}">取消订单</button>
-      <button class="btn btn_default" wx:if="{{orderInfo.status == '2' || orderInfo.status == '1'}}">申请退款</button>
+      <button class="btn btn_default" wx:if="{{orderInfo.status == '2' || orderInfo.status == '1'}}" bindtap="refund">申请退款</button>
       <button class="btn btn_default" wx:if="{{orderInfo.status == '2'}}">查看物流</button>
     </view>
   </view>

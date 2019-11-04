@@ -28,7 +28,7 @@
     </view>
     <view class="remakes">
       <text class="line_title">订单备注</text>
-      <input maxlength="100" placeholder="选填，请先和商家协商一致"bindinput="bindKeyRemakes"></input>
+      <input maxlength="100" placeholder="选填，请先和商家协商一致" bindinput="bindKeyRemakes"></input>
     </view>
     <view class="goods_total">
         共计 {{buyGoodsList.length}} 件商品，应付总金额<text class="money">￥{{totalMoney}}</text>元

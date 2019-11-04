@@ -1,1 +1,65 @@
 /* pages/order/orderRefunding/orderRefunding.wxss */
+.page_refund{
+  width: 750rpx;
+  min-height: 100vh;
+  font-size: 30rpx;
+  background-color: #f3f3f3;
+  position: relative;
+}
+.order_detail, .refund_info, .upload_pic{
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.order_detail{
+  width: 750rpx;
+  color: #999;
+  font-size: 30rpx;
+  padding: 32rpx 36rpx;
+  border-top: 1px solid #eaeaea;
+}
+
+.refund_info{
+  width: 750rpx;
+  color: #999999;
+  font-size: 30rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.refund_info>view{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 0;
+}
+.refund_info view picker{
+  height: 40rpx;
+  flex: 1;
+}
+.refund_info view .remake{
+  flex: 1;
+  padding: 0 20rpx;
+}
+.refund_info view picker .picker{
+  height: 40rpx;
+  text-align: right;
+  padding-right: 30rpx;
+}
+.refund_info view+view{
+  border-top: 1px solid #eaeaea;
+}
+.upload_pic{
+  padding: 30rpx;
+}
+.upload_pic .title{
+	font-size: 30rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	color: #333333;
+}
+.upload_pic .content{
+  display: flex;
+  flex-wrap: wrap;
+}

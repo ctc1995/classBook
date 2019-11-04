@@ -1,2 +1,36 @@
 <!--pages/order/orderRefunding/orderRefunding.wxml-->
-<text>pages/order/orderRefunding/orderRefunding.wxml</text>
+<view class="page_refund">
+  <view class="order_detail">
+    <orderGoods buy-goods-list="{{buyGoodsList}}"  money="{{false}}"></orderGoods>
+  </view>
+  <i class="line"></i>
+  <view class="refund_info">
+    <view>
+      <text>退款金额</text>
+      <input style="text-align: right;" type="digit" placeholder="最大退款金额 {{orderMaxMoney}}元" bindinput="bindMoney"></input>
+    </view>
+    <view class="need_link_icon">
+      <text>退款原因</text>
+      <picker mode="selector" range="{{reasonObj}}" range-key="name" bindchange="bindRegionChange" value="{{index}}">
+        <view class="picker">
+          {{reason.name}}
+        </view>
+      </picker>
+    </view>
+    <view>
+      <text>退款说明</text>
+      <input class="remake" type="text" placeholder="请输入退款说明" bindinput="bindRemake"></input>
+    </view>
+  </view>
+  <i class="line"></i>
+  <view class="upload_pic">
+    <view class='title'>图片上传 {{uploaderNum}}/6</view>
+    <view class='ui_uploader_cell content'>
+      <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="{{index}}">
+        <icon class='ui_uploader_item_icon' bindtap='clearImg' data-index="{{index}}" type="clear" size="20" color="red" />
+        <image bindtap='showImg' mode="aspectFit" data-index="{{index}}" src='{{item}}'></image>
+      </view>
+      <view class='ui_uploader' bindtap='upload' wx:if="{{showUpload}}"></view>
+    </view>
+  </view>
+</view>

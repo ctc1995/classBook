@@ -14,7 +14,7 @@ Page({
         phone: '18977837849',
         address: '广东省深圳市南山区粤海街道9109号三诺智慧大厦'
       },
-      status: 0,
+      status: 1,
       // 快递费用
       logisticsPrice: '6.00',
       // 订单费用
@@ -55,9 +55,20 @@ Page({
     })
     console.log(this.data.orderStatus)
   },
+  // 拨打电话
   callPhone(){
     wx.makePhoneCall({
       phoneNumber: '15018504589' //仅为示例，并非真实的电话号码
+    })
+  },
+  // 申请退货
+  refund(){
+    var self = this;
+    wx.navigateTo({
+      url: '../orderRefunding/orderRefunding',
+      success: function (res) {
+        res.eventChannel.emit("acceptBuyGoodsList", self.data.buyGoodsList)
+      }
     })
   },
   /**

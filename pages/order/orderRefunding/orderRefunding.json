@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "申请退款",
+  "usingComponents": {
+    "orderGoods": "../../../component/orderGoods/orderGoods"
+  }
 }
