@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/order/orderConfirm/orderConfirm",
+    "pages/about/about",
     "pages/home/home",
+    "pages/order/orderConfirm/orderConfirm",
     "pages/shopCar/shopCar",
     "pages/recommend/recommend",
     "pages/search/search",
     "pages/discovery/discovery",
-    "pages/about/about",
     "pages/logs/logs",
     "pages/goods/goods",
     "pages/allClass/allClass",
@@ -19,7 +19,8 @@
     "pages/order/orderRefundSuc/orderRefundSuc",
     "pages/order/orderRefunding/orderRefunding",
     "pages/order/orderAfterSales/orderAfterSales",
-    "pages/order/orderRefundProcess/orderRefundProcess"
+    "pages/order/orderRefundProcess/orderRefundProcess",
+    "pages/order/orderManager/orderManager"
   ],
   "window": {
     "backgroundTextStyle": "light",

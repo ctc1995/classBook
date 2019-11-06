@@ -1,0 +1,27 @@
+<!--pages/order/orderManager/orderManager.wxml-->
+<view class="page_order_manager">
+  <tab-nav tab-list="{{tabList}}" small="{{true}}" bind:changeTabNav="changeTabNav"></tab-nav>
+  <view class="order_list">
+    <view class="order_detail" wx:for="{{orderList}}" wx:key="{{index}}">
+      <i class="line"></i>
+      <view class="order_status">
+        {{item.ctime}}
+        <span class="{{item.status == '0' ? 'topaid' : ''}}">
+          {{orderStatus[item.status].title}}
+        </span>
+      </view>
+      <orderGoods buy-goods-list="{{item.goods}}"></orderGoods>
+      <view class="order_price">
+        共{{item.goods.length}}件商品（含快递费￥{{item.logisticsPrice}}）共计：<text class="price">{{item.orderTotal}}</text>
+      </view>
+      <view class="order_action">
+        <button class="btn btn_default" wx:if="{{item.status != '1'}}" bindtap="detail">查看详情</button>
+        <button class="btn btn_primary" wx:if="{{item.status == '0'}}" bindtap="toPaid">立即支付</button>
+        <button class="btn btn_default" wx:if="{{item.status == '1'}}" bindtap="remind">提醒发货</button>
+        <button class="btn btn_primary" wx:if="{{item.status == '2'}}" bingtap="logistics">物流跟踪</button>
+        <button class="btn btn_default" wx:if="{{item.status == '0' || item.status == '1'}}" bingtap="cancel">取消订单</button>
+        <button class="btn btn_default" wx:if="{{item.status == '3'}}" bindtap="refund">申请售后</button>
+      </view>
+    </view>
+  </view>
+</view>

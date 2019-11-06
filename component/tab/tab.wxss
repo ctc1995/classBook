@@ -5,13 +5,19 @@
   /* border-top: 1px solid #eaeaea; */
   border-bottom: 1px solid #eaeaea;
   background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .mod_tabnav .tabnav_item{
-  width: 375rpx;
+  flex: 1;
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
   display: inline-block;
+}
+.mod_tabnav .tabnav_item.small{
+  font-size: 24rpx;
 }
 .mod_tabnav .tabnav_item.current{
   color: #f4b800;

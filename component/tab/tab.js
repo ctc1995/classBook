@@ -7,6 +7,10 @@ Component({
     tabList: {
       type: Array,
       value: []
+    },
+    small: {
+      type: Boolean,
+      value: false
     }
   },
   /**

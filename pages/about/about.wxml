@@ -11,7 +11,7 @@
   <view class="my_order">
     <p class="title">
       我的订单
-      <span class="all_order">全部</span>
+      <navigator class="all_order" url="../../pages/order/orderManager/orderManager">全部</navigator>
     </p>
     <view class="order_modules">
     <!-- TODO: 切换成跳转链接 -->

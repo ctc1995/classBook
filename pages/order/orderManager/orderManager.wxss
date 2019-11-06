@@ -1,0 +1,44 @@
+/* pages/order/orderManager/orderManager.wxss */
+.order_list{
+  width: 750rpx;
+  min-height: 750rpx;
+  background-color: #f3f3f3;
+  position: relative;
+  box-sizing: border-box;
+}
+.order_detail{
+  font-size: 24rpx;
+  background-color: #fff;
+  padding: 0 36rpx 30rpx;
+}
+.order_detail .order_status{
+  height: 100rpx;
+  background-color: #fff;
+  color: #999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.order_detail .order_status span{
+  font-size: 30rpx;
+}
+.order_detail .order_status .topaid{
+  color: #e50101;
+}
+.order_detail .order_price{
+  color: #555;
+  text-align: right;
+  border-top: 1px solid #eaeaea;
+  padding: 28rpx 0;
+}
+.order_detail .order_price .price{
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.order_detail .order_action{
+  display: flex;
+  justify-content: flex-end;
+}
+.order_detail .order_action button{
+  margin-left: 22rpx;
+}
