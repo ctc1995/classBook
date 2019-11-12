@@ -47,13 +47,13 @@ Page({
   onReady: function () {
     const eventChannel = this.getOpenerEventChannel();
     var self = this, appInstance = getApp();
-    eventChannel.on('acceptBuyGoodsList', function (data) {
+    eventChannel.on('acceptOrder', function (data) {
       self.setData({
-        buyGoodsList: data,
+        orderInfo: data,
+        buyGoodsList: data.goods,
         orderStatus: appInstance.globalData.orderStatus
       })
     })
-    console.log(this.data.orderStatus)
   },
   // 拨打电话
   callPhone(){
@@ -67,7 +67,7 @@ Page({
     wx.navigateTo({
       url: '../orderRefunding/orderRefunding',
       success: function (res) {
-        res.eventChannel.emit("acceptBuyGoodsList", self.data.buyGoodsList)
+        res.eventChannel.emit("acceptOrder", self.data.buyGoodsList)
       }
     })
   },

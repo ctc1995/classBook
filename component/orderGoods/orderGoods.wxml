@@ -8,7 +8,7 @@
     </view>
     <view class="price_sum">
       <text class="price" wx:if="{{money}}"><text class="unit">￥</text>{{item.realPrice}}</text>
-      <text class="sum">x {{item.sum}}</text>
+      <text class="sum" wx:if="{{sum}}">x {{item.sum}}</text>
       <text class="sum">　</text>
     </view>
   </view>

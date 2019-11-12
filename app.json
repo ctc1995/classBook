@@ -2,6 +2,7 @@
   "pages": [
     "pages/about/about",
     "pages/home/home",
+    "pages/info/info",
     "pages/order/orderConfirm/orderConfirm",
     "pages/shopCar/shopCar",
     "pages/recommend/recommend",
@@ -20,7 +21,12 @@
     "pages/order/orderRefunding/orderRefunding",
     "pages/order/orderAfterSales/orderAfterSales",
     "pages/order/orderRefundProcess/orderRefundProcess",
-    "pages/order/orderManager/orderManager"
+    "pages/order/orderManager/orderManager",
+    "pages/aboutMe/aboutMe",
+    "pages/coupon/coupon",
+    "pages/bookshelf/bookshelf",
+    "pages/mission/mission",
+    "pages/address/address"
   ],
   "window": {
     "backgroundTextStyle": "light",

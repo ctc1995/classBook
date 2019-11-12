@@ -1,0 +1,10 @@
+<!--pages/bookshelf/bookshelf.wxml-->
+<view class="page_bookshelf">
+  <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
+  <view class="book_list" wx:if="{{curTabId==='shoucang'}}">
+    <goods goods="{{buySCGoodsList}}" car="{{false}}"></goods>
+  </view>
+  <view class="book_list" wx:if="{{curTabId==='maiguo'}}">
+    <goods goods="{{buyMGGoodsList}}" car="{{false}}"></goods>
+  </view>
+</view>

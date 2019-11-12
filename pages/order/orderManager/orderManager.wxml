@@ -1,6 +1,6 @@
 <!--pages/order/orderManager/orderManager.wxml-->
 <view class="page_order_manager">
-  <tab-nav tab-list="{{tabList}}" small="{{true}}" bind:changeTabNav="changeTabNav"></tab-nav>
+  <tab-nav tab-list="{{tabList}}" small="{{true}}" cur-tab-index="{{curTabIndex}}" bind:changeTabNav="changeTabNav"></tab-nav>
   <view class="order_list">
     <view class="order_detail" wx:for="{{orderList}}" wx:key="{{index}}">
       <i class="line"></i>
@@ -15,13 +15,17 @@
         共{{item.goods.length}}件商品（含快递费￥{{item.logisticsPrice}}）共计：<text class="price">{{item.orderTotal}}</text>
       </view>
       <view class="order_action">
-        <button class="btn btn_default" wx:if="{{item.status != '1'}}" bindtap="detail">查看详情</button>
-        <button class="btn btn_primary" wx:if="{{item.status == '0'}}" bindtap="toPaid">立即支付</button>
-        <button class="btn btn_default" wx:if="{{item.status == '1'}}" bindtap="remind">提醒发货</button>
-        <button class="btn btn_primary" wx:if="{{item.status == '2'}}" bingtap="logistics">物流跟踪</button>
-        <button class="btn btn_default" wx:if="{{item.status == '0' || item.status == '1'}}" bingtap="cancel">取消订单</button>
-        <button class="btn btn_default" wx:if="{{item.status == '3'}}" bindtap="refund">申请售后</button>
+        <button class="btn btn_default" wx:if="{{item.status != '1'}}" bindtap="detail" data-index="{{index}}">查看详情</button>
+        <button class="btn btn_primary" wx:if="{{item.status == '0'}}" bindtap="toPaid" data-index="{{index}}">立即支付</button>
+        <button class="btn btn_default" wx:if="{{item.status == '1'}}" bindtap="remind" data-index="{{index}}">提醒发货</button>
+        <button class="btn btn_primary" wx:if="{{item.status == '2'}}" bindtap="logistics" data-index="{{index}}">物流跟踪</button>
+        <button class="btn btn_default" wx:if="{{item.status == '0' || item.status == '1'}}" bindtap="cancel" data-index="{{index}}">取消订单</button>
+        <button class="btn btn_default" wx:if="{{item.status == '3'}}" bindtap="refund" data-index="{{index}}">申请售后</button>
       </view>
+    </view>
+    <view class="order_none" wx:if="{{orderList.length == 0}}">
+      <image src="../../../assets/images/no-data.png" mode="widthFix"/>
+      <text>暂无订单，快去下单吧</text>
     </view>
   </view>
 </view>

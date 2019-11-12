@@ -2,15 +2,15 @@
 <view class="page_search">
     <!-- 搜索区域 -->
     <view class='mod_search'>
-      <navigator class='searchItem' url="../../pages/search/search">
+      <view class='searchItem'>
         <image src='../../assets/images/search.png' />
         <input placeholder='搜索关键词'></input>
-      </navigator>
+      </view>
     </view>
     <view class="mod_book_list">
       <h2 class="title">官方书单</h2>
       <div class="list">
-        <navigator class="item" wx:for="{{bookList}}" url="../../pages/home/home?{{item.id}}">
+        <navigator class="item" wx:for="{{bookList}}" url="../../pages/bookMenu/bookMenu?{{item.id}}">
           {{item.name}}
         </navigator>
       </div>
@@ -18,11 +18,13 @@
     <view class="mod_good">
       <h2 class="title">
         好书推荐
-        <span class="more">全部分类</span>
+        <navigator class="item" url="../../pages/allClass/allClass">
+          全部分类
+        </navigator>
       </h2>
       <div class="book_list">
         <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
-          <navigator class="book_content" url="../home/home?bookId={{item.bookId}}">
+          <navigator class="book_content" url="../goods/goods?bookId={{item.bookId}}">
             <image src="../../assets/images/{{item.pic}}"></image>
             <section class="book_detail">
               <section class="book_info">

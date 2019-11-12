@@ -43,11 +43,11 @@ Page({
     var self = this;
     eventChannel.on('acceptBuyGoodsList', function (data) {
       var orderMaxMoney = 0;
-      data.map(item=>{
+      data.goods.map(item=>{
         orderMaxMoney += parseFloat(item.realPrice);
       })
       self.setData({
-        buyGoodsList: data,
+        buyGoodsList: data.goods,
         orderMaxMoney: orderMaxMoney,
       })
     })

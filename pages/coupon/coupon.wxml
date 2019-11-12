@@ -1,0 +1,63 @@
+<!--pages/coupon/coupon.wxml-->
+<view class="page_coupon">
+  <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
+  <view class="coupon-list">
+    <view class="coupon primary" wx:if="{{curTabId==='keyong'}}" wx:for="{{coupon}}" wx:key="{{index}}">
+      <view class="coupon-info">
+        <view class="detail">
+          <span class="money">
+            ￥{{item.money}}
+          </span>
+          <span class="condition">
+            活动优惠券
+            <span style="white-space:nowrap;">满{{item.condition}}使用</span>
+          </span>
+        </view>
+        <view class="validity">
+          {{item.validityStart}} - {{item.validityEnd}}
+        </view>
+      </view>
+      <view class="coupon-action">
+        去使用
+      </view>
+    </view>
+    <view class="coupon primary" wx:if="{{curTabId==='dailingqu'}}" wx:for="{{coupon}}" wx:key="{{index}}">
+      <view class="coupon-info">
+        <view class="detail">
+          <span class="money">
+            ￥{{item.money}}
+          </span>
+          <span class="condition">
+            活动优惠券
+            <span style="white-space:nowrap;">满{{item.condition}}使用</span>
+          </span>
+        </view>
+        <view class="validity">
+          {{item.validityStart}} - {{item.validityEnd}}
+        </view>
+      </view>
+      <view class="coupon-action">
+        立即领取
+      </view>
+    </view>
+    <view class="coupon default" wx:if="{{curTabId==='bukeyong'}}" wx:for="{{coupon}}" wx:key="{{index}}">
+      <view class="coupon-info">
+        <view class="detail">
+          <span class="money">
+            ￥{{item.money}}
+          </span>
+          <span class="condition">
+            活动优惠券
+            <span style="white-space:nowrap;">满{{item.condition}}使用</span>
+          </span>
+        </view>
+        <view class="validity">
+          {{item.validityStart}} - {{item.validityEnd}}
+        </view>
+      </view>
+      <view class="coupon-action">
+        已失效
+      </view>
+    </view>
+  </view>
+</view>

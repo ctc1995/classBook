@@ -3,7 +3,7 @@
     <view class="mod_book_list" wx:for="{{allClassList}}">
       <h2 class="title">{{item.className}}</h2>
       <div class="list">
-        <navigator class="item" wx:for="{{item.classList}}" url="../../pages/home/home?{{item.id}}">
+        <navigator class="item" wx:for="{{item.classList}}" url="../../pages/bookMenu/bookMenu?{{item.id}}">
           {{item.name}}
         </navigator>
       </div>

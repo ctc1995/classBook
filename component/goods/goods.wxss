@@ -1,0 +1,71 @@
+/* component/goods/goods.wxss */
+.book_item {
+  display: flex;
+  align-items: center;
+  padding-bottom: 30rpx;
+}
+
+.book_item+.book_item {
+  padding-top: 30rpx;
+  border-top: 1px solid #eaeaea;
+}
+
+.book_item .book_content {
+  width: 636rpx;
+  display: flex;
+}
+
+.book_item .book_content image {
+  width: 152rpx;
+  height: 196rpx;
+  max-width: 152rpx;
+  max-height: 196rpx;
+  margin-right: 26rpx;
+}
+
+.book_item .book_content .book_detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book_item .book_content .book_detail .book_info {
+  width: 458rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.book_item .book_content .book_detail .book_info .book_title {
+  width: 458rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  overflow: hidden; /*超出部分隐藏*/
+  text-overflow: ellipsis; /* 超出部分显示省略号 */
+  white-space: nowrap; /*规定段落中的文本不进行换行 */
+}
+
+.book_item .book_content .book_detail .book_info p+p {
+  margin-top: 15rpx;
+}
+
+.book_item .book_content .book_detail .book_price .price_unit {
+  font-size: 20rpx;
+  color: #e50101;
+}
+.book_item .book_content .book_detail .book_price .price{
+    text-decoration:line-through;margin-left: 5rpx
+}
+.book_item .book_content .book_detail .book_price .real_price {
+  font-size: 32rpx;
+  color: #e50101;
+}
+
+.book_item .add_car {
+  width: 42rpx;
+}
+
+.book_item .add_car image {
+  width: 42rpx;
+  height: 37rpx;
+}

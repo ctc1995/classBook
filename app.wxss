@@ -1,4 +1,6 @@
 /**app.wxss**/
+@import './weui/weui-wxss/dist/style/weui.wxss';
+
 .container {
   height: 100%;
   display: flex;
@@ -167,7 +169,7 @@ h2.title {
 }
 
 /* 好书推荐 */
-.mod_good .book_list {
+.book_list {
   width: 678rpx;
   font-size: 24rpx;
   color: #999;
@@ -175,23 +177,23 @@ h2.title {
   flex-direction: column;
 }
 
-.mod_good .book_list .book_item {
+.book_list .book_item {
   display: flex;
   align-items: center;
   padding-bottom: 30rpx;
 }
 
-.mod_good .book_list .book_item+.book_item {
+.book_list .book_item+.book_item {
   padding-top: 30rpx;
   border-top: 1px solid #eaeaea;
 }
 
-.mod_good .book_list .book_item .book_content {
+.book_list .book_item .book_content {
   width: 636rpx;
   display: flex;
 }
 
-.mod_good .book_list .book_item .book_content image {
+.book_list .book_item .book_content image {
   width: 152rpx;
   height: 196rpx;
   max-width: 152rpx;
@@ -199,19 +201,19 @@ h2.title {
   margin-right: 26rpx;
 }
 
-.mod_good .book_list .book_item .book_content .book_detail {
+.book_list .book_item .book_content .book_detail {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.mod_good .book_list .book_item .book_content .book_detail .book_info {
+.book_list .book_item .book_content .book_detail .book_info {
   width: 458rpx;
   display: flex;
   flex-direction: column;
 }
 
-.mod_good .book_list .book_item .book_content .book_detail .book_info .book_title {
+.book_list .book_item .book_content .book_detail .book_info .book_title {
   width: 458rpx;
   font-size: 30rpx;
   font-weight: bold;
@@ -221,27 +223,27 @@ h2.title {
   white-space: nowrap; /*规定段落中的文本不进行换行 */
 }
 
-.mod_good .book_list .book_item .book_content .book_detail .book_info p+p {
+.book_list .book_item .book_content .book_detail .book_info p+p {
   margin-top: 15rpx;
 }
 
-.mod_good .book_list .book_item .book_content .book_detail .book_price .price_unit {
+.book_list .book_item .book_content .book_detail .book_price .price_unit {
   font-size: 20rpx;
   color: #e50101;
 }
-.mod_good .book_list .book_item .book_content .book_detail .book_price .price{
+.book_list .book_item .book_content .book_detail .book_price .price{
     text-decoration:line-through;margin-left: 5rpx
 }
-.mod_good .book_list .book_item .book_content .book_detail .book_price .real_price {
+.book_list .book_item .book_content .book_detail .book_price .real_price {
   font-size: 32rpx;
   color: #e50101;
 }
 
-.mod_good .book_list .book_item .add_car {
+.book_list .book_item .add_car {
   width: 42rpx;
 }
 
-.mod_good .book_list .book_item .add_car image {
+.book_list .book_item .add_car image {
   width: 42rpx;
   height: 37rpx;
 }

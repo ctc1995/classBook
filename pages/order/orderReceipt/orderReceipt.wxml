@@ -52,13 +52,15 @@
       </button>
     </view>
   </view>
-  <view class="order_footer" wx:if="{{orderInfo.status == '0'}}">
-    <view class="total_money">
+  <view class="order_footer" wx:if="{{orderInfo.status == '0' || orderInfo.status == '6'}}">
+    <view class="total_money" wx:if="{{orderInfo.status == '0'}}">
       <view class="money">
         <text class="unit">￥</text>{{orderInfo.orderTotal}}
       </view>
       <text class="total_tips">不计运费</text>
     </view>
-    <button class="btn btn_primary" bindtap="buy">立即支付</button>
+    <button class="btn btn_primary" bindtap="buy" wx:if="{{orderInfo.status == '0'}}">立即支付</button>
+    <view wx:if="{{orderInfo.status != '0'}}"></view>
+    <button class="btn btn_default" bindtap="buy" wx:if="{{orderInfo.status == '6'}}">物流登记</button>
   </view>
 </view>

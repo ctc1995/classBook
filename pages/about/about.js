@@ -13,27 +13,27 @@ Page({
       {
         "icon": 'book-shelf.png',
         "title": '我的书架',
-        "href": '../logs/logs'
+        "href": '../bookshelf/bookshelf'
       },
       {
         "icon": 'coupon.png',
         "title": '我的优惠',
-        "href": '../logs/logs'
+        "href": '../coupon/coupon'
       },
       {
         "icon": 'task.png',
         "title": '任务中心',
-        "href": '../logs/logs'
+        "href": '../mission/mission'
       },
       {
         "icon": 'setting.png',
-        "title": '设置',
-        "href": '../logs/logs'
+        "title": '收货地址',
+        "href": '../address/address'
       },
       {
         "icon": 'aboutme.png',
         "title": '关于我们',
-        "href": '../logs/logs'
+        "href": '../aboutMe/aboutMe'
       },
     ],
   },

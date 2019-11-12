@@ -23,7 +23,7 @@
   <view class="mod_good">
     <div class="book_list">
       <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
-        <navigator class="book_content" url="../logs/logs?bookId={{item.bookId}}">
+        <navigator class="book_content" url="../goods/goods?bookId={{item.bookId}}">
           <image src="../../assets/images/{{item.pic}}"></image>
           <section class="book_detail">
             <section class="book_info">

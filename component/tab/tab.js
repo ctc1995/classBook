@@ -11,13 +11,16 @@ Component({
     small: {
       type: Boolean,
       value: false
+    },
+    curTabIndex: {
+      type: Number,
+      value: 0
     }
   },
   /**
    * 组件的初始数据
    */
   data: {
-    curTabIndex: 0
   },
 
   /**
@@ -28,7 +31,7 @@ Component({
       this.setData({
         curTabIndex: e.currentTarget.dataset.index
       })
-      this.triggerEvent('changeTabNav', e.currentTarget.dataset.item);
+      this.triggerEvent('changeTabNav', Object.assign(e.currentTarget.dataset.item,{ 'tabIndex': e.currentTarget.dataset.index}));
     },
   }
 })

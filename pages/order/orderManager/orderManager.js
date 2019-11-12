@@ -27,7 +27,8 @@ Page({
         "tabName": "退款/售后"
       }
     ],
-    curTabId: "all",
+    curTabId: "",
+    curTabIndex: 0,
     orderStatus: {},
     orderList: [],
   },
@@ -36,12 +37,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(_MD);
     var appInstance = getApp()
     this.setData({
       orderStatus: appInstance.globalData.orderStatus,
-      orderList: _MD.allOrderList
+      orderList: _MD.allOrderList,
+      curTabId: options.type,
+      curTabIndex: options.index
     })
+    this.changeTabNav({detail:{tabId:options.type}})
   },
 
   // 切换TabNav事件
@@ -49,43 +52,60 @@ Page({
     var orderListKey = e.detail.tabId + 'OrderList';
     this.setData({
       curTabId: e.detail.tabId,
+      curTabIndex: e.detail.tabIndex,
       orderList: _MD[orderListKey]
     })
-    console.log(this.data.orderList);
   },
   // 订单详情
-  detail(){
-    console.log('detail')
+  detail(e){
+    var self = this, orderIndex = e.currentTarget.dataset.index;
+    wx.navigateTo({
+      url: '../orderReceipt/orderReceipt',
+      success: function (res) {
+        res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
+      }
+    })
   },
   // 立即支付
-  toPaid() {
+  toPaid(e) {
+    var orderIndex = e.currentTarget.dataset.index;
     var self = this;
     wx.navigateTo({
       url: '../orderReceipt/orderReceipt',
       success: function (res) {
-        res.eventChannel.emit("acceptBuyGoodsList", self.data.orderList)
+        res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
       }
     })
   },
   // 提醒发货
-  remind(){
+  remind(e){
+    var orderIndex = e.currentTarget.dataset.index;
     console.log('已提醒')
   },
   // 查看物流
-  logistics(){
-    console.log('logistics')
+  logistics(e){
+    var orderIndex = e.currentTarget.dataset.index;
+    var self = this;
+    wx.navigateTo({
+      url: '../orderReceipt/orderReceipt',
+      success: function (res) {
+        res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
+      }
+    })
   },
   // 取消订单
-  cancel(){
+  cancel(e){
+    var orderIndex = e.currentTarget.dataset.index;
     console.log('cancel')
   },
   // 申请退货
-  refund() {
+  refund(e) {
+    var orderIndex = e.currentTarget.dataset.index;
     var self = this;
     wx.navigateTo({
       url: '../orderRefunding/orderRefunding',
       success: function (res) {
-        res.eventChannel.emit("acceptBuyGoodsList", self.data.orderList)
+        res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
       }
     })
   },

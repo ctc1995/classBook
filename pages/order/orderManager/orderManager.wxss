@@ -1,8 +1,10 @@
 /* pages/order/orderManager/orderManager.wxss */
+.page_order_manager{
+  min-height: 100vh;
+  background-color: #f3f3f3;
+}
 .order_list{
   width: 750rpx;
-  min-height: 750rpx;
-  background-color: #f3f3f3;
   position: relative;
   box-sizing: border-box;
 }
@@ -41,4 +43,16 @@
 }
 .order_detail .order_action button{
   margin-left: 22rpx;
+}
+.order_none{
+  width: 750rpx;
+  text-align: center;
+  padding-top: 100rpx;
+}
+.order_none image{
+  width: 350rpx;
+}
+.order_none text{
+  display: block;
+  margin-top: 20rpx;
 }

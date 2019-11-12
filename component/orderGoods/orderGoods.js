@@ -16,6 +16,10 @@ Component({
       type: Boolean,
       value: true
     },
+    sum: {
+      type: Boolean,
+      value: true
+    },
   },
 
   /**
