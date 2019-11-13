@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/about/about",
+    "pages/address/address",
     "pages/home/home",
     "pages/info/info",
     "pages/order/orderConfirm/orderConfirm",
@@ -26,7 +27,7 @@
     "pages/coupon/coupon",
     "pages/bookshelf/bookshelf",
     "pages/mission/mission",
-    "pages/address/address"
+    "pages/addAddress/addAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,2 +1,38 @@
 <!--pages/address/address.wxml-->
-<text>pages/address/address.wxml</text>
+<view class="page_address">
+  <radio-group class="address_list">
+    <view class="address_item" wx:for="{{addressList}}" wx:key="{{index}}">
+      <view class="address_info">
+        <view class="name_phone">
+          <span>{{item.userName}}</span>
+          <span>{{item.telNumber}}</span>
+        </view>
+        <view class="addredd_detail">
+          {{item.provinceName}}{{item.cityName}}{{item.countyName}}{{item.detailInfo}}
+        </view>
+      </view>
+      <view class="address_action">
+        <!-- <mp-checkbox ext-class="default_checkbox" label="默认地址" value="{{item.type}}" checked="{{item.type == 1}}"></mp-checkbox> -->
+        <radio class="default_radio" value="{{item.type}}" checked="{{item.type == 1}}" color="{{'#f4b800'}}">
+          <text>默认地址</text>
+        </radio>
+        <view class="btn_group">
+          <button class="btn btn_text">
+            <image src="../../assets/images/edit.png" mode="widthFix"></image>
+            编辑
+          </button>
+          <button class="btn btn_text">
+            <image src="../../assets/images/delete.png" mode="widthFix"></image>
+            删除
+          </button>
+        </view>
+      </view>
+    </view>
+  </radio-group>
+  <!-- <navigator class="add_address" url="../addAddress/addAddress">
+    + 新增地址
+  </navigator> -->
+  <view class="add_address" bindtap="addAddress">
+    + 新增地址
+  </view>
+</view>

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "新增地址",
+  "component": true,
+  "usingComponents": {
+    "mp-toptips": "../../weui/toptips/toptips",
+    "mp-cells": "../../weui/cells/cells",
+    "mp-cell": "../../weui/cell/cell",
+    "mp-form": "../../weui/form/form" 
+  }
+}

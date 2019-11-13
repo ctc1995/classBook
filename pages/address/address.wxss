@@ -1,1 +1,73 @@
 /* pages/address/address.wxss */
+.page_address{
+  width: 750rpx;
+  min-height: 100vh;
+  background-color: #f3f3f3;
+  position: relative;
+  border-top: 1px solid #ddd;
+}
+.page_address .add_address{
+  width: 750rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #333;
+  font-size: 30rpx;
+  background-color: #fff;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+}
+.page_address .address_item{
+  width: 750rpx;
+  color: #999;
+  background-color: #fff;
+  padding: 0 30rpx;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.page_address .address_item+.address_item{
+  margin-top: 16rpx;
+}
+.address_info{
+  padding: 32rpx 0;
+}
+.name_phone{
+  font-size: 30rpx;
+  color: #333;
+}
+.name_phone span+span{
+  margin-left: 40rpx;
+}
+.addredd_detail{
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+.page_address .address_action{
+  height: 80rpx;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.default_radio{
+  font-size: 26rpx;
+  padding: 0 !important;
+}
+.btn_group{
+  display: flex;
+}
+.btn_group .btn_text{
+  color: #999;
+  font-size: 26rpx;
+  display: flex;
+  background-color: transparent;
+  align-items: center;
+}
+.btn_group .btn_text::after{
+  border: unset;
+}
+.page_address .address_action image{
+  width: 30rpx;
+  margin-right: 14rpx;
+}
