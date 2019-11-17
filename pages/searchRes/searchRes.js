@@ -1,36 +1,10 @@
-// pages/recommend/recommend.js
-const app = new getApp();
-
+// pages/searchRes/searchRes.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    title: '典书',
-    // 全部分类
-    bookClass: [
-      {
-        id: 1,
-        name: '明国旧书',
-        sel: false
-      },
-      {
-        id: 2,
-        name: '名人墨迹',
-        sel: false
-      },
-      {
-        id: 3,
-        name: '外文原版',
-        sel: true
-      },
-      {
-        id: 4,
-        name: '线装古籍',
-        sel: false
-      },
-    ],
     goodList: [
       {
         bookId: 1,
@@ -60,16 +34,6 @@ Page({
         price: "558.00"
       },
     ],
-    // 分类面板
-    showClassPanel: false,
-    // 推荐类型
-    type: ''
-  },
-  
-  toggleClassPanel: function(){
-    this.setData({
-      showClassPanel : !this.data.showClassPanel
-    })
   },
 
   /**
@@ -77,19 +41,12 @@ Page({
    */
   onLoad: function (options) {
     const eventChannel = this.getOpenerEventChannel(), self = this;
-    eventChannel.on('sendData', function (data) {
+    eventChannel.on('sendSearchData', function (data) {
       console.log(data)
       self.setData({
-        title: '分类-' + data.name,
-        bookClass: data.items
+        goodList: data.data
       })
     })
-
-    this.setData({
-      type: options.type
-    })
-    // 好书推荐
-    this.getGoodsRecommend(options.type, 10, 1)
   },
 
   /**
@@ -98,41 +55,12 @@ Page({
   onReady: function () {
 
   },
-  checkClass: function (e) {
-    console.log(e.currentTarget.dataset.item);
-  },
-  getGoodsRecommend: function(type, number, page){
-    const self = this;
-    app.request.getGoodsRecommend({
-      type: type || self.data.type,
-      number,
-      page
-    }).then(res => {
-      console.log(res);
-    })
-  },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var title = '', self=this;
-    switch (this.data.type) {
-      case 'new_upper':
-        title = "最新上架";
-        break;
-      case 'recommended_daily':
-        title = "每日推荐";
-        break;
-      case 'rare_treasures':
-        title = "珍品孤本";
-        break;
-      default:
-        title = self.data.title;
-        break;
-    }
-    wx.setNavigationBarTitle({
-      title
-    })
+
   },
 
   /**

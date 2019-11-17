@@ -1,11 +1,11 @@
 <!--pages/allClass/allClass.wxml-->
 <view class="page_all_class">
     <view class="mod_book_list" wx:for="{{allClassList}}">
-      <h2 class="title">{{item.className}}</h2>
+      <h2 class="title">{{item.name}}</h2>
       <div class="list">
-        <navigator class="item" wx:for="{{item.classList}}" url="../../pages/bookMenu/bookMenu?{{item.id}}">
+        <span class="item" wx:for="{{item.items}}" bindtap="navToList" data-item="{{item}}">
           {{item.name}}
-        </navigator>
+        </span>
       </div>
     </view>
 </view>

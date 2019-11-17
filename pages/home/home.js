@@ -12,25 +12,25 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     // 轮播图片
-    swiperPics: ['swiper.png', 'swiper.png','swiper.png'],
+    swiperPics: [],
+    // swiperPics: ['swiper.png', 'swiper.png','swiper.png'],
     // 当前选中图片
     current: 0,
     // 导航信息
-    navBar: [
-      {
+    navBar: [{
         icon: "new2x.png",
         label: "最新上架",
-        href: "../recommend/recommend?type=new"
+        href: "../recommend/recommend?type=new_upper"
       },
       {
         icon: "recommend2x.png",
         label: "每日推荐",
-        href: "../recommend/recommend?type=day"
+        href: "../recommend/recommend?type=recommended_daily"
       },
       {
         icon: "collection2x.png",
         label: "珍品孤本",
-        href: "../recommend/recommend?type=collection"
+        href: "../recommend/recommend?type=rare_treasures"
       },
       {
         icon: "all2x.png",
@@ -39,8 +39,7 @@ Page({
       },
     ],
     // 推荐书单
-    recommendList: [
-      {
+    recommendList: [{
         bookId: 1,
         pic: "book.png",
         title: "传奇，独自从矿山中走出",
@@ -63,8 +62,7 @@ Page({
       },
     ],
     // 好书推荐
-    goodList:[
-      {
+    goodList: [{
         bookId: 1,
         pic: 'book.jpg',
         title: '我是个年轻人，我的脾气不太好',
@@ -84,11 +82,10 @@ Page({
       },
     ]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -115,9 +112,38 @@ Page({
         }
       })
     }
+    console.log(this.data.userInfo);
+    this.pageInit();
   },
-
-  getUserInfo: function (e) {
+  pageInit: function () {
+    var self = this;
+    // Banner
+    app.request.getBanner().then(res => {
+      console.log(res);
+      self.setData({
+        swiperPics: res.data
+      })
+    })
+    // 推荐书单
+    app.request.getRecommendedlist({
+      number: 3,
+      page: 1
+    }).then(res=>{
+      console.log(res);
+      self.setData({
+        recommendList: res.data.data
+      })
+    })
+    // 好书推荐
+    app.request.getGoodsRecommend({
+      type: 'is_home_recommended',
+      number: 10,
+      page: 1
+    }).then(res=>{
+      console.log(res);
+    })
+  },
+  getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -126,13 +152,13 @@ Page({
     })
   },
 
-  swiperChange: function (e) {
+  swiperChange: function(e) {
     this.setData({
       current: e.detail.current
     })
   },
   // 加购
-  addShopCar(e){
+  addShopCar(e) {
     console.log(e);
     try {
       var shopCar = wx.getStorageSync('shopCar') || {
@@ -141,7 +167,7 @@ Page({
       };
       if (shopCar) {
         // Do something with return value
-        if (shopCar.idList.indexOf(e.currentTarget.dataset.book.bookId) === -1){
+        if (shopCar.idList.indexOf(e.currentTarget.dataset.book.bookId) === -1) {
           shopCar.list.push(e.currentTarget.dataset.book);
           shopCar.idList.push(e.currentTarget.dataset.book.bookId);
         }
@@ -160,49 +186,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

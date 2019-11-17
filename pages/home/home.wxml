@@ -17,9 +17,9 @@
       <swiper autoplay="true" interval="3000" circular="true" current="current" bindchange="swiperChange">
         <block wx:for="{{swiperPics}}" wx:key="{{index}}">
           <swiper-item>
-            <view class="swiper-item">
-              <image src='../../assets/images/{{item}}'></image>
-            </view>
+            <navigator class="swiper-item" url="{{item.event_value}}">
+              <image src='{{item.images_url}}'></image>
+            </navigator>
           </swiper-item>
         </block>
       </swiper>
@@ -44,11 +44,11 @@
         <navigator class="more" url="../bookMenuList/bookMenuList">更多书单</navigator>
       </h2>
       <div class="book_list">
-        <navigator class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" url="../bookMenu/bookMenu?bookMenuId={{item.bookId}}">
-          <image class="book_pic" src="../../assets/images/{{item.pic}}"></image>
-          <p class="like {{item.like? 'active' : ''}}">
+        <navigator class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" url="../bookMenu/bookMenu?bookMenuId={{item.id}}">
+          <image class="book_pic" src="http://dianshu.chaoshang666.com{{item.layout}}"></image>
+          <p class="like {{item.like? 'active' : 'active'}}">
             <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like2x.png'}}"></image>
-            {{item.likeCount}}
+            {{item.fabulous || Math.random()*10000}}
           </p>
           <p class="book_title">{{item.title}}</p>
         </navigator>

@@ -1,1 +1,39 @@
 /* pages/mission/mission.wxss */
+.page_mission{
+  width: 750rpx;
+  min-height: 100vh;
+  background-color: #f3f3f3;
+  border-top: 1px solid #ddd;
+  box-sizing: border-box;
+}
+.page_mission .mission_item{
+  width: 750rpx;
+  height: 135rpx;
+  background-color: #fff;
+  padding: 0 50rpx 0 30rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.need_link_icon::after{
+  right: 20rpx
+}
+.page_mission .mission_item image{
+  width: 48rpx;
+}
+.page_mission .mission_item .title_info{
+  margin-left: 30rpx;
+}
+.page_mission .mission_item .title_info text{
+  display: block;
+}
+.page_mission .mission_item .title_info .title{
+  color: #333;
+  font-size: 30rpx;
+  margin-bottom: 4rpx;
+}
+.page_mission .mission_item .title_info .info{
+  color: #999;
+  font-size: 24rpx;
+}

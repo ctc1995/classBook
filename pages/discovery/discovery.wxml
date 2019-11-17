@@ -8,7 +8,7 @@
         <image src="../../assets/images/discovery/{{item.image}}" />
       </navigator>
       <section class="list">
-        <navigator wx:for="{{item.list}}" wx:key="{{index}}" url="../goods/goods?goodsId={{item.bookId}}">{{index+1}}.{{item.name}}</navigator>
+        <navigator wx:for="{{item.list}}" wx:key="{{index}}" url="../goods/goods?goodsId={{item.goods_id}}">{{index+1}}.{{item.title}}</navigator>
       </section>
     </section>
   </view>
@@ -17,15 +17,15 @@
     <view class='mod_search'>
       <view class='searchItem'>
         <image src='../../assets/images/search.png' />
-        <input placeholder='搜索关键词'></input>
+        <input placeholder='搜索关键词' confirm-type="search" bindconfirm="search"></input>
       </view>
     </view>
     <view class="auth_item" wx:for="{{authList}}" wx:key="{{index}}">
-      <image class="auth_ava" src="../../assets/images/discovery/{{item.image}}"/>
+      <image class="auth_ava" src="http://dianshu.chaoshang666.com{{item.head_img}}"/>
       <p class="auth_name">
         <span title="{{item.name}}">{{item.name}}</span>
         <span class="{{item.like? 'like': ''}}">
-          {{item.likeCount}}
+          {{item.follow_num}}
           <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like22x.png'}}"/>
         </span>
       </p>

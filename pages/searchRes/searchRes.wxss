@@ -1,0 +1,13 @@
+/* pages/searchRes/searchRes.wxss */
+.page_searchRes{
+  padding: 0 36rpx;
+}
+.mod_good{
+  margin-top: 30rpx;
+}
+.mod_good .book_list .book_item{
+  border-bottom: 1px solid #eaeaea;
+}
+.mod_good .book_list .book_item+.book_item{
+  border-top: unset;
+}

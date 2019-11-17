@@ -1,14 +1,15 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/discovery/discovery",
+    "pages/recommend/recommend",
+    "pages/logistics/logistics",
     "pages/about/about",
     "pages/address/address",
-    "pages/home/home",
     "pages/info/info",
     "pages/order/orderConfirm/orderConfirm",
     "pages/shopCar/shopCar",
-    "pages/recommend/recommend",
     "pages/search/search",
-    "pages/discovery/discovery",
     "pages/logs/logs",
     "pages/goods/goods",
     "pages/allClass/allClass",
@@ -27,7 +28,8 @@
     "pages/coupon/coupon",
     "pages/bookshelf/bookshelf",
     "pages/mission/mission",
-    "pages/addAddress/addAddress"
+    "pages/addAddress/addAddress",
+    "pages/searchRes/searchRes"
   ],
   "window": {
     "backgroundTextStyle": "light",

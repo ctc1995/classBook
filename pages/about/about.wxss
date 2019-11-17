@@ -9,13 +9,14 @@
     display: flex;
     align-items: center;
 }
-.mod_about .user_info image{
+.mod_about .user_info .ava{
     width: 94rpx;
     height: 94rpx;
     max-width: 94rpx;
     max-height: 94rpx;
     border-radius: 50%;
     border: 1px solid rgb(250,247,239);
+    overflow: hidden;
 }
 .mod_about .user_info .name_phone{
     margin-left: 20rpx;

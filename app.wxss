@@ -183,11 +183,6 @@ h2.title {
   padding-bottom: 30rpx;
 }
 
-.book_list .book_item+.book_item {
-  padding-top: 30rpx;
-  border-top: 1px solid #eaeaea;
-}
-
 .book_list .book_item .book_content {
   width: 636rpx;
   display: flex;

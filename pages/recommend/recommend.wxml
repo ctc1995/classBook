@@ -1,6 +1,6 @@
 <!--pages/recommend/recommend.wxml-->
 <view class="page_recommend">
-  <view class="mod_filter" wx:if="type==='collection'">
+  <view class="mod_filter" wx:if="type==='rare_treasures'">
     <p class="filter_item">
       综合
     </p>
@@ -22,7 +22,7 @@
     </p>
     <section class="class_panel {{showClassPanel? '' : 'disabled'}}">
       <div class="list">
-        <span class="item {{item.sel?'current':''}}" wx:for="{{bookClass}}">
+        <span class="item {{item.sel?'current':''}}" wx:for="{{bookClass}}" bindtap="checkClass" data-item="{{item}}">
           {{item.name}}
         </span>
       </div>

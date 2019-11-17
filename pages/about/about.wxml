@@ -1,9 +1,13 @@
 <!--pages/about/about.wxml-->
 <view class="mod_about">
   <navigator class="need_link_icon user_info" url="../info/info?userid=112">
-    <image src="../../assets/images/about/ava2x.png"></image>
+    <!-- <image src="../../assets/images/about/ava2x.png"></image> -->
+    <view class="ava">
+      <open-data class="ava" type="userAvatarUrl"></open-data>
+    </view>
     <div class="name_phone">
-      <p class="name">{{userInfo.name || "太白书局"}}</p>
+      <open-data class="name" type="userNickName"></open-data>
+      <!-- <p class="name">{{userInfo.name || "太白书局"}}</p> -->
       <p class="phone">{{userInfo.phone || '绑定手机号，到货早知道'}}</p>
     </div>
   </navigator>

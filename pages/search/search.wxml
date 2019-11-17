@@ -4,7 +4,7 @@
     <view class='mod_search'>
       <view class='searchItem'>
         <image src='../../assets/images/search.png' />
-        <input placeholder='搜索关键词'></input>
+        <input placeholder='搜索关键词' confirm-type="search" bindconfirm="search"></input>
       </view>
     </view>
     <view class="mod_book_list">

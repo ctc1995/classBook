@@ -1,0 +1,99 @@
+/* pages/logistics/logistics.wxss */
+.page_logistics .panel{
+  width: 750rpx;
+  height: 150rpx;
+  color: #fff;
+  background-color: #f4b800;
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.page_logistics .logistics_info{
+  width: 750rpx;
+  font-size: 32rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.page_logistics .logistics_info p+p {
+  border-top: 1px solid #ededed;
+}
+.page_logistics .logistics_info p{
+  font-size: 30rpx;
+  padding: 15rpx 0;
+  display: block;
+}
+.page_logistics .logistics_info p span:first-child{
+  display: inline-block;
+  width: 150rpx;
+  color: #999;
+}
+.page_logistics .logistics_info p span:last-child{
+  display: inline-block;
+  color: #333;
+}
+.page_logistics .line{
+  margin-left: 0;
+}
+.page_logistics .logistics_status{
+  width: 750rpx;
+  padding: 30rpx;
+  font-size: 24rpx;
+  color: #999;
+  box-sizing: border-box;
+}
+.page_logistics .logistics_status .address{
+  padding-left: 140rpx; 
+  display: flex;
+  align-items: center;
+}
+.page_logistics .logistics_status .address image{
+  width: 33rpx;
+  margin-right: 26rpx;
+}
+.page_logistics .logistics_status .status{
+  position: relative;
+  padding-top: 30rpx;
+  overflow: hidden;
+}
+.page_logistics .logistics_status .status::after{
+  content: "";
+  width: 1rpx;
+  height: 95%;
+  border-right: 1px dashed #c9c9c9;
+  position: absolute;
+  left: 150rpx;
+  top: -20%;
+}
+.page_logistics .logistics_status .status_item+.status_item{
+  margin-top: 48rpx;
+}
+.page_logistics .logistics_status .status_item{
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+.page_logistics .logistics_status .status_item::before{
+  content: "";
+  width:22rpx;
+  height: 22rpx;
+  border-radius: 50%;
+  background-color: #c9c9c9;
+  position: absolute;
+  left: 142rpx;
+}
+.page_logistics .logistics_status .status_item .time{
+  width: 98rpx;
+  text-align: right;
+}
+.page_logistics .logistics_status .status_item .info{
+  width: 500rpx;
+  padding-left: 90rpx;
+}
+.page_logistics .logistics_status .status_item.current{
+  color: #333;
+}
+.page_logistics .logistics_status .status_item.current::before{
+  background-color: #999;
+}

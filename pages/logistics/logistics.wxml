@@ -1,0 +1,35 @@
+<!--pages/logistics/logistics.wxml-->
+<wxs src="../../utils/date.wxs" module="date" />
+<view class="page_logistics">
+  <view class="panel">
+    {{logistics.state == '0' ? '您的书籍还在路上......' : '您的书籍已签收'}}
+  </view>
+  <view class="logistics_info">
+    <p>
+      <span>物流公司</span>
+      <span>{{logistics.com}}</span>
+    </p>
+    <p>
+      <span>运单号</span>
+      <span>{{logistics.nu}}</span>
+    </p>
+  </view>
+  <i class="line"></i>
+  <view class="logistics_status">
+    <view class="address">
+      <image src="../../assets/images/address.png" mode="widthFix"></image>
+      <span>
+        [收货地址]{{delivery.address}}
+      </span>
+    </view>
+    <view class="status">
+      <view class="status_item {{index == 0 ? 'current': ''}}" wx:for="{{logistics.data}}" wx:key="{{index}}">
+        <p class="time">
+          <span style="display: block;">{{date.formatDate(item.ftime)[0]}}</span>
+          <span>{{date.formatDate(item.ftime)[1]}}</span>
+        </p>
+        <p class="info">{{item.context}}</p>
+      </view>
+    </view>
+  </view>
+</view>

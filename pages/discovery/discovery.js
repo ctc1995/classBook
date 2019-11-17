@@ -1,4 +1,6 @@
 // pages/discovery.js
+const app = new getApp();
+
 Page({
 
   /**
@@ -146,9 +148,48 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.init()
   },
-
+  init: function () {
+    const self = this;
+    app.request.getHotsearchlist({}).then(res=>{
+      console.log(res);
+      self.setData({
+        'rankList[2].list': res.data.data
+      })
+    })
+    app.request.getCollectionlist({}).then(res=>{
+      console.log(res);
+      self.setData({
+        'rankList[1].list': res.data.data
+      })
+    })
+    app.request.getHotlist({}).then(res=>{
+      console.log(res);
+      self.setData({
+        'rankList[0].list': res.data.data
+      })
+    })
+    app.request.getAuthList({}).then(res=>{
+      console.log(res);
+      self.setData({
+        authList: res.data.data
+      })
+    })
+  },
+  /**
+   * 搜索作者
+   */
+  search: function (e) {
+    const self = this;
+    app.request.getAuthList({
+      keyword: e.detail.value
+    }).then(res => {
+      self.setData({
+        authList: res.data.data
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

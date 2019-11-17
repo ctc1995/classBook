@@ -1,0 +1,28 @@
+<!--pages/searchRes/searchRes.wxml-->
+<view class="page_searchRes">
+  <view class="mod_good">
+    <div class="book_list">
+      <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
+        <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
+          <image src="{{item.images}}"></image>
+          <section class="book_detail">
+            <section class="book_info">
+              <p class="book_title">{{item.title}}</p>
+              <p class="book_auth">{{item.author_name || '未知'}}</p>
+              <!-- <p class="book_rate">豆瓣评分：{{item.rate}}</p> -->
+            </section>
+            <p class="book_price">
+              <span class="price_unit">￥</span>
+              <span class="real_price">{{item.price}}</span>
+              <span>/</span>
+              <span class="price">{{item.price_container.original_price}}</span>
+            </p>
+          </section>
+        </navigator>
+        <section class="add_car" bindtap="addShopCar" data-book="{{item}}">
+          <image src="../../assets/images/add-car2x.png" />
+        </section>
+      </section>
+    </div>
+  </view>
+</view>
