@@ -1,4 +1,5 @@
 // pages/coupon/coupon.js
+const app = new getApp();
 Page({
 
   /**
@@ -21,33 +22,34 @@ Page({
       }
     ],
     curTabId: 'keyong',
-    coupon: [
-      {
-        couponId: 1,
-        title: "活动优惠券",
-        money: "20",
-        condition: "100",
-        validityStart: "2019/11/10",
-        validityEnd: "2019/11/11",
-        status: 0
-      },
-      {
-        couponId: 1,
-        title: "活动优惠券",
-        money: "20",
-        condition: "100",
-        validityStart: "2019/11/10",
-        validityEnd: "2019/11/11",
-        status: 0
-      },
-    ]
+    coupon: {
+      already_use: [],
+      already_expire: [],
+      not_use: []
+    },
+      // {
+      //   couponId: 1,
+      //   title: "活动优惠券",
+      //   money: "20",
+      //   condition: "100",
+      //   validityStart: "2019/11/10",
+      //   validityEnd: "2019/11/11",
+      //   status: 0
+      // },
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.request.getCoupon().then(res=>{
+      console.log(res);
+      this.setData({
+        'coupon.already_use': res.data.already_use,
+        'coupon.already_expire': res.data.already_expire,
+        'coupon.not_use': res.data.not_use,
+      })
+    })
   },
 
   // 切换TabNav事件

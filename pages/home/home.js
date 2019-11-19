@@ -11,6 +11,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    ref: null,
     // 轮播图片
     swiperPics: [],
     // swiperPics: ['swiper.png', 'swiper.png','swiper.png'],
@@ -39,53 +40,17 @@ Page({
       },
     ],
     // 推荐书单
-    recommendList: [{
-        bookId: 1,
-        pic: "book.png",
-        title: "传奇，独自从矿山中走出",
-        like: true,
-        likeCount: 10000,
-      },
-      {
-        bookId: 2,
-        pic: "book.png",
-        title: "心通万古，踏上了一条传奇之路",
-        like: false,
-        likeCount: 10000,
-      },
-      {
-        bookId: 3,
-        pic: "book.png",
-        title: "宇文轩，武当山上一名杰出的道教弟子",
-        like: true,
-        likeCount: 10000,
-      },
-    ],
+    recommendList: [],
     // 好书推荐
-    goodList: [{
-        bookId: 1,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-      {
-        bookId: 2,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-    ]
+    goodList: []
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      ref: options.ref
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -136,16 +101,29 @@ Page({
     })
     // 好书推荐
     app.request.getGoodsRecommend({
+      // type: 'recommended_daily',
       type: 'is_home_recommended',
       number: 10,
       page: 1
     }).then(res=>{
       console.log(res);
+      this.setData({
+        goodList: res.data.data
+      })
     })
   },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
+
+    app.request.getUserInfo({
+      openid: wx.getStorageSync('openid'),
+      encrypted_data: e.detail.encryptedData,
+      iv: e.detail.iv,
+      referrer: this.data.ref,
+    }).then(res => {
+      wx.setStorageSync('token', res.data.token)
+    })
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true

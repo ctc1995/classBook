@@ -1,2 +1,41 @@
 <!--pages/addAddress/addAddress.wxml-->
-<text>pages/addAddress/addAddress.wxml</text>
+<view class="page_modify_adress">
+  <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+    <mp-cells>
+      <mp-cell prop="name" title="收货人">
+        <input bindinput="formInputChange" data-field="name" value="{{formData.name}}" class="weui-input" placeholder="请输入姓名" />
+      </mp-cell>
+      <mp-cell prop="tel" title="联系电话">
+        <input bindinput="formInputChange" data-field="tel" value="{{formData.tel}}" class="weui-input" placeholder="请输入电话" type="number"/>
+      </mp-cell>
+      <view class="weui-cell weui-cell_select" style="padding: 16px;">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">所在区域</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker class="address" mode="region" bindchange="bindRegionChange" value="{{region}}">
+            <view class="picker" style="height: 56rpx;">
+              {{region[0]}} {{region[1]}} {{region[2]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <mp-cell prop="address" title="详细地址">
+        <input bindinput="formInputChange" data-field="address" value="{{formData.address}}" class="weui-input" placeholder="请输入详细地址" />
+      </mp-cell>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">设为默认地址</view>
+          <view class="weui-cell__ft">
+            <switch checked="{{formData.is_default == '1'}}" bindchange="switchChange"/>
+          </view>
+        </view>
+      </view>
+    </mp-cells>
+  </mp-form>
+  <view class="weui-btn-area">
+    <button class="btn btn_primary" bindtap="submitForm">保存</button>
+    <text> \n </text> 
+    <button class="weui-btn btn btn_primary" type="primary" bindtap="wechatAddress" wx:if="{{!currentAddressId}}">一键使用微信地址</button>
+  </view>
+</view>

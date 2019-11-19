@@ -66,6 +66,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+}
+.mod_about .my_order .order_modules .order_item span{
+  width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  font-size: 22rpx;
+  color: #f4b800;
+  border: 1px solid #f4b800;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  top: -14rpx;
+  right: -20rpx;
 }
 .mod_about .my_order .order_modules .order_item image{
     width: 60rpx;

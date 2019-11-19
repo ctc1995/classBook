@@ -11,10 +11,10 @@ App({
     wx.login({
       success: res => {
         console.log(res.code)
-        this.request.getAuth({code: res.code}).then(res=>{
-          console.log(res);
-        })
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        self.request.postAuth({code: res.code}).then(res=>{
+          wx.setStorageSync('openid', res.data)
+        })
       }
     })
     // 获取用户信息
@@ -27,7 +27,16 @@ App({
               console.log(res);
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              this.globalData.encryptedData = res.encryptedData
+              this.globalData.iv = res.iv
+              this.globalData.signature = res.signature
+              this.request.getUserInfo({
+                openid: wx.getStorageSync('openid'),
+                encrypted_data: res.encryptedData,
+                iv: res.iv,
+              }).then(res => {
+                wx.setStorageSync('token', res.data.token)
+              })
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -41,6 +50,9 @@ App({
   },
   globalData: {
     userInfo: null,
+    encryptedData: '',
+    iv: '',
+    signature: '',
     orderStatus:{
       0: {
         title: '等待支付',

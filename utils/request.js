@@ -4,6 +4,7 @@ class request {
   constructor() {
     this._api = new api
     this._api.setErrorHandler(this.errorHander)
+    this.token = wx.getStorageSync('token')
   }
 
   /**
@@ -15,16 +16,21 @@ class request {
   /**
    * 获取用户授权
    */
-  getAuth({code}) {
-    return this._api.getRequest('user/WechatUserAuth',{
+  postAuth({code}) {
+    return this._api.postRequest('user/WechatUserAuth',{
       authcode: code
     }).then(res=>res.data)
   }
   /**
    * 微信小程序获取用户信息
    */
-  getUserInfo({openid}){
-
+  getUserInfo({ openid, encrypted_data, iv, referrer}){
+    return this._api.postRequest('user/WechatUserInfo',{
+      openid,
+      encrypted_data,
+      iv,
+      referrer
+    }).then(res=> res.data);
   }
   /**
    * Banner图
@@ -62,8 +68,8 @@ class request {
    * 全部分类
    * new_upper最新上架 recommended_daily每日推荐 rare_treasures真品孤本
    */
-  getGoodsCategory({ type = 'is_home_recommended', page = 1 }) {
-    return this._api.postRequest('goods/Category', { type, page }).then(res => res.data)
+  getGoodsCategory({ type, page = 1, pid }) {
+    return this._api.postRequest('goods/Category', { type, page, pid }).then(res => res.data)
   }
   /**
    * 商品详情 
@@ -100,6 +106,54 @@ class request {
    */
   getAuthList({ page = 1, keywords }) {
     return this._api.postRequest('Author/index', { page, keywords }).then(res => res.data)
+  }
+
+  /**
+   * 我的
+   */
+  //我的
+  getAbout() {
+    return this._api.postRequest('user/Center', { token: this.token}).then(res=>res.data)
+  }
+  //书架-买过
+  getBookBought (page=1) {
+    return this._api.postRequest('user/bought', { token: this.token, page }).then(res => res.data)
+  }
+  //书架-收藏
+  getUserGoodsFavor(page=1) {
+    return this._api.postRequest('UserGoodsFavor/Index', { token: this.token, page }).then(res => res.data)
+  }
+  //优惠券
+  getCoupon() {
+    return this._api.postRequest('Coupon/Index', { token: this.token }).then(res => res.data)
+  }
+  //全部收货地址
+  getAddress() {
+    return this._api.postRequest('UserAddress/Index', { token: this.token }).then(res => res.data)
+  }
+  //收货地址详情
+  getAddressDetail(id) {
+    return this._api.postRequest('UserAddress/Detail', { token: this.token, id }).then(res => res.data)
+  }
+  //新增收货地址
+  postAddress({ name, province_name, city_name, county_name, address, tel, id}) {
+    return this._api.postRequest('UserAddress/Save', { 
+      token: this.token, 
+      id,
+      name,
+      province: province_name,
+      city: city_name,
+      county: county_name,
+      address,
+      tel }).then(res => res.data)
+  }
+  //删除收货地址
+  delAddress(id) {
+    return this._api.postRequest('UserAddress/Delete', { token: this.token, id}).then(res => res.data)
+  }
+  //设置默认地址
+  setDefaultAddress(id) {
+    return this._api.postRequest('UserAddress/SetDefault', { token: this.token, id }).then(res => res.data)
   }
 }
 export default request

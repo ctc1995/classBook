@@ -1,4 +1,5 @@
 // pages/address/address.js
+const app = new getApp();
 Page({
 
   /**
@@ -39,36 +40,66 @@ Page({
         telNumber: '15018504589',
         type: 0,
       }
-    ]
+    ],
+    currentAddressId: null,
+    dialogShow: false,
+    buttons: [{ text: '取消' }, { text: '确定' }],
+    success: '',
+    error: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    app.request.getAddress().then(res=>{
+      console.log(res);
+      this.setData({
+        addressList: res.data
+      })
+    })
   },
-  addAddress: function() {
-    let that = this;
-    wx.chooseAddress({
-      success(res) {
-        let address = {
-          userName: res.userName,
-          postalCode: res.postalCode,
-          provinceName: res.provinceName,
-          cityName: res.cityName,
-          countyName: res.countyName,
-          detailInfo: res.detailInfo,
-          nationalCode: res.nationalCode,
-          telNumber: res.telNumber,
-          type: 0
-        }, addressList = that.data.addressList;
-        console.log(address);
-        addressList.push(address);
+  delAddress: function(e){
+    this.setData({
+      dialogShow: true,
+      currentAddressId: e.currentTarget.dataset.id
+    })
+  },
+  tapDialogButton: function (e){
+    const that = this;
+    if (e.detail.index){
+      console.log(that.data.currentAddressId)
+      app.request.delAddress(that.data.currentAddressId).then(res=>{
+        // if (res.code == 0) {
+        //   that.setData({
+        //     success: res.msg
+        //   })
+        // } else {
+        //   that.setData({
+        //     error: res.msg
+        //   })
+        // }
         that.setData({
-          addressList: addressList
+          dialogShow: false,
+          currentAddressId: null
         })
-      }
+        app.request.getAddress().then(res => {
+          that.setData({
+            addressList: res.data
+          })
+        })
+      })
+    } else {
+      that.setData({
+        dialogShow: false
+      })
+    }
+  },
+  modifyAddress: function(e){
+    let url = '../addAddress/addAddress';
+    if (e.currentTarget.dataset.id) url += `?id=${e.currentTarget.dataset.id}`
+    wx.redirectTo({
+      url
     })
   },
   /**

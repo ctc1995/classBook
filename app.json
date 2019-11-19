@@ -1,11 +1,13 @@
 {
   "pages": [
+    "pages/about/about",
+    "pages/addAddress/addAddress",
+    "pages/address/address",
+    "pages/bookshelf/bookshelf",
     "pages/home/home",
     "pages/discovery/discovery",
     "pages/recommend/recommend",
     "pages/logistics/logistics",
-    "pages/about/about",
-    "pages/address/address",
     "pages/info/info",
     "pages/order/orderConfirm/orderConfirm",
     "pages/shopCar/shopCar",
@@ -26,9 +28,7 @@
     "pages/order/orderManager/orderManager",
     "pages/aboutMe/aboutMe",
     "pages/coupon/coupon",
-    "pages/bookshelf/bookshelf",
     "pages/mission/mission",
-    "pages/addAddress/addAddress",
     "pages/searchRes/searchRes"
   ],
   "window": {

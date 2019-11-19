@@ -9,57 +9,8 @@ Page({
   data: {
     title: '典书',
     // 全部分类
-    bookClass: [
-      {
-        id: 1,
-        name: '明国旧书',
-        sel: false
-      },
-      {
-        id: 2,
-        name: '名人墨迹',
-        sel: false
-      },
-      {
-        id: 3,
-        name: '外文原版',
-        sel: true
-      },
-      {
-        id: 4,
-        name: '线装古籍',
-        sel: false
-      },
-    ],
-    goodList: [
-      {
-        bookId: 1,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-      {
-        bookId: 1,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-      {
-        bookId: 2,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-    ],
+    bookClass: [],
+    goodList: [],
     // 分类面板
     showClassPanel: false,
     // 推荐类型
@@ -109,6 +60,9 @@ Page({
       page
     }).then(res => {
       console.log(res);
+      this.setData({
+        goodList: res.data.data
+      })
     })
   },
   /**

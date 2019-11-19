@@ -1,4 +1,5 @@
 // pages/bookshelf/bookshelf.js
+const app = new getApp();
 Page({
 
   /**
@@ -16,107 +17,26 @@ Page({
       }
     ],
     curTabId: 'shoucang',
-    buySCGoodsList: [
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      },
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      }
-    ],
-    buyMGGoodsList: [
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      },
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      },
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      },
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      },
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      },
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      },
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      },
-      {
-        bookId: 2,
-        title: "我是个年轻人，我的脾气不太好",
-        auth: "金庸",
-        pic: "book.jpg",
-        price: "558.00",
-        realPrice: "388.00",
-        rate: 8.7,
-      }
-    ],
+    buySCGoodsList: [],
+    buyMGGoodsList: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.request.getBookBought().then(res=>{
+      console.log(res);
+      this.setData({
+        buyMGGoodsList: res.data.data
+      })
+    })
+    app.request.getUserGoodsFavor().then(res=>{
+      console.log(res);
+      this.setData({
+        buySCGoodsList: res.data.data
+      })
+    })
   },
 
   // 切换TabNav事件

@@ -1,4 +1,8 @@
 {
   "navigationBarTitleText": "收货地址",
-  "usingComponents": {}
+  "component": true,
+  "usingComponents": {
+    "mp-dialog": "../../weui/dialog/dialog",
+    "mp-toptips": "../../weui/toptips/toptips"
+  }
 }

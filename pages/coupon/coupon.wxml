@@ -2,10 +2,16 @@
 <view class="page_coupon">
   <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
   <view class="coupon-list">
-    <view class="coupon primary" wx:if="{{curTabId==='keyong'}}" wx:for="{{coupon}}" wx:key="{{index}}">
+    <view class="coupon primary" wx:if="{{curTabId==='keyong'}}" wx:for="{{coupon.not_use}}" wx:key="{{index}}">
       <view class="coupon-info">
         <view class="detail">
-          <span class="money">
+          <span class="money" wx:if="{{item.coupon.type=='0'}}">
+            ￥{{item.money}}
+          </span>
+          <span class="money" wx:if="{{item.coupon.type=='1'}}">
+            {{item.money}}
+          </span>
+          <span class="money" wx:if="{{item.coupon.type=='2'}}">
             ￥{{item.money}}
           </span>
           <span class="condition">
@@ -21,7 +27,7 @@
         去使用
       </view>
     </view>
-    <view class="coupon primary" wx:if="{{curTabId==='dailingqu'}}" wx:for="{{coupon}}" wx:key="{{index}}">
+    <view class="coupon primary" wx:if="{{curTabId==='dailingqu'}}" wx:for="{{coupon.already_use}}" wx:key="{{index}}">
       <view class="coupon-info">
         <view class="detail">
           <span class="money">
@@ -40,7 +46,7 @@
         立即领取
       </view>
     </view>
-    <view class="coupon default" wx:if="{{curTabId==='bukeyong'}}" wx:for="{{coupon}}" wx:key="{{index}}">
+    <view class="coupon default" wx:if="{{curTabId==='bukeyong'}}" wx:for="{{coupon.already_expire}}" wx:key="{{index}}">
       <view class="coupon-info">
         <view class="detail">
           <span class="money">

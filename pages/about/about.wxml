@@ -11,7 +11,7 @@
       <p class="phone">{{userInfo.phone || '绑定手机号，到货早知道'}}</p>
     </div>
   </navigator>
-  <image class="about_banner" src="../../assets/images/about/banner2x.png"></image>
+  <image class="about_banner" src="http://dianshu.chaoshang666.com{{about.advertisement}}"></image>
   <view class="my_order">
     <p class="title">
       我的订单
@@ -20,18 +20,22 @@
     <view class="order_modules">
     <!-- TODO: 切换成跳转链接 -->
       <navigator class="order_item"  url="../order/orderManager/orderManager?type=pendPay&index=1">
+        <span wx:if="{{about.dfk_order_count > 0}}">{{about.dfk_order_count}}</span>
         <image src="../../assets/images/about/fukuan.png" />
         待付款
       </navigator>
       <navigator class="order_item"  url="../order/orderManager/orderManager?type=paid&index=2">
+        <span wx:if="{{about.dsh_order_count > 0}}">{{about.dsh_order_count}}</span>
         <image src="../../assets/images/about/daishouhuo.png" />
         待收货
       </navigator>
       <navigator class="order_item"  url="../order/orderManager/orderManager?type=arrived&index=3">
+        <span wx:if="{{about.ysh_order_count > 0}}">{{about.ysh_order_count}}</span>
         <image src="../../assets/images/about/yishouhuo.png" />
         已收货
       </navigator>
       <navigator class="order_item"  url="../order/orderManager/orderManager?type=refund&index=4">
+        <span wx:if="{{about.tk_order_count > 0}}">{{about.tk_order_count}}</span>
         <image src="../../assets/images/about/tuikuan.png" />
         退款/售后
       </navigator>

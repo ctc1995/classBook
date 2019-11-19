@@ -7,50 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    allClassList: [
-      {
-        className: "官方书单",
-        classList: [
-          {
-            id: 1,
-            name: '职场必读'
-          },
-          {
-            id: 2,
-            name: '提高文学'
-          },
-          {
-            id: 3,
-            name: '放眼世界'
-          },
-          {
-            id: 4,
-            name: '管理必读'
-          },
-        ],
-      },
-      {
-        className: "官方书单",
-        classList: [
-          {
-            id: 1,
-            name: '职场必读'
-          },
-          {
-            id: 2,
-            name: '提高文学'
-          },
-          {
-            id: 3,
-            name: '放眼世界'
-          },
-          {
-            id: 4,
-            name: '管理必读'
-          },
-        ],
-      },
-    ],
+    allClassList: [],
   },
 
   /**
