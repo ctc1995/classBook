@@ -5,14 +5,14 @@
         官方书单
       </h2>
       <div class="book_list">
-        <navigator class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" url="../bookMenu/bookMenu?bookId={{item.bookId}}">
-          <image class="book_pic" src="../../assets/images/{{item.pic}}"></image>
-          <p class="like {{item.like? 'active' : ''}}">
+        <view class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="goBookMenu" data-item="{{item}}">
+          <image class="book_pic" src="http://dianshu.chaoshang666.com{{item.layout}}"></image>
+          <p class="like {{item.like? 'active' : 'active'}}">
             <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like2x.png'}}"></image>
-            {{item.likeCount}}
+            {{item.fabulous || Math.random()*10000}}
           </p>
           <p class="book_title">{{item.title}}</p>
-        </navigator>
+        </view>
       </div>
     </view>
 </view>

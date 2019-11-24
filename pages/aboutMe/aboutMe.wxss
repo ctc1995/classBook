@@ -1,1 +1,6 @@
 /* pages/aboutMe/aboutMe.wxss */
+.page_aboutus{
+  width: 750rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}

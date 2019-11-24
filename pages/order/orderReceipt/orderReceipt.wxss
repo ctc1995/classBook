@@ -47,6 +47,9 @@
   color: #999;
   margin-bottom: 20rpx;
 }
+.page_receipt .logistics .info{
+  font-size: 24rpx;
+}
 .need_link_icon::after{
   right: 30rpx; 
 }

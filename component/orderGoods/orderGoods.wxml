@@ -1,15 +1,15 @@
 <!--component/orderGoods/orderGoods.wxml-->
 <view class="goods_list" bindtap="hihi">
   <view class="goods" wx:for="{{buyGoodsList}}" wx:key="{{index}}">
-    <image src="../../assets/images/{{item.pic}}"></image>
+    <image src="{{item.images}}"></image>
     <view class="title_attr">
       <text class="good_title">{{item.title}}</text>
-      <text class="good_attr" wx:if="{{attr}}">{{item.attr || "品相良好"}}</text>
+      <text class="good_attr" wx:if="{{attr}}">{{item.phase || "品相良好"}}</text>
     </view>
     <view class="price_sum">
-      <text class="price" wx:if="{{money}}"><text class="unit">￥</text>{{item.realPrice}}</text>
-      <text class="sum" wx:if="{{sum}}">x {{item.sum}}</text>
-      <text class="sum">　</text>
+      <text class="price" wx:if="{{money}}"><text class="unit">￥</text>{{item.price}}</text>
+      <text class="sum" wx:if="{{sum}}">x {{item.stock || item.buy_number}}</text>
+      <button class="btn btn_default" wx:if="{{shouhou}}" bindtap="refund" data-index="{{index}}">退换</button>
     </view>
   </view>
 </view>

@@ -1,9 +1,10 @@
 <!-- pages/bookMenu.wxml -->
 <view class="page_book_menu">
   <view class="header">
+    <image class="header_image" src="http://dianshu.chaoshang666.com{{bookMenu.layout}}" mode="widthFix"></image>
     <p class="book_menu_title">{{bookMenu.title}}</p>
-    <p class="book_menu_info">{{bookMenu.info}}</p>
-    <view class="book_menu_opration">
+    <p class="book_menu_info">{{bookMenu.describe}}</p>
+    <view class="book_menu_opration" style="display: none;">
       <p class="opration_item">
         <image mode="aspectFit" wx:if="{{bookMenu.like}}" src="../../assets/images/bookmenu/sel-like.png" />
         <image mode="aspectFit" wx:else src="../../assets/images/bookmenu/like.png" />
@@ -19,23 +20,24 @@
       </p>
     </view>
   </view>
-  <i class="line"></i>
+  <!-- <i class="line"></i> -->
   <view class="mod_good">
     <div class="book_list">
       <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
-        <navigator class="book_content" url="../goods/goods?bookId={{item.bookId}}">
-          <image src="../../assets/images/{{item.pic}}"></image>
+        <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
+          <image src="{{item.images}}"></image>
           <section class="book_detail">
             <section class="book_info">
               <p class="book_title">{{item.title}}</p>
-              <p class="book_auth">{{item.auth}}</p>
-              <p class="book_rate">豆瓣评分：{{item.rate}}</p>
+              <p class="book_auth">{{item.author}}</p>
+              <p class="book_rate" wx:if="{{item.rate}}">豆瓣评分：{{item.rate}}</p>
+              <p class="book_rate" wx:if="{{!item.rate && item.qualit}}">成色：{{item.quality}}</p>
             </section>
             <p class="book_price">
               <span class="price_unit">￥</span>
-              <span class="real_price">{{item.realPrice}}</span>
+              <span class="real_price">{{item.price}}</span>
               <span>/</span>
-              <span class="price">{{item.price}}</span>
+              <span class="price">{{item.original_price}}</span>
             </p>
           </section>
         </navigator>

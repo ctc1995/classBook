@@ -20,7 +20,7 @@
           </span>
         </view>
         <view class="validity">
-          {{item.validityStart}} - {{item.validityEnd}}
+          {{item.time_end_text}} - {{item.time_start_text}}
         </view>
       </view>
       <view class="coupon-action">

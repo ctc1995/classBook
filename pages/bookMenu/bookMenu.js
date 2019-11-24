@@ -1,4 +1,5 @@
 // pages/bookMenu.js
+const app = new getApp();
 Page({
 
   /**
@@ -58,9 +59,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const self = this, appInstance = getApp();
+    app.request.getBookListDetail(options.bookMenuId).then(res=>{
+      console.log(res);
+      self.setData({
+        goodList: res.data
+      })
+    })
+    const eventChannel = this.getOpenerEventChannel();
+    eventChannel.on('acceptbookMenu', function (data) {
+      console.log(data);
+      self.setData({
+        bookMenu: data
+      })
+    })
   },
 
+  // 加购
+  addShopCar(e) {
+    console.log(e);
+    app.request.addCart({ goods_id: e.currentTarget.dataset.book.id }).then(res => {
+      console.log(res);
+      wx.showToast({
+        title: '加入购物车成功',
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

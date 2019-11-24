@@ -1,37 +1,25 @@
 <!--pages/order/orderConfirm/orderConfirm.wxml-->
 <view class="page_order_confirm">
-  <view class="need_link_icon order_delivery">
+  <view class="need_link_icon order_delivery" bindtap="changeAddress">
     <p class="name_phone">
-      <span>张三丰</span>
-      <span>18977837849</span>
+      <span>{{base.address.name}}</span>
+      <span>{{base.address.tel}}</span>
     </p>
-    <p class="address">广东省深圳市南山区粤海街道9109号三诺智慧大厦</p>
+    <p class="address">{{base.address.province_name}}{{base.address.city_name}}{{base.address.county_name}}{{base.address.address}}</p>
   </view>
   <i class="line"></i>
   <view class="order_detail">
-      <orderGoods buy-goods-list="{{buyGoodsList}}"></orderGoods>
-      <!-- <view class="goods" wx:for="{{buyGoodsList}}" wx:key="{{index}}">
-        <image src="../../../assets/images/{{item.pic}}"></image>
-        <view class="title_attr">
-          <text class="good_title">{{item.title}}</text>
-          <text class="good_attr">{{item.attr || "品相良好"}}</text>
-        </view>
-        <view class="price_sum">
-          <text class="price"><text class="unit">￥</text>{{item.realPrice}}</text>
-          <text class="sum">x {{item.sum}}</text>
-          <text class="sum">　</text>
-        </view>
-      </view> -->
+      <orderGoods buy-goods-list="{{goods_list}}"></orderGoods>
     <view class="delivery_method">
       <text class="line_title">配送方式</text>
-      <text class="method">快递：{{item.delivery || '￥6.00'}}</text>
+      <text class="method">快递：￥{{base.increase_price || '6.00'}}元</text>
     </view>
     <view class="remakes">
       <text class="line_title">订单备注</text>
       <input maxlength="100" placeholder="选填，请先和商家协商一致" bindinput="bindKeyRemakes"></input>
     </view>
     <view class="goods_total">
-        共计 {{buyGoodsList.length}} 件商品，应付总金额<text class="money">￥{{totalMoney}}</text>元
+        共计 {{base.buy_count}} 件商品，应付总金额<text class="money">￥{{base.actual_price}}</text>元
     </view>
   </view>
   <view class="tips">
@@ -43,7 +31,7 @@
   <view class="order_footer">
     <view class="total_money">
       <view class="money">
-        <text class="unit">￥</text>{{totalMoney}}
+        <text class="unit">￥</text>{{base.total_price}}
       </view>
       <text class="total_tips">不计运费</text>
     </view>

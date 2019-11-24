@@ -1,18 +1,25 @@
-// pages/aboutMe/aboutMe.js
+// pages/aboutMe/aboutMe.js】
+var app = new getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    about: {},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const self = this;
+    app.request.getAboutUs().then(res=>{
+      console.log(res);
+      self.setData({
+        about: res.data
+      })
+    })
   },
 
   /**

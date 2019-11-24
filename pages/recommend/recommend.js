@@ -27,20 +27,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const eventChannel = this.getOpenerEventChannel(), self = this;
-    eventChannel.on('sendData', function (data) {
-      console.log(data)
-      self.setData({
-        title: '分类-' + data.name,
-        bookClass: data.items
+    if (options.type){
+      this.setData({
+        type: options.type
       })
-    })
-
-    this.setData({
-      type: options.type
-    })
-    // 好书推荐
-    this.getGoodsRecommend(options.type, 10, 1)
+      this.getGoodsRecommend(options.type, 10, 1)
+    } else {
+      const eventChannel = this.getOpenerEventChannel(), self = this;
+      eventChannel.on('sendData', function (data) {
+        self.setData({
+          title: '分类-' + data.name,
+          bookClass: data.items
+        })
+        app.request.getGoodsCategoryList(data.id).then(res=>{
+          self.setData({
+            goodList: res.data.data
+          })
+        })
+      })
+    }
   },
 
   /**

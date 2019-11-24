@@ -135,31 +135,27 @@ Page({
       current: e.detail.current
     })
   },
+  // 进入书单
+  goBookMenu(e){
+    console.log(e.currentTarget.dataset.item)
+
+    var self = this;
+    wx.navigateTo({
+      url: '../bookMenu/bookMenu?bookMenuId=' + e.currentTarget.dataset.item.id,
+      success: function (res) {
+        res.eventChannel.emit("acceptbookMenu", e.currentTarget.dataset.item)
+      }
+    })
+  },
   // 加购
   addShopCar(e) {
     console.log(e);
-    try {
-      var shopCar = wx.getStorageSync('shopCar') || {
-        "list": [],
-        "idList": [],
-      };
-      if (shopCar) {
-        // Do something with return value
-        if (shopCar.idList.indexOf(e.currentTarget.dataset.book.bookId) === -1) {
-          shopCar.list.push(e.currentTarget.dataset.book);
-          shopCar.idList.push(e.currentTarget.dataset.book.bookId);
-        }
-      }
-      try {
-        console.log(shopCar);
-        wx.setStorageSync('shopCar', shopCar);
-      } catch (e) {
-        console.log(e);
-      }
-    } catch (e) {
-      // Do something when catch error
-      console.log(e);
-    }
+    app.request.addCart({ goods_id: e.currentTarget.dataset.book.id}).then(res=>{
+      console.log(res);
+      wx.showToast({
+        title: '加入购物车成功',
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

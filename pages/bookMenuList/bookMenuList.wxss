@@ -7,7 +7,8 @@
   font-size: 24rpx;
   color: #999;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  /* justify-content: space-between; */
   flex-wrap: wrap;
 }
 .mod_recommend .book_item{
@@ -18,6 +19,9 @@
   align-items: center;
   position: relative;
   margin-bottom: 30rpx;
+}
+.mod_recommend .book_item:nth-child(3n+2),.mod_recommend .book_item:nth-child(3n+3){
+  margin-left: 72rpx;
 }
 .mod_recommend .book_item .book_pic{
   width: 178rpx;

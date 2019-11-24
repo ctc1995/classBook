@@ -1,7 +1,7 @@
 <!--pages/address/address.wxml-->
 <view class="page_address">
-  <radio-group class="address_list">
-    <view class="address_item" wx:for="{{addressList}}" wx:key="{{index}}">
+  <radio-group class="address_list" bindchange="radioChange">
+    <view class="address_item" wx:for="{{addressList}}" wx:key="{{index}}" bindtap="selAddress" data-item="{{item}}">
       <view class="address_info">
         <view class="name_phone">
           <span>{{item.name}}</span>
@@ -13,7 +13,7 @@
       </view>
       <view class="address_action">
         <!-- <mp-checkbox ext-class="default_checkbox" label="默认地址" value="{{item.type}}" checked="{{item.type == 1}}"></mp-checkbox> -->
-        <radio class="default_radio" value="{{item.is_default}}" checked="{{item.is_default == '1'}}" color="{{'#f4b800'}}">
+        <radio class="default_radio" value="{{item.id}}" checked="{{item.is_default == '1'}}" color="{{'#f4b800'}}">
           <text>默认地址</text>
         </radio>
         <view class="btn_group">

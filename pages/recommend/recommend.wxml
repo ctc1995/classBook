@@ -1,6 +1,6 @@
 <!--pages/recommend/recommend.wxml-->
 <view class="page_recommend">
-  <view class="mod_filter" wx:if="type==='rare_treasures'">
+  <view class="mod_filter" wx:if="{{type==='rare_treasures'}}">
     <p class="filter_item">
       综合
     </p>

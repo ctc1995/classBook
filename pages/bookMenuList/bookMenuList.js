@@ -1,4 +1,5 @@
 // pages/bookMenuList.js
+const app = new getApp();
 Page({
 
   /**
@@ -42,9 +43,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const self = this;
+    app.request.getBookList().then(res=>{
+      self.setData({
+        recommendList: res.data.data
+      })
+    })
   },
 
+  // 进入书单
+  goBookMenu(e) {
+    console.log(e.currentTarget.dataset.item)
+
+    var self = this;
+    wx.navigateTo({
+      url: '../bookMenu/bookMenu?bookMenuId=' + e.currentTarget.dataset.item.id,
+      success: function (res) {
+        res.eventChannel.emit("acceptbookMenu", e.currentTarget.dataset.item)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

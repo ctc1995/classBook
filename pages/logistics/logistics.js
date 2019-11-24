@@ -1,4 +1,5 @@
 // pages/logistics/logistics.js
+const app = new getApp();
 Page({
 
   /**
@@ -10,28 +11,42 @@ Page({
       phone: '18977837849',
       address: '广东省深圳市南山区粤海街道9109号三诺智慧大厦'
     },
-    logistics: {
-      "state": "0", //0在途，1揽收，2疑难，3签收，4退签，5派件，6退回
-      "com": "圆通快递",
-      "nu": "V030344422",
-      "data": [
-        {
-          "context": "上海分拨中心/装件入车扫描 ",
-          "ftime": "2019-08-28 16:33:19",
-        },
-        {
-          "context": "上海分拨中心/下车扫描 ",
-          "ftime": "2019-08-27 23:22:42",
-        }
-      ]
-    }
+    logistics: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const self = this;
+    app.request.orderLogistics(options.id, options.number).then(res=>{
+      console.log(res);
+      let stateTips='' 
+      switch (res.State) {
+        case '0':
+          stateTips = '暂无物流信息';
+          break;
+        case '1':
+          stateTips = '快递公司已揽收';
+          break;
+        case '2':
+          stateTips = '快递正在配送途中';
+          break;
+        case '3':
+          stateTips = '该物流已被签收';
+          break;
+        case '4':
+          stateTips = '该物流问题件，请咨询物流商处理！';
+          break;
+      }
+      res.Traces = res.Traces.reverse()
+      res.stateTips = stateTips
+      res.logisticsName = options.name
+      res.address = options.address
+      self.setData({
+        logistics: res
+      })
+    })
   },
 
   /**

@@ -1,65 +1,49 @@
 // pages/order/orderConfirm/orderConfirm.js
+const app = new getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    buyGoodsList: [{
-      auth: "金庸",
-      bookId: 2,
-      pic: "book.jpg",
-      price: "558.00",
-      rate: 8.7,
-      realPrice: "388.00",
-      remind: false,
-      sel: true,
-      stock: 20,
-      sum: 1,
-      title: "我是个年轻人，我的脾气不太好",
-    }, {
-        auth: "金庸",
-        bookId: 2,
-        pic: "book.jpg",
-        price: "558.00",
-        rate: 8.7,
-        realPrice: "388.00",
-        remind: false,
-        sel: true,
-        stock: 20,
-        sum: 1,
-        title: "我是个年轻人，我的脾气不太好",
-      }],
+    // 订单备注
     remakes: '',
-    totalMoney: 0,
+    // 订单基础信息
+    base: {},
+    // 订单运费信息
+    extension_data: {},
+    // 订单商品信息
+    goods_list: [],
+    // 商品的购物车id合集
+    ids: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const eventChannel = this.getOpenerEventChannel();
+    var self = this;
+    eventChannel.on('acceptBuyGoodsList', function (data) {
+      console.log(data);
+      self.setData({
+        ids: data,
+      })
+      app.request.buyCart(data).then(res=>{
+        console.log(res);
+        self.setData({
+          base: res.data.base,
+          extension_data: res.data.extension_data,
+          goods_list: res.data.goods_list,
+        })
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    // const eventChannel = this.getOpenerEventChannel();
-    // var self = this;
-    // eventChannel.on('acceptBuyGoodsList', function (data) {
-    //   self.setData({
-    //     buyGoodsList: data
-    //   })
-    // })
-    var totalMoney = 0;
-    this.data.buyGoodsList.map(item=>{
-      totalMoney += item.sum * parseFloat(item.realPrice);
-    })
-    this.setData({
-      totalMoney: totalMoney
-    })
-    console.log(this.data.buyGoodsList)
   },
   
   bindKeyRemakes(e){
@@ -67,16 +51,48 @@ Page({
       remakes: e.detail.value
     })
   },
-
+  changeAddress(){
+    const self=this;
+    wx.navigateTo({
+      url: '../../address/address',
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        acceptDataFromOpenedPage: function (data) {
+          self.setData({
+            'base.address': data
+          })
+        }
+      },
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', true)
+      }
+    })
+  },
   // 调起微信支付
   buy(){
     var self = this;
-    wx.navigateTo({
-      url: '../orderReceipt/orderReceipt',
-      success: function (res) {
-        res.eventChannel.emit("acceptBuyGoodsList", self.data.buyGoodsList)
-      }
+    let orderObj = { 
+      address_id: this.data.base.address.id,
+      ids: this.data.ids,
+      // coupon_id,
+      user_note: this.data.remakes
+    }
+    app.request.payOrder('12').then(res=>{
+      console.log(res);
     })
+    // app.request.buyAdd(orderObj).then(res=>{
+    //   console.log(res);
+    //   app.request.payOrder(res.data.order.id).then(res=>{
+
+    //   })
+    // })
+    // wx.navigateTo({
+    //   url: '../orderReceipt/orderReceipt',
+    //   success: function (res) {
+    //     res.eventChannel.emit("acceptBuyGoodsList", self.data.buyGoodsList)
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面显示

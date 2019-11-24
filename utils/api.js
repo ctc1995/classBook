@@ -43,6 +43,7 @@ class api {
    * 网络请求
    */
   requestAll(url, data, header, method) {
+    wx.showLoading();
     return new Promise((resolve, reject) => {
       wx.request({
         url: this._baseUrl + url,
@@ -67,6 +68,9 @@ class api {
             this._errorHandler(res)
           }
           reject(res)
+        }),
+        complete: (res=>{
+          wx.hideLoading();
         })
       })
     })

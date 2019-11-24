@@ -1,4 +1,5 @@
 // pages/order/orderRefunding/orderRefunding.js
+const app = new getApp();
 Page({
 
   /**
@@ -16,11 +17,28 @@ Page({
         name: '买错了'
       },
     ],
+    reasonTypeObj: [
+      {
+        id: 0,
+        name: '仅退款'
+      },
+      {
+        id: 1,
+        name: '退款退货'
+      },
+    ],
     orderMaxMoney: '',
-    // 退款说明
-    reason: '',
+    orderMaxNumber: 0,
+    order_id: null,
+    order_detail_id: null,
     // 退款金额
     money: '',
+    // 退款方式
+    reasonType: '',
+    //退款数量
+    number: 0,
+    // 退款原因
+    reason: '',
     // 退款说明
     remake: '',
     uploaderList: [],
@@ -32,30 +50,67 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const eventChannel = this.getOpenerEventChannel();
+    var self = this;
+    eventChannel.on('acceptOrder', function (data) {
+      console.log(data)
+      self.setData({
+        buyGoodsList: [data],
+        order_id: data.order_id,
+        order_detail_id: data.id,
+        orderMaxMoney: data.total_price,
+        orderMaxNumber: data.buy_number,
+        number: data.buy_number,
+      })
+    })
+    // app.request.getOrderAftersale(this.data.order_id, this.data.order_detail_id).then(res=>{
+    //   console.log(res);
+    // })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const eventChannel = this.getOpenerEventChannel();
-    var self = this;
-    eventChannel.on('acceptBuyGoodsList', function (data) {
-      var orderMaxMoney = 0;
-      data.goods.map(item=>{
-        orderMaxMoney += parseFloat(item.realPrice);
-      })
-      self.setData({
-        buyGoodsList: data.goods,
-        orderMaxMoney: orderMaxMoney,
-      })
-    })
-    console.log(this.data.buyGoodsList)
   },
-
+  submit:function(){
+    let obj = {
+      order_id: this.data.order_id,
+      order_detail_id: this.data.order_detail_id,
+      // 退款金额
+      money: this.data.money,
+      // 退款方式
+      reasonType: this.data.reasonType.id,
+      // 退款原因
+      reason: this.data.reason.name,
+      // 退款说明
+      remake: this.data.remake,
+      // 凭证图片
+      images: this.data.uploaderList
+    }
+    if (this.data.reasonType.id == 1){
+      obj.number = this.data.number;
+    }
+    console.log(obj)
+    app.request.postOrserAftersale(obj).then(res=>{
+      console.log(res);
+      if (res.code == 0) {
+        wx.showToast({
+          title: '提交成功',
+          success(res) {
+            setTimeout(() => { wx.navigateBack() }, 1500);
+          }
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+        })
+      }
+    })
+  },
   bindMoney(e) {
-    var money = e.detail.value.match(/\d+/g).join('');
+    var money = e.detail.value && e.detail.value.match(/\d+/g).join('');
     if (parseFloat(money) > parseFloat(this.data.orderMaxMoney)) {
       money = this.data.orderMaxMoney
     }
@@ -68,10 +123,29 @@ Page({
       cursor: money.length
     }
   },
+  bindNumber(e) {
+    let number = e.detail.value
+    if (number > this.data.orderMaxNumber){
+      number = this.data.orderMaxNumber;
+    }
+    this.setData({
+      number
+    })
+    return {
+      value: number,
+      cursor: number.length
+    }
+  },
   bindRemake(e) {
     this.setData({
       remake: e.detail.value
     })
+  },
+  bindRegionTypeChange: function (e) {
+    this.setData({
+      reasonType: this.data.reasonTypeObj[e.detail.value]
+    })
+    console.log(this.data.reasonType);
   },
   bindRegionChange: function (e) {
     this.setData({

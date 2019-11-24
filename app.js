@@ -11,10 +11,12 @@ App({
     wx.login({
       success: res => {
         console.log(res.code)
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        self.request.postAuth({code: res.code}).then(res=>{
-          wx.setStorageSync('openid', res.data)
-        })
+        if (!wx.getStorageSync('openid')) {
+          // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          self.request.postAuth({code: res.code}).then(res=>{
+            wx.setStorageSync('openid', res.data)
+          })
+        }
       }
     })
     // 获取用户信息
@@ -30,13 +32,15 @@ App({
               this.globalData.encryptedData = res.encryptedData
               this.globalData.iv = res.iv
               this.globalData.signature = res.signature
-              this.request.getUserInfo({
-                openid: wx.getStorageSync('openid'),
-                encrypted_data: res.encryptedData,
-                iv: res.iv,
-              }).then(res => {
-                wx.setStorageSync('token', res.data.token)
-              })
+              if (!wx.getStorageSync('token')) {
+                this.request.getUserInfo({
+                  openid: wx.getStorageSync('openid'),
+                  encrypted_data: res.encryptedData,
+                  iv: res.iv,
+                }).then(res => {
+                  wx.setStorageSync('token', res.data.token)
+                })
+              }
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -53,7 +57,7 @@ App({
     encryptedData: '',
     iv: '',
     signature: '',
-    orderStatus:{
+    /* orderStatus: {
       0: {
         title: '等待支付',
         tips: '请在下单后30分钟内付款，超时他人将有机会购买'
@@ -90,6 +94,36 @@ App({
         title: '换货成功',
         tips: '时间：'
       },
+    }, */
+    orderStatus: {
+      1: {
+        title: '等待支付',
+        tips: '请在下单后30分钟内付款，超时他人将有机会购买'
+      },
+      2: {
+        title: '付款成功',
+        tips: '您已成功付款，订单处理中，请耐心等候'
+      },
+      3: {
+        title: '订单已发货',
+        tips: '订单已发货，请注意查收快件'
+      },
+      '4': {
+        title: '订单完成',
+        tips: '您已成功签收心爱的书籍，欢迎再次购买'
+      },
+      5: {
+        title: '订单取消',
+        tips: '您已狠心取消订单'
+      },
+      6: {
+        title: '订单关闭',
+        tips: '订单已处理完毕'
+      },
+      7: {
+        title: '售后/退款',
+        tips: '订单正在售后处理，请退货并填写物流信息'
+      }
     }
   },
   request: new request(),

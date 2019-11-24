@@ -1,4 +1,5 @@
 // pages/order/orderReceipt/orderReceipt.js
+const app = new getApp();
 Page({
 
   /**
@@ -38,27 +39,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const eventChannel = this.getOpenerEventChannel();
+    var self = this, appInstance = getApp();
+    eventChannel.on('acceptOrder', function (data) {
+      console.log(data);
+      app.request.orderLogistics(data.express_id, data.express_number).then(res => {
+        data.logistics = res.Traces.reverse()
+        self.setData({
+          orderInfo: data,
+          buyGoodsList: data.items,
+          orderStatus: appInstance.globalData.orderStatus
+        })
+      })
+    })
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const eventChannel = this.getOpenerEventChannel();
-    var self = this, appInstance = getApp();
-    eventChannel.on('acceptOrder', function (data) {
-      self.setData({
-        orderInfo: data,
-        buyGoodsList: data.goods,
-        orderStatus: appInstance.globalData.orderStatus
-      })
-    })
   },
   // 拨打电话
   callPhone(){
     wx.makePhoneCall({
-      phoneNumber: '15018504589' //仅为示例，并非真实的电话号码
+      phoneNumber: this.data.orderInfo.receive_tel //仅为示例，并非真实的电话号码
     })
   },
   // 申请退货
@@ -69,6 +74,16 @@ Page({
       success: function (res) {
         res.eventChannel.emit("acceptOrder", self.data.buyGoodsList)
       }
+    })
+  },
+  //调起支付
+  buy(){
+    
+  },
+  // 查看物流
+  goLogi(){
+    wx.navigateTo({
+      url: '../../logistics/logistics?id=' + this.data.orderInfo.express_id + '&number=' + this.data.orderInfo.express_number + '&name=' + this.data.orderInfo.express_name + '&address=' + this.data.orderInfo.receive_province_name + this.data.orderInfo.receive_city_name + this.data.orderInfo.receive_county_name + this.data.orderInfo.receive_address
     })
   },
   /**

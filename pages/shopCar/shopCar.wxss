@@ -41,6 +41,7 @@
   color: #999;
   display: flex;
   flex-direction: column;
+  margin-bottom: 88rpx;
 }
 
 .mod_shopcar .goods_list .book_item {
@@ -142,4 +143,38 @@
   font-size: 32rpx;
   color: #e50101;
 }
-
+/* actionSheet */
+.action_sheet{
+  width: 750rpx;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.action_sheet.cur{
+  display: flex;
+  transition: width .5s;
+}
+.action_sheet .mask{
+  width: 750rpx;
+  height: 100vh;
+  background-color: rgba(0,0,0,.2);
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+.action_sheet .action_b{
+  width: 500rpx;
+  background-color: #fff;
+  z-index: 2;
+}
+.action_sheet .action_b .action{
+  padding: 20rpx 50rpx;
+  letter-spacing: 8rpx;
+}
+.action_sheet .action_b .action+.action{
+  border-top: 1px solid #ddd;
+  color: #f4b800;
+}

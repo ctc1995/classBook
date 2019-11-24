@@ -8,7 +8,7 @@
         <image src="../../assets/images/discovery/{{item.image}}" />
       </navigator>
       <section class="list">
-        <navigator wx:for="{{item.list}}" wx:key="{{index}}" url="../goods/goods?goodsId={{item.goods_id}}">{{index+1}}.{{item.title}}</navigator>
+        <navigator wx:for="{{item.list}}" wx:key="{{index}}" url="../goods/goods?bookId={{item.goods_id}}">{{index+1}}.{{item.title}}</navigator>
       </section>
     </section>
   </view>

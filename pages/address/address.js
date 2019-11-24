@@ -41,23 +41,40 @@ Page({
         type: 0,
       }
     ],
+    isEdit: true,
     currentAddressId: null,
     dialogShow: false,
     buttons: [{ text: '取消' }, { text: '确定' }],
     success: '',
     error: '',
   },
-
+  radioChange: function(e){
+    app.request.setDefaultAddress(e.detail.value).then(res=>{
+      console.log(res);
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
+    const eventChannel = this.getOpenerEventChannel(), self = this;
     app.request.getAddress().then(res=>{
       console.log(res);
       this.setData({
         addressList: res.data
       })
     })
+    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      self.setData({
+        isEdit: data
+      })
+    })
+  },
+  // 选择地址
+  selAddress: function (e) {
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('acceptDataFromOpenedPage', e.currentTarget.dataset.item);
+    wx.navigateBack()
   },
   delAddress: function(e){
     this.setData({
@@ -98,7 +115,7 @@ Page({
   modifyAddress: function(e){
     let url = '../addAddress/addAddress';
     if (e.currentTarget.dataset.id) url += `?id=${e.currentTarget.dataset.id}`
-    wx.redirectTo({
+    wx.navigateTo({
       url
     })
   },

@@ -1,7 +1,7 @@
 <!--component/goods/goods.wxml-->
 <section class="book_item" wx:for="{{goods}}" wx:key="{{index}}">
-  <navigator class="book_content" url="../goods/goods?bookId={{item.id || item.good_id}}">
-    <image src="http://dianshu.chaoshang666.com{{item.images}}"></image>
+  <navigator class="book_content" url="../goods/goods?bookId={{item.goods_id || item.id}}">
+    <image src="{{item.images.indexOf('http') == -1? 'http://dianshu.chaoshang666.com'+item.images:item.images}}"></image>
     <section class="book_detail">
       <section class="book_info">
         <p class="book_title">{{item.title}}</p>

@@ -10,6 +10,18 @@
       <input style="text-align: right;" type="digit" placeholder="最大退款金额 {{orderMaxMoney}}元" bindinput="bindMoney"></input>
     </view>
     <view class="need_link_icon">
+      <text>退款方式</text>
+      <picker mode="selector" range="{{reasonTypeObj}}" range-key="name" bindchange="bindRegionTypeChange" value="{{index}}">
+        <view class="picker">
+          {{reasonType.name}}
+        </view>
+      </picker>
+    </view>
+    <view wx:if="{{reasonType.id == 1}}">
+      <text>商品件数</text>
+      <input style="text-align: right;" type="number" placeholder="商品件数" bindinput="bindNumber"></input>
+    </view>
+    <view class="need_link_icon">
       <text>退款原因</text>
       <picker mode="selector" range="{{reasonObj}}" range-key="name" bindchange="bindRegionChange" value="{{index}}">
         <view class="picker">
@@ -33,4 +45,5 @@
       <view class='ui_uploader' bindtap='upload' wx:if="{{showUpload}}"></view>
     </view>
   </view>
+  <button class="btn btn_primary submit" bindtap="submit">提交申请</button>
 </view>

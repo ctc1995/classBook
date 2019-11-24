@@ -1,4 +1,5 @@
 // pages/shopCar/shopCar.js
+const app = new getApp();
 Page({
 
   /**
@@ -17,6 +18,7 @@ Page({
     curTabId: "all",
     shopCarList: [],
     curGoods: [],
+    curCartId: null,
     checkAllGoods: false,
     // 到货提醒
     remindGoods: false,
@@ -33,6 +35,7 @@ Page({
       remindGoods: false,
       totalGoods: 0,
       totalMoney: 0,
+      curCartId: null,
     })
   },
   // 切换TabNav事件
@@ -41,81 +44,90 @@ Page({
       curTabId: e.detail.tabId
     })
     console.log(e.detail);
-  },
-  // 取购物车商品缓存
-  getShopCarList: function() {
-    try {
-      var value = wx.getStorageSync('shopCar')
-      if (value) {
-        let list = [];
-        value.list.map(item => {
-          list.push(Object.assign({
-            sum: 1,
-            sel: false,
-            remind: false,
-            stock: 20
-          }, item))
+    const self = this;
+    if(e.detail.tabIndex == 1){
+      app.request.getCartArri().then(res=>{
+        self.setData({
+          shopCarList: res.data
         })
-        list[0].stock = 0;
-        console.log(list);
-        this.setData({
-          shopCarList: list
-        })
-      }
-    } catch (e) {
-      // Do something when catch error
+      })
+    } else {
+      this.onShow()
     }
+  },
+  // 获取购物车信息
+  getShopCarList: function() {
+    const self = this;
+    app.request.getCartIndex().then(res=>{
+      console.log(res);
+      self.setData({
+        shopCarList: res.data
+      })
+    })
   },
   // 选择商品
   selGoods: function(e) {
-    this.data.shopCarList[e.target.dataset.index].sel = !this.data.shopCarList[e.target.dataset.index].sel;
+    let item = this.data.shopCarList[e.target.dataset.index];
+    item.sel = !item.sel;
     var totalGoods = this.data.totalGoods;
-    this.data.shopCarList[e.target.dataset.index].sel ? totalGoods += 1 : totalGoods -= 1;
+    item.sel ? totalGoods += 1 : totalGoods -= 1;
     this.setData({
       totalGoods: totalGoods,
       checkAllGoods: this.data.shopCarList.length === totalGoods
     })
     this.countMoney();
-    if (this.data.shopCarList[e.target.dataset.index].stock < 0) {
+    if (item.stock < 0) {
       this.setData({
         remindGoods: !this.data.remindGoods
       })
     }
   },
   /*点击减号*/
-  bindMinus: function(e) {
-    if (this.data.shopCarList[e.target.dataset.index].sum == 1) {
-      this.data.shopCarList[e.target.dataset.index].sum = 1
+  bindMinus: function (e) {
+    let item = this.data.shopCarList[e.target.dataset.index];
+    if (item.stock == 1) {
+      item.stock = 1
+      return;
     } else {
-      this.data.shopCarList[e.target.dataset.index].sum -= 1
+      item.stock -= 1
     }
     this.setData({
       shopCarList: this.data.shopCarList
     })
-    this.countMoney();
+    this.stockGoodsCart(item.stock, item.goods_id, item.id)
     console.log(this.data.shopCarList);
   },
   /*点击加号*/
   bindPlus: function(e) {
-    if (this.data.shopCarList[e.target.dataset.index].sum == 999) {
-      this.data.shopCarList[e.target.dataset.index].sum = 999
+    let item = this.data.shopCarList[e.target.dataset.index];
+    if (item.stock == 999) {
+      item.stock = 999
+      return;
     } else {
-      this.data.shopCarList[e.target.dataset.index].sum += 1
+      item.stock *= 1
+      item.stock += 1
     }
     this.setData({
       shopCarList: this.data.shopCarList
     })
-    this.countMoney();
+    this.stockGoodsCart(item.stock, item.goods_id, item.id)
     console.log(this.data.shopCarList);
   },
   // 输入商品数量
   bindManual: function(e) {
-    var sum = parseInt(e.detail.value.replace(/[^\d]/g, '') || 1);
-    this.data.shopCarList[e.target.dataset.index].sum = sum;
+    let sum = parseInt(e.detail.value.replace(/[^\d]/g, '') || 1), item = this.data.shopCarList[e.target.dataset.index];
+    item.stock = sum;
+    this.stockGoodsCart(item.stock, item.goods_id, item.id, )
     return {
       value: sum
     }
-    this.countMoney();
+  },
+  // 更新购物车商品数量
+  stockGoodsCart: function (stock, goods_id, id) {
+    app.request.stockGoodsCart({ stock, goods_id, id }).then(res => {
+      console.log(res);
+      this.countMoney();
+    })
   },
   // 全选购物车
   selAllGoods: function(e) {
@@ -137,11 +149,11 @@ Page({
     var sum = 0;
     this.data.shopCarList.map(item => {
       if (item.sel && item.stock > 0) {
-        sum += item.sum * item.realPrice
+        sum += item.stock * item.price
       }
     })
     this.setData({
-      totalMoney: sum
+      totalMoney: sum.toFixed(2)
     })
   },
   // 到货提醒
@@ -161,11 +173,12 @@ Page({
   },
   // 结算
   buy: function() {
-    console.log(this.data.shopCarList);
     var buyGoodsList = [];
     this.data.shopCarList.map(item => {
-      if (item.sel && item.stock > 0) buyGoodsList.push(item)
+      if (item.sel && item.stock > 0) buyGoodsList.push(item.id)
     })
+    console.log(buyGoodsList);
+
     wx.navigateTo({
       url: '../order/orderConfirm/orderConfirm',
       success: function (res) {
@@ -173,10 +186,45 @@ Page({
       }
     })
   },
+  longpressGoods: function (e) {
+    let index = e.currentTarget.dataset.index, item = this.data.shopCarList[index];
+    console.log(item);
+    this.setData({
+      curCartId: item.id
+    })
+  },
+  // 关闭actionSheet
+  hiddenActionSheet: function(){
+    this.setData({
+      curCartId: null
+    })
+  },
+  // 移出购物车
+  delGoods: function(){
+    const self=this;
+    app.request.delGoodsCart(this.data.curCartId).then(res=>{
+      console.log(res);
+      self.setData({
+        curCartId: null
+      })
+      self.getShopCarList();
+    })
+  },
+  // 移入收藏夹
+  colGoods: function () {
+    const self=this;
+    app.request.favorOrder(this.data.curCartId).then(res => {
+      console.log(res);
+      self.setData({
+        curCartId: null
+      })
+      self.getShopCarList();
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
   },
 
   /**
@@ -189,7 +237,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.getShopCarList();
   },
 

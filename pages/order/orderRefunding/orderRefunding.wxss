@@ -63,3 +63,11 @@
   display: flex;
   flex-wrap: wrap;
 }
+.submit{
+  width: 750rpx;
+  height: 75rpx;
+  line-height: 75rpx;
+  border-radius: 0;
+  position: fixed;
+  bottom: 0;
+}

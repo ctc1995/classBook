@@ -1,4 +1,5 @@
 // pages/info/info.js
+const app = new getApp();
 Page({
 
   /**
@@ -18,18 +19,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    app.request.getAbout().then(res => {
+      console.log(res);
+      this.setData({
+        'formData.avatar': res.data.avatar,
+        'formData.nickname': res.data.nickname,
+        'formData.gender': res.data.gender,
+        'formData.birthday': res.data.birthday,
+        'formData.mobile': res.data.mobile,
+        region: [res.data.province, res.data.city, res.data.address]
+      })
+    })
   },
 
   bindDateChange: function (e) {
     this.setData({
       date: e.detail.value,
-      [`formData.date`]: e.detail.value
+      [`formData.birthday`]: e.detail.value
     })
   },
   bindSexChange: function (e) {
     this.setData({
-      [`formData.sex`]: e.detail.value,
+      [`formData.gender`]: e.detail.value,
       sexIndex: e.detail.value
     })
   },
@@ -42,12 +53,16 @@ Page({
   bindRegionChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      [`formData.region`]: e.detail.value,
+      [`formData.province`]: e.detail.value[0],
+      [`formData.city`]: e.detail.value[1],
+      [`formData.address`]: e.detail.value[2],
       region: e.detail.value
     })
   },
   getCode: function(){
-    if (/^1[3456789]\d{9}$/.test(this.data.formData.mobile) && this.data.canGetCode) {
+    // if (/^1[3456789]\d{9}$/.test(this.data.formData.mobile) && this.data.canGetCode) {
+    console.log(this.data.formData.mobile);
+    if (/^1[3456789]\d{9}$/.test(this.data.formData.mobile)) {
       this.setData({
         canGetCode: false,
       })
@@ -55,10 +70,23 @@ Page({
         this.setData({
           canGetCode: true,
         })
-      },60000)
+      }, 60000)
+      return true;
     } else {
       this.setData({
         error: '手机号错误，请检查'
+      })
+      return false;
+    }
+  },
+  submitForm: function(){
+    console.log(this.data.formData)
+    if (this.getCode()) {
+      app.request.modifyInfo(this.data.formData).then(res => {
+        console.log(res);
+        if (res.code == 0) {
+          wx.navigateBack();
+        }
       })
     }
   },

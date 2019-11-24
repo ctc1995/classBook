@@ -1,2 +1,8 @@
 <!--pages/aboutMe/aboutMe.wxml-->
-<text>pages/aboutMe/aboutMe.wxml</text>
+<view class="page_aboutus">
+  <image mode="widthFix" src="{{about.image}}" style="width:690rpx;"></image>
+  <rich-text nodes="{{about.content}}"></rich-text>
+  <official-account></official-account>
+
+  <!-- <view class="about"></view> -->
+</view>

@@ -1,16 +1,16 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/about/about",
+    "pages/shopCar/shopCar",
     "pages/addAddress/addAddress",
     "pages/address/address",
     "pages/bookshelf/bookshelf",
-    "pages/home/home",
     "pages/discovery/discovery",
     "pages/recommend/recommend",
     "pages/logistics/logistics",
     "pages/info/info",
     "pages/order/orderConfirm/orderConfirm",
-    "pages/shopCar/shopCar",
     "pages/search/search",
     "pages/logs/logs",
     "pages/goods/goods",

@@ -32,7 +32,7 @@
       <navigator class="order_item"  url="../order/orderManager/orderManager?type=arrived&index=3">
         <span wx:if="{{about.ysh_order_count > 0}}">{{about.ysh_order_count}}</span>
         <image src="../../assets/images/about/yishouhuo.png" />
-        已收货
+        已完成
       </navigator>
       <navigator class="order_item"  url="../order/orderManager/orderManager?type=refund&index=4">
         <span wx:if="{{about.tk_order_count > 0}}">{{about.tk_order_count}}</span>

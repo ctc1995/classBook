@@ -2,6 +2,9 @@
 .page_goods{
   padding: 0 30rpx 100rpx;
 }
+.page_goods .mod_good{
+  margin-top: 50rpx;
+}
 swiper{
   height: 514rpx;
 }
@@ -122,10 +125,21 @@ swiper{
   display: flex;
   justify-content: space-around;
 }
-.page_goods .goods_footer .click p{
+.page_goods .goods_footer .click p, .page_goods .goods_footer .click .share{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+.page_goods .goods_footer .click .share{
+  font-size: 24rpx;
+  color: #999;
+  background-color: transparent;
+  line-height: 1.5;
+  margin: 0;
+}
+.page_goods .goods_footer .click .share::after{
+  border: unset;
 }
 .page_goods .goods_footer .click image{
   width: 26rpx;

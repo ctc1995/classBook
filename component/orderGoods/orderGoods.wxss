@@ -1,4 +1,15 @@
 /* 订单页商品样式 */
+.btn{
+  height: 40rpx;
+  line-height: 36rpx;
+  font-size: 24rpx;
+  margin: 0;
+}
+.btn_default {
+  background-color: transparent;
+  color: #999999;
+  border: 1px solid #999999;
+}
 .goods_list{
   background-color: #fff;
   display: flex;
@@ -26,11 +37,13 @@
   margin-left: 26rpx;
 }
 .goods_list .goods .title_attr .good_title{
+  width: 400rpx;
 	font-size: 30rpx;
 	color: #444444;
   margin-bottom: 10rpx;
 }
 .goods_list .goods .title_attr .good_attr{
+  width: 400rpx;
   font-size: 24rpx;
   color: #777;
 }

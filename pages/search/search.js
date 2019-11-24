@@ -52,6 +52,18 @@ Page({
    */
   onLoad: function(options) {
 
+    // 好书推荐
+    app.request.getGoodsRecommend({
+      // type: 'recommended_daily',
+      type: 'is_home_recommended',
+      number: 10,
+      page: 1
+    }).then(res => {
+      console.log(res);
+      this.setData({
+        goodList: res.data.data
+      })
+    })
   },
 
   /**

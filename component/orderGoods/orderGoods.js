@@ -20,6 +20,10 @@ Component({
       type: Boolean,
       value: true
     },
+    shouhou: {
+      type: Boolean,
+      value: false
+    },
   },
 
   /**
@@ -33,9 +37,16 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    hihi(){
-      console.log(this.data.needMoney)
-      console.log(this.data.needAttr)
-    }
+    // 申请退货
+    refund(e) {
+      var orderIndex = e.currentTarget.dataset.index;
+      var self = this;
+      wx.navigateTo({
+        url: '../orderRefunding/orderRefunding',
+        success: function (res) {
+          res.eventChannel.emit("acceptOrder", self.properties.buyGoodsList[orderIndex])
+        }
+      })
+    },
   }
 })
