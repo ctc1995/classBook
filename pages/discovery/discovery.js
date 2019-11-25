@@ -183,7 +183,7 @@ Page({
   search: function (e) {
     const self = this;
     app.request.getAuthList({
-      keyword: e.detail.value
+      keywords: e.detail.value
     }).then(res => {
       self.setData({
         authList: res.data.data

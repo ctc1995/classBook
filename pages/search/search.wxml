@@ -8,10 +8,10 @@
       </view>
     </view>
     <view class="mod_book_list">
-      <h2 class="title">官方书单</h2>
+      <h2 class="title">推荐书单</h2>
       <div class="list">
-        <navigator class="item" wx:for="{{bookList}}" url="../../pages/bookMenu/bookMenu?{{item.id}}">
-          {{item.name}}
+        <navigator class="item" wx:for="{{recommendList}}" bindtap="goBookMenu" data-item="{{item}}">
+          {{item.title}}
         </navigator>
       </div>
     </view>

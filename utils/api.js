@@ -1,6 +1,6 @@
 class api {
   constructor() {
-    this._baseUrl = 'http://dianshu.chaoshang666.com/index.php/api/'
+    this._baseUrl = 'https://dianshu.chaoshang666.com/index.php/api/'
     this._header = {}
   }
 
@@ -54,7 +54,7 @@ class api {
           if (res.statusCode === 200) {
             //200: 服务端业务处理正常结束
             resolve(res)
-          } else {
+          }  else {
             //其它错误，提示用户错误信息
             if (this._errorHandler != null) {
               //如果有统一的异常处理，就先调用统一异常处理函数对异常进行处理

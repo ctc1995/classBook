@@ -2,23 +2,25 @@
 import request from './utils/request.js'
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
     const self = this;
     // 登录
     wx.login({
       success: res => {
+        wx.setStorageSync('authcode', res.code)
         console.log(res.code)
         if (!wx.getStorageSync('openid')) {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           self.request.postAuth({code: res.code}).then(res=>{
             wx.setStorageSync('openid', res.data)
+            self.getUserInfo();
           })
+        } else {
+          self.getUserInfo();
         }
       }
     })
+  },
+  getUserInfo:function(){
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -26,12 +28,14 @@ App({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log(res);
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
               this.globalData.encryptedData = res.encryptedData
               this.globalData.iv = res.iv
               this.globalData.signature = res.signature
+              wx.setStorageSync('encryptedData', res.encryptedData)
+              wx.setStorageSync('iv', res.iv)
+              wx.setStorageSync('signature', res.signature)
               if (!wx.getStorageSync('token')) {
                 this.request.getUserInfo({
                   openid: wx.getStorageSync('openid'),

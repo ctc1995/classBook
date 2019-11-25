@@ -67,14 +67,10 @@ Page({
         let id = res.data || that.data.formData.id
         app.request.setDefaultAddress(id).then(res=>{
           console.log(res);
-          wx.redirectTo({
-            url: '../address/address'
-          });
+          wx.navigateBack()
         })
       } else {
-        wx.redirectTo({
-          url: '../address/address'
-        });
+        wx.navigateBack()
       }
     })
   },

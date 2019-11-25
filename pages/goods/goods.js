@@ -24,26 +24,7 @@ Page({
       format: '32',
     },
     // 相关推荐
-    goodList: [
-      {
-        bookId: 1,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-      {
-        bookId: 2,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-    ],
+    goodList: [],
     goodsServer: [
       {
         "icon": '',
@@ -90,6 +71,11 @@ Page({
   shoucang: function(){
     app.request.favorOrder(this.data.goods.id, this.data.goods.isbn).then(res=>{
       console.log(res);
+      if (res.code == 0) {
+        wx.showToast({
+          title: '收藏成功',
+        })
+      }
     })
   },
   // 加入购物车

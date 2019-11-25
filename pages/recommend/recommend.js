@@ -70,6 +70,16 @@ Page({
       })
     })
   },
+  // 加购
+  addShopCar(e) {
+    console.log(e);
+    app.request.addCart({ goods_id: e.currentTarget.dataset.book.id }).then(res => {
+      console.log(res);
+      wx.showToast({
+        title: '加入购物车成功',
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

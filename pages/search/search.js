@@ -8,50 +8,26 @@ Page({
    */
   data: {
     // 官方书单
-    bookList: [{
-        id: 1,
-        name: '职场必读'
-      },
-      {
-        id: 2,
-        name: '提高文学'
-      },
-      {
-        id: 3,
-        name: '放眼世界'
-      },
-      {
-        id: 4,
-        name: '管理必读'
-      },
-    ],
+    recommendList: [],
     // 好书推荐
-    goodList: [{
-        bookId: 1,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-      {
-        bookId: 2,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-    ]
+    goodList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    const self = this;
+    // 推荐书单
+    app.request.getRecommendedlist({
+      number: 3,
+      page: 1
+    }).then(res => {
+      console.log(res);
+      self.setData({
+        recommendList: res.data.data
+      })
+    })
     // 好书推荐
     app.request.getGoodsRecommend({
       // type: 'recommended_daily',
@@ -71,6 +47,29 @@ Page({
    */
   onReady: function() {
 
+  },
+
+  // 进入书单
+  goBookMenu(e) {
+    console.log(e.currentTarget.dataset.item)
+
+    var self = this;
+    wx.navigateTo({
+      url: '../bookMenu/bookMenu?bookMenuId=' + e.currentTarget.dataset.item.id,
+      success: function (res) {
+        res.eventChannel.emit("acceptbookMenu", e.currentTarget.dataset.item)
+      }
+    })
+  },
+  // 加购
+  addShopCar(e) {
+    console.log(e);
+    app.request.addCart({ goods_id: e.currentTarget.dataset.book.id }).then(res => {
+      console.log(res);
+      wx.showToast({
+        title: '加入购物车成功',
+      })
+    })
   },
   /**
    * 搜索

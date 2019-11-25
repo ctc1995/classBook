@@ -133,7 +133,7 @@ h2.title {
 /*主容器*/
 
 .stepper {
-  width: 180rpx;
+  width: 184rpx;
   height: 54rpx;
   border: 1px solid #ccc;
   border-radius: 3px;

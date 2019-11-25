@@ -1,39 +1,12 @@
 // pages/searchRes/searchRes.js
+const app = new getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    goodList: [
-      {
-        bookId: 1,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-      {
-        bookId: 1,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-      {
-        bookId: 2,
-        pic: 'book.jpg',
-        title: '我是个年轻人，我的脾气不太好',
-        auth: '金庸',
-        rate: 8.7,
-        realPrice: "388.00",
-        price: "558.00"
-      },
-    ],
+    goodList: [],
   },
 
   /**
@@ -49,6 +22,16 @@ Page({
     })
   },
 
+  // 加购
+  addShopCar(e) {
+    console.log(e);
+    app.request.addCart({ goods_id: e.currentTarget.dataset.book.id }).then(res => {
+      console.log(res);
+      wx.showToast({
+        title: '加入购物车成功',
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -1,4 +1,5 @@
 import api from './api.js';
+const app = new getApp();
 
 class request {
   constructor() {
@@ -11,7 +12,7 @@ class request {
    * 统一的异常处理方法
    */
   errorHander(res) {
-    console.error(res)
+    console.log(res);
   }
   /**
    * 获取用户授权

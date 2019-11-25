@@ -6,6 +6,9 @@
   position: relative;
   border-top: 1px solid #ddd;
 }
+.page_address .address_list{
+  margin-bottom: 100rpx;
+}
 .page_address .add_address{
   width: 750rpx;
   height: 100rpx;

@@ -6,41 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    addressList: [{
-        // 收货人姓名
-        userName: '张三',
-        // 邮编
-        postalCode: '516300',
-        // 国标收货地址第一级地址
-        provinceName: '广东省',
-        // 国标收货地址第二级地址
-        cityName: '深圳市',
-        // 国标收货地址第三级地址
-        countyName: '龙岗区',
-        // 详细收货地址信息
-        detailInfo: '龙城街道111号',
-        // 	收货人手机号码
-        telNumber: '15018504589',
-        type: 1,
-      },
-      {
-        // 收货人姓名
-        userName: '张三',
-        // 邮编
-        postalCode: '516300',
-        // 国标收货地址第一级地址
-        provinceName: '广东省',
-        // 国标收货地址第二级地址
-        cityName: '深圳市',
-        // 国标收货地址第三级地址
-        countyName: '龙岗区',
-        // 详细收货地址信息
-        detailInfo: '龙城街道111号',
-        // 	收货人手机号码
-        telNumber: '15018504589',
-        type: 0,
-      }
-    ],
+    addressList: [],
     isEdit: true,
     currentAddressId: null,
     dialogShow: false,
