@@ -31,6 +31,13 @@ Page({
       })
       app.request.buyCart(data).then(res=>{
         console.log(res);
+        res.data.payment_list.map(item=>{
+          if (item.payment == 'Weixin'){
+            self.setData({
+              payment_id: item.id
+            })
+          }
+        })
         self.setData({
           base: res.data.base,
           extension_data: res.data.extension_data,
@@ -75,24 +82,24 @@ Page({
     let orderObj = { 
       address_id: this.data.base.address.id,
       ids: this.data.ids,
+      payment_id: this.data.payment_id,
       // coupon_id,
       user_note: this.data.remakes
     }
-    app.request.payOrder('12').then(res=>{
+    app.request.buyAdd(orderObj).then(res=>{
       console.log(res);
+      app.request.payOrder(res.data.order.id).then(res=>{
+        if(res.code == 0){
+          // 支付成功或者取消支付再跳转
+          wx.navigateTo({
+            url: '../orderReceipt/orderReceipt',
+            success: function (res) {
+              res.eventChannel.emit("acceptBuyGoodsList", self.data.buyGoodsList)
+            }
+          })
+        }
+      })
     })
-    // app.request.buyAdd(orderObj).then(res=>{
-    //   console.log(res);
-    //   app.request.payOrder(res.data.order.id).then(res=>{
-
-    //   })
-    // })
-    // wx.navigateTo({
-    //   url: '../orderReceipt/orderReceipt',
-    //   success: function (res) {
-    //     res.eventChannel.emit("acceptBuyGoodsList", self.data.buyGoodsList)
-    //   }
-    // })
   },
   /**
    * 生命周期函数--监听页面显示

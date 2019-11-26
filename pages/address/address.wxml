@@ -17,11 +17,11 @@
           <text>默认地址</text>
         </radio>
         <view class="btn_group">
-          <button class="btn btn_text" bindtap="modifyAddress" data-id="{{item.id}}">
+          <button class="btn btn_text" catchtap="modifyAddress" data-id="{{item.id}}">
             <image src="../../assets/images/edit.png" mode="widthFix"></image>
             编辑
           </button>
-          <button class="btn btn_text" bindtap="delAddress" data-id="{{item.id}}">
+          <button class="btn btn_text" catchtap="delAddress" data-id="{{item.id}}">
             <image src="../../assets/images/delete.png" mode="widthFix"></image>
             删除
           </button>

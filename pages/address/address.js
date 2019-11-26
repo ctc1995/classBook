@@ -24,12 +24,6 @@ Page({
    */
   onLoad: function (options) {
     const eventChannel = this.getOpenerEventChannel(), self = this;
-    app.request.getAddress().then(res=>{
-      console.log(res);
-      this.setData({
-        addressList: res.data
-      })
-    })
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
       self.setData({
         isEdit: data
@@ -95,8 +89,14 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-
+  onShow: function () {
+    const self = this;
+    app.request.getAddress().then(res => {
+      console.log(res);
+      self.setData({
+        addressList: res.data
+      })
+    })
   },
 
   /**

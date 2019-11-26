@@ -50,15 +50,6 @@ Page({
       curTabIndex: options.index,
       orderList: []
     })
-    if (options.type != 'all'){
-      this.changeTabNav({ detail: { tabId: options.type } })
-    } else {
-      app.request.getOrderIndex({ type: 'all' }).then(res => {
-        self.setData({
-          orderList: res.data.data
-        })
-      })
-    }
   },
   /**
    * TODO：
@@ -70,6 +61,7 @@ Page({
       console.log(that.data.curOrderId)
       app.request.cancelOrder(that.data.curOrderId).then(res => {
         if (res.code == 0) {
+          that.onLoad();
           that.setData({
             topTips: res.msg
           })
@@ -82,7 +74,6 @@ Page({
           dialogShow: false,
           curOrderId: null
         })
-        that.onload();
       })
     } else {
       that.setData({
@@ -224,7 +215,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log('show')
+    if (this.data.curTabId != 'all') {
+      this.changeTabNav({ detail: { tabId: this.data.curTabId } })
+    } else {
+      app.request.getOrderIndex({ type: 'all' }).then(res => {
+        self.setData({
+          orderList: res.data.data
+        })
+      })
+    }
   },
 
   /**

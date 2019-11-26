@@ -1,11 +1,12 @@
 <!--pages/order/orderConfirm/orderConfirm.wxml-->
 <view class="page_order_confirm">
   <view class="need_link_icon order_delivery" bindtap="changeAddress">
-    <p class="name_phone">
+    <p class="address" wx:if="{{!base.address}}">暂无地址，点击进入新建地址</p>
+    <p class="name_phone" wx:if="{{base.address}}">
       <span>{{base.address.name}}</span>
       <span>{{base.address.tel}}</span>
     </p>
-    <p class="address">{{base.address.province_name}}{{base.address.city_name}}{{base.address.county_name}}{{base.address.address}}</p>
+    <p class="address" wx:if="{{base.address}}">{{base.address.province_name}}{{base.address.city_name}}{{base.address.county_name}}{{base.address.address}}</p>
   </view>
   <i class="line"></i>
   <view class="order_detail">

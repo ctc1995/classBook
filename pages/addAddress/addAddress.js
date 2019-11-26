@@ -92,6 +92,14 @@ Page({
         })
         app.request.postAddress(address).then(res => {
           console.log(res);
+          if(res.code == 0){
+            wx.showToast({
+              title: '新建成功',
+              success(){
+                setTimeout(() => {wx.navigateBack()},1500)
+              }
+            })
+          }
         })
       }
     })

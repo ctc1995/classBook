@@ -43,7 +43,9 @@ class api {
    * 网络请求
    */
   requestAll(url, data, header, method) {
-    wx.showLoading();
+    wx.showLoading({
+      title: '加载中',
+    });
     return new Promise((resolve, reject) => {
       wx.request({
         url: this._baseUrl + url,
