@@ -1,11 +1,16 @@
 /* pages/goods/goods.wxss */
 .page_goods{
   width: 750rpx;
-  padding: 0 30rpx 100rpx;
+  padding: 0 0 100rpx;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 .page_goods .mod_good{
   margin-top: 50rpx;
+}
+.pic_title_price, .goods_detail, .good_action, .mod_good{
+  padding: 0 30rpx;
+  box-sizing: border-box;
 }
 swiper{
   height: 514rpx;
@@ -19,7 +24,7 @@ swiper{
   max-height: 514rpx;
 }
 .page_goods .line{
-  margin: 30rpx -30rpx;
+  margin: 30rpx 0;
 }
 .page_goods .pic_title_price .price{
 	font-size: 30rpx;
@@ -97,12 +102,13 @@ swiper{
 	font-size: 32rpx;
 	line-height: 100rpx;
 	color: #333333;
-  margin: 0 -30rpx 30rpx;
+  margin: 0 0 30rpx;
   padding: 0 30rpx;
   display: block;
 }
 .page_goods .goods_detail_image{
-  margin: 30rpx -30rpx -30rpx;
+  width: 690rpx;
+  margin: 30rpx 0 -30rpx;
 }
 .page_goods .goods_detail_image image{
   width: 750rpx;
@@ -113,7 +119,6 @@ swiper{
   font-size: 24rpx;
   background-color: #fff;
   border-top: 1px solid #eaeaea;
-  margin: 0 -30rpx;
   padding: 0 30rpx;
   box-sizing: border-box;
   display: flex;
@@ -121,39 +126,39 @@ swiper{
   position: fixed;
   bottom: 0;
 }
-.page_goods .goods_footer .click{
+.goods_footer .click{
   flex: 1;
   color: #999;
   display: flex;
   justify-content: space-around;
 }
-.page_goods .goods_footer .click p, .page_goods .goods_footer .click .share{
+.goods_footer .click p, .goods_footer .click .share{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.page_goods .goods_footer .click .share{
+.goods_footer .click .share{
   font-size: 24rpx;
   color: #999;
   background-color: transparent;
   line-height: 1.5;
   margin: 0;
 }
-.page_goods .goods_footer .click .share::after{
+.goods_footer .click .share::after{
   border: unset;
 }
-.page_goods .goods_footer .click image{
+.goods_footer .click image{
   width: 26rpx;
   height: 26rpx;
   margin-bottom: 10rpx;
 }
-.page_goods .goods_footer .button{
+.goods_footer .button{
   flex: 1;
   display: flex;
   align-items: center;
 }
-.page_goods .goods_footer .button button{
+.goods_footer .button button{
   width: 200rpx;
   height: 60rpx;
   line-height: 60rpx;
@@ -161,16 +166,16 @@ swiper{
   margin: 0;
   border-radius: 0;
 }
-.page_goods .goods_footer .button button::after{
+.goods_footer .button button::after{
   border: unset;
 }
-.page_goods .goods_footer .button button.addCar{
+.goods_footer .button button.addCar{
   background-color: #999;
   color: #eee;
   border-top-left-radius: 60rpx;
   border-bottom-left-radius: 60rpx;
 }
-.page_goods .goods_footer .button button.shop{
+.goods_footer .button button.shop{
   background-color: #f4b800;
   color: #fff;
   border-top-right-radius: 60rpx;

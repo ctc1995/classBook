@@ -149,9 +149,9 @@
       </p>
     </view>
     <view class="button">
-      <button class="addCar" bindtap="addCar" wx:if="{{goods.invertory != 0}}">加入购物车</button>
-      <button class="shop" bindtap="shop" wx:if="{{goods.invertory != 0}}">立即购买</button>
-      <button class="btn btn_primary" bindtap="arrival" style="width: 100%; border-radius: 80rpx;" wx:if="{{goods.invertory == 0}}">到货提醒</button>
+      <button class="addCar" bindtap="addCar" wx:if="{{goods.inventory != 0}}">加入购物车</button>
+      <button class="shop" bindtap="shop" wx:if="{{goods.inventory != 0}}">立即购买</button>
+      <button class="btn btn_primary" bindtap="arrival" style="width: 100%; border-radius: 80rpx;" wx:if="{{goods.inventory == '0'}}">到货提醒</button>
     </view>
   </view>
 </view>
