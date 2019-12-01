@@ -149,6 +149,13 @@
   display: inline-block;
   margin-right: 16rpx;
 }
+.delivery_method{
+  height: 70rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .order_footer{
   width: 750rpx;

@@ -19,9 +19,12 @@
             </p>
           </section>
         </navigator>
-        <section class="add_car" bindtap="addShopCar" data-book="{{item}}">
+        <section class="add_car" bindtap="addShopCar" data-book="{{item}}" wx:if="{{item.inventory != 0}}">
           <image src="../../assets/images/add-car2x.png" />
         </section>
+        <navigator class="add_car" url="../goods/goods?bookId={{item.goods_id || item.id}}" style="white-space: nowrap;" wx:else>
+          无货
+        </navigator>
       </section>
     </div>
   </view>

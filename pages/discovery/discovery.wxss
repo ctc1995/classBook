@@ -19,6 +19,12 @@
   flex-direction: column;
   justify-content: center;
 }
+.mod_rank .rank_item .list navigator{
+  width: 460rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .mod_rank .rank_item navigator+navigator{
   margin-top: 28rpx;
 }

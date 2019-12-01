@@ -24,12 +24,44 @@ Page({
    */
   onLoad: function (options) {
     const self = this, appInstance = getApp();
-    app.request.getBookListDetail(options.bookMenuId).then(res=>{
-      console.log(res);
-      self.setData({
-        goodList: res.data
+    if (options.bookMenuId) {
+      app.request.getBookListDetail(options.bookMenuId).then(res => {
+        console.log(res);
+        self.setData({
+          goodList: res.data
+        })
       })
-    })
+    } else if (options.type) {
+      switch (options.type) {
+        case '0':
+          app.request.getHotlist({page:1, number:999}).then(res => {
+            console.log(res);
+            self.setData({
+              goodList: res.data.data,
+              "bookMenu.title": '热销榜'
+            })
+          })
+          break;
+        case '1':
+          app.request.getCollectionlist({page:1, number:999}).then(res => {
+            console.log(res);
+            self.setData({
+              goodList: res.data.data,
+              "bookMenu.title": '收藏榜'
+            })
+          })
+          break;
+        case '2':
+          app.request.getHotsearchlist({page:1, number:999}).then(res => {
+            console.log(res);
+            self.setData({
+              goodList: res.data.data,
+              "bookMenu.title": '热搜榜'
+            })
+          })
+          break;
+      }
+    }
     const eventChannel = this.getOpenerEventChannel();
     eventChannel.on('acceptbookMenu', function (data) {
       console.log(data);

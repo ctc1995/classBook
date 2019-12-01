@@ -42,6 +42,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const eventChannel = this.getOpenerEventChannel(), self = this;
+    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      self.setData({
+        isUse: data
+      })
+    })
     app.request.getCoupon().then(res=>{
       console.log(res);
       this.setData({
@@ -57,6 +63,13 @@ Page({
     this.setData({
       curTabId: e.detail.tabId
     })
+  },
+  // 选择优惠券
+  chooseCoupon: function(e){
+    console.log(e);
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('acceptDataFromOpenedPage', e.currentTarget.dataset.item);
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

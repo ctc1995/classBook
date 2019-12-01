@@ -1,6 +1,6 @@
 <!--pages/recommend/recommend.wxml-->
 <view class="page_recommend">
-  <view class="mod_filter" wx:if="{{type==='rare_treasures'}}">
+  <!-- <view class="mod_filter" wx:if="{{type==='rare_treasures'}}">
     <p class="filter_item">
       综合
     </p>
@@ -27,7 +27,7 @@
         </span>
       </div>
     </section>
-  </view>
+  </view> -->
   <view class="mod_good">
     <div class="book_list">
       <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
@@ -36,7 +36,7 @@
           <section class="book_detail">
             <section class="book_info">
               <p class="book_title">{{item.title}}</p>
-              <p class="book_auth">{{item.author}}</p>
+              <p class="book_auth">{{item.author_name}}</p>
               <p class="book_rate" wx:if="{{item.rate}}">豆瓣评分：{{item.rate}}</p>
               <p class="book_rate" wx:if="{{!item.rate && item.qualit}}">成色：{{item.quality}}</p>
             </section>
@@ -48,9 +48,12 @@
             </p>
           </section>
         </navigator>
-        <section class="add_car" bindtap="addShopCar" data-book="{{item}}">
+        <section class="add_car" bindtap="addShopCar" data-book="{{item}}" wx:if="{{item.inventory != 0}}">
           <image src="../../assets/images/add-car2x.png" />
         </section>
+        <navigator class="add_car" url="../goods/goods?bookId={{item.id}}" style="white-space: nowrap;" wx:else>
+          无货
+        </navigator>
       </section>
     </div>
   </view>

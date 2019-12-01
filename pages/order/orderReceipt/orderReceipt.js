@@ -6,8 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    buyGoodsList: [],
-    orderStatus: {},
     orderInfo: {
       id: 20191023008912,
       delivery: {
@@ -32,7 +30,11 @@ Page({
         '百世物流已揽件',
       ],
     },
-    
+    buyGoodsList: [],
+    orderStatus: {},
+    topTips: '',
+    dialogShow: false,
+    buttons: [{ text: '取消' }, { text: '确定' }]
   },
 
   /**
@@ -41,26 +43,105 @@ Page({
   onLoad: function (options) {
     const eventChannel = this.getOpenerEventChannel();
     var self = this, appInstance = getApp();
-    eventChannel.on('acceptOrder', function (data) {
-      console.log(data);
-      if (data.status == '2') {
-        app.request.orderLogistics(data.express_id, data.express_number).then(res => {
-          data.logistics = res.Traces.reverse()
+    console.log(options);
+    if(options.id){
+      app.request.getOrderDetail(options.id).then(res => {
+        self.setData({
+          orderInfo: res.data,
+          buyGoodsList: res.data.items,
+          orderStatus: appInstance.globalData.orderStatus
+        })
+      })
+    } else {
+      eventChannel.on('acceptOrder', function (data) {
+        console.log(data);
+        if (data.status == '2') {
+          app.request.orderLogistics(data.express_id, data.express_number).then(res => {
+            data.logistics = res.Traces.reverse()
+            self.setData({
+              orderInfo: data,
+              buyGoodsList: data.items,
+              orderStatus: appInstance.globalData.orderStatus
+            })
+          })
+        } else {
           self.setData({
             orderInfo: data,
             buyGoodsList: data.items,
             orderStatus: appInstance.globalData.orderStatus
           })
+        }
+      })
+    }
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  },
+
+  tapDialogButton: function (e) {
+    const that = this;
+    if (e.detail.index) {
+      app.request.cancelOrder(that.data.orderInfo.id).then(res => {
+        if (res.code == 0) {
+          that.setData({
+            topTips: res.msg
+          })
+          setTimeout(() => { wx.navigateBack()}, 1000)
+        } else {
+          that.setData({
+            topTipse: res.msg
+          })
+        }
+        that.setData({
+          dialogShow: false
         })
-      } else {
-        self.setData({
-          orderInfo: data,
-          buyGoodsList: data.items,
-          orderStatus: appInstance.globalData.orderStatus
+      })
+    } else {
+      that.setData({
+        dialogShow: false
+      })
+    }
+  },
+  // 复制
+  copyText(e){
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.text,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '复制成功'
+            })
+          }
         })
       }
     })
   },
+  // 拨打电话
+  callPhone(){
+    wx.makePhoneCall({
+      phoneNumber: this.data.orderInfo.receive_tel 
+    })
+  },
+  // 申请退货
+  refund(){
+    var self = this;
+    wx.navigateTo({
+      url: '../orderRefunding/orderRefunding',
+      success: function (res) {
+        res.eventChannel.emit("acceptOrder", self.data.buyGoodsList)
+      }
+    })
+  },
+  // 取消订单
+  cancel(e) {
+    this.setData({
+      dialogShow: true
+    })
+  },
+  // 立即支付
   toPay: function () {
     var self = this;
     // 加载loding
@@ -96,12 +177,12 @@ Page({
                 console.log(res);
                 let temp_orderInfo = self.data.orderInfo;
                 temp_orderInfo.status = "2",
-                temp_orderInfo.status_name = "待发货",
-                temp_orderInfo.pay_status = "2",
-                temp_orderInfo.pay_status_name = "已支付",
-                self.setData({
-                  orderInfo: temp_orderInfo
-                })
+                  temp_orderInfo.status_name = "待发货",
+                  temp_orderInfo.pay_status = "2",
+                  temp_orderInfo.pay_status_name = "已支付",
+                  self.setData({
+                    orderInfo: temp_orderInfo
+                  })
                 // 数据设置
                 // var temp_data_list = $this.data.data_list;
                 // temp_data_list[index]['status'] = 2;
@@ -135,43 +216,6 @@ Page({
         })
       }
     });
-    // app.request.payOrder(this.data.orderInfo.id).then(res => {
-      // console.log(res);
-      // if (res.code == 0) {
-        // 支付成功或者取消支付再跳转
-        // wx.navigateTo({
-        //   url: '../orderReceipt/orderReceipt',
-        //   success: function (res) {
-        //     res.eventChannel.emit("acceptBuyGoodsList", self.data.buyGoodsList)
-        //   }
-        // })
-      // }
-    // })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  },
-  // 拨打电话
-  callPhone(){
-    wx.makePhoneCall({
-      phoneNumber: this.data.orderInfo.receive_tel //仅为示例，并非真实的电话号码
-    })
-  },
-  // 申请退货
-  refund(){
-    var self = this;
-    wx.navigateTo({
-      url: '../orderRefunding/orderRefunding',
-      success: function (res) {
-        res.eventChannel.emit("acceptOrder", self.data.buyGoodsList)
-      }
-    })
-  },
-  //调起支付
-  buy(){
-    
   },
   // 查看物流
   goLogi(){

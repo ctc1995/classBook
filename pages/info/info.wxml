@@ -11,7 +11,7 @@
         <input data-field="id" class="weui-input" disabled="true" />
       </mp-cell> -->
       <mp-cell title="昵称" ext-class="">
-        <input bindinput="formInputChange" data-field="nickname" value="{{formData.nickname}}" class="weui-input" placeholder="请输入昵称" />
+        <input bindblur="formInputChange" data-field="nickname" value="{{formData.nickname}}" class="weui-input" placeholder="请输入昵称" />
       </mp-cell>
       <!-- <mp-cell prop="intro" title="简介" ext-class="">
         <input bindinput="formInputChange" data-field="intro" class="weui-input" placeholder="请输入简介" />
@@ -44,7 +44,7 @@
         </view>
       </view>
       <mp-cell title="手机号" ext-class="">
-        <input bindinput="formInputChange" data-field="mobile" value="{{formData.mobile}}" class="weui-input" placeholder="请输入手机号" />
+        <input bindblur="formInputChange" data-field="mobile" value="{{formData.mobile}}" class="weui-input" placeholder="请输入手机号" />
       </mp-cell>
       <!-- <mp-cell title="手机号" ext-class=" weui-cell_vcode">
         <input bindinput="formInputChange" value="{{formData.mobile}}" class="weui-input" placeholder="请输入手机号" />

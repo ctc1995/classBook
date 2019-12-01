@@ -39,6 +39,7 @@ Page({
   },
 
   formInputChange(e) {
+    console.log(e);
     const { field } = e.currentTarget.dataset
     this.setData({
       [`formData.${field}`]: e.detail.value
@@ -63,14 +64,21 @@ Page({
     const that = this;
     app.request.postAddress(this.data.formData).then(res => {
       console.log(res);
-      if (that.data.formData.is_default){
-        let id = res.data || that.data.formData.id
-        app.request.setDefaultAddress(id).then(res=>{
-          console.log(res);
+      if (res.code == 0) {
+        if (that.data.formData.is_default){
+          let id = res.data || that.data.formData.id
+          app.request.setDefaultAddress(id).then(res=>{
+            console.log(res);
+            wx.navigateBack()
+          })
+        } else {
           wx.navigateBack()
-        })
+        }
       } else {
-        wx.navigateBack()
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
       }
     })
   },

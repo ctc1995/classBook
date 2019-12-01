@@ -1,4 +1,5 @@
 <!--pages/coupon/coupon.wxml-->
+<wxs src="../../utils/time.wxs" module="date" />
 <view class="page_coupon">
   <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
   <view class="coupon-list">
@@ -6,40 +7,49 @@
       <view class="coupon-info">
         <view class="detail">
           <span class="money" wx:if="{{item.coupon.type=='0'}}">
-            ￥{{item.money}}
+            ￥{{item.coupon.discount_value}}
           </span>
           <span class="money" wx:if="{{item.coupon.type=='1'}}">
-            {{item.money}}
+            {{item.coupon.discount_value}}
           </span>
-          <span class="money" wx:if="{{item.coupon.type=='2'}}">
-            ￥{{item.money}}
+          <span class="money" style="font-size: 60rpx; margin-left:60rpx;" wx:if="{{item.coupon.type=='2'}}">
+            包邮
           </span>
           <span class="condition">
             活动优惠券
-            <span style="white-space:nowrap;">满{{item.condition}}使用</span>
+            <span style="white-space:nowrap;">满{{item.coupon.where_order_price}}使用</span>
           </span>
         </view>
         <view class="validity">
-          {{item.time_end_text}} - {{item.time_start_text}}
+          {{date.formatDate(item.time_start_text)}} - {{date.formatDate(item.time_end_text)}}
         </view>
       </view>
-      <view class="coupon-action">
+      <view class="coupon-action" wx:if="{{!isUse}}">
         去使用
+      </view>
+      <view class="coupon-action" wx:if="{{isUse}}" bindtap="chooseCoupon" data-item="{{item}}">
+        选择
       </view>
     </view>
     <view class="coupon primary" wx:if="{{curTabId==='dailingqu'}}" wx:for="{{coupon.already_use}}" wx:key="{{index}}">
       <view class="coupon-info">
         <view class="detail">
-          <span class="money">
-            ￥{{item.money}}
+          <span class="money" wx:if="{{item.coupon.type=='0'}}">
+            ￥{{item.coupon.discount_value}}
+          </span>
+          <span class="money" wx:if="{{item.coupon.type=='1'}}">
+            {{item.coupon.discount_value}}
+          </span>
+          <span class="money" style="font-size: 60rpx; margin-left:60rpx;" wx:if="{{item.coupon.type=='2'}}">
+            包邮
           </span>
           <span class="condition">
             活动优惠券
-            <span style="white-space:nowrap;">满{{item.condition}}使用</span>
+            <span style="white-space:nowrap;">满{{item.coupon.where_order_price}}使用</span>
           </span>
         </view>
         <view class="validity">
-          {{item.validityStart}} - {{item.validityEnd}}
+          {{date.formatDate(item.validityStart)}} - {{date.formatDate(item.validityEnd)}}
         </view>
       </view>
       <view class="coupon-action">
@@ -49,16 +59,22 @@
     <view class="coupon default" wx:if="{{curTabId==='bukeyong'}}" wx:for="{{coupon.already_expire}}" wx:key="{{index}}">
       <view class="coupon-info">
         <view class="detail">
-          <span class="money">
-            ￥{{item.money}}
+          <span class="money" wx:if="{{item.coupon.type=='0'}}">
+            ￥{{item.coupon.discount_value}}
+          </span>
+          <span class="money" wx:if="{{item.coupon.type=='1'}}">
+            {{item.coupon.discount_value}}
+          </span>
+          <span class="money" style="font-size: 60rpx; margin-left:60rpx;" wx:if="{{item.coupon.type=='2'}}">
+            包邮
           </span>
           <span class="condition">
             活动优惠券
-            <span style="white-space:nowrap;">满{{item.condition}}使用</span>
+            <span style="white-space:nowrap;">满{{item.coupon.where_order_price}}使用</span>
           </span>
         </view>
         <view class="validity">
-          {{item.validityStart}} - {{item.validityEnd}}
+          {{date.formatDate(item.validityStart)}} - {{date.formatDate(item.validityEnd)}}
         </view>
       </view>
       <view class="coupon-action">

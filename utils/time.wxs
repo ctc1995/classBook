@@ -1,0 +1,6 @@
+var formatDate = function (datetime) {
+  return datetime.substring(0,10)
+}
+module.exports = {
+  formatDate: formatDate
+}

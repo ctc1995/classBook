@@ -11,9 +11,15 @@
   <i class="line"></i>
   <view class="order_detail">
       <orderGoods buy-goods-list="{{goods_list}}"></orderGoods>
+    <view class="need_link_icon delivery_method" bindtap="chooseCoupon">
+      <text class="line_title">优惠券</text>
+      <text class="method" wx:if="{{extension_data[0].price == 0}}">包邮券</text>
+      <text class="method" wx:elif="{{extension_data[0].price != 0 && extension_data[1]}}">{{extension_data[1].tips}}</text>
+      <text class="method" wx:else>待选</text>
+    </view>
     <view class="delivery_method">
       <text class="line_title">配送方式</text>
-      <text class="method">快递：￥{{base.increase_price || '6.00'}}元</text>
+      <text class="method">快递：￥{{extension_data[0].price}}元</text>
     </view>
     <view class="remakes">
       <text class="line_title">订单备注</text>

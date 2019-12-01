@@ -12,6 +12,10 @@ class request {
    */
   errorHander(res) {
     console.log(res);
+    wx.showToast({
+      title: '数据请求失败，请下拉页面刷新',
+      icon: 'none'
+    })
   }
   /**
    * 获取用户授权
@@ -102,8 +106,8 @@ class request {
   /**
    * 搜索
    */
-  getSearch({ number = 10, page = 1, keyword=""}){
-    return this._api.postRequest('Search/Index', {number,page,keyword}).then(res=>res.data)
+  getSearch({ number = 10, page = 1, keywords=""}){
+    return this._api.postRequest('Search/Index', {number,page,keywords}).then(res=>res.data)
   }
   /**
    * 热搜榜
@@ -212,8 +216,14 @@ class request {
   getCartIndex() {
     return this._api.postRequest('Cart/Index', { token: wx.getStorageSync('token') }).then(res => res.data)
   }
-  getCartArri() {
-    return this._api.postRequest('cart/Arrivalreminder', { token: wx.getStorageSync('token'), page:1, number: 999 }).then(res => res.data)
+  getCartArri(isbn=undefined, title=undefined, images=undefined) {
+    let obj = { token: wx.getStorageSync('token')}
+    if(isbn){
+      Object.assign(obj, { isbn, title, images })
+    } else {
+      Object.assign(obj, { page: 1, number: 999 })
+    }
+    return this._api.postRequest('cart/Arrivalreminder', obj).then(res => res.data)
   }
   // 加入购物车
   addCart({ stock = 1, goods_id}) {
@@ -228,12 +238,15 @@ class request {
     return this._api.postRequest('cart/Delete', { token: wx.getStorageSync('token'), id }).then(res => res.data)
   }
   // 购物车结算
-  buyCart(ids) {
-    return this._api.postRequest('buy/index', { token: wx.getStorageSync('token'), buy_type: 'cart', ids: ids.join() }).then(res => res.data)
+  buyCart(ids, couponid) {
+    return this._api.postRequest('buy/index', { token: wx.getStorageSync('token'), buy_type: 'cart', ids: ids.join(), coupon_id: couponid }).then(res => res.data)
   }
   //确认订单
   buyAdd({ address_id, payment_id, ids, coupon_id, user_note}) {
     return this._api.postRequest('buy/add', { token: wx.getStorageSync('token'), buy_type: 'cart', payment_id, ids: ids.join(), address_id, coupon_id, user_note}).then(res => res.data)
+  }
+  getOrderDetail(id) {
+    return this._api.postRequest('order/Detail', { token: wx.getStorageSync('token'), id }).then(res => res.data)
   }
   // 支付订单
   payOrder(id, payment_id){

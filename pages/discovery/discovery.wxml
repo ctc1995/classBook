@@ -4,7 +4,7 @@
   <view class="mod_rank" wx:if="{{curTabId==='rank'}}">
     <h2 class="title">官方榜</h2>
     <section class="rank_item" wx:for="{{rankList}}" wx:key="{{index}}">
-      <navigator url="../bookMenu/bookMenu?bookMenuId={{index}}">
+      <navigator url="../bookMenu/bookMenu?type={{index}}">
         <image src="../../assets/images/discovery/{{item.image}}" />
       </navigator>
       <section class="list">
@@ -21,7 +21,7 @@
       </view>
     </view>
     <view class="auth_item" wx:for="{{authList}}" wx:key="{{index}}">
-      <image class="auth_ava" src="http://dianshu.chaoshang666.com{{item.head_img}}"/>
+      <image class="auth_ava" src="{{item.head_img}}" mode="widthFix"/>
       <p class="auth_name">
         <span title="{{item.name}}">{{item.name}}</span>
         <span class="{{item.like? 'like': ''}}">

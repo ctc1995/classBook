@@ -11,6 +11,12 @@
 .need_link_icon::after{
   right: 28rpx;
 }
+.need_link_icon.delivery_method::after{
+  right: 0;
+}
+.need_link_icon.delivery_method .method{
+  margin-right: 40rpx;
+}
 .order_detail{
   width: 750rpx;
   color: #999;

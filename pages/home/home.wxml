@@ -45,10 +45,10 @@
       </h2>
       <div class="book_list">
         <view class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="goBookMenu" data-item="{{item}}">
-          <image class="book_pic" src="http://dianshu.chaoshang666.com{{item.layout}}"></image>
+          <image class="book_pic" src="http://dianshu.chaoshang666.com{{item.layout}}" mode="aspectFit"></image>
           <p class="like {{item.like? 'active' : 'active'}}">
             <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like2x.png'}}"></image>
-            {{item.fabulous || Math.random()*10000}}
+            {{item.fabulous || 0}}
           </p>
           <p class="book_title">{{item.title}}</p>
         </view>
@@ -63,11 +63,11 @@
       <div class="book_list">
         <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
           <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
-            <image src="{{item.images}}"></image>
+            <image src="{{item.images}}" mode="aspectFit"></image>
             <section class="book_detail">
               <section class="book_info">
                 <p class="book_title">{{item.title}}</p>
-                <p class="book_auth">{{item.author}}</p>
+                <p class="book_auth">{{item.author_name}}</p>
                 <p class="book_rate" wx:if="{{item.rate}}">豆瓣评分：{{item.rate}}</p>
                 <p class="book_rate" wx:if="{{!item.rate && item.qualit}}">成色：{{item.quality}}</p>
               </section>
@@ -79,9 +79,12 @@
               </p>
             </section>
           </navigator>
-          <section class="add_car" bindtap="addShopCar" data-book="{{item}}">
+          <section class="add_car" bindtap="addShopCar" data-book="{{item}}" wx:if="{{item.inventory != 0}}">
             <image src="../../assets/images/add-car2x.png" />
           </section>
+          <navigator class="add_car" url="../goods/goods?bookId={{item.goods_id || item.id}}" style="white-space: nowrap;" wx:else>
+            无货
+          </navigator>
         </section>
       </div>
     </view>

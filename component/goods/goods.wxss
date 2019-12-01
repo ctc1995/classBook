@@ -61,11 +61,15 @@
   color: #e50101;
 }
 
-.book_item .add_car {
+.book_item .add_car, .book_item .canelFavor {
   width: 42rpx;
 }
 
 .book_item .add_car image {
   width: 42rpx;
   height: 37rpx;
+}
+
+.book_item .canelFavor image {
+  width: 24rpx;
 }

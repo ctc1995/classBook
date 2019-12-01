@@ -1,5 +1,10 @@
 <!--pages/order/orderReceipt/orderReceipt.wxml-->
 <view class="page_receipt">
+  <mp-toptips msg="{{topTips}}" type="success" show="{{topTips}}"></mp-toptips>
+  <mp-toptips msg="{{topTipe}}" type="error" show="{{topTipe}}"></mp-toptips>
+  <mp-dialog title="取消订单" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+      <view>请确认是否取消订单</view>
+  </mp-dialog>
   <view class="order_status status_primary">
     <text class="status">{{orderInfo.status_name}}</text>
     <text class="status_info">{{orderStatus[orderInfo.status].tips}}</text>
@@ -19,16 +24,21 @@
   <i class="line" wx:if="{{orderInfo.status == '3'}}"></i>
   <view class="order_detail">
     <orderGoods buy-goods-list="{{buyGoodsList}}" shouhou="{{orderInfo.status == '4'?true:false}}"></orderGoods>
+    {{extension_data}}
+    <view class="delivery_method" wx:if="{{extension_data[0].price != 0 && extension_data[1]}}">
+      <text class="line_title">优惠券</text>
+      <text class="method">{{extension_data[1].tips}}</text>
+    </view>
     <view class="logistics_money">
       <text class="line_title">快递</text>
-      <text class="money">￥{{orderInfo.extension_data[0].price || '6.00'}}</text>
+      <text class="money">￥{{orderInfo.extension_data[0].price}}</text>
     </view>
     <view class="order_total">
       {{orderInfo.describe}}
       <!-- 共{{orderInfo.buy_number_count}}件，小计：￥<text class="price">{{orderInfo.total_price}}</text> -->
     </view>
     <view class="order_action">
-      <button class="btn btn_default" wx:if="{{orderInfo.status == '1'}}">取消订单</button>
+      <button class="btn btn_default" wx:if="{{orderInfo.status == '1'}}" bindtap="cancel">取消订单</button>
       <button class="btn btn_primary" wx:if="{{orderInfo.status == '1'}}" bindtap="toPay">立即支付</button>
       <button class="btn btn_default" wx:if="{{orderInfo.status == '2'}}" bindtap="refund">申请退款</button>
       <button class="btn btn_default" wx:if="{{orderInfo.status == '3'}}" bindtap="goLogi">查看物流</button>
@@ -37,8 +47,8 @@
   <i class="line"></i>
   <view class="order_info">
     <view class="number">
-      订单编号： {{orderInfo.id}}
-      <button class="btn btn_default">复制</button>
+      订单编号： {{orderInfo.order_no}}
+      <button class="btn btn_default" bindtap='copyText' data-text="{{orderInfo.order_no}}">复制</button>
     </view>
     <text>创建时间： {{orderInfo.add_time}}</text>
     <text wx:if="{{orderInfo.pay_time}}">付款时间： {{orderInfo.pay_time}}</text>

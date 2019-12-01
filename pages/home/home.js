@@ -42,7 +42,9 @@ Page({
     // 推荐书单
     recommendList: [],
     // 好书推荐
-    goodList: []
+    goodList: [],
+    // 加载页数
+    page: 1,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -104,11 +106,12 @@ Page({
       // type: 'recommended_daily',
       type: 'is_home_recommended',
       number: 10,
-      page: 1
+      page: self.data.page
     }).then(res=>{
       console.log(res);
       this.setData({
-        goodList: res.data.data
+        goodList: res.data.data,
+        page: self.data.page+1
       })
     })
   },
@@ -195,8 +198,25 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
-
+  onReachBottom: function () {
+    const self = this;
+    app.request.getGoodsRecommend({
+      // type: 'recommended_daily',
+      type: 'is_home_recommended',
+      number: 10,
+      page: self.data.page
+    }).then(res => {
+      if (res.data.data.length == 0) {
+        wx.showToast({
+          title: '没有更多了',
+          icon: 'none'
+        })
+      }
+      self.setData({
+        goodList: self.data.goodList.concat(res.data.data),
+        page: self.data.page + 1
+      })
+    })
   },
 
   /**

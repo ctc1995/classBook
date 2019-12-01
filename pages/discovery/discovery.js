@@ -135,7 +135,8 @@ Page({
         "likeCount": 29093,
         "like": true,
       },
-    ]
+    ],
+    authPage: 1,
   },
   // 切换TabNav事件
   changeTabNav: function (e){
@@ -170,10 +171,11 @@ Page({
         'rankList[0].list': res.data.data
       })
     })
-    app.request.getAuthList({}).then(res=>{
+    app.request.getAuthList({ page: this.data.authPage}).then(res=>{
       console.log(res);
       self.setData({
-        authList: res.data.data
+        authList: res.data.data,
+        authPage: self.data.authPage+1
       })
     })
   },
@@ -229,7 +231,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    const self= this;
+    app.request.getAuthList({ page: self.data.authPage }).then(res => {
+      console.log(res);
+      self.setData({
+        authList: self.data.authList.concat(res.data.data),
+        authPage: self.data.authPage + 1
+      })
+    })
   },
 
   /**

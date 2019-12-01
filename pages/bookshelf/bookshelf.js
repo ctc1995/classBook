@@ -19,23 +19,31 @@ Page({
     curTabId: 'shoucang',
     buySCGoodsList: [],
     buyMGGoodsList: [],
+    page: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.request.getBookBought().then(res=>{
+    const self = this;
+    app.request.getBookBought(self.data.page).then(res=>{
       console.log(res);
-      this.setData({
-        buyMGGoodsList: res.data.data
-      })
+      if(res.data.data.length != 0){
+        self.setData({
+          page: self.data.page+1,
+          buyMGGoodsList: self.data.buyMGGoodsList.concat(res.data.data)
+        })
+      }
     })
-    app.request.getUserGoodsFavor().then(res=>{
+    app.request.getUserGoodsFavor(self.data.page).then(res=>{
       console.log(res);
-      this.setData({
-        buySCGoodsList: res.data.data
-      })
+      if(res.data.data.length != 0){
+        self.setData({
+          page: self.data.page+1,
+          buySCGoodsList: self.data.buySCGoodsList.concat(res.data.data)
+        })
+      }
     })
   },
 
@@ -43,6 +51,17 @@ Page({
   changeTabNav: function (e) {
     this.setData({
       curTabId: e.detail.tabId
+    })
+  },
+  onParentEvent(){
+    const self = this;
+    app.request.getUserGoodsFavor().then(res => {
+      console.log(res);
+      if (res.data.data.length != 0) {
+        self.setData({
+          buySCGoodsList: self.data.buySCGoodsList.concat(res.data.data)
+        })
+      }
     })
   },
   /**
@@ -84,7 +103,36 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    const self = this;
+    if (this.data.curTabId == 'shoucang') {
+      app.request.getUserGoodsFavor(self.data.page).then(res => {
+        console.log(res);
+        if (res.data.data.length == 0) {
+          wx.showToast({
+            title: '没有更多了',
+          })
+        } else {
+          self.setData({
+            page: self.data.page + 1,
+            buySCGoodsList: self.data.buySCGoodsList.concat(res.data.data)
+          })
+        }
+      })
+    } else {
+      app.request.getBookBought(self.data.page).then(res => {
+        console.log(res);
+        if (res.data.data.length == 0) {
+          wx.showToast({
+            title: '没有更多了',
+          })
+        } else {
+          self.setData({
+            page: self.data.page + 1,
+            buyMGGoodsList: self.data.buyMGGoodsList.concat(res.data.data)
+          })
+        }
+      })
+    }
   },
 
   /**

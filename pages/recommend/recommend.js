@@ -14,7 +14,8 @@ Page({
     // 分类面板
     showClassPanel: false,
     // 推荐类型
-    type: ''
+    type: '',
+    page: 1,
   },
   
   toggleClassPanel: function(){
@@ -31,7 +32,7 @@ Page({
       this.setData({
         type: options.type
       })
-      this.getGoodsRecommend(options.type, 10, 1)
+      this.getGoodsRecommend(options.type, 10, this.data.page)
     } else {
       const eventChannel = this.getOpenerEventChannel(), self = this;
       eventChannel.on('sendData', function (data) {
@@ -65,8 +66,15 @@ Page({
       page
     }).then(res => {
       console.log(res);
+      if (res.data.data.length == 0) {
+        wx.showToast({
+          title: '没有更多了',
+          icon: 'none'
+        })
+      }
       this.setData({
-        goodList: res.data.data
+        goodList: self.data.goodList.concat(res.data.data),
+        page: self.data.page+1
       })
     })
   },
@@ -129,7 +137,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getGoodsRecommend(this.data.type, 10, this.data.page)
   },
 
   /**

@@ -60,20 +60,21 @@ Page({
     })
   },
   getCode: function(){
+    const self = this;
     // if (/^1[3456789]\d{9}$/.test(this.data.formData.mobile) && this.data.canGetCode) {
-    console.log(this.data.formData.mobile);
-    if (/^1[3456789]\d{9}$/.test(this.data.formData.mobile)) {
-      this.setData({
+    console.log(self.data.formData.mobile);
+    if (/^1[3456789]\d{9}$/.test(self.data.formData.mobile)) {
+      self.setData({
         canGetCode: false,
       })
       setTimeout(function(){
-        this.setData({
+        self.setData({
           canGetCode: true,
         })
       }, 60000)
       return true;
     } else {
-      this.setData({
+      self.setData({
         error: '手机号错误，请检查'
       })
       return false;

@@ -94,6 +94,18 @@ Page({
   shop: function(){
     
   },
+  // 到货提醒
+  arrival: function(){
+    const self = this;
+    app.request.getCartArri(self.data.goods.isbn, self.data.goods.title, self.data.goods.images).then(res=>{
+      console.log(res);
+      if(res.code == 0){
+        wx.showToast({
+          title: '登记成功，到货时将微信提醒您！',
+        })
+      }
+    })
+  },
   go: function(){
     wx.switchTab({
       url: '../../pages/shopCar/shopCar',

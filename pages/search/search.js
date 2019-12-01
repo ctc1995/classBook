@@ -10,7 +10,8 @@ Page({
     // 官方书单
     recommendList: [],
     // 好书推荐
-    goodList: []
+    goodList: [],
+    page: 1,
   },
 
   /**
@@ -33,11 +34,12 @@ Page({
       // type: 'recommended_daily',
       type: 'is_home_recommended',
       number: 10,
-      page: 1
+      page: this.data.page
     }).then(res => {
       console.log(res);
       this.setData({
-        goodList: res.data.data
+        goodList: self.data.goodList.concat(res.data.data),
+        page: this.data.page+1
       })
     })
   },
@@ -79,7 +81,7 @@ Page({
     app.request.getSearch({
       number: 999,
       page: 1,
-      keyword: e.detail.value
+      keywords: e.detail.value
     }).then(res => {
       console.log(res);
       let data = res.data.data;
@@ -126,7 +128,23 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    app.request.getGoodsRecommend({
+      // type: 'recommended_daily',
+      type: 'is_home_recommended',
+      number: 10,
+      page: this.data.page
+    }).then(res => {
+      if (res.data.data.length == 0) {
+        wx.showToast({
+          title: '没有更多了',
+          icon: 'none'
+        })
+      }
+      this.setData({
+        goodList: self.data.goodList.concat(res.data.data),
+        page: this.data.page + 1
+      })
+    })
   },
 
   /**

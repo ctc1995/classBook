@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "订单详情",
   "usingComponents": {
-    "orderGoods": "../../../component/orderGoods/orderGoods"
+    "orderGoods": "../../../component/orderGoods/orderGoods",
+    "mp-toptips": "../../../weui/toptips/toptips",
+    "mp-dialog": "../../../weui/dialog/dialog"
   }
 }

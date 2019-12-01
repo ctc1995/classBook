@@ -45,6 +45,13 @@ App({
               }).then(res => {
                 console.log(res);
                 wx.setStorageSync('token', res.data.token)
+              }).catch(error=>{
+                console.log(error);
+                wx.showToast({
+                  title: '获取用户信息失败，可能影响体验，请重启小程序。',
+                  icon: 'none',
+                  duration: 3000
+                })
               })
               // }
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回

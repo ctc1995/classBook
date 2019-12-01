@@ -35,7 +35,8 @@ Page({
     curOrderId: null,
     topTips: '',
     dialogShow: false,
-    buttons: [{ text: '取消' }, { text: '确定' }]
+    buttons: [{ text: '取消' }, { text: '确定' }],
+    page: 1,
   },
 
   /**
@@ -61,7 +62,7 @@ Page({
       console.log(that.data.curOrderId)
       app.request.cancelOrder(that.data.curOrderId).then(res => {
         if (res.code == 0) {
-          that.onLoad();
+          that.onShow();
           that.setData({
             topTips: res.msg
           })
@@ -87,7 +88,8 @@ Page({
     this.setData({
       curTabId: e.detail.tabId,
       curTabIndex: e.detail.tabIndex,
-      orderList: []
+      orderList: [],
+      page: 1
       // orderList: _MD[orderListKey]
     })
     switch (e.detail.tabId) {
@@ -105,33 +107,50 @@ Page({
         break;
     }
     if (status == 2) {
-      app.request.getOrderIndex({page:1, status: 2}).then(res => {
-        // let orderList = self.data.orderList;
-        self.setData({
-          orderList: self.data.orderList.concat(res.data.data)
-        })
+      app.request.getOrderIndex({ page: self.data.page, status: 2 }).then(res => {
+        if (res.data.data.length == 0) {
+          self.nomore()
+        } else {
+          self.setData({
+            orderList: self.data.orderList.concat(res.data.data)
+          })
+        }
       })
-      app.request.getOrderIndex({ page: 1, status: 3 }).then(res => {
-        // let orderList = self.data.orderList;
-        self.setData({
-          orderList: self.data.orderList.concat(res.data.data)
-        })
+      app.request.getOrderIndex({ page: self.data.page, status: 3 }).then(res => {
+        if (res.data.data.length == 0) {
+          self.nomore()
+        } else {
+          self.setData({
+            orderList: self.data.orderList.concat(res.data.data),
+            page: self.data.page + 1
+          })
+        }
       })
     } else if(status == 7) {
-      app.request.getOrderAftersaleList(1).then(res => {
-        let oL = [];
-        res.data.map(item=>{
-          oL.push(item.order_data)
-        })
-        self.setData({
-          orderList: oL
-        })
+      app.request.getOrderAftersaleList(self.data.page).then(res => {
+        if (res.data.length == 0) {
+          self.nomore()
+        } else {
+          let oL = [];
+          res.data.map(item => {
+            oL.push(item.order_data)
+          })
+          self.setData({
+            orderList: self.data.orderList.concat(oL),
+            page: self.data.page + 1
+          })
+        }
       })
     } else {
-      app.request.getOrderIndex({ page: 1, status }).then(res => {
-        self.setData({
-          orderList: res.data.data
-        })
+      app.request.getOrderIndex({ page: self.data.page, status }).then(res => {
+        if (res.data.data.length == 0) {
+          self.nomore()
+        } else {
+          self.setData({
+            orderList: self.data.orderList.concat(res.data.data),
+            page: self.data.page + 1
+          })
+        }
       })
     }
   },
@@ -147,14 +166,60 @@ Page({
   },
   // 立即支付
   toPaid(e) {
-    var orderIndex = e.currentTarget.dataset.index;
-    var self = this;
-    wx.navigateTo({
-      url: '../orderReceipt/orderReceipt',
-      success: function (res) {
-        res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
+    var orderIndex = e.currentTarget.dataset.index, self = this, orderInfo = self.data.orderList[orderIndex];
+    // 加载loding
+    wx.showLoading({ title: "请求中..." });
+    wx.request({
+      url: app.request.payOrder(orderInfo.id, orderInfo.payment_id),
+      method: "POST",
+      data: {
+        id: orderInfo.id,
+        payment_id: orderInfo.payment_id,
+      },
+      dataType: "json",
+      success: res => {
+        wx.hideLoading();
+        console.log(res);
+        if (res.data.code == 0) {
+          wx.requestPayment({
+            timeStamp: res.data.data.timeStamp,
+            nonceStr: res.data.data.nonceStr,
+            package: res.data.data.package,
+            signType: res.data.data.signType,
+            paySign: res.data.data.paySign,
+            success: function (res) {
+              self.onShow()
+            },
+            fail: function (res) {
+              wx.showToast({
+                title: "支付失败",
+                icon: 'none',
+                complete(){
+                  self.onShow()
+                }
+              })
+            }
+          });
+          
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+          })
+        }
+      },
+      fail: () => {
+        wx.hideLoading();
+        wx.showToast({
+          title: "服务器请求出错",
+        })
       }
-    })
+    });
+    // wx.navigateTo({
+    //   url: '../orderReceipt/orderReceipt',
+    //   success: function (res) {
+    //     res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
+    //   }
+    // })
   },
   // 提醒发货
   remind(e){
@@ -216,12 +281,14 @@ Page({
    */
   onShow: function () {
     console.log('show')
+    const self = this;
     if (this.data.curTabId != 'all') {
       this.changeTabNav({ detail: { tabId: this.data.curTabId } })
     } else {
-      app.request.getOrderIndex({ type: 'all' }).then(res => {
+      app.request.getOrderIndex({ type: 'all', page: self.data.page }).then(res => {
         self.setData({
-          orderList: res.data.data
+          orderList: res.data.data,
+          page: self.data.page + 1
         })
       })
     }
@@ -247,12 +314,29 @@ Page({
   onPullDownRefresh: function () {
 
   },
-
+  nomore(){
+    wx.showToast({
+      title: '没有更多了',
+      icon: 'none'
+    })
+  },
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (this.data.curTabId != 'all') {
+      this.changeTabNav({ detail: { tabId: this.data.curTabId } })
+    } else {
+      app.request.getOrderIndex({ type: 'all', page: self.data.page }).then(res => {
+        if(res.data.data.length == 0 ){
+          self.nomore()
+        }
+        self.setData({
+          orderList: res.data.data,
+          page: self.data.page + 1
+        })
+      })
+    }
   },
 
   /**

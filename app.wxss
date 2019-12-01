@@ -189,9 +189,7 @@ h2.title {
 }
 
 .book_list .book_item .book_content image {
-  width: 152rpx;
-  height: 196rpx;
-  max-width: 152rpx;
+  max-width: 196rpx;
   max-height: 196rpx;
   margin-right: 26rpx;
 }
@@ -203,13 +201,13 @@ h2.title {
 }
 
 .book_list .book_item .book_content .book_detail .book_info {
-  width: 458rpx;
+  width: 414rpx;
   display: flex;
   flex-direction: column;
 }
 
 .book_list .book_item .book_content .book_detail .book_info .book_title {
-  width: 458rpx;
+  width: 414rpx;
   font-size: 30rpx;
   font-weight: bold;
   color: #333;
