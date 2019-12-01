@@ -216,14 +216,17 @@ class request {
   getCartIndex() {
     return this._api.postRequest('Cart/Index', { token: wx.getStorageSync('token') }).then(res => res.data)
   }
-  getCartArri(isbn=undefined, title=undefined, images=undefined) {
-    let obj = { token: wx.getStorageSync('token')}
-    if(isbn){
-      Object.assign(obj, { isbn, title, images })
+  getCartArri(goods_id = null, isbn = undefined, title = undefined, images = undefined) {
+    let obj = { token: wx.getStorageSync('token') }
+    if (isbn) {
+      Object.assign(obj, { goods_id, isbn, title, images })
     } else {
       Object.assign(obj, { page: 1, number: 999 })
     }
     return this._api.postRequest('cart/Arrivalreminder', obj).then(res => res.data)
+  }
+  getCartArriList() {
+    return this._api.postRequest('cart/ArrivalReminderlist', { token: wx.getStorageSync('token'), page: 1, number: 999 }).then(res => res.data)
   }
   // 加入购物车
   addCart({ stock = 1, goods_id}) {

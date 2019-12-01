@@ -8,21 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goods:{
-      picUrl: ['swiper.png', 'book.png', 'swiper.png'],
-      realPrice: 399.99,
-      price: 999.99,
-      title: '我是个年轻人，我的脾气不太好',
-      auth: '金庸',
-      publicHome: '全球国际-联合出版社出版',
-      publicTime: '2010-09-16',
-      buildType: '平装',
-      server: [1,2],
-      ID: '10010',
-      type: 'wenxue',
-      buyTime: '2018-09-09',
-      format: '32',
-    },
+    goods:{},
     // 相关推荐
     goodList: [],
     goodsServer: [
@@ -97,11 +83,11 @@ Page({
   // 到货提醒
   arrival: function(){
     const self = this;
-    app.request.getCartArri(self.data.goods.isbn, self.data.goods.title, self.data.goods.images).then(res=>{
+    app.request.getCartArri(self.data.goods.id, self.data.goods.isbn, self.data.goods.title, self.data.goods.images).then(res=>{
       console.log(res);
       if(res.code == 0){
         wx.showToast({
-          title: '登记成功，到货时将微信提醒您！',
+          title: '登记成功！',
         })
       }
     })
@@ -137,7 +123,7 @@ Page({
         goods: res.data,
         'goods.picUrl': [res.data.home_recommended_images, res.data.images]
       })
-      if(res.data.isbn){
+      if (res.data.isbn && res.data.isbn!=0){
         app.request.getProduct(res.data.isbn).then(res=>{
           console.log(res);
           res.data.map(item=>{

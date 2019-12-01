@@ -1,6 +1,8 @@
 /* pages/goods/goods.wxss */
 .page_goods{
+  width: 750rpx;
   padding: 0 30rpx 100rpx;
+  box-sizing: border-box;
 }
 .page_goods .mod_good{
   margin-top: 50rpx;

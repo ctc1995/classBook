@@ -2,9 +2,17 @@
 <view class="page_bookshelf">
   <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
   <view class="book_list" wx:if="{{curTabId==='shoucang'}}">
+    <view wx:if="{{buySCGoodsList.length == 0}}" style="width: 690rpx;text-align:center;padding-top: 20rpx;">
+      <image src="../../assets/images/no-data.png" mode="widthFix" style="width:350rpx;"></image>
+      <text style="display:block;margin-top:20rpx;">暂无数据，去收藏吧！</text>
+    </view>
     <goods goods="{{buySCGoodsList}}" car="{{false}}" favor="{{true}}" bindparentEvent="onParentEvent"></goods>
   </view>
   <view class="book_list" wx:if="{{curTabId==='maiguo'}}">
+    <view wx:if="{{buyMGGoodsList.length == 0}}" style="width: 690rpx;text-align:center;padding-top: 20rpx;">
+      <image src="../../assets/images/no-data.png" mode="widthFix" style="width:350rpx;"></image>
+      <text style="display:block;margin-top:20rpx;">暂无数据，去购买吧！</text>
+    </view>
     <goods goods="{{buyMGGoodsList}}" car="{{false}}"></goods>
   </view>
 </view>

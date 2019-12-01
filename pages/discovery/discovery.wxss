@@ -4,6 +4,7 @@
   padding: 60rpx 36rpx 30rpx;
   font-size: 28rpx;
   color: #555;
+  box-sizing: border-box;
 }
 .mod_rank .rank_item{
   margin-bottom: 30rpx;
@@ -34,6 +35,7 @@
   padding: 30rpx 36rpx;
   font-size: 24rpx;
   color: #999;
+  box-sizing: border-box;
 }
 .mod_auth .auth_item{
   width: 212rpx;

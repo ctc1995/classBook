@@ -9,7 +9,7 @@
           <image class="book_pic" src="http://dianshu.chaoshang666.com{{item.layout}}"></image>
           <p class="like {{item.like? 'active' : 'active'}}">
             <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like2x.png'}}"></image>
-            {{item.fabulous || Math.random()*10000}}
+            {{item.fabulous || 0}}
           </p>
           <p class="book_title">{{item.title}}</p>
         </view>

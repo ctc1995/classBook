@@ -17,9 +17,9 @@
           </section>
         </navigator>
         <p class="book_price">
-          <span class="price_unit">￥</span>
-          <span class="real_price">{{item.price}}</span>
-          <span>/{{item.original_price}}</span>
+          <span class="price_unit" wx:if="{{curTabId == 'all'}}">￥</span>
+          <span class="real_price" wx:if="{{curTabId == 'all'}}">{{item.price}}</span>
+          <span wx:if="{{curTabId == 'all'}}">/{{item.original_price}}</span>
           <view class='stepper' wx:if="{{item.inventory>0}}">
             <view class="oprate" catchtap='bindMinus' data-index='{{index}}'>-</view>
             <input bindinput='bindManual' type="number" maxlength="3" value='{{item.stock}}' data-index='{{index}}'></input>
@@ -30,7 +30,7 @@
       </section>
     </section>
   </view>
-  <view class="goods_total">
+  <view class="goods_total" wx:if="{{curTabId == 'all'}}">
     <view>
       <label class="sel_all">
         <checkbox data-checked="{{checkAllGoods}}" checked="{{checkAllGoods}}" bindtap="selAllGoods" />

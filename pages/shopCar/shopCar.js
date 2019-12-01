@@ -41,14 +41,16 @@ Page({
   // 切换TabNav事件
   changeTabNav: function(e) {
     this.setData({
-      curTabId: e.detail.tabId
+      curTabId: e.detail.tabId,
+      totalGoods: 0,
+      checkAllGoods: false
     })
     console.log(e.detail);
     const self = this;
     if(e.detail.tabIndex == 1){
-      app.request.getCartArri().then(res=>{
+      app.request.getCartArriList().then(res=>{
         self.setData({
-          shopCarList: res.data
+          shopCarList: res.data.data
         })
       })
     } else {

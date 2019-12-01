@@ -15,7 +15,7 @@
       TODO: 点击指示点切换轮播图 -->
     <view class="mod_swiper">
       <swiper autoplay="true" interval="3000" circular="true" current="current" bindchange="swiperChange">
-        <block wx:for="{{swiperPics}}" wx:key="{{index}}">
+        <block wx:for="{{swiperPics}}" wx:key="index">
           <swiper-item>
             <navigator class="swiper-item" url="{{item.event_value}}">
               <image src='{{item.images_url}}'></image>
@@ -25,14 +25,14 @@
       </swiper>
       <!-- 重置小圆点的样式 -->
       <view class="dots">
-        <block wx:for="{{swiperPics}}" wx:key="{{index}}">
+        <block wx:for="{{swiperPics}}" wx:key="index">
           <view class="dot {{index == current?'active':''}}"></view>
         </block>
       </view>
     </view>
     <!-- 导航区域 -->
     <view class="mod_navbar">
-      <navigator class="navbar_item" wx:for="{{navBar}}" wx:key="{{index}}" url="{{item.href}}">
+      <navigator class="navbar_item" wx:for="{{navBar}}" wx:key="index" url="{{item.href}}">
         <image src="../../assets/images/home/{{item.icon}}"></image>
         <p>{{item.label}}</p>
       </navigator>
@@ -44,7 +44,7 @@
         <navigator class="more" url="../bookMenuList/bookMenuList">更多书单</navigator>
       </h2>
       <div class="book_list">
-        <view class="book_item" wx:for="{{recommendList}}" wx:key="{{index}}" bindtap="goBookMenu" data-item="{{item}}">
+        <view class="book_item" wx:for="{{recommendList}}" wx:key="index" bindtap="goBookMenu" data-item="{{item}}">
           <image class="book_pic" src="http://dianshu.chaoshang666.com{{item.layout}}" mode="aspectFit"></image>
           <p class="like {{item.like? 'active' : 'active'}}">
             <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like2x.png'}}"></image>
@@ -61,7 +61,7 @@
         <navigator class="more" url="../allClass/allClass">更多好书</navigator>
       </h2>
       <div class="book_list">
-        <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
+        <section class="book_item" wx:for="{{goodList}}" wx:key="index">
           <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
             <image src="{{item.images}}" mode="aspectFit"></image>
             <section class="book_detail">
