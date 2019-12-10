@@ -13,7 +13,7 @@ class request {
   errorHander(res) {
     console.log(res);
     wx.showToast({
-      title: '数据请求失败，请下拉页面刷新',
+      title: '数据请求失败，请重试',
       icon: 'none'
     })
   }
@@ -35,6 +35,13 @@ class request {
       iv,
       referrer
     }).then(res=> res.data);
+  }
+  /**
+   * 获取accesstoken
+   * 28_4iUlOL04D0LYw_jnuhNMIuBt6WaipcCmd0dunRVk0pSy4ZageGG83nX6LzvvX-2KQbTaxGmZElm3TAiD3WG98kWtve1dGRbFkAmZyOSDEBePvh2Js4WdCZjqYLIvRHflvSScqtUhntu9K-jYTPFdAAALHX
+   */
+  getAccessToken(){
+    return this._api.getRequest('user/access_token').then(res=> res.data)
   }
   /**
    * Banner图
@@ -182,8 +189,8 @@ class request {
     return this._api.postRequest('UserAddress/SetDefault', { token: wx.getStorageSync('token'), id }).then(res => res.data)
   }
   //修改个人信息
-  modifyInfo({ nickname, gender, birthday, mobile, province, city, address, }) {
-    return this._api.postRequest('User/PersonalSave', { token: wx.getStorageSync('token'), nickname, gender, birthday, mobile, province, city, address }).then(res => res.data)
+  modifyInfo({ nickname, gender, birthday, mobile, province, city, area, }) {
+    return this._api.postRequest('User/PersonalSave', { token: wx.getStorageSync('token'), nickname, gender, birthday, mobile, province, city, area }).then(res => res.data)
   }
   /**
    * 订单
@@ -191,11 +198,11 @@ class request {
   getOrderIndex({ type, page = 1, status}) {
     let obj = { 
       token: wx.getStorageSync('token'),
-      page,
-      status
+      page
     }
     if (type != 'all'){
-      obj.is_more= 1
+      obj.is_more= 1;
+      obj.status = status;
     }
     return this._api.postRequest('order/Index', obj).then(res => res.data)
   }
@@ -244,9 +251,13 @@ class request {
   buyCart(ids, couponid) {
     return this._api.postRequest('buy/index', { token: wx.getStorageSync('token'), buy_type: 'cart', ids: ids.join(), coupon_id: couponid }).then(res => res.data)
   }
+  // 立即购买
+  buyNow({ goods_id, spec='' }) {
+    return this._api.postRequest('buy/index', { token: wx.getStorageSync('token'), buy_type: 'goods', stock: 1, goods_id, spec }).then(res => res.data)
+  }
   //确认订单
-  buyAdd({ address_id, payment_id, ids, coupon_id, user_note}) {
-    return this._api.postRequest('buy/add', { token: wx.getStorageSync('token'), buy_type: 'cart', payment_id, ids: ids.join(), address_id, coupon_id, user_note}).then(res => res.data)
+  buyAdd({ address_id, payment_id, ids, coupon_id, user_note, buy_type = 'cart', stock, goods_id, spec = '', isbn=0, wid	}) {
+    return this._api.postRequest('buy/add', { token: wx.getStorageSync('token'), buy_type, payment_id, ids: ids.join(), address_id, coupon_id, user_note, stock, goods_id, spec, isbn, wid}).then(res => res.data)
   }
   getOrderDetail(id) {
     return this._api.postRequest('order/Detail', { token: wx.getStorageSync('token'), id }).then(res => res.data)

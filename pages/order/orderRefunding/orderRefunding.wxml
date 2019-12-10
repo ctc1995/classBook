@@ -7,7 +7,7 @@
   <view class="refund_info">
     <view>
       <text>退款金额</text>
-      <input style="text-align: right;" type="digit" placeholder="最大退款金额 {{orderMaxMoney}}元" bindinput="bindMoney"></input>
+      <input style="text-align: right;" type="digit" placeholder="最大退款金额 {{orderMaxMoney}}元" value="{{orderMaxMoney}}" bindblur="bindMoney" disabled="true"></input>
     </view>
     <view class="need_link_icon">
       <text>退款方式</text>
@@ -19,10 +19,10 @@
     </view>
     <view wx:if="{{reasonType.id == 1}}">
       <text>商品件数</text>
-      <input style="text-align: right;" type="number" placeholder="商品件数" bindinput="bindNumber"></input>
+      <input style="text-align: right;" type="number" placeholder="商品件数" bindblur="bindNumber" disabled="true" value="{{orderMaxNumber}}"></input>
     </view>
     <view class="need_link_icon">
-      <text>退款原因</text>
+      <text>售后原因</text>
       <picker mode="selector" range="{{reasonObj}}" range-key="name" bindchange="bindRegionChange" value="{{index}}">
         <view class="picker">
           {{reason.name}}
@@ -30,8 +30,8 @@
       </picker>
     </view>
     <view>
-      <text>退款说明</text>
-      <input class="remake" type="text" placeholder="请输入退款说明" bindinput="bindRemake"></input>
+      <text>售后说明</text>
+      <input class="remake" type="text" placeholder="请输入退款说明" bindblur="bindRemake"></input>
     </view>
   </view>
   <i class="line"></i>

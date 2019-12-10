@@ -8,7 +8,7 @@
     <div class="name_phone">
       <open-data class="name" type="userNickName"></open-data>
       <!-- <p class="name">{{userInfo.name || "太白书局"}}</p> -->
-      <p class="phone">{{userInfo.phone || '绑定手机号，到货早知道'}}</p>
+      <p class="phone">{{about.mobile || '绑定手机号，到货早知道'}}</p>
     </div>
   </navigator>
   <image class="about_banner" src="http://dianshu.chaoshang666.com{{about.advertisement}}"></image>

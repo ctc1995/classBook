@@ -44,15 +44,3 @@
 .order_detail .order_action button{
   margin-left: 22rpx;
 }
-.order_none{
-  width: 750rpx;
-  text-align: center;
-  padding-top: 100rpx;
-}
-.order_none image{
-  width: 350rpx;
-}
-.order_none text{
-  display: block;
-  margin-top: 20rpx;
-}

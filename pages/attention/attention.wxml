@@ -1,0 +1,10 @@
+<!--pages/attention/attention.wxml-->
+<view class="page_attention">
+  <image style="width: 750rpx;" mode="widthFix" src="../../assets/images/guanzhu.png"></image>
+  <view class="content">
+    <h2 class="title">如何关注</h2>
+    <p class="text">方法1：点击小程序右上角[●●●]，点击“典书“进入“相关公众号“,关注即可。</p>
+    <p class="text">方法2：微信搜索“典书“，关注即可。</p>
+  </view>
+  <!-- <button class="btn btn_primary">马上关注</button> -->
+</view>

@@ -145,7 +145,7 @@
       </button>
       <p bindtap="shoucang">
         <image src="../../assets/images/shoucang.png"></image>
-        <span>收藏</span>
+        <span>{{goods.is_favor == 0 ? '收藏': '已收藏'}}</span>
       </p>
     </view>
     <view class="button">

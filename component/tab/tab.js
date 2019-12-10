@@ -33,5 +33,13 @@ Component({
       })
       this.triggerEvent('changeTabNav', Object.assign(e.currentTarget.dataset.item,{ 'tabIndex': e.currentTarget.dataset.index}));
     },
+  },
+  /*组件所在页面的生命周期 */
+  pageLifetimes: {
+    // show: function () {
+    //   this.setData({
+    //     curTabIndex: 'all'
+    //   })
+    // }
   }
 })

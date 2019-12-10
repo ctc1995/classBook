@@ -1,12 +1,11 @@
-// pages/aboutMe/aboutMe.js】
-var app = new getApp();
+// pages/invite/invite.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    about: {},
+    access_token: '28_4iUlOL04D0LYw_jnuhNMIuBt6WaipcCmd0dunRVk0pSy4ZageGG83nX6LzvvX-2KQbTaxGmZElm3TAiD3WG98kWtve1dGRbFkAmZyOSDEBePvh2Js4WdCZjqYLIvRHflvSScqtUhntu9K-jYTPFdAAALHX'
   },
 
   /**
@@ -14,12 +13,16 @@ Page({
    */
   onLoad: function (options) {
     const self = this;
-    app.request.getAboutUs().then(res=>{
-      console.log(res);
-      res.data.content = res.data.content.replace(/\<img/gi, '<img style="max-width:100%;height:auto"')
-      self.setData({
-        about: res.data
-      })
+    wx.request({
+      url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=' + self.access_token,
+      data: {
+        access_token: self.access_token,
+        scene: 'ovwpL5MOUPrgYeD0HWLmt6pKq2PM'
+      },
+      method: 'POST',
+      success(res){
+        console.log(res);
+      },
     })
   },
 

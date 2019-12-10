@@ -156,7 +156,7 @@ Page({
     app.request.addCart({ goods_id: e.currentTarget.dataset.book.id}).then(res=>{
       console.log(res);
       wx.showToast({
-        title: '加入购物车成功',
+        title: res.msg,
       })
     })
   },

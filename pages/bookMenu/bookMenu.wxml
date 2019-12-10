@@ -25,7 +25,7 @@
     <div class="book_list">
       <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
         <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
-          <image src="{{item.images}}"></image>
+          <image src="{{item.images}}" mode="aspectFit"></image>
           <section class="book_detail">
             <section class="book_info">
               <p class="book_title">{{item.title}}</p>

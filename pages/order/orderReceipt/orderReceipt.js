@@ -55,9 +55,16 @@ Page({
     } else {
       eventChannel.on('acceptOrder', function (data) {
         console.log(data);
-        if (data.status == '2') {
+        if (data.status == '3') {
           app.request.orderLogistics(data.express_id, data.express_number).then(res => {
-            data.logistics = res.Traces.reverse()
+            if (res.code == 0) {
+              data.logistics = res.Traces.reverse()
+            } else {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
+            }
             self.setData({
               orderInfo: data,
               buyGoodsList: data.items,

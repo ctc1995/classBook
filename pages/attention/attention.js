@@ -1,26 +1,18 @@
-// pages/aboutMe/aboutMe.js】
-var app = new getApp();
+// pages/attention/attention.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    about: {},
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const self = this;
-    app.request.getAboutUs().then(res=>{
-      console.log(res);
-      res.data.content = res.data.content.replace(/\<img/gi, '<img style="max-width:100%;height:auto"')
-      self.setData({
-        about: res.data
-      })
-    })
+
   },
 
   /**

@@ -1,0 +1,28 @@
+/* pages/attention/attention.wxss */
+.page_attention{
+  width: 750rpx;
+}
+.content{
+  padding: 0 36rpx;
+  margin-top: 60rpx;
+}
+.content .title{
+	font-size: 30rpx;
+	font-weight: bold;
+	font-stretch: normal;
+	line-height: 34rpx;
+	letter-spacing: 0rpx;
+	color: #333333;
+}
+.content .text{
+	font-size: 30rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 48rpx;
+	letter-spacing: 0rpx;
+	color: #999999;
+  display: block;
+}
+.content .text+.text{
+  margin-top: 20rpx;
+}

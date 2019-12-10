@@ -17,6 +17,87 @@ Page({
         name: '买错了'
       },
     ],
+    tuikuan: [
+
+      {
+        id: 0,
+        name: '活动/优惠未生效'
+      },
+      {
+        id: 1,
+        name: '空包裹'
+      },
+      {
+        id: 2,
+        name: '包裹丢失'
+      },
+      {
+        id: 3,
+        name: '配送超时'
+      },
+      {
+        id: 4,
+        name: '未按约定时间发货'
+      },
+      {
+        id: 5,
+        name: '未送货上门'
+      },
+      {
+        id: 6,
+        name: '物流显示签收实际未到货'
+      },
+      {
+        id: 7,
+        name: '不喜欢/不想要'
+      },
+    ],
+    tuihuo: [
+      {
+        id: 0,
+        name: '7天无理由退换货'
+      },
+      {
+        id: 1,
+        name: '配送超时'
+      },
+      {
+        id: 2,
+        name: '未按约定时间发货'
+      },
+      {
+        id: 3,
+        name: '未送货上门'
+      },
+      {
+        id: 4,
+        name: '卖家发错货'
+      },
+      {
+        id: 5,
+        name: '少件/漏发'
+      },
+      {
+        id: 6,
+        name: '包装/商品破损/污渍'
+      },
+      {
+        id: 7,
+        name: '商品信息描述不符'
+      },
+      {
+        id: 8,
+        name: '使用后过敏'
+      },
+      {
+        id: 9,
+        name: '已过/临近保质期'
+      },
+      {
+        id: 10,
+        name: '无法溶解/结块/有异物'
+      },
+    ],
     reasonTypeObj: [
       {
         id: 0,
@@ -28,6 +109,7 @@ Page({
       },
     ],
     orderMaxMoney: '',
+    money: 0,
     orderMaxNumber: 0,
     order_id: null,
     order_detail_id: null,
@@ -51,7 +133,7 @@ Page({
    */
   onLoad: function (options) {
     const eventChannel = this.getOpenerEventChannel();
-    var self = this;
+    var self = this, status = options.status;
     eventChannel.on('acceptOrder', function (data) {
       console.log(data)
       self.setData({
@@ -59,6 +141,7 @@ Page({
         order_id: data.order_id,
         order_detail_id: data.id,
         orderMaxMoney: data.total_price,
+        money: data.total_price,
         orderMaxNumber: data.buy_number,
         number: data.buy_number,
       })
@@ -145,9 +228,23 @@ Page({
     this.setData({
       reasonType: this.data.reasonTypeObj[e.detail.value]
     })
+    console.log(e.detail.value);
+    const self = this;
+    if (e.detail.value == 1) {
+      this.setData({
+        reasonObj: this.data.tuihuo,
+        reason: ''
+      })
+    } else {
+      this.setData({
+        reasonObj: this.data.tuikuan,
+        reason: ''
+      })
+    }
     console.log(this.data.reasonType);
   },
   bindRegionChange: function (e) {
+    console.log(this.data.reasonObj);
     this.setData({
       reason: this.data.reasonObj[e.detail.value]
     })

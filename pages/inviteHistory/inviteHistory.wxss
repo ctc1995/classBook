@@ -1,0 +1,43 @@
+/* pages/inviteHistory/inviteHistory.wxss */
+.page_invitehis{
+  font-size: 30rpx;
+}
+.page_invitehis .invite_total {
+  width: 750rpx;
+	height: 190rpx;
+  color: #fff;
+	background-color: #f4b800;
+  padding: 38rpx 0;
+  box-sizing: border-box;
+}
+.page_invitehis .invite_total .total_item{
+  width: 374rpx;
+  height: 114rpx;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.page_invitehis .invite_total .total_item text{
+  font-size: 60rpx;
+  margin-right: 6rpx;
+}
+.page_invitehis .invite_total .total_item+.total_item{
+  border-left: 1px solid rgba(255,255,255, .3)
+}
+.page_invitehis .invite_num{
+  padding: 60rpx 38rpx 0;
+}
+.page_invitehis .invite_num .invite_list .item{
+  height: 90rpx;
+  padding: 0 15rpx;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page_invitehis .invite_num .invite_list .item text:last-child{
+  color: #999;
+  font-size: 26rpx;
+}

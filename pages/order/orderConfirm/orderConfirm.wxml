@@ -38,9 +38,9 @@
   <view class="order_footer">
     <view class="total_money">
       <view class="money">
-        <text class="unit">￥</text>{{base.total_price}}
+        <text class="unit">￥</text>{{base.actual_price}}
       </view>
-      <text class="total_tips">不计运费</text>
+      <text class="total_tips">共{{base.buy_count}}件，含运费: ￥{{base.increase_price}}</text>
     </view>
     <button class="btn btn_primary" bindtap="buy">去支付</button>
   </view>

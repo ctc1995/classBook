@@ -44,12 +44,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    app.request.getAbout().then(res=>{
-      console.log(res);
-      this.setData({
-        about: res.data
-      })
-    })
   },
 
   /**
@@ -63,7 +57,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    app.request.getAbout().then(res => {
+      console.log(res);
+      this.setData({
+        about: res.data
+      })
+    })
   },
 
   /**

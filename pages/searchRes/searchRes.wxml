@@ -26,6 +26,10 @@
           无货
         </navigator>
       </section>
-    </div>
+    </div> 
   </view>
+</view>
+<view class="order_none" wx:if="{{goodList.length == 0}}">
+  <image src="../../assets/images/no-data.png" mode="widthFix"/>
+  <text>没有搜到您需要商品,尝试更换搜索关键字再试试吧</text>
 </view>

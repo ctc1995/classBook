@@ -1,6 +1,17 @@
 /**app.wxss**/
 @import './weui/weui-wxss/dist/style/weui.wxss';
-
+.order_none{
+  width: 750rpx;
+  text-align: center;
+  padding-top: 100rpx;
+}
+.order_none image{
+  width: 350rpx;
+}
+.order_none text{
+  display: block;
+  margin-top: 20rpx;
+}
 .container {
   height: 100%;
   display: flex;
@@ -144,6 +155,9 @@ h2.title {
 
 /*加号和减号*/
 
+.stepper.disable{
+  background-color: rgba(0,0,0,0.05);
+}
 .stepper .oprate {
   float: left;
   width: 50rpx;

@@ -6,6 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 下单类型
+    buyType: 'cart',
+    // 商品id
+    goodsId: null,
     // 订单备注
     remakes: '',
     // 订单基础信息
@@ -24,17 +28,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const eventChannel = this.getOpenerEventChannel();
-    var self = this;
-    eventChannel.on('acceptBuyGoodsList', function (data) {
-      console.log(data);
-      self.setData({
-        ids: data,
-      })
-      app.request.buyCart(data).then(res=>{
-        console.log(res);
-        res.data.payment_list.map(item=>{
-          if (item.payment == 'Weixin'){
+    const self = this;
+    if(options.goods_id){
+      this.data.buyType = 'goods'
+      this.data.goodsId = options.goods_id
+      this.data.wid = options.wid
+      app.request.buyNow({ goods_id: parseInt(options.goods_id) }).then(res => {
+        res.data.payment_list.map(item => {
+          if (item.payment == 'Weixin') {
             self.setData({
               payment_id: item.id
             })
@@ -46,7 +47,30 @@ Page({
           goods_list: res.data.goods_list,
         })
       })
-    })
+    } else {
+      const eventChannel = this.getOpenerEventChannel();
+      eventChannel.on('acceptBuyGoodsList', function (data) {
+        console.log(data);
+        self.setData({
+          ids: data,
+        })
+        app.request.buyCart(data).then(res => {
+          console.log(res);
+          res.data.payment_list.map(item => {
+            if (item.payment == 'Weixin') {
+              self.setData({
+                payment_id: item.id
+              })
+            }
+          })
+          self.setData({
+            base: res.data.base,
+            extension_data: res.data.extension_data,
+            goods_list: res.data.goods_list,
+          })
+        })
+      })
+    }
   },
 
   /**
@@ -120,63 +144,76 @@ Page({
       ids: this.data.ids,
       payment_id: this.data.payment_id,
       coupon_id: this.data.coupon_id,
-      user_note: this.data.remakes
+      user_note: this.data.remakes,
+      buy_type: this.data.buyType
+    }
+    if (this.data.buyType == 'goods'){
+      orderObj.stock = 1
+      orderObj.goods_id = this.data.goodsId
+      orderObj.wid = this.data.wid
     }
     app.request.buyAdd(orderObj).then(res=>{
       console.log(res);
       let orderInfo = res.data.order;
-      wx.request({
-        url: app.request.payOrder(orderInfo.id, orderInfo.payment_id),
-        method: "POST",
-        data: {
-          id: orderInfo.id,
-          payment_id: orderInfo.payment_id,
-        },
-        dataType: "json",
-        success: res => {
-          wx.hideLoading();
-          console.log(res);
-          if (res.data.code == 0) {
-            wx.requestPayment({
-              timeStamp: res.data.data.timeStamp,
-              nonceStr: res.data.data.nonceStr,
-              package: res.data.data.package,
-              signType: res.data.data.signType,
-              paySign: res.data.data.paySign,
-              success: function (res) {
-                console.log(res);
-                // 数据设置
-                orderInfo['status'] = 2;
-                orderInfo['status_name'] = '待发货';
-                wx.redirectTo({
-                  url: '../orderReceipt/orderReceipt?id=' + orderInfo.id,
-                })
-              },
-              fail: function (res) {
-                wx.showToast({
-                  title: "支付失败",
-                  icon: 'none',
-                  complete(){
-                    wx.redirectTo({
-                      url: '../orderReceipt/orderReceipt?id=' + orderInfo.id,
-                    })
-                  }
-                })
-              }
-            });
-          } else {
+      if(res.code == 0){
+        wx.request({
+          url: app.request.payOrder(orderInfo.id, orderInfo.payment_id),
+          method: "POST",
+          data: {
+            id: orderInfo.id,
+            payment_id: orderInfo.payment_id,
+          },
+          dataType: "json",
+          success: res => {
+            wx.hideLoading();
+            console.log(res);
+            if (res.data.code == 0) {
+              wx.requestPayment({
+                timeStamp: res.data.data.timeStamp,
+                nonceStr: res.data.data.nonceStr,
+                package: res.data.data.package,
+                signType: res.data.data.signType,
+                paySign: res.data.data.paySign,
+                success: function (res) {
+                  console.log(res);
+                  // 数据设置
+                  orderInfo['status'] = 2;
+                  orderInfo['status_name'] = '待发货';
+                  wx.redirectTo({
+                    url: '../orderReceipt/orderReceipt?id=' + orderInfo.id,
+                  })
+                },
+                fail: function (res) {
+                  wx.showToast({
+                    title: "支付失败",
+                    icon: 'none',
+                    complete(){
+                      wx.redirectTo({
+                        url: '../orderReceipt/orderReceipt?id=' + orderInfo.id,
+                      })
+                    }
+                  })
+                }
+              });
+            } else {
+              wx.showToast({
+                title: res.data.msg,
+              })
+            }
+          },
+          fail: () => {
+            wx.hideLoading();
             wx.showToast({
-              title: res.data.msg,
+              title: "服务器请求出错",
             })
           }
-        },
-        fail: () => {
-          wx.hideLoading();
-          wx.showToast({
-            title: "服务器请求出错",
-          })
-        }
-      });
+        });
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     }).catch(error=>{
       wx.showToast({
         title: '下单失败，请重试',

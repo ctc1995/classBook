@@ -1,7 +1,7 @@
 <!--component/orderGoods/orderGoods.wxml-->
 <view class="goods_list" bindtap="hihi">
   <view class="goods" wx:for="{{buyGoodsList}}" wx:key="{{index}}">
-    <image src="{{item.images}}"></image>
+    <image src="{{item.images}}" mode="aspectFit"></image>
     <view class="title_attr">
       <text class="good_title">{{item.title}}</text>
       <text class="good_attr" wx:if="{{attr}}">{{item.phase || "品相良好"}}</text>

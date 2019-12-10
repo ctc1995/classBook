@@ -1,0 +1,101 @@
+/* pages/invite/invite.wxss */
+.page_invite{
+  width: 750rpx;
+  color: #fff;
+  background-color: rgb(244, 133, 14);
+  padding-bottom: 50rpx;
+  position: relative;
+  overflow: hidden;
+}
+.page_invite .bg{
+  width: 750rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.page_invite .content{
+  padding: 750rpx 40rpx 0;
+  position: relative;
+  z-index: 1;
+}
+.page_invite .content .li{
+  width: 750rpx;
+  font-size: 30rpx;
+  margin-bottom: 30rpx;
+  padding-left: 50rpx;
+  display: block;
+  position: relative;
+}
+.page_invite .content .li::after, .page_invite .content .li::before{
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+	background-color: #ffffff;
+}
+.page_invite .content .li::after{
+  width: 30rpx;
+	height: 30rpx;
+  top: 10rpx;
+  left: 0;
+	opacity: 0.63;
+}
+.page_invite .content .li::before{
+  width: 14rpx;
+	height: 14rpx;
+  top: 18rpx;
+  left: 10rpx;
+	opacity: 0.86;
+}
+.page_invite .content .btn_invite{
+  width: 670rpx;
+	height: 88rpx;
+	line-height: 88rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #f4850e;
+	background-color: #fbf5da;
+	border-radius: 44rpx;
+  margin: 30rpx 0 50rpx;
+}
+.page_invite .content .invite_history{
+	height: 60rpx;
+	line-height: 60rpx;
+  font-size: 30rpx;
+}
+.page_invite .content .invite_history:after{
+  width: 32rpx;
+  height: 32rpx;
+  top: 14rpx;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABA0lEQVRYR73XywnCQBCA4RkxgpiDTZizJWglmg5iB3bidmAJWkdysAmN4KorEQQJuI95mGt2+L+whyEInsdemwU83B4ATJYXG99Z6jv0Dd7P9doh7LozDsCMJkVJDf2a8wK6odulNgiw0kIEAdqIKIAmIhqghUgCaCCSAdIIEkASQQZIIVgACQQbwEWIADgIMQAVIQqgIMQBfQQ6KId5YcjbMHX9Onea2tYeEGD+nh3gMhvPjn8B9OOhr+9QYldAiYsBqHERACfOBnDjLIBEnAyQipMAkvFkgHQ8CaARjwZoxaMAmvEgQDseBHz/F8YsltTNGQa0TYVPt0WAyrfTKeHPzAuGPewhRN7B0AAAAABJRU5ErkJggg==)
+}
+.page_invite .content .invite_history span:nth-child(2), .page_invite .content .invite_history span:nth-child(3){
+	width: 60rpx;
+	height: 60rpx;
+  text-align: center;
+  font-weight: bold;
+	background-color: #fbf5da;
+  border-radius: 50%;
+  margin: 0 10rpx;
+  display: inline-block;
+}
+.page_invite .content .invite_history span:nth-child(2){
+  color: #ec0000;
+}
+.page_invite .content .invite_history span:nth-child(3){
+  color: rgb(244, 133, 14);
+}
+.page_invite .content .rules{
+  margin-top: 100rpx;
+}
+
+.page_invite .content .rules .li{
+  font-size: 34rpx;
+}
+
+.page_invite .content .rules .rule{
+  line-height: 48rpx;
+  font-size: 26rpx;
+  display: block;
+  margin-bottom: 26rpx;
+}

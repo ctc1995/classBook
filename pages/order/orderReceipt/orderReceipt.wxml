@@ -23,7 +23,7 @@
   </view>
   <i class="line" wx:if="{{orderInfo.status == '3'}}"></i>
   <view class="order_detail">
-    <orderGoods buy-goods-list="{{buyGoodsList}}" shouhou="{{orderInfo.status == '4'?true:false}}"></orderGoods>
+    <orderGoods buy-goods-list="{{buyGoodsList}}" shouhou="{{orderInfo.status == '4' || orderInfo.status == '2'?true:false}}" status="'{{orderInfo.status}}'"></orderGoods>
     {{extension_data}}
     <view class="delivery_method" wx:if="{{extension_data[0].price != 0 && extension_data[1]}}">
       <text class="line_title">优惠券</text>
@@ -40,7 +40,7 @@
     <view class="order_action">
       <button class="btn btn_default" wx:if="{{orderInfo.status == '1'}}" bindtap="cancel">取消订单</button>
       <button class="btn btn_primary" wx:if="{{orderInfo.status == '1'}}" bindtap="toPay">立即支付</button>
-      <button class="btn btn_default" wx:if="{{orderInfo.status == '2'}}" bindtap="refund">申请退款</button>
+      <!-- <button class="btn btn_default" wx:if="{{orderInfo.status == '2'}}" bindtap="refund">申请退款</button> -->
       <button class="btn btn_default" wx:if="{{orderInfo.status == '3'}}" bindtap="goLogi">查看物流</button>
     </view>
   </view>

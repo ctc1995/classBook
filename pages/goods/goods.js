@@ -59,7 +59,7 @@ Page({
       console.log(res);
       if (res.code == 0) {
         wx.showToast({
-          title: '收藏成功',
+          title: res.msg,
         })
       }
     })
@@ -70,24 +70,65 @@ Page({
     app.request.addCart({ goods_id: this.data.goods.id }).then(res => {
       console.log(res);
       if(res.code==0){
-        self.setData({
-          msg: true
+        // self.setData({
+        //   msg: true
+        // })
+        wx.showToast({
+          title: res.msg,
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
         })
       }
     })
   },
+  // 加购
+  addShopCar(e) {
+    console.log(e);
+    app.request.addCart({ goods_id: e.currentTarget.dataset.book.id }).then(res => {
+      console.log(res);
+      wx.showToast({
+        title: res.msg,
+      })
+    })
+  },
   // 立即购买
   shop: function(){
-    
+    console.log(this.data.goods);
+    const self = this;
+    wx.navigateTo({
+      url: '../order/orderConfirm/orderConfirm?goods_id=' + self.data.goods.id + '&wid=' + self.data.goods.wid
+    })
   },
   // 到货提醒
   arrival: function(){
     const self = this;
-    app.request.getCartArri(self.data.goods.id, self.data.goods.isbn, self.data.goods.title, self.data.goods.images).then(res=>{
-      console.log(res);
-      if(res.code == 0){
+    wx.requestSubscribeMessage({
+      tmplIds: ['SRu_UWjgrbun3CacoCV1LrTRn0bK0cG9evsa8s25090'],
+      success(res) {
+        console.log(res);
+        if (res['SRu_UWjgrbun3CacoCV1LrTRn0bK0cG9evsa8s25090'] == 'accept'){
+          app.request.getCartArri(self.data.goods.id, self.data.goods.isbn, self.data.goods.title, self.data.goods.images).then(ret => {
+            console.log(ret);
+            if (ret.code == 0) {
+              wx.showToast({
+                title: '登记成功！',
+              })
+            }
+          })
+        } else {
+          wx.showToast({
+            title: '到货提醒需要授权消息提醒',
+            icon: 'none'
+          })
+        }
+      },
+      fail(res) {
         wx.showToast({
-          title: '登记成功！',
+          title: 'errMsg',
+          icon: 'none'
         })
       }
     })

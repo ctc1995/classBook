@@ -7,7 +7,7 @@ Page({
    */
   data: {
     formData: {},
-    sex: ["未知", "男", "女"],
+    sex: ["保密", "男", "女"],
     sexIndex: 0,
     region: ['', '', ''],
     canGetCode: true,
@@ -27,7 +27,7 @@ Page({
         'formData.gender': res.data.gender,
         'formData.birthday': res.data.birthday,
         'formData.mobile': res.data.mobile,
-        region: [res.data.province, res.data.city, res.data.address]
+        region: [res.data.province, res.data.city, res.data.area]
       })
     })
   },
@@ -55,7 +55,7 @@ Page({
     this.setData({
       [`formData.province`]: e.detail.value[0],
       [`formData.city`]: e.detail.value[1],
-      [`formData.address`]: e.detail.value[2],
+      [`formData.area`]: e.detail.value[2],
       region: e.detail.value
     })
   },

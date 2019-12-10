@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/inviteHistory/inviteHistory",
+    "pages/invite/invite",
+    "pages/mission/mission",
     "pages/about/about",
     "pages/shopCar/shopCar",
     "pages/addAddress/addAddress",
@@ -28,8 +31,8 @@
     "pages/order/orderManager/orderManager",
     "pages/aboutMe/aboutMe",
     "pages/coupon/coupon",
-    "pages/mission/mission",
-    "pages/searchRes/searchRes"
+    "pages/searchRes/searchRes",
+    "pages/attention/attention"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,7 +40,8 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "典书",
     "navigationBarTextStyle": "black",
-    "onReachBottomDistance": 50
+    "onReachBottomDistance": 50,
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#999999",

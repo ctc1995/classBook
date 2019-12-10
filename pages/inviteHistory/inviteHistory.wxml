@@ -1,0 +1,32 @@
+<!--pages/inviteHistory/inviteHistory.wxml-->
+<view class="page_invitehis">
+  <view class="invite_total">
+    <view class="total_item">
+      <view><text>{{invite.invita_success_num}}</text>(人)</view>
+      <view>成功邀请</view>
+    </view>
+    <view class="total_item">
+      <view><text>{{invite.exchange_total_num}}</text>(本)</view>
+      <view>总奖励</view>
+    </view>
+  </view>
+  <view class="invite_num">
+    <h2 class="title">邀请人数</h2>
+    <view class="invite_list">
+      <view class="item" wx:for="{{invite.invitation}}">
+        <text>{{item.username}}</text>
+        <text>{{item.add_time}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="invite_num">
+    <h2 class="title">兑换</h2>
+    <view class="invite_list">
+      <view class="item" wx:for="{{invite.user_exchange}}">
+        <text>{{item.title}}</text>
+        <text>{{item.add_time}}</text>
+      </view>
+    </view>
+  </view>
+</view>

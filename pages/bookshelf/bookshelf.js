@@ -57,11 +57,12 @@ Page({
     const self = this;
     app.request.getUserGoodsFavor().then(res => {
       console.log(res);
-      if (res.data.data.length != 0) {
-        self.setData({
-          buySCGoodsList: self.data.buySCGoodsList.concat(res.data.data)
-        })
-      }
+      wx.showToast({
+        title: res.data.msg
+      })
+      self.setData({
+        buySCGoodsList: res.data.data
+      })
     })
   },
   /**

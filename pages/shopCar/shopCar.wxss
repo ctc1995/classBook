@@ -52,7 +52,7 @@
   padding: 30rpx 36rpx;
 }
 .mod_shopcar .goods_list .book_item.out_stock {
-  background-color: rgb(220,220,220);
+  /* background-color: rgb(220,220,220); */
 }
 
 .mod_shopcar .goods_list .book_item+.book_item {
@@ -61,9 +61,7 @@
 }
 
 .mod_shopcar .goods_list .book_item image {
-  width: 152rpx;
-  height: 196rpx;
-  max-width: 152rpx;
+  max-width: 196rpx;
   max-height: 196rpx;
   border: 1px solid #eaeaea;
   border-radius: 8rpx;
@@ -78,13 +76,13 @@
 }
 
 .mod_shopcar .goods_list .book_item .book_detail .book_info {
-  width: 438rpx;
+  width: 404rpx;
   display: flex;
   flex-direction: column;
 }
 
 .mod_shopcar .goods_list .book_item .book_detail .book_info .book_title {
-  width: 438rpx;
+  width: 404rpx;
   font-size: 30rpx;
   font-weight: bold;
   color: #333;
@@ -122,6 +120,7 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  z-index: 2;
 }
 
 .sel_all {

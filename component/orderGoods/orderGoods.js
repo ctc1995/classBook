@@ -24,6 +24,10 @@ Component({
       type: Boolean,
       value: false
     },
+    status: {
+      type: String,
+      value: ''
+    }
   },
 
   /**
@@ -42,7 +46,7 @@ Component({
       var orderIndex = e.currentTarget.dataset.index;
       var self = this;
       wx.navigateTo({
-        url: '../orderRefunding/orderRefunding',
+        url: '../orderRefunding/orderRefunding?status=' + self.properties.status,
         success: function (res) {
           res.eventChannel.emit("acceptOrder", self.properties.buyGoodsList[orderIndex])
         }

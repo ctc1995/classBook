@@ -1,17 +1,17 @@
 <!--pages/mission/mission.wxml-->
 <view class="page_mission">
-  <view class="need_link_icon mission_item">
+  <navigator class="need_link_icon mission_item" url="../invite/invite">
     <image src="../../assets/images/friend.png" mode="widthFix"></image>
     <view class="title_info">
       <text class="title">邀请好友</text>
       <text class="info">每成功邀请3位，即可免费获取原价30的书籍</text>
     </view>
-  </view>
-  <view class="need_link_icon mission_item">
+  </navigator>
+  <navigator class="need_link_icon mission_item" url="../attention/attention">
     <image src="../../assets/images/wechat.png" mode="widthFix"></image>
     <view class="title_info">
       <text class="title">关注典书公众号</text>
       <text class="info">接受通知和优惠活动</text>
     </view>
-  </view>
+  </navigator>
 </view>

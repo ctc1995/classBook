@@ -37,6 +37,7 @@ Page({
     dialogShow: false,
     buttons: [{ text: '取消' }, { text: '确定' }],
     page: 1,
+    noMore: false
   },
 
   /**
@@ -49,7 +50,8 @@ Page({
       // orderList: _MD.allOrderList,
       curTabId: options.type,
       curTabIndex: options.index,
-      orderList: []
+      orderList: [],
+      page: 1,
     })
   },
   /**
@@ -84,15 +86,25 @@ Page({
   },
   // 切换TabNav事件
   changeTabNav: function (e) {
-    var orderListKey = e.detail.tabId + 'OrderList', status= null, self=this;
+    var orderListKey = e.detail.tabId + 'OrderList', self=this;
     this.setData({
       curTabId: e.detail.tabId,
       curTabIndex: e.detail.tabIndex,
       orderList: [],
-      page: 1
+      page: 1,
+      noMore: false
       // orderList: _MD[orderListKey]
     })
-    switch (e.detail.tabId) {
+    this.getOrderList();
+    if(e.detail.tabId == 'all'){
+
+    } else {
+    } 
+  },
+  // 请求订单数据
+  getOrderList() {
+    var self = this, status = null;
+    switch (this.data.curTabId) {
       case 'pendPay':
         status = 1;
         break;
@@ -105,53 +117,94 @@ Page({
       case 'refund':
         status = 7;
         break;
+      default:
+        status = null;
+        break;
     }
-    if (status == 2) {
-      app.request.getOrderIndex({ page: self.data.page, status: 2 }).then(res => {
-        if (res.data.data.length == 0) {
-          self.nomore()
-        } else {
-          self.setData({
-            orderList: self.data.orderList.concat(res.data.data)
-          })
-        }
-      })
-      app.request.getOrderIndex({ page: self.data.page, status: 3 }).then(res => {
-        if (res.data.data.length == 0) {
-          self.nomore()
-        } else {
-          self.setData({
-            orderList: self.data.orderList.concat(res.data.data),
-            page: self.data.page + 1
-          })
-        }
-      })
-    } else if(status == 7) {
-      app.request.getOrderAftersaleList(self.data.page).then(res => {
-        if (res.data.length == 0) {
-          self.nomore()
-        } else {
-          let oL = [];
-          res.data.map(item => {
-            oL.push(item.order_data)
-          })
-          self.setData({
-            orderList: self.data.orderList.concat(oL),
-            page: self.data.page + 1
-          })
-        }
-      })
-    } else {
-      app.request.getOrderIndex({ page: self.data.page, status }).then(res => {
-        if (res.data.data.length == 0) {
-          self.nomore()
-        } else {
-          self.setData({
-            orderList: self.data.orderList.concat(res.data.data),
-            page: self.data.page + 1
-          })
-        }
-      })
+    if (!this.data.noMore) {
+      if (status == 2) {
+        app.request.getOrderIndex({ page: self.data.page, status: 2 }).then(res => {
+          if (res.data.data.length == 0) {
+            self.nomore();
+            self.setData({
+              noMore: true
+            })
+          } else {
+            let orders
+            if (self.data.page != 1) {
+              orders = self.data.orderList.concat(res.data.data)
+            } else {
+              orders = res.data.data
+            }
+            self.setData({
+              orderList: orders,
+              page: self.data.page + 1
+            })
+          }
+        })
+        app.request.getOrderIndex({ page: self.data.page, status: 3 }).then(res => {
+          if (res.data.data.length == 0) {
+            self.nomore();
+            self.setData({
+              noMore: true
+            })
+          } else {
+            let orders
+            if (self.data.page != 1) {
+              orders = self.data.orderList.concat(res.data.data)
+            } else {
+              orders = res.data.data
+            }
+            self.setData({
+              orderList: orders,
+              page: self.data.page + 1
+            })
+          }
+        })
+      } else if (status == 7) {
+        app.request.getOrderAftersaleList(self.data.page).then(res => {
+          if (res.data.length == 0) {
+            self.nomore();
+            self.setData({
+              noMore: true
+            })
+          } else {
+            let oL = [], orders;
+            res.data.map(item => {
+              oL.push(item.order_data)
+            })
+            if (self.data.page != 1) {
+              orders = self.data.orderList.concat(oL)
+            } else {
+              orders = oL
+            }
+            self.setData({
+              orderList: orders,
+              page: self.data.page + 1
+            })
+          }
+        })
+      } else {
+        app.request.getOrderIndex({ type: self.data.curTabId, page: self.data.page, status }).then(res => {
+          if (res.data.data.length == 0) {
+            self.nomore();
+            self.setData({
+              noMore: true
+            })
+          } else {
+            let orders
+            if (self.data.page != 1) {
+              orders = self.data.orderList.concat(res.data.data)
+            } else {
+              orders = res.data.data
+            }
+            self.setData({
+              orderList: orders,
+              page: self.data.page + 1
+            })
+          }
+        })
+      }
     }
   },
   // 订单详情
@@ -282,8 +335,11 @@ Page({
   onShow: function () {
     console.log('show')
     const self = this;
+    self.setData({
+      page: 1,
+    })
     if (this.data.curTabId != 'all') {
-      this.changeTabNav({ detail: { tabId: this.data.curTabId } })
+      this.getOrderList()
     } else {
       app.request.getOrderIndex({ type: 'all', page: self.data.page }).then(res => {
         self.setData({
@@ -312,7 +368,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.onShow();
   },
   nomore(){
     wx.showToast({
@@ -324,18 +380,26 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    const self = this;
     if (this.data.curTabId != 'all') {
-      this.changeTabNav({ detail: { tabId: this.data.curTabId } })
+      this.getOrderList({ detail: { tabId: this.data.curTabId } })
     } else {
-      app.request.getOrderIndex({ type: 'all', page: self.data.page }).then(res => {
-        if(res.data.data.length == 0 ){
-          self.nomore()
-        }
-        self.setData({
-          orderList: res.data.data,
-          page: self.data.page + 1
+      if (!this.data.noMore){
+        app.request.getOrderIndex({ type: 'all', page: self.data.page }).then(res => {
+          console.log(res.data.data);
+          if (res.data.data.length == 0) {
+            self.nomore();
+            self.setData({
+              noMore: true
+            })
+          } else {
+            self.setData({
+              orderList: self.data.orderList.concat(res.data.data),
+              page: self.data.page + 1
+            })
+          }
         })
-      })
+      }
     }
   },
 

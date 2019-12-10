@@ -102,8 +102,9 @@ Page({
   /*点击加号*/
   bindPlus: function(e) {
     let item = this.data.shopCarList[e.target.dataset.index];
-    if (item.stock == 999) {
-      item.stock = 999
+    console.log(item);
+    if (item.stock >= parseInt(item.inventory)) {
+      item.stock = parseInt(item.inventory)
       return;
     } else {
       item.stock *= 1
@@ -134,14 +135,19 @@ Page({
   // 全选购物车
   selAllGoods: function(e) {
     var list = [],
-      checked = !this.data.checkAllGoods;
+      checked = !this.data.checkAllGoods,
+      sum = 0;
     this.data.shopCarList.map(item => {
-      item.sel = checked;
+      console.log(item);
+      if (item.inventory != 0) {
+        item.sel = checked;
+        sum += 1;
+      }
       list.push(item);
     })
     this.setData({
       shopCarList: list,
-      totalGoods: checked ? this.data.shopCarList.length : 0,
+      totalGoods: checked ? sum : 0,
       checkAllGoods: checked
     })
     this.countMoney();
@@ -240,6 +246,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this._init_();
     this.getShopCarList();
   },
 
@@ -247,14 +254,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    this._init_();
+    // this._init_();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
-
+  onUnload: function () {
+    // this._init_();
   },
 
   /**
