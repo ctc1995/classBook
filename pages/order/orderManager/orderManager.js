@@ -171,7 +171,10 @@ Page({
           } else {
             let oL = [], orders;
             res.data.map(item => {
-              oL.push(item.order_data)
+              let obj = item.order_data
+              obj.status = 7
+              obj.status_name = item.status_text
+              oL.push(obj)
             })
             if (self.data.page != 1) {
               orders = self.data.orderList.concat(oL)

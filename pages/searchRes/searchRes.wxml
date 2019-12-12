@@ -3,7 +3,7 @@
   <view class="mod_good">
     <div class="book_list">
       <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
-        <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
+        <navigator class="book_content" url="../goods/goods?bookId={{item.id}}&boss=true&keywords={{keywords}}">
           <image src="{{item.images}}"></image>
           <section class="book_detail">
             <section class="book_info">

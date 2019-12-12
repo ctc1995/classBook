@@ -7,6 +7,7 @@ Page({
    */
   data: {
     goodList: [],
+    keywords: '',
   },
 
   /**
@@ -17,7 +18,8 @@ Page({
     eventChannel.on('sendSearchData', function (data) {
       console.log(data)
       self.setData({
-        goodList: data.data
+        goodList: data.data,
+        keywords: data.keywords
       })
     })
   },

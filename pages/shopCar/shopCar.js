@@ -27,7 +27,7 @@ Page({
   },
   _init_: function() {
     this.setData({
-      curTabId: "all",
+      // curTabId: "all",
       shopCarList: [],
       curGoods: [],
       checkAllGoods: false,
@@ -40,21 +40,30 @@ Page({
   },
   // 切换TabNav事件
   changeTabNav: function(e) {
+    this._init_();
+    if (e.detail.tabId) {
+      this.setData({
+        curTabId: e.detail.tabId,
+      })
+    }
     this.setData({
-      curTabId: e.detail.tabId,
       totalGoods: 0,
       checkAllGoods: false
     })
-    console.log(e.detail);
     const self = this;
-    if(e.detail.tabIndex == 1){
+    if (e.detail.tabIndex == 1 || self.data.curTabId=='remind'){
       app.request.getCartArriList().then(res=>{
         self.setData({
           shopCarList: res.data.data
         })
       })
     } else {
-      this.onShow()
+      app.request.getCartIndex().then(res => {
+        console.log(res);
+        self.setData({
+          shopCarList: res.data
+        })
+      })
     }
   },
   // 获取购物车信息
@@ -246,8 +255,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this._init_();
-    this.getShopCarList();
+    console.log(this.data.curTabId);
+    this.changeTabNav({ detail: {} })
   },
 
   /**
@@ -268,7 +277,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    this.changeTabNav({detail:{}})
   },
 
   /**

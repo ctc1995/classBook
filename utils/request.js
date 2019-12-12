@@ -100,7 +100,7 @@ class request {
    * 商品详情 
    */
   getGoodsDetail(id){
-    return this._api.postRequest('goods/detail', { goods_id: parseInt(id)}).then(res=> res.data)
+    return this._api.postRequest('goods/detail', { token: wx.getStorageSync('token'), goods_id: parseInt(id)}).then(res=> res.data)
   }
   //更多品相
   getProduct(isbn) {
@@ -115,6 +115,9 @@ class request {
    */
   getSearch({ number = 10, page = 1, keywords=""}){
     return this._api.postRequest('Search/Index', {number,page,keywords}).then(res=>res.data)
+  }
+  searchBoss({ goods_id, isbn, title, keywords}){
+    return this._api.postRequest('Search/Goodssearch', { goods_id, isbn, title, keywords}).then(res=>res.data)
   }
   /**
    * 热搜榜

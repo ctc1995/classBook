@@ -31,6 +31,10 @@
         选择
       </view>
     </view>
+    <view class="order_none" wx:if="{{orderList.length == 0 && curTabId==='keyong'}}">
+      <image src="../../assets/images/no-data.png" mode="widthFix"/>
+      <text>暂无优惠券，快去领取吧</text>
+    </view>
     <view class="coupon primary" wx:if="{{curTabId==='dailingqu'}}" wx:for="{{coupon.already_use}}" wx:key="{{index}}">
       <view class="coupon-info">
         <view class="detail">
@@ -56,6 +60,10 @@
         立即领取
       </view>
     </view>
+    <view class="order_none" wx:if="{{orderList.length == 0 && curTabId==='dailingqu'}}">
+      <image src="../../assets/images/no-data.png" mode="widthFix"/>
+      <text>暂无可领优惠券，敬请关注</text>
+    </view>
     <view class="coupon default" wx:if="{{curTabId==='bukeyong'}}" wx:for="{{coupon.already_expire}}" wx:key="{{index}}">
       <view class="coupon-info">
         <view class="detail">
@@ -80,6 +88,10 @@
       <view class="coupon-action">
         已失效
       </view>
+    </view>
+    <view class="order_none" wx:if="{{orderList.length == 0 && curTabId==='bukeyong'}}">
+      <image src="../../assets/images/no-data.png" mode="widthFix"/>
+      <text>暂无优惠券，快去领取吧</text>
     </view>
   </view>
 </view>

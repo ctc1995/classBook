@@ -56,8 +56,9 @@
 }
 .mod_auth .auth_item .auth_name{
   margin: 30rpx 0;
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
+  /* display: flex; */
+  /* justify-content: space-between; */
 }
 .mod_auth .auth_item .auth_name span{
   min-width: 100rpx;

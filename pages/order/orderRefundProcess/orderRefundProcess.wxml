@@ -2,8 +2,8 @@
 <view class="page_receipt">
   <view class="order_status status_primary}}">
     <text class="status">{{orderStatus[orderInfo.status].title}}</text>
-    <text class="status_info">{{orderInfo.status == '5' ? orderInfo.rtime : countDown}}</text>
-    <view class="countdown" wx:if="{{orderInfo.status == '5'}}">
+    <text class="status_info">{{orderInfo.status == '7' ? orderInfo.rtime : countDown}}</text>
+    <view class="countdown" wx:if="{{orderInfo.status == '7'}}">
       <image src="../../../assets/images/countdown.png"></image>
       <text>{{countDown}}</text>
     </view>

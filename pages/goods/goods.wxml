@@ -105,7 +105,7 @@
     </p>
   </view>
   <view class="goods_detail_image">
-    <image src="{{item.images}}" mode="widthFix" wx:for="{{goods.photo}}"></image>
+    <image src="{{item.images_b}}" mode="widthFix" wx:for="{{goods.photo}}"></image>
     <!-- <image src="../../assets/images/test_detail_image.png" mode="widthFix"></image> -->
   </view>
   <view class="mod_good">
@@ -115,7 +115,7 @@
     <div class="book_list">
       <section class="book_item" wx:for="{{goodList}}" wx:key="index">
         <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
-          <image src="{{item.images}}"></image>
+          <image src="{{item.images}}" mode="aspectFit"></image>
           <section class="book_detail">
             <section class="book_info">
               <p class="book_title">{{item.title}}</p>
@@ -144,8 +144,8 @@
         <span>分享</span>
       </button>
       <p bindtap="shoucang">
-        <image src="../../assets/images/shoucang.png"></image>
-        <span>{{goods.is_favor == 0 ? '收藏': '已收藏'}}</span>
+        <image src="../../assets/images/{{is_favor == 0 ? 'shoucang.png' : 'yishoucang.png'}}"></image>
+        <span>{{is_favor == 0 ? '收藏': '已收藏'}}</span>
       </p>
     </view>
     <view class="button">

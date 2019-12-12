@@ -31,6 +31,7 @@ Page({
     region: ['', '', ''],
     // 显示msg
     msg: false,
+    is_favor: 0,
   },
 
   swiperChange: function (e) {
@@ -55,9 +56,13 @@ Page({
   },
   // 收藏
   shoucang: function(){
+    const self = this;
     app.request.favorOrder(this.data.goods.id, this.data.goods.isbn).then(res=>{
       console.log(res);
       if (res.code == 0) {
+        self.setData({
+          is_favor: res.data.status
+        })
         wx.showToast({
           title: res.msg,
         })
@@ -162,8 +167,14 @@ Page({
       }
       self.setData({
         goods: res.data,
-        'goods.picUrl': [res.data.home_recommended_images, res.data.images]
+        'goods.picUrl': [res.data.home_recommended_images, res.data.images],
+        is_favor: res.data.is_favor
       })
+      if (options.boss) {
+        app.request.searchBoss({ isbn: res.data.isbn, goods_id: res.data.id, title: res.data.title, keywords: options.keywords}).then(res=>{
+          console.log(res);
+        })
+      }
       if (res.data.isbn && res.data.isbn!=0){
         app.request.getProduct(res.data.isbn).then(res=>{
           console.log(res);
