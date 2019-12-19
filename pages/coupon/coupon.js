@@ -12,10 +12,10 @@ Page({
         "tabId": "keyong",
         "tabName": "可用",
       },
-      {
-        "tabId": "dailingqu",
-        "tabName": "待领取"
-      },
+      // {
+      //   "tabId": "dailingqu",
+      //   "tabName": "待领取"
+      // },
       {
         "tabId": "bukeyong",
         "tabName": "不可用"
@@ -103,7 +103,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
   /**

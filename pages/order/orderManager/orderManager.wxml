@@ -17,18 +17,18 @@
           {{item.status_name}}
         </span>
       </view>
-      <orderGoods buy-goods-list="{{item.items}}"></orderGoods>
+      <orderGoods buy-goods-list="{{item.items}}" order-info="{{item}}"></orderGoods>
       <view class="order_price">
         共{{item.buy_number_count}}件商品（含快递费￥{{item.extension_data[0].price}}元）共计：<text class="price">{{item.total_price}}元</text>
       </view>
       <view class="order_action">
-        <button class="btn btn_default" bindtap="detail" data-index="{{index}}">查看详情</button>
+        <button class="btn btn_default" wx:if="{{item.status != '3'}}" bindtap="detail" data-index="{{index}}">查看详情</button>
         <button class="btn btn_primary" wx:if="{{item.status == '1'}}" bindtap="toPaid" data-index="{{index}}">立即支付</button>
         <button class="btn btn_default" wx:if="{{item.status == '2'}}" bindtap="remind" data-index="{{index}}">提醒发货</button>
         <button class="btn btn_default" wx:if="{{item.status == '3'}}" bindtap="logistics" data-index="{{index}}">物流跟踪</button>
         <button class="btn btn_primary" wx:if="{{item.status == '3'}}" bindtap="collect" data-index="{{index}}">确认收货</button>
         <button class="btn btn_default" wx:if="{{item.status == '1'}}" bindtap="cancel" data-index="{{item.id}}">取消订单</button>
-        <button class="btn btn_default" wx:if="{{item.status == '4'}}" bindtap="detail" data-index="{{index}}">申请售后</button>
+        <!-- <button class="btn btn_default" wx:if="{{item.status == '4'}}" bindtap="detail" data-index="{{index}}">申请售后</button> -->
       </view>
     </view>
     <view class="order_none" wx:if="{{orderList.length == 0}}">

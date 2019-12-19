@@ -24,9 +24,9 @@
   margin-left: 72rpx;
 }
 .mod_recommend .book_item .book_pic{
-  width: 178rpx;
+  width: 206rpx;
   height:236rpx;
-  max-width: 178rpx;
+  max-width: 206rpx;
   max-height: 236rpx;
 }
 .mod_recommend .book_item .like{

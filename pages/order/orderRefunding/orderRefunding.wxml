@@ -6,11 +6,11 @@
   <i class="line"></i>
   <view class="refund_info">
     <view>
-      <text>退款金额</text>
+      <span>退款金额<span style="color: red;">*</span></span>
       <input style="text-align: right;" type="digit" placeholder="最大退款金额 {{orderMaxMoney}}元" value="{{orderMaxMoney}}" bindblur="bindMoney" disabled="true"></input>
     </view>
     <view class="need_link_icon">
-      <text>退款方式</text>
+      <span>退款方式<span style="color: red;">*</span></span>
       <picker mode="selector" range="{{reasonTypeObj}}" range-key="name" bindchange="bindRegionTypeChange" value="{{index}}">
         <view class="picker">
           {{reasonType.name}}
@@ -18,11 +18,11 @@
       </picker>
     </view>
     <view wx:if="{{reasonType.id == 1}}">
-      <text>商品件数</text>
+      <span>商品件数<span style="color: red;">*</span></span>
       <input style="text-align: right;" type="number" placeholder="商品件数" bindblur="bindNumber" disabled="true" value="{{orderMaxNumber}}"></input>
     </view>
     <view class="need_link_icon">
-      <text>售后原因</text>
+      <span>售后原因<span style="color: red;">*</span></span>
       <picker mode="selector" range="{{reasonObj}}" range-key="name" bindchange="bindRegionChange" value="{{index}}">
         <view class="picker">
           {{reason.name}}
@@ -30,15 +30,15 @@
       </picker>
     </view>
     <view>
-      <text>售后说明</text>
+      <span>售后说明<span style="color: red;">*</span></span>
       <input class="remake" type="text" placeholder="请输入退款说明" bindblur="bindRemake"></input>
     </view>
   </view>
   <i class="line"></i>
   <view class="upload_pic">
-    <view class='title'>图片上传 {{uploaderNum}}/6</view>
+    <view class='title'>图片上传 {{uploaderNum}}/3</view>
     <view class='ui_uploader_cell content'>
-      <view class='ui_uploader_item' wx:for="{{uploaderList}}" wx:key="{{index}}">
+      <view class='ui_uploader_item' wx:for="{{uploaderList1}}" wx:key="{{index}}">
         <icon class='ui_uploader_item_icon' bindtap='clearImg' data-index="{{index}}" type="clear" size="20" color="red" />
         <image bindtap='showImg' mode="aspectFit" data-index="{{index}}" src='{{item}}'></image>
       </view>

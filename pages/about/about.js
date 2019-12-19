@@ -62,6 +62,7 @@ Page({
       this.setData({
         about: res.data
       })
+      wx.stopPullDownRefresh();
     })
   },
 
@@ -83,7 +84,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.onShow()
+    // setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
   /**

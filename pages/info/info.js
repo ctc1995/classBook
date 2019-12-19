@@ -7,7 +7,7 @@ Page({
    */
   data: {
     formData: {},
-    sex: ["保密", "男", "女"],
+    sex: ["男", "女"],
     sexIndex: 0,
     region: ['', '', ''],
     canGetCode: true,
@@ -24,7 +24,7 @@ Page({
       this.setData({
         'formData.avatar': res.data.avatar,
         'formData.nickname': res.data.nickname,
-        'formData.gender': res.data.gender,
+        'formData.gender': res.data.gender - 1,
         'formData.birthday': res.data.birthday,
         'formData.mobile': res.data.mobile,
         region: [res.data.province, res.data.city, res.data.area]
@@ -83,6 +83,8 @@ Page({
   submitForm: function(){
     console.log(this.data.formData)
     if (this.getCode()) {
+      let obj = this.data.formData;
+      obj.gender = (+obj.gender + 1).toString()
       app.request.modifyInfo(this.data.formData).then(res => {
         console.log(res);
         if (res.code == 0) {
@@ -123,7 +125,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
   /**

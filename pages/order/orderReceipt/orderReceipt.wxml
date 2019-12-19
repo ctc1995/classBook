@@ -7,7 +7,8 @@
   </mp-dialog>
   <view class="order_status status_primary">
     <text class="status">{{orderInfo.status_name}}</text>
-    <text class="status_info">{{orderStatus[orderInfo.status].tips}}</text>
+    <text class="status_info" wx:if="{{orderInfo.status == '7-4'}}">{{orderStatus[orderInfo.status].tips}}拒绝原因：{{orderInfo.refuse_reason}}</text>
+    <text class="status_info" wx:else>{{orderStatus[orderInfo.status].tips}}</text>
   </view>
   <view class="order_delivery">
     <p class="name_phone">
@@ -19,11 +20,11 @@
   <i class="line"></i>
   <view class="need_link_icon logistics" wx:if="{{orderInfo.status == '3'}}" bindtap="goLogi">
     <text class="title">物流信息</text>
-    <text class="info">{{orderInfo.logistics[0].AcceptStation}}</text>
+    <text class="info">{{orderInfo.express_name}}：{{orderInfo.logistics[0].AcceptStation}}</text>
   </view>
   <i class="line" wx:if="{{orderInfo.status == '3'}}"></i>
   <view class="order_detail">
-    <orderGoods buy-goods-list="{{buyGoodsList}}" shouhou="{{orderInfo.status == '4' || orderInfo.status == '2'?true:false}}" status="'{{orderInfo.status}}'"></orderGoods>
+    <orderGoods buy-goods-list="{{buyGoodsList}}" shouhou="{{orderInfo.status == '4' || orderInfo.status == '3' || orderInfo.status == '2'?true:false}}" status="{{orderInfo.status}}" nav-type="1"></orderGoods>
     {{extension_data}}
     <view class="delivery_method" wx:if="{{extension_data[0].price != 0 && extension_data[1]}}">
       <text class="line_title">优惠券</text>
@@ -55,17 +56,17 @@
     <text wx:if="{{orderInfo.delivery_time}}">发货时间： {{orderInfo.delivery_time}}</text>
     <text wx:if="{{orderInfo.close_time}}">关闭时间： {{orderInfo.close_time}}</text>
     <view class="info_action">
-      <button bindtap="callPhone">
-        <image src="../../../assets/images/phone.png" mode="aspectFit"></image>
+      <button open-type="contact">
+        <image src="../../../assets/images/message.png" mode="aspectFit"></image>
           联系客服
       </button>
       <button bindtap="callPhone">
-        <image src="../../../assets/images/message.png" mode="aspectFit"></image>
+        <image src="../../../assets/images/phone.png" mode="aspectFit"></image>
           拨打电话
       </button>
     </view>
   </view>
-  <view class="order_footer" wx:if="{{orderInfo.status == '0' || orderInfo.status == '6'}}">
+  <view class="order_footer" wx:if="{{orderInfo.status == '0' || orderInfo.status == '7-0' || orderInfo.status == '7-1' || orderInfo.status == '7-2'}}">
     <view class="total_money" wx:if="{{orderInfo.status == '0'}}">
       <view class="money">
         <text class="unit">￥</text>{{orderInfo.price}}
@@ -74,6 +75,7 @@
     </view>
     <button class="btn btn_primary" bindtap="buy" wx:if="{{orderInfo.status == '0'}}">立即支付</button>
     <view wx:if="{{orderInfo.status != '0'}}"></view>
-    <button class="btn btn_default" bindtap="buy" wx:if="{{orderInfo.status == '6'}}">物流登记</button>
+    <button class="btn btn_default" bindtap="logisticsMark" wx:if="{{orderInfo.status == '7-0' || orderInfo.status == '7-1' || orderInfo.status == '7-2'}}">撤销申请</button>
+    <button class="btn btn_default" bindtap="logisticsMark" wx:if="{{orderInfo.status == '7-1'}}">物流登记</button>
   </view>
 </view>

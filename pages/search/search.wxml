@@ -4,13 +4,13 @@
     <view class='mod_search'>
       <view class='searchItem'>
         <image src='../../assets/images/search.png' />
-        <input placeholder='搜索关键词' confirm-type="search" bindconfirm="search"></input>
+        <input placeholder='搜索关键词' confirm-type="search" bindconfirm="search" focus="true"></input>
       </view>
     </view>
     <view class="mod_book_list">
       <h2 class="title">推荐书单</h2>
       <div class="list">
-        <navigator class="item" wx:for="{{recommendList}}" bindtap="goBookMenu" data-item="{{item}}">
+        <navigator hover-class="none" class="item" wx:for="{{recommendList}}" bindtap="goBookMenu" data-item="{{item}}">
           {{item.title}}
         </navigator>
       </div>
@@ -18,13 +18,13 @@
     <view class="mod_good">
       <h2 class="title">
         好书推荐
-        <navigator class="item" url="../../pages/allClass/allClass">
+        <navigator hover-class="none" class="item" url="../../pages/allClass/allClass">
           全部分类
         </navigator>
       </h2>
       <div class="book_list">
         <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
-          <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
+          <navigator hover-class="none" class="book_content" url="../goods/goods?bookId={{item.id}}">
             <image src="{{item.images}}"></image>
             <section class="book_detail">
               <section class="book_info">
@@ -44,7 +44,7 @@
           <section class="add_car" bindtap="addShopCar" data-book="{{item}}" wx:if="{{item.inventory != 0}}">
             <image src="../../assets/images/add-car2x.png" />
           </section>
-          <navigator class="add_car" url="../goods/goods?bookId={{item.goods_id || item.id}}" style="white-space: nowrap;" wx:else>
+          <navigator hover-class="none" class="add_car" url="../goods/goods?bookId={{item.goods_id || item.id}}" style="white-space: nowrap;" wx:else>
             无货
           </navigator>
         </section>

@@ -8,6 +8,14 @@ Component({
       type: Array,
       value: []
     },
+    orderInfo: {
+      type: Object,
+      value: {}
+    },
+    navType: {
+      type: Number,
+      value: 0
+    },
     money: {
       type: Boolean,
       value: true
@@ -25,7 +33,7 @@ Component({
       value: false
     },
     status: {
-      type: String,
+      type: Number,
       value: ''
     }
   },
@@ -51,6 +59,24 @@ Component({
           res.eventChannel.emit("acceptOrder", self.properties.buyGoodsList[orderIndex])
         }
       })
+    },
+
+    // 商品详情
+    detail(e) {
+      var self = this, goodsIndex = e.currentTarget.dataset.index;
+      if (self.properties.navType == 1){
+        console.log(self.properties.buyGoodsList[goodsIndex])
+        wx.navigateTo({
+          url: "../../goods/goods?bookId=" + self.properties.buyGoodsList[goodsIndex].goods_id,
+        })
+      } else {
+        wx.navigateTo({
+          url: '../orderReceipt/orderReceipt',
+          success: function (res) {
+            res.eventChannel.emit("acceptOrder", self.properties.orderInfo)
+          }
+        })
+      }
     },
   }
 })

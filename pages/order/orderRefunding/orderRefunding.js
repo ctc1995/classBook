@@ -18,7 +18,6 @@ Page({
       },
     ],
     tuikuan: [
-
       {
         id: 0,
         name: '活动/优惠未生效'
@@ -53,10 +52,6 @@ Page({
       },
     ],
     tuihuo: [
-      {
-        id: 0,
-        name: '7天无理由退换货'
-      },
       {
         id: 1,
         name: '配送超时'
@@ -103,10 +98,6 @@ Page({
         id: 0,
         name: '仅退款'
       },
-      {
-        id: 1,
-        name: '退款退货'
-      },
     ],
     orderMaxMoney: '',
     money: 0,
@@ -123,7 +114,10 @@ Page({
     reason: '',
     // 退款说明
     remake: '',
-    uploaderList: [],
+    // 本地显示
+    uploaderList1: [],
+    // 实际URL
+    uploaderList2: [],
     uploaderNum: 0,
     showUpload: true
   },
@@ -132,8 +126,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     const eventChannel = this.getOpenerEventChannel();
     var self = this, status = options.status;
+    if (status == 4 || status == 3){
+      self.setData({
+        reasonTypeObj: self.data.reasonTypeObj.concat([{ id: 1, name: '退款退货' }])
+      })
+    }
     eventChannel.on('acceptOrder', function (data) {
       console.log(data)
       self.setData({
@@ -169,18 +169,20 @@ Page({
       // 退款说明
       remake: this.data.remake,
       // 凭证图片
-      images: this.data.uploaderList
+      images: this.data.uploaderList2
     }
     if (this.data.reasonType.id == 1){
       obj.number = this.data.number;
     }
-    console.log(obj)
     app.request.postOrserAftersale(obj).then(res=>{
       console.log(res);
       if (res.code == 0) {
         wx.showToast({
           title: '提交成功',
           success(res) {
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2];  //上一个页面
+            prevPage.setData({ isRunOnShow: 0 })//设置数据
             setTimeout(() => { wx.navigateBack() }, 1500);
           }
         })
@@ -274,29 +276,40 @@ Page({
     var that = this;
     wx.previewImage({
       urls: that.data.uploaderList,
-      current: that.data.uploaderList[e.currentTarget.dataset.index]
+      current: that.data.uploaderList1[e.currentTarget.dataset.index]
     })
   },
   //上传图片
   upload: function (e) {
     var that = this;
     wx.chooseImage({
-      count: 6 - that.data.uploaderNum, // 默认6
+      count: 3 - that.data.uploaderNum, // 默认3
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
-        console.log(res)
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        let tempFilePaths = res.tempFilePaths;
-        let uploaderList = that.data.uploaderList.concat(tempFilePaths);
-        if (uploaderList.length == 6) {
-          that.setData({
-            showUpload: false
-          })
-        }
-        that.setData({
-          uploaderList: uploaderList,
-          uploaderNum: uploaderList.length,
+        wx.uploadFile({
+          url: 'https://dianshu.chaoshang666.com/index.php/api/ueditor/Index/path_type/aftersale_2_15_27?action=uploadimage&encode=utf-8&token=' + wx.getStorageSync('token'),
+          filePath: res.tempFilePaths[0],
+          name: 'upfile',
+          success(upData) {
+            // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+            let tempFilePaths1 = res.tempFilePaths, tempFilePaths2 = JSON.parse(upData.data).data.url;
+            let uploaderList1 = that.data.uploaderList1.concat(tempFilePaths1),
+                uploaderList2 = that.data.uploaderList2.concat(tempFilePaths2);
+            if (uploaderList1.length == 3) {
+              that.setData({
+                showUpload: false
+              })
+            }
+            that.setData({
+              uploaderList1: uploaderList1,
+              uploaderList2: uploaderList2,
+              uploaderNum: uploaderList1.length,
+            })
+          },
+          fail(err){
+            console.log(err);
+          }
         })
       }
     })
@@ -326,7 +339,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
   /**

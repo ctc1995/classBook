@@ -30,6 +30,7 @@ Page({
         '百世物流已揽件',
       ],
     },
+    isRunOnShow: 1,
     buyGoodsList: [],
     orderStatus: {},
     topTips: '',
@@ -49,7 +50,8 @@ Page({
         self.setData({
           orderInfo: res.data,
           buyGoodsList: res.data.items,
-          orderStatus: appInstance.globalData.orderStatus
+          orderStatus: appInstance.globalData.orderStatus,
+          isRunOnShow: 1
         })
       })
     } else {
@@ -57,8 +59,12 @@ Page({
         console.log(data);
         if (data.status == '3') {
           app.request.orderLogistics(data.express_id, data.express_number).then(res => {
-            if (res.code == 0) {
-              data.logistics = res.Traces.reverse()
+            if (res.State == '0') {
+              if (res.Traces.length != 0) {
+                data.logistics = res.Traces.reverse()
+              } else {
+                data.logistics = [{ 'AcceptStation': res.Reason }]
+              }
             } else {
               wx.showToast({
                 title: res.msg,
@@ -127,9 +133,13 @@ Page({
     })
   },
   // 拨打电话
-  callPhone(){
+  callPhone() {
+    // let phone = 15919544457, sPhone = wx.getStorageSync('phone')
+    // if (sPhone) {
+    //   phone = sPhone
+    // }
     wx.makePhoneCall({
-      phoneNumber: this.data.orderInfo.receive_tel 
+      phoneNumber: wx.getStorageSync('phone')
     })
   },
   // 申请退货
@@ -230,11 +240,36 @@ Page({
       url: '../../logistics/logistics?id=' + this.data.orderInfo.express_id + '&number=' + this.data.orderInfo.express_number + '&name=' + this.data.orderInfo.express_name + '&address=' + this.data.orderInfo.receive_province_name + this.data.orderInfo.receive_city_name + this.data.orderInfo.receive_county_name + this.data.orderInfo.receive_address
     })
   },
+  // 撤销申请
+  cancel(){
+    app.request.cancelOrder(this.data.orderInfo.aid).then(res=>{
+      console.log(res);
+      wx.showToast({
+        title: res.msg,
+      })
+    })
+  },
+  // 物流登记
+  logisticsMark(){
+    console.log(this.data.orderInfo);
+    wx.navigateTo({
+      url: '../orderRefundProcess/orderRefundProcess?id='+this.data.orderInfo.id,
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (this.data.isRunOnShow != 1) {
+      app.request.getOrderDetail(self.orderInfo.id).then(res => {
+        self.setData({
+          orderInfo: res.data,
+          buyGoodsList: res.data.items,
+          orderStatus: appInstance.globalData.orderStatus,
+          isRunOnShow: 1
+        })
+      })
+    }
   },
 
   /**
@@ -255,7 +290,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
   /**

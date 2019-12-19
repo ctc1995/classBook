@@ -16,9 +16,9 @@
 }
 .order_status{
   width: 750rpx;
-  height: 190rpx;
+  min-height: 190rpx;
   color: #fff;
-  padding: 0 30rpx;
+  padding: 30rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;

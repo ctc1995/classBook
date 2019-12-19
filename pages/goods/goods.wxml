@@ -50,6 +50,10 @@
       <span class="txt">{{goods.pubdate}}</span>
     </p>
     <p class="detail_item">
+      <span class="unit">库存</span>
+      <span class="txt">{{goods.inventory}}</span>
+    </p>
+    <p class="detail_item">
       <span class="unit">装帧</span>
       <span class="txt" wx:if="{{goods.binding=='1'}}">平装</span>
       <span class="txt" wx:if="{{goods.binding=='2'}}">精装</span>
@@ -104,7 +108,7 @@
       <span class="txt">{{goods.openbook || 32}}开</span>
     </p>
   </view>
-  <view class="goods_detail_image">
+  <view class="goods_detail_image" wx:if="{{item.images_b}}">
     <image src="{{item.images_b}}" mode="widthFix" wx:for="{{goods.photo}}"></image>
     <!-- <image src="../../assets/images/test_detail_image.png" mode="widthFix"></image> -->
   </view>
@@ -114,7 +118,7 @@
     </h2>
     <div class="book_list">
       <section class="book_item" wx:for="{{goodList}}" wx:key="index">
-        <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
+        <navigator hover-class="none" class="book_content" url="../goods/goods?bookId={{item.id}}">
           <image src="{{item.images}}" mode="aspectFit"></image>
           <section class="book_detail">
             <section class="book_info">

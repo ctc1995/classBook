@@ -45,14 +45,16 @@ Page({
    */
   onLoad: function (options) {
     var appInstance = getApp(), self = this;
-    this.setData({
-      // orderStatus: appInstance.globalData.orderStatus,
-      // orderList: _MD.allOrderList,
-      curTabId: options.type,
-      curTabIndex: options.index,
-      orderList: [],
-      page: 1,
-    })
+    if (options) {
+      this.setData({
+        // orderStatus: appInstance.globalData.orderStatus,
+        // orderList: _MD.allOrderList,
+        curTabId: options.type,
+        curTabIndex: options.index,
+        orderList: [],
+        page: 1,
+      })
+    }
   },
   /**
    * TODO：
@@ -172,8 +174,11 @@ Page({
             let oL = [], orders;
             res.data.map(item => {
               let obj = item.order_data
-              obj.status = 7
+              obj.aid = item.id
+              obj.did = item.order_detail_id
+              obj.status = '7-'+item.status
               obj.status_name = item.status_text
+              obj.refuse_reason = item.refuse_reason
               oL.push(obj)
             })
             if (self.data.page != 1) {
@@ -279,11 +284,19 @@ Page({
   },
   // 提醒发货
   remind(e){
-    var orderIndex = e.currentTarget.dataset.index;
-    this.setData({
-      topTips: '已提醒,将尽快为您发货！'
+    const self = this, orderIndex = e.currentTarget.dataset.index;
+    app.request.orderRemind(self.data.orderList[orderIndex].id).then(res => {
+      console.log(res);
+      if (res.code == 0) {
+        this.setData({
+          topTips: '已提醒,将尽快为您发货！'
+        })
+      } else {
+        this.setData({
+          topTips: res.msg
+        })
+      }
     })
-    console.log('已提醒')
   },
   // 查看物流
   logistics(e){
@@ -303,16 +316,21 @@ Page({
       content: '确认收货',
       success(res) {
         if (res.confirm) {
-          console.log('用户点击确定')
           app.request.orderCollect(self.data.orderList[orderIndex].id).then(res=>{
             console.log(res);
-            wx.showToast({
-              title: res.msg,
-            })
-            self.onLoad()
+            if (res.code == 0) {
+              wx.showToast({
+                title: res.msg,
+              })
+              this.setData({
+                noMore: false,
+                page: 1
+              })
+              self.onShow();
+            }
+            // self.onLoad()
           })
         } else if (res.cancel) {
-          console.log('用户点击取消')
         }
       }
     })
@@ -323,6 +341,17 @@ Page({
       dialogShow: true,
       curOrderId: e.currentTarget.dataset.index
     })
+  },
+
+//计算时间差（相差分钟）
+  timeDifference: function(startTime, endTime) {
+    var start1 = startTime.split(":");
+    var startAll = parseInt(start1[0] * 60) + parseInt(start1[1]);
+
+    var end1 = endTime.split(":");
+    var endAll = parseInt(end1[0] * 60) + parseInt(end1[1]);
+
+    return endAll - startAll;
   },
 
   /**
@@ -336,7 +365,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('show')
     const self = this;
     self.setData({
       page: 1,
@@ -371,7 +399,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.setData({
+      noMore: false,
+      page: 1
+    })
     this.onShow();
+    setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
   nomore(){
     wx.showToast({

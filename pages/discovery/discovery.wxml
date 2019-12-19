@@ -4,11 +4,11 @@
   <view class="mod_rank" wx:if="{{curTabId==='rank'}}">
     <h2 class="title">官方榜</h2>
     <section class="rank_item" wx:for="{{rankList}}" wx:key="{{index}}">
-      <navigator url="../bookMenu/bookMenu?type={{index}}">
+      <navigator hover-class="none" url="../bookMenu/bookMenu?type={{index}}">
         <image src="../../assets/images/discovery/{{item.image}}" />
       </navigator>
       <section class="list">
-        <navigator wx:for="{{item.list}}" wx:key="{{index}}" url="../goods/goods?bookId={{item.goods_id}}">{{index+1}}.{{item.title}}</navigator>
+        <navigator hover-class="none" wx:for="{{item.list}}" wx:key="{{index}}" url="../goods/goods?bookId={{item.goods_id}}">{{index+1}}.{{item.title}}</navigator>
       </section>
     </section>
   </view>

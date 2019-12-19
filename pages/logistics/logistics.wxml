@@ -22,7 +22,14 @@
         [收货地址]{{logistics.address}}
       </span>
     </view>
-    <view class="status">
+    <view class="status"> 
+      <view class="status_item" wx:if="{{logistics.State == '0'}}">
+        <p class="time">
+          <span style="display: block;">{{date.formatDate(nowDate)[0]}}</span>
+          <span>{{date.formatDate(nowDate)[1]}}</span>
+        </p>
+        <p class="info">暂无轨迹信息</p>
+      </view>
       <view class="status_item {{index == 0 ? 'current': ''}}" wx:for="{{logistics.Traces}}" wx:key="{{index}}">
         <p class="time">
           <span style="display: block;">{{date.formatDate(item.AcceptTime)[0]}}</span>

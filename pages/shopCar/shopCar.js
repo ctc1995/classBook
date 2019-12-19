@@ -26,6 +26,11 @@ Page({
     totalMoney: 0,
   },
   _init_: function() {
+
+    wx.setTabBarBadge({//tabbar右上角添加文本
+      index: 2, ////tabbar下标
+      text: wx.getStorageSync('cartNum')	//显示的内容
+    })
     this.setData({
       // curTabId: "all",
       shopCarList: [],
@@ -188,6 +193,15 @@ Page({
     })
     console.log(this.data.shopCarList);
   },
+  // 取消到货提醒
+  cancelRemind: function(e){
+    const self = this;
+    console.log(self.data.shopCarList[e.target.dataset.index]);
+    app.request.cancelReminder(self.data.shopCarList[e.target.dataset.index].id).then(res=>{
+      console.log(res);
+      self.changeTabNav({ detail: {} });
+    })
+  },
   // 结算
   buy: function() {
     var buyGoodsList = [];
@@ -204,11 +218,12 @@ Page({
     })
   },
   longpressGoods: function (e) {
-    let index = e.currentTarget.dataset.index, item = this.data.shopCarList[index];
-    console.log(item);
-    this.setData({
-      curCartId: item.id
-    })
+    if (this.data.curTabId == 'all') {
+      let index = e.currentTarget.dataset.index, item = this.data.shopCarList[index];
+      this.setData({
+        curCartId: item.id
+      })
+    }
   },
   // 关闭actionSheet
   hiddenActionSheet: function(){
@@ -257,6 +272,19 @@ Page({
   onShow: function () {
     console.log(this.data.curTabId);
     this.changeTabNav({ detail: {} })
+    try {
+      var value = wx.getStorageSync('cartNum')
+      if (value) {
+        wx.setTabBarBadge({//tabbar右上角添加文本
+          index: 2, ////tabbar下标
+          text: value.toString()	//显示的内容
+        })
+      } else {
+        wx.removeTabBarBadge({index: 2})
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
   },
 
   /**
@@ -277,7 +305,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    this.changeTabNav({detail:{}})
+    this.changeTabNav({ detail: {} })
+    setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
   /**

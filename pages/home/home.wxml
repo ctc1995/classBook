@@ -1,14 +1,12 @@
 <!-- home.wxml -->
 <view class="container">
-  <view class="userinfo" wx:if="{{!hasUserInfo && canIUse}}">
-    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">进入典书</button>
-  </view>
-  <view class="mod_home" wx:else>
+
+  <view class="mod_home" wx:if="{{hasUserInfo || !canIUse}}">
     <!-- 搜索区域 -->
     <view class='mod_search'>
-      <navigator class='searchItem' url="../../pages/search/search">
+      <navigator hover-class="none" class='searchItem' url="../../pages/search/search">
         <image src='../../assets/images/search.png' />
-        <input placeholder='搜索关键词' confirm-type="search"></input>
+        <input placeholder='搜索关键词' confirm-type="search" disabled="true"></input>
       </navigator>
     </view>
     <!-- 轮播图区域
@@ -17,7 +15,7 @@
       <swiper autoplay="true" interval="3000" circular="true" current="current" bindchange="swiperChange">
         <block wx:for="{{swiperPics}}" wx:key="index">
           <swiper-item>
-            <navigator class="swiper-item" url="{{item.event_value}}">
+            <navigator hover-class="none" class="swiper-item" url="{{item.event_value}}">
               <image src='{{item.images_url}}'></image>
             </navigator>
           </swiper-item>
@@ -32,7 +30,7 @@
     </view>
     <!-- 导航区域 -->
     <view class="mod_navbar">
-      <navigator class="navbar_item" wx:for="{{navBar}}" wx:key="index" url="{{item.href}}">
+      <navigator hover-class="none" class="navbar_item" wx:for="{{navBar}}" wx:key="index" url="{{item.href}}">
         <image src="../../assets/images/home/{{item.icon}}"></image>
         <p>{{item.label}}</p>
       </navigator>
@@ -41,7 +39,7 @@
     <view class="mod_recommend">
       <h2 class="title">
         推荐书单
-        <navigator class="more" url="../bookMenuList/bookMenuList">更多书单</navigator>
+        <navigator hover-class="none" class="more" url="../bookMenuList/bookMenuList">更多书单</navigator>
       </h2>
       <div class="book_list">
         <view class="book_item" wx:for="{{recommendList}}" wx:key="index" bindtap="goBookMenu" data-item="{{item}}">
@@ -58,11 +56,11 @@
     <view class="mod_good">
       <h2 class="title">
         好书推荐
-        <navigator class="more" url="../allClass/allClass">更多好书</navigator>
+        <navigator hover-class="none" class="more" url="../recommend/recommend?type=is_home_recommended">更多好书</navigator>
       </h2>
       <div class="book_list">
         <section class="book_item" wx:for="{{goodList}}" wx:key="index">
-          <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
+          <navigator hover-class="none" class="book_content" url="../goods/goods?bookId={{item.id}}">
             <image src="{{item.images}}" mode="aspectFit"></image>
             <section class="book_detail">
               <section class="book_info">
@@ -82,11 +80,19 @@
           <section class="add_car" bindtap="addShopCar" data-book="{{item}}" wx:if="{{item.inventory != 0}}">
             <image src="../../assets/images/add-car2x.png" />
           </section>
-          <navigator class="add_car" url="../goods/goods?bookId={{item.goods_id || item.id}}" style="white-space: nowrap;" wx:else>
+          <navigator hover-class="none" class="add_car" url="../goods/goods?bookId={{item.goods_id || item.id}}" style="white-space: nowrap;" wx:else>
             无货
           </navigator>
         </section>
       </div>
     </view>
+  </view>
+  <view class="userinfo" wx:else>
+    <!-- <text class="slogan">旧书直营平台</text> -->
+    <open-data class="ava" type="userAvatarUrl"></open-data>
+    <open-data class="name" type="userNickName"></open-data>
+    <text class="logo">典书</text>
+    <text class="tips">您好，为了方便您的使用，请先登录</text>
+    <button class="btn btn_primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">一键登录</button>
   </view>
 </view>

@@ -2,8 +2,10 @@
 <view class="page_book_menu">
   <view class="header">
     <image class="header_image" src="http://dianshu.chaoshang666.com{{bookMenu.layout}}" mode="widthFix"></image>
-    <p class="book_menu_title">{{bookMenu.title}}</p>
-    <p class="book_menu_info">{{bookMenu.describe}}</p>
+    <view class="book_menu_detail">
+      <p class="book_menu_title">{{bookMenu.title}}</p>
+      <p class="book_menu_info">{{bookMenu.describe}}</p>
+    </view>
     <view class="book_menu_opration" style="display: none;">
       <p class="opration_item">
         <image mode="aspectFit" wx:if="{{bookMenu.like}}" src="../../assets/images/bookmenu/sel-like.png" />

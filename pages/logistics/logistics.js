@@ -11,7 +11,8 @@ Page({
       phone: '18977837849',
       address: '广东省深圳市南山区粤海街道9109号三诺智慧大厦'
     },
-    logistics: {}
+    logistics: {},
+    nowDate: new Date().toLocaleDateString() + ' ' + new Date().toTimeString()
   },
 
   /**
@@ -21,39 +22,31 @@ Page({
     const self = this;
     app.request.orderLogistics(options.id, options.number).then(res=>{
       console.log(res);
-      if(res.code == 0 ){
-
-        let stateTips = ''
-        switch (res.State) {
-          case '0':
-            stateTips = '暂无物流信息';
-            break;
-          case '1':
-            stateTips = '快递公司已揽收';
-            break;
-          case '2':
-            stateTips = '快递正在配送途中';
-            break;
-          case '3':
-            stateTips = '该物流已被签收';
-            break;
-          case '4':
-            stateTips = '该物流问题件，请咨询物流商处理！';
-            break;
-        }
-        res.Traces = res.Traces.reverse()
-        res.stateTips = stateTips
-        res.logisticsName = options.name
-        res.address = options.address
-        self.setData({
-          logistics: res
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
+      let stateTips = ''
+      switch (res.State) {
+        case '0':
+          stateTips = '暂无物流信息';
+          break;
+        case '1':
+          stateTips = '快递公司已揽收';
+          break;
+        case '2':
+          stateTips = '快递正在配送途中';
+          break;
+        case '3':
+          stateTips = '该物流已被签收';
+          break;
+        case '4':
+          stateTips = '该物流问题件，请咨询物流商处理！';
+          break;
       }
+      res.Traces = res.Traces.reverse()
+      res.stateTips = stateTips
+      res.logisticsName = options.name
+      res.address = options.address
+      self.setData({
+        logistics: res
+      })
     })
   },
 
@@ -89,7 +82,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
   /**

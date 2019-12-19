@@ -49,7 +49,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
       ref: options.ref
     })
@@ -79,8 +79,14 @@ Page({
         }
       })
     }
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          this.pageInit();
+        }
+      }
+    })
     console.log(this.data.userInfo);
-    this.pageInit();
   },
   pageInit: function () {
     var self = this;
@@ -114,11 +120,13 @@ Page({
         page: self.data.page+1
       })
     })
+    
   },
   getUserInfo: function(e) {
     console.log(e)
+    this.pageInit();
+    wx.showTabBar();
     app.globalData.userInfo = e.detail.userInfo
-
     app.request.getUserInfo({
       openid: wx.getStorageSync('openid'),
       encrypted_data: e.detail.encryptedData,
@@ -171,7 +179,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    try {
+      var value = wx.getStorageSync('cartNum')
+      if (value) {
+        wx.setTabBarBadge({//tabbar右上角添加文本
+          index: 2, ////tabbar下标
+          text: value.toString()	//显示的内容
+        })
+      } else {
+        wx.removeTabBarBadge({ index: 2 })
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
   },
 
   /**
@@ -196,6 +216,7 @@ Page({
       page: 1
     })
     this.onLoad({});
+    setTimeout(() => { wx.stopPullDownRefresh();},1000)
   },
 
   /**

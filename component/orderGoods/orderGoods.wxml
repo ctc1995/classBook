@@ -1,15 +1,21 @@
 <!--component/orderGoods/orderGoods.wxml-->
-<view class="goods_list" bindtap="hihi">
+<view class="goods_list">
   <view class="goods" wx:for="{{buyGoodsList}}" wx:key="{{index}}">
-    <image src="{{item.images}}" mode="aspectFit"></image>
-    <view class="title_attr">
+    <image src="{{item.images}}" mode="aspectFit" bindtap="detail" data-index="{{index}}"></image>
+    <view class="title_attr" bindtap="detail" data-index="{{index}}">
       <text class="good_title">{{item.title}}</text>
       <text class="good_attr" wx:if="{{attr}}">{{item.phase || "品相良好"}}</text>
     </view>
     <view class="price_sum">
       <text class="price" wx:if="{{money}}"><text class="unit">￥</text>{{item.price}}</text>
       <text class="sum" wx:if="{{sum}}">x {{item.stock || item.buy_number}}</text>
-      <button class="btn btn_default" wx:if="{{shouhou}}" bindtap="refund" data-index="{{index}}">退换</button>
+      <button class="btn btn_default" wx:if="{{shouhou && !item.orderaftersale}}" bindtap="refund" data-index="{{index}}">退换</button>
+      <text class="sale_status" wx:if="{{item.orderaftersale && item.orderaftersale.status == '0'}}">售后状态：待确认</text>
+      <text class="sale_status" wx:if="{{item.orderaftersale && item.orderaftersale.status == '1'}}">售后状态：待退货</text>
+      <text class="sale_status" wx:if="{{item.orderaftersale && item.orderaftersale.status == '2'}}">售后状态：待审核</text>
+      <text class="sale_status" wx:if="{{item.orderaftersale && item.orderaftersale.status == '3'}}">售后状态：已完成</text>
+      <text class="sale_status" wx:if="{{item.orderaftersale && item.orderaftersale.status == '4'}}">售后状态：已拒绝</text>
+      <text class="sale_status" wx:if="{{item.orderaftersale && item.orderaftersale.status == '5'}}">售后状态：已取消</text>
     </view>
   </view>
 </view>

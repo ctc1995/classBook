@@ -14,7 +14,7 @@ Page({
     // 分类面板
     showClassPanel: false,
     // 推荐类型
-    type: '',
+    type: 'is_home_recommended',
     page: 1,
   },
   
@@ -104,7 +104,7 @@ Page({
         title = "珍品孤本";
         break;
       default:
-        title = self.data.title;
+        title = "好书推荐";
         break;
     }
     wx.setNavigationBarTitle({
@@ -134,6 +134,7 @@ Page({
       page: 1
     })
     this.onLoad(this.data.type)
+    setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
   /**

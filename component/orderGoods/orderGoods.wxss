@@ -1,4 +1,9 @@
 /* 订单页商品样式 */
+.sale_status{
+  font-size: 22rpx;
+  color: red;
+  white-space:nowrap;
+}
 .btn{
   height: 40rpx;
   line-height: 36rpx;

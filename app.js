@@ -2,6 +2,7 @@
 import request from './utils/request.js'
 App({
   onLaunch: function () {
+    wx.hideTabBar()
     const self = this;
     // 登录
     wx.login({
@@ -21,10 +22,12 @@ App({
     })
   },
   getUserInfo:function(){
+    const self = this;
     // 获取用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
+          wx.showTabBar();
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
@@ -44,7 +47,19 @@ App({
                 iv: res.iv,
               }).then(res => {
                 console.log(res);
-                wx.setStorageSync('token', res.data.token)
+                if (res.code == 0) {
+                  wx.setStorageSync('token', res.data.token)
+                  if (!wx.getStorageSync('phone')) {
+                    self.request.getAbout().then(res => {
+                      wx.setStorageSync('phone', res.data.customer_service_tel)
+                    })
+                  }
+                  self.request.getAbout().then(res => {
+                    wx.setStorageSync('phone', res.data.customer_service_tel)
+                  })
+                } else {
+                  throw res.msg
+                }
               }).catch(error=>{
                 console.log(error);
                 wx.showToast({
@@ -133,11 +148,38 @@ App({
         title: '订单关闭',
         tips: '订单已处理完毕'
       },
-      7: {
-        title: '售后/退款',
+      '7-0': {
+        title: '待确认',
+        // tips: '订单正在售后处理，请退货并填写物流信息'
+        tips: '订单正在售后处理'
+      },
+      '7-1': {
+        title: '待退货',
+        // tips: '订单正在售后处理，请退货并填写物流信息'
         tips: '订单正在售后处理，请退货并填写物流信息'
-      }
+      },
+      '7-2': {
+        title: '待审核',
+        // tips: '订单正在售后处理，请退货并填写物流信息'
+        tips: '订单正在售后处理，请耐心等待。'
+      },
+      '7-3': {
+        title: '已完成',
+        // tips: '订单正在售后处理，请退货并填写物流信息'
+        tips: '订单已完成售后处理，欢迎您再次购买。'
+      },
+      '7-4': {
+        title: '已拒绝',
+        // tips: '订单正在售后处理，请退货并填写物流信息'
+        tips: '订单的售后处理，已被拒绝。'
+      },
+      '7-5': {
+        title: '已取消',
+        // tips: '订单正在售后处理，请退货并填写物流信息'
+        tips: '您已取消订单的售后处理'
+      },
     }
   },
   request: new request(),
+  
 })

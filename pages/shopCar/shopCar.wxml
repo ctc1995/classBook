@@ -2,14 +2,13 @@
 <view class="mod_shopcar">
   <tab-nav tab-list="{{tabList}}" bind:changeTabNav="changeTabNav"></tab-nav>
   <view class="goods_list">
-    <section class="book_item {{item.stock<=0?'out_stock':''}}" wx:for="{{shopCarList}}" wx:key="{{index}}" wx:if="{{curTabId == 'all' || item.stock<=0}}"
-    bindlongpress="longpressGoods" data-index="{{index}}">
+    <section class="book_item {{item.stock<=0?'out_stock':''}}" wx:for="{{shopCarList}}" wx:key="{{index}}" wx:if="{{curTabId == 'all' || item.stock<=0}}" bindlongpress="longpressGoods" data-index="{{index}}">
       <checkbox  wx:if="{{curTabId == 'all'}}" value="{{item.id}}" checked="{{item.sel}}" bindtap="selGoods" disabled="{{item.inventory == 0}}" data-index="{{index}}"/>
-      <navigator url="../goods/goods?bookId={{item.goods_id}}&type=car&tabId=all">
+      <navigator hover-class="none" url="../goods/goods?bookId={{item.goods_id}}&type=car&tabId=all">
         <image src="{{item.images}}"></image>
       </navigator>
       <section class="book_detail">
-        <navigator url="../goods/goods?bookId={{item.goods_id}}">
+        <navigator hover-class="none" url="../goods/goods?bookId={{item.goods_id}}">
           <section class="book_info">
             <p class="book_title">{{item.title}}</p>
             <p class="book_auth">{{item.author_name}}</p>
@@ -25,7 +24,7 @@
             <input bindinput='bindManual' type="number" maxlength="3" value='{{item.stock}}' data-index='{{index}}' disabled="{{item.inventory <2}}"></input>
             <view class="oprate" catchtap='bindPlus' data-index='{{index}}'>+</view>
           </view>
-          <span class="stock" wx:else>无货</span>
+          <span class="stock" bindtap="cancelRemind" data-index="{{index}}" wx:else>取消提醒</span>
         </p>
       </section>
     </section>

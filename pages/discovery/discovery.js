@@ -22,119 +22,20 @@ Page({
       {
         "image": "hot-shop.png",
         "list": [
-          {
-            "id": 10,
-            "name": "我和我的祖国",
-          },
-          {
-            "id": 11,
-            "name": "基督山伯爵",
-          },
-          {
-            "id": 12,
-            "name": "时间简史",
-          },
         ]
       },
       {
         "image": "hot-like.png",
         "list": [
-          {
-            "id": 10,
-            "name": "我和我的祖国",
-          },
-          {
-            "id": 11,
-            "name": "基督山伯爵",
-          },
-          {
-            "id": 12,
-            "name": "时间简史",
-          },
         ]
       },
       {
         "image": "hot-search.png",
         "list": [
-          {
-            "id": 10,
-            "name": "我和我的祖国",
-          },
-          {
-            "id": 11,
-            "name": "基督山伯爵",
-          },
-          {
-            "id": 12,
-            "name": "时间简史",
-          },
         ]
       },
     ],
     authList: [
-      {
-        "id": 0,
-        "name": "大仲马大仲马大仲马大仲马",
-        "image": "hot-shop.png",
-        "likeCount": 29093,
-        "like": true,
-      },
-      {
-        "id": 1,
-        "name": "刘慈溪",
-        "image": "hot-shop.png",
-        "likeCount": 29093,
-        "like": false,
-      },
-      {
-        "id": 2,
-        "name": "莫言",
-        "image": "hot-shop.png",
-        "likeCount": 29093,
-        "like": true,
-      },
-      {
-        "id": 0,
-        "name": "大仲马",
-        "image": "hot-shop.png",
-        "likeCount": 29093,
-        "like": true,
-      },
-      {
-        "id": 1,
-        "name": "刘慈溪",
-        "image": "hot-shop.png",
-        "likeCount": 29093,
-        "like": false,
-      },
-      {
-        "id": 2,
-        "name": "莫言",
-        "image": "hot-shop.png",
-        "likeCount": 29093,
-        "like": true,
-      },
-      {
-        "id": 0,
-        "name": "大仲马",
-        "image": "hot-shop.png",
-        "likeCount": 29093,
-        "like": true,
-      },
-      {
-        "id": 1,
-        "name": "刘慈溪",
-        "image": "hot-shop.png",
-        "likeCount": 29093,
-        "like": false,
-      },
-      {
-        "id": 2,
-        "name": "莫言",
-        "image": "hot-shop.png",
-        "likeCount": 29093,
-        "like": true,
-      },
     ],
     authPage: 1,
   },
@@ -224,7 +125,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.init()
+    setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
   /**
