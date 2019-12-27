@@ -58,6 +58,11 @@ Page({
       eventChannel.on('acceptOrder', function (data) {
         console.log(data);
         if (data.status == '3') {
+          self.setData({
+            orderInfo: data,
+            buyGoodsList: data.items,
+            orderStatus: appInstance.globalData.orderStatus
+          })
           app.request.orderLogistics(data.express_id, data.express_number).then(res => {
             if (res.State == '0') {
               if (res.Traces.length != 0) {
@@ -72,9 +77,7 @@ Page({
               })
             }
             self.setData({
-              orderInfo: data,
-              buyGoodsList: data.items,
-              orderStatus: appInstance.globalData.orderStatus
+              orderInfo: data
             })
           })
         } else {
@@ -101,7 +104,9 @@ Page({
           that.setData({
             topTips: res.msg
           })
-          setTimeout(() => { wx.navigateBack()}, 1000)
+          setTimeout(() => {
+            wx.navigateBack();
+            that.onShow() }, 500)
         } else {
           that.setData({
             topTipse: res.msg
@@ -153,7 +158,7 @@ Page({
     })
   },
   // 取消订单
-  cancel(e) {
+  cancelOrder(e) {
     this.setData({
       dialogShow: true
     })
@@ -238,22 +243,6 @@ Page({
   goLogi(){
     wx.navigateTo({
       url: '../../logistics/logistics?id=' + this.data.orderInfo.express_id + '&number=' + this.data.orderInfo.express_number + '&name=' + this.data.orderInfo.express_name + '&address=' + this.data.orderInfo.receive_province_name + this.data.orderInfo.receive_city_name + this.data.orderInfo.receive_county_name + this.data.orderInfo.receive_address
-    })
-  },
-  // 撤销申请
-  cancel(){
-    app.request.cancelOrder(this.data.orderInfo.aid).then(res=>{
-      console.log(res);
-      wx.showToast({
-        title: res.msg,
-      })
-    })
-  },
-  // 物流登记
-  logisticsMark(){
-    console.log(this.data.orderInfo);
-    wx.navigateTo({
-      url: '../orderRefundProcess/orderRefundProcess?id='+this.data.orderInfo.id,
     })
   },
   /**

@@ -39,10 +39,10 @@
       <!-- 共{{orderInfo.buy_number_count}}件，小计：￥<text class="price">{{orderInfo.total_price}}</text> -->
     </view>
     <view class="order_action">
-      <button class="btn btn_default" wx:if="{{orderInfo.status == '1'}}" bindtap="cancel">取消订单</button>
+      <button class="btn btn_default" wx:if="{{orderInfo.status == '1'}}" bindtap="cancelOrder">取消订单</button>
       <button class="btn btn_primary" wx:if="{{orderInfo.status == '1'}}" bindtap="toPay">立即支付</button>
       <!-- <button class="btn btn_default" wx:if="{{orderInfo.status == '2'}}" bindtap="refund">申请退款</button> -->
-      <button class="btn btn_default" wx:if="{{orderInfo.status == '3'}}" bindtap="goLogi">查看物流</button>
+      <!-- <button class="btn btn_default" wx:if="{{orderInfo.status == '3'}}" bindtap="goLogi">查看物流</button> -->
     </view>
   </view>
   <i class="line"></i>
@@ -75,7 +75,7 @@
     </view>
     <button class="btn btn_primary" bindtap="buy" wx:if="{{orderInfo.status == '0'}}">立即支付</button>
     <view wx:if="{{orderInfo.status != '0'}}"></view>
-    <button class="btn btn_default" bindtap="logisticsMark" wx:if="{{orderInfo.status == '7-0' || orderInfo.status == '7-1' || orderInfo.status == '7-2'}}">撤销申请</button>
+    <!-- <button class="btn btn_default" bindtap="cancel" wx:if="{{orderInfo.status == '7-0' || orderInfo.status == '7-1' || orderInfo.status == '7-2'}}">撤销申请</button> -->
     <button class="btn btn_default" bindtap="logisticsMark" wx:if="{{orderInfo.status == '7-1'}}">物流登记</button>
   </view>
 </view>

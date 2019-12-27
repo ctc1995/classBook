@@ -204,8 +204,13 @@ Page({
           fail: () => {
             wx.hideLoading();
             wx.showToast({
-              title: "服务器请求出错",
+              title: "服务器请求出错,拉起支付失败！",
             })
+            setTimeout(()=>{
+              wx.navigateTo({
+                url: 'page/order/orderManager/orderManager?type=pendPay&index=1',
+              })
+            },500)
           }
         });
       } else {

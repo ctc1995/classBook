@@ -1,4 +1,5 @@
 // component/orderGoods/orderGoods.js
+const app = new getApp();
 Component({
   /**
    * 组件的属性列表
@@ -61,6 +62,31 @@ Component({
       })
     },
 
+    // 撤销申请
+    cancel(e) {
+      console.log(e)
+      wx.showModal({
+        content: '撤销售后申请',
+        success(res) {
+          if (res.confirm) {
+            app.request.aftersaleCancel(e.target.dataset.id).then(res => {
+              console.log(res);
+              wx.showToast({
+                title: res.msg,
+              })
+              wx.navigateBack()
+            })
+          } else if (res.cancel) {
+          }
+        }
+      })
+    },
+    // 物流登记
+    logisticsMark(e) {
+      wx.navigateTo({
+        url: '../orderRefundProcess/orderRefundProcess?id=' + e.target.dataset.id,
+      })
+    },
     // 商品详情
     detail(e) {
       var self = this, goodsIndex = e.currentTarget.dataset.index;

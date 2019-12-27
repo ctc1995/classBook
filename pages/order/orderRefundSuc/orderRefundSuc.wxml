@@ -30,9 +30,9 @@
     <text wx:if="{{orderInfo.status != '8'}}">退款金额： ￥{{orderInfo.money}}</text>
     <text wx:if="{{orderInfo.status != '8'}}" style="margin-bottom:30rpx;">申请时间： {{orderInfo.ctime}}</text>
     <view class="info_action">
-      <button bindtap="callPhone">
-        <image src="../../../assets/images/phone.png" mode="aspectFit"></image>
-        联系客服
+      <button open-type="contact">
+        <image src="../../../assets/images/message.png" mode="aspectFit"></image>
+          联系客服
       </button>
       <button bindtap="callPhone">
         <image src="../../../assets/images/message.png" mode="aspectFit"></image>

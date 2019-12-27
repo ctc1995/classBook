@@ -37,8 +37,8 @@
     <text wx:if="order.ptime !== ''">付款时间： {{orderInfo.ptime}}</text>
     <text wx:if="order.stime !== ''">发货时间： {{orderInfo.stime}}</text>
     <view class="info_action">
-      <button bindtap="callPhone">
-        <image src="../../../assets/images/phone.png" mode="aspectFit"></image>
+      <button open-type="contact">
+        <image src="../../../assets/images/message.png" mode="aspectFit"></image>
           联系客服
       </button>
       <button bindtap="callPhone">

@@ -48,7 +48,7 @@ class request {
    */
   getBanner() {
     return this._api.getRequest('Banner/Index').then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -61,7 +61,7 @@ class request {
   /**关于我们 */
   getAboutUs() {
     return this._api.getRequest('User/AboutUs').then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -80,7 +80,7 @@ class request {
       type,
       page
     }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -93,7 +93,7 @@ class request {
   // 全部书单
   getBookList(number=10, page=1) {
     return this._api.postRequest('Booklist/Index', { number, page }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -106,7 +106,7 @@ class request {
   // 书单内容
   getBookListDetail(book_id) {
     return this._api.postRequest('Booklist/book_good_list', { book_id }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -129,7 +129,7 @@ class request {
    */
   getGoodsRecommend({ type, number = 10, page = 1 }) {
     return this._api.postRequest('goods/goodsRecommend', { type, number, page }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -142,7 +142,7 @@ class request {
   // 根据分类获取书籍
   getGoodsCategoryList(id) {
     return this._api.postRequest('goods/GoodsCategoryList', { category_id: id }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -158,7 +158,7 @@ class request {
    */
   getGoodsCategory({ type, page = 1, pid }) {
     return this._api.postRequest('goods/Category', { type, page, pid }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -177,7 +177,7 @@ class request {
   //更多品相
   getProduct(isbn) {
     return this._api.getRequest('goods/Moreproducts', {isbn: isbn}).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -190,7 +190,7 @@ class request {
   // 相关推荐
   getRelatedRecommendations(id) {
     return this._api.postRequest('goods/Relatedrecommendations', { goods_id: parseInt(id) }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -232,7 +232,7 @@ class request {
    */
   getAuthList({ page = 1, keywords }) {
     return this._api.postRequest('Author/index', { page, keywords, number: 999 }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -253,7 +253,7 @@ class request {
   //书架-买过
   getBookBought (page=1) {
     return this._api.postRequest('user/bought', { token: wx.getStorageSync('token'), page }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -266,7 +266,7 @@ class request {
   //书架-收藏
   getUserGoodsFavor(page=1) {
     return this._api.postRequest('UserGoodsFavor/Index', { token: wx.getStorageSync('token'), page }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -279,7 +279,7 @@ class request {
   //优惠券
   getCoupon() {
     return this._api.postRequest('Coupon/Index', { token: wx.getStorageSync('token') }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -292,7 +292,7 @@ class request {
   //全部收货地址
   getAddress() {
     return this._api.postRequest('UserAddress/Index', { token: wx.getStorageSync('token') }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -305,7 +305,7 @@ class request {
   //收货地址详情
   getAddressDetail(id) {
     return this._api.postRequest('UserAddress/Detail', { token: wx.getStorageSync('token'), id }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -326,7 +326,7 @@ class request {
       county: county_name,
       address,
       tel }).then(res=>{
-        if(res.data.code == 0) {
+        if(res.code == 0 || res.data.code == 0) {
           return res.data
         }
         else {
@@ -340,7 +340,7 @@ class request {
   //删除收货地址
   delAddress(id) {
     return this._api.postRequest('UserAddress/Delete', { token: wx.getStorageSync('token'), id}).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -353,7 +353,7 @@ class request {
   //设置默认地址
   setDefaultAddress(id) {
     return this._api.postRequest('UserAddress/SetDefault', { token: wx.getStorageSync('token'), id }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -366,7 +366,7 @@ class request {
   //修改个人信息
   modifyInfo({ nickname, gender, birthday, mobile, province, city, area, }) {
     return this._api.postRequest('User/PersonalSave', { token: wx.getStorageSync('token'), nickname, gender, birthday, mobile, province, city, area }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -379,6 +379,19 @@ class request {
   /**
    * 订单
    */
+  // 取消售后
+  aftersaleCancel(id) {
+    return this._api.postRequest('order/aftersaleCancel', { token: wx.getStorageSync('token'), id}).then(res => {
+      if (res.code == 0 || res.data.code == 0) {
+        return res.data
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        })
+      }
+    })
+  }
   getOrderIndex({ type, page = 1, status}) {
     let obj = { 
       token: wx.getStorageSync('token'),
@@ -389,7 +402,7 @@ class request {
       obj.status = status;
     }
     return this._api.postRequest('order/Index', obj).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -401,7 +414,7 @@ class request {
   }
   getOrderAftersaleList(page = 1) {
     return this._api.postRequest('order/Aftersale_list', { token: wx.getStorageSync('token'), page }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -413,7 +426,7 @@ class request {
   }
   cancelOrder(id) {
     return this._api.postRequest('order/Cancel', { token: wx.getStorageSync('token'), id }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -426,7 +439,7 @@ class request {
   // 收藏商品
   favorOrder(id, isbn) {
     return this._api.postRequest('goods/Favor', { token: wx.getStorageSync('token'), id, isbn }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -442,7 +455,7 @@ class request {
   //购物车页面
   getCartIndex() {
     return this._api.postRequest('Cart/Index', { token: wx.getStorageSync('token') }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -461,7 +474,7 @@ class request {
       Object.assign(obj, { page: 1, number: 999 })
     }
     return this._api.postRequest('cart/Arrivalreminder', obj).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -474,7 +487,7 @@ class request {
   // 到货提醒列表
   getCartArriList() {
     return this._api.postRequest('cart/ArrivalReminderlist', { token: wx.getStorageSync('token'), page: 1, number: 999 }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -487,7 +500,7 @@ class request {
   // 取消到货提醒
   cancelReminder(id) {
     return this._api.postRequest('cart/CancelReminder', { token: wx.getStorageSync('token'), id }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -511,7 +524,7 @@ class request {
   // 购物车商品数量调整
   stockGoodsCart({ stock = 1, goods_id, id }) {
     return this._api.postRequest('cart/stock', { token: wx.getStorageSync('token'), stock: parseInt(stock), goods_id: parseInt(goods_id), id: parseInt(id) }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -542,7 +555,7 @@ class request {
   // 购物车结算
   buyCart(ids, couponid) {
     return this._api.postRequest('buy/index', { token: wx.getStorageSync('token'), buy_type: 'cart', ids: ids.join(), coupon_id: couponid }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -555,7 +568,7 @@ class request {
   // 立即购买
   buyNow({ goods_id, spec='' }) {
     return this._api.postRequest('buy/index', { token: wx.getStorageSync('token'), buy_type: 'goods', stock: 1, goods_id, spec }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -581,7 +594,7 @@ class request {
   // 订单详情
   getOrderDetail(id, is_orderaftersale) {
     return this._api.postRequest('order/Detail', { token: wx.getStorageSync('token'), id, is_orderaftersale }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -594,7 +607,7 @@ class request {
   //发货提醒
   orderRemind(order_id) {
     return this._api.postRequest('order/remind', { token: wx.getStorageSync('token'), order_id }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -630,7 +643,7 @@ class request {
   // 退换信息
   getOrderAftersale(oid, did) {
     return this._api.postRequest('Order/Aftersale', { token: wx.getStorageSync('token'), oid, did }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -643,7 +656,7 @@ class request {
   // 提交退换
   postOrserAftersale({ order_id, order_detail_id, money, reasonType, reason, remake, number, images }){
     return this._api.postRequest('order/Create', { token: wx.getStorageSync('token'), order_id, order_detail_id, type: reasonType, price: money, reason, msg: remake, number, images }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({
@@ -656,7 +669,7 @@ class request {
   // 确认收货
   orderCollect(id) {
     return this._api.postRequest('order/Collect', { token: wx.getStorageSync('token'), id }).then(res=>{
-      if(res.data.code == 0) {
+      if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
         wx.showToast({

@@ -183,7 +183,10 @@ Page({
             var pages = getCurrentPages();
             var prevPage = pages[pages.length - 2];  //上一个页面
             prevPage.setData({ isRunOnShow: 0 })//设置数据
-            setTimeout(() => { wx.navigateBack() }, 1500);
+            setTimeout(() => {
+              wx.navigateBack({
+                delta: 2
+              }) }, 1500);
           }
         })
       } else {

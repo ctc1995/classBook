@@ -66,3 +66,11 @@
 .goods_list .goods .price_sum .price .unit{
   font-size: 24rpx;
 }
+.btn_group{
+  display: flex;
+  width: 350rpx;
+  justify-content: flex-end;
+}
+.btn_group .btn {
+  margin-left: 10rpx;
+}

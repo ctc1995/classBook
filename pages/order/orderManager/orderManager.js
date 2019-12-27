@@ -79,6 +79,9 @@ Page({
           dialogShow: false,
           curOrderId: null
         })
+        wx.navigateTo({
+          url: 'pages/order/orderManager/orderManager?type=all&index=0',
+        })
       })
     } else {
       that.setData({
@@ -98,10 +101,10 @@ Page({
       // orderList: _MD[orderListKey]
     })
     this.getOrderList();
-    if(e.detail.tabId == 'all'){
+    // if(e.detail.tabId == 'all'){
 
-    } else {
-    } 
+    // } else {
+    // } 
   },
   // 请求订单数据
   getOrderList() {
@@ -125,26 +128,7 @@ Page({
     }
     if (!this.data.noMore) {
       if (status == 2) {
-        app.request.getOrderIndex({ page: self.data.page, status: 2 }).then(res => {
-          if (res.data.data.length == 0) {
-            self.nomore();
-            self.setData({
-              noMore: true
-            })
-          } else {
-            let orders
-            if (self.data.page != 1) {
-              orders = self.data.orderList.concat(res.data.data)
-            } else {
-              orders = res.data.data
-            }
-            self.setData({
-              orderList: orders,
-              page: self.data.page + 1
-            })
-          }
-        })
-        app.request.getOrderIndex({ page: self.data.page, status: 3 }).then(res => {
+        app.request.getOrderIndex({ page: self.data.page, status: '2,3' }).then(res => {
           if (res.data.data.length == 0) {
             self.nomore();
             self.setData({
@@ -250,6 +234,13 @@ Page({
             paySign: res.data.data.paySign,
             success: function (res) {
               self.onShow()
+              setTimeout(()=>{
+                self.changeTabNav({
+                  detail:{
+                    tabId: 'paid'
+                  }
+                })
+              },500)
             },
             fail: function (res) {
               wx.showToast({
@@ -322,7 +313,7 @@ Page({
               wx.showToast({
                 title: res.msg,
               })
-              this.setData({
+              self.setData({
                 noMore: false,
                 page: 1
               })
@@ -385,7 +376,13 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+      orderStatus: {},
+      orderList: [],
+      curOrderId: null,
+      page: 1,
+      noMore: false
+    })
   },
 
   /**
