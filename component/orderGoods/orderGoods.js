@@ -58,8 +58,9 @@ Component({
     refund(e) {
       var orderIndex = e.currentTarget.dataset.index;
       var self = this;
+      console.log(self.properties.buyGoodsList[orderIndex]);
       wx.navigateTo({
-        url: '../orderRefunding/orderRefunding?status=' + self.properties.status,
+        url: `../orderRefunding/orderRefunding?status=${self.properties.status}&oid=${self.properties.buyGoodsList[orderIndex].order_id}`,
         success: function (res) {
           res.eventChannel.emit("acceptOrder", self.properties.buyGoodsList[orderIndex])
         }

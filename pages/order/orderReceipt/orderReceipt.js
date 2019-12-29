@@ -35,7 +35,8 @@ Page({
     orderStatus: {},
     topTips: '',
     dialogShow: false,
-    buttons: [{ text: '取消' }, { text: '确定' }]
+    buttons: [{ text: '取消' }, { text: '确定' }],
+    request: false,
   },
 
   /**
@@ -57,7 +58,7 @@ Page({
     } else {
       eventChannel.on('acceptOrder', function (data) {
         console.log(data);
-        if (data.status == '3') {
+        if (data && data.status == '3') {
           self.setData({
             orderInfo: data,
             buyGoodsList: data.items,
@@ -166,6 +167,12 @@ Page({
   // 立即支付
   toPay: function () {
     var self = this;
+    if (this.data.request) {
+      return;
+    }
+    this.setData({
+      request: true
+    })
     // 加载loding
     wx.showLoading({ title: "请求中..." });
     wx.request({
@@ -185,8 +192,9 @@ Page({
             var temp_data_list = this.data.data_list;
             temp_data_list[index]['status'] = 2;
             temp_data_list[index]['status_name'] = '待发货';
-            this.setData({ data_list: temp_data_list });
-
+            this.setData({ 
+              data_list: temp_data_lis
+            });
             app.showToast("支付成功", "success");
           } else {
             wx.requestPayment({
@@ -222,6 +230,11 @@ Page({
                   title: "支付失败",
                   icon: 'none'
                 })
+              }, 
+              complete: function(){
+                self.setData({
+                  request: false
+                });
               }
             });
           }

@@ -125,6 +125,7 @@ Page({
     logisName: "",
     // 快递单号
     logisNumber: "",
+    request: false,
   },
 
   /**
@@ -136,12 +137,14 @@ Page({
     var self = this, status = options.status;
     if (status == 4 || status == 3){
       self.setData({
-        reasonTypeObj: self.data.reasonTypeObj.concat([{ id: 1, name: '退款退货' }])
+        reasonTypeObj: self.data.reasonTypeObj.concat([{ id: 1, name: '退款退货' }]),
+        orderId: options.oid
       })
     } else if (status == 99) {
       self.setData({
         isLogis: true,
-        shouhouId: options.id
+        shouhouId: options.id,
+        orderId: options.oid
       })
     }
     eventChannel.on('acceptOrder', function (data) {
@@ -176,17 +179,27 @@ Page({
       logisNumber: e.detail.value
     })
   },
-  submit:function(){
+  submit: function () {
+    const self = this;
+    if (this.data.request) {
+      return;
+    }
+    this.setData({
+      request: true
+    })
     if(this.data.isLogis){
       app.request.aftersaledelivery({ id: this.data.shouhouId, name: this.data.logisName, number: this.data.logisNumber}).then(res=>{
         console.log(res);
+        this.setData({
+          request: false
+        })
         if (res.code == 0) {
           wx.showToast({
             title: '提交成功',
             success(res) {
               setTimeout(() => {
-                wx.navigateTo({
-                  url: '../orderManager/orderManager?type=all&index=0',
+                wx.redirectTo({
+                  url: '../orderReceipt/orderReceipt?id=' + self.data.orderId,
                 })
               }, 1500);
             }
@@ -222,14 +235,16 @@ Page({
           wx.showToast({
             title: '提交成功',
             success(res) {
-              var pages = getCurrentPages();
-              var prevPage = pages[pages.length - 2];  //上一个页面
-              prevPage.setData({ isRunOnShow: 0 })//设置数据
               setTimeout(() => {
-                wx.navigateBack({
-                  delta: 2
+                wx.redirectTo({
+                  url: '../orderReceipt/orderReceipt?id=' + self.data.orderId,
                 })
               }, 1500);
+            },
+            complete() {
+              self.setData({
+                request: false
+              })
             }
           })
         } else {

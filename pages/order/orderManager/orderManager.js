@@ -37,7 +37,8 @@ Page({
     dialogShow: false,
     buttons: [{ text: '取消' }, { text: '确定' }],
     page: 1,
-    noMore: false
+    noMore: false,
+    request: false
   },
 
   /**
@@ -211,6 +212,13 @@ Page({
   },
   // 立即支付
   toPaid(e) {
+    console.log(this.data.request);
+    if (this.data.request) {
+      return;
+    }
+    this.setData({
+      request: true
+    })
     var orderIndex = e.currentTarget.dataset.index, self = this, orderInfo = self.data.orderList[orderIndex];
     // 加载loding
     wx.showLoading({ title: "请求中..." });
@@ -233,7 +241,8 @@ Page({
             signType: res.data.data.signType,
             paySign: res.data.data.paySign,
             success: function (res) {
-              self.onShow()
+              // self.onShow()
+              self.onPullDownRefresh()
               setTimeout(()=>{
                 self.changeTabNav({
                   detail:{
@@ -249,6 +258,11 @@ Page({
                 complete(){
                   self.onShow()
                 }
+              })
+            },
+            complete: function(){
+              self.setData({
+                request: false
               })
             }
           });
@@ -302,6 +316,12 @@ Page({
   },
   // 确认收货
   collect(e) {
+    if (this.data.request) {
+      return;
+    }
+    this.setData({
+      request: true
+    })
     var orderIndex = e.currentTarget.dataset.index, self = this;
     wx.showModal({
       content: '确认收货',
@@ -314,6 +334,7 @@ Page({
                 title: res.msg,
               })
               self.setData({
+                request: false,
                 noMore: false,
                 page: 1
               })

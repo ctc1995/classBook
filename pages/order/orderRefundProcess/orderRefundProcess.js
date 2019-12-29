@@ -107,7 +107,7 @@ Page({
     console.log('logis');
     const self = this;
     wx.navigateTo({
-      url: '../orderRefunding/orderRefunding?status=99&id=' + this.data.receiptInfo.id,
+      url: `../orderRefunding/orderRefunding?status=99&id=${this.data.receiptInfo.id}&oid=${this.data.buyGoodsList[0].order_id}`,
       success: function (res) {
         res.eventChannel.emit("acceptOrder", self.data.buyGoodsList[0])
       }

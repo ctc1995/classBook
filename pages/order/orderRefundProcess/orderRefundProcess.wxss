@@ -96,6 +96,7 @@
 }
 .order_info text{
   margin-top: 16rpx;
+  word-break: break-all;
 }
 .order_info .number{
   color: #333;

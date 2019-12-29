@@ -34,7 +34,8 @@
     <view class="number" style="padding-top:30rpx;">
       售后编号： {{receiptInfo.id}}
     </view>
-    <text>售后原因： {{receiptInfo.msg + receiptInfo.reason}}</text>
+    <text>售后原因： {{receiptInfo.reason}}</text>
+    <text>售后备注： {{receiptInfo.msg}}</text>
     <text style="margin-bottom:30rpx;" wx:if="{{receiptInfo.price}}">退款金额： ￥{{receiptInfo.price}}</text>
     <!-- <text style="margin-bottom:30rpx;">申请时间： {{receiptInfo.ctime}}</text> -->
     <view class="info_action">

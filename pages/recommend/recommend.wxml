@@ -1,33 +1,5 @@
 <!--pages/recommend/recommend.wxml-->
 <view class="page_recommend">
-  <!-- <view class="mod_filter" wx:if="{{type==='rare_treasures'}}">
-    <p class="filter_item">
-      综合
-    </p>
-    <p class="filter_item">
-      <span>价格</span><view class="sort">
-        <image src="../../assets/images/up-arrow.png"></image>
-        <image src="../../assets/images/down-arrow.png"></image>
-      </view>
-    </p>
-    <p class="filter_item">
-      <span>出版</span><view class="sort">
-        <image src="../../assets/images/up-arrow.png"></image>
-        <image src="../../assets/images/down-arrow.png"></image>
-      </view>
-    </p>
-    <p class="filter_item" bindtap="toggleClassPanel">
-      <span>分类</span>
-      <image style="width:24rpx;height:13rpx;margin-left: 10rpx;" src="../../assets/images/{{showClassPanel ?  'expand.png' : 'collapse.png'}}" />
-    </p>
-    <section class="class_panel {{showClassPanel? '' : 'disabled'}}">
-      <div class="list">
-        <span class="item {{item.sel?'current':''}}" wx:for="{{bookClass}}" bindtap="checkClass" data-item="{{item}}">
-          {{item.name}}
-        </span>
-      </div>
-    </section>
-  </view> -->
   <view class="mod_good">
     <div class="book_list">
       <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
@@ -56,5 +28,9 @@
         </navigator>
       </section>
     </div>
+    <view wx:if="{{goodList.length == 0}}" style="width: 690rpx;text-align:center;padding-top: 20rpx;">
+      <image src="../../assets/images/no-data.png" mode="widthFix" style="width:350rpx;"></image>
+      <text style="display:block;margin-top:20rpx;">暂无数据！</text>
+    </view>
   </view>
 </view>

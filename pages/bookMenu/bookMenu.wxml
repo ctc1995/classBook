@@ -1,7 +1,8 @@
 <!-- pages/bookMenu.wxml -->
 <view class="page_book_menu">
   <view class="header">
-    <image class="header_image" src="http://dianshu.chaoshang666.com{{bookMenu.layout}}" mode="widthFix"></image>
+    <image class="header_image" wx:if="{{bookMenu.layout}}" src="http://dianshu.chaoshang666.com{{bookMenu.layout}}" mode="widthFix"></image>
+    <image class="header_image" wx:else src="../../assets/images/bookmenu/header-bg.png" mode="widthFix"></image>
     <view class="book_menu_detail">
       <p class="book_menu_title">{{bookMenu.title}}</p>
       <p class="book_menu_info">{{bookMenu.describe}}</p>

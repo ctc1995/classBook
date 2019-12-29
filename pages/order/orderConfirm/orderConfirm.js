@@ -219,7 +219,7 @@ Page({
             },
             complete: ()=>{
               self.setData({
-                disable: true
+                disable: false
               })
             }
           });
