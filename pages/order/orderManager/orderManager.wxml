@@ -17,7 +17,7 @@
           {{item.status_name}}
         </span>
       </view>
-      <orderGoods buy-goods-list="{{item.items}}" order-info="{{item}}"></orderGoods>
+      <orderGoods buy-goods-list="{{item.items}}" order-info="{{item}}" shouhouDetail="{{false}}"></orderGoods>
       <view class="order_price">
         共{{item.buy_number_count}}件商品（含快递费￥{{item.extension_data[0].price}}元）共计：<text class="price">{{item.total_price}}元</text>
       </view>

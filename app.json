@@ -2,6 +2,7 @@
   "pages": [
     "pages/home/home",
     "pages/about/about",
+    "pages/search/search",
     "pages/inviteHistory/inviteHistory",
     "pages/invite/invite",
     "pages/mission/mission",
@@ -14,7 +15,6 @@
     "pages/logistics/logistics",
     "pages/info/info",
     "pages/order/orderConfirm/orderConfirm",
-    "pages/search/search",
     "pages/logs/logs",
     "pages/goods/goods",
     "pages/allClass/allClass",
@@ -74,8 +74,8 @@
     ]
   },
   "networkTimeout": {
-    "request": 5000,
-    "downloadFile": 5000
+    "request": 10000,
+    "downloadFile": 10000
   },
   "sitemapLocation": "sitemap.json"
 }

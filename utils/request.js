@@ -231,7 +231,7 @@ class request {
    * 作者列表 搜索作者
    */
   getAuthList({ page = 1, keywords }) {
-    return this._api.postRequest('Author/index', { page, keywords, number: 999 }).then(res=>{
+    return this._api.postRequest('Author/index', { page, keywords, number: 20 }).then(res=>{
       if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {
@@ -471,7 +471,7 @@ class request {
     if (isbn) {
       Object.assign(obj, { goods_id, isbn, title, images })
     } else {
-      Object.assign(obj, { page: 1, number: 999 })
+      Object.assign(obj, { page: 1, number: 20 })
     }
     return this._api.postRequest('cart/Arrivalreminder', obj).then(res=>{
       if(res.code == 0 || res.data.code == 0) {
@@ -513,11 +513,13 @@ class request {
   // 加入购物车
   addCart({ stock = 1, goods_id}) {
     return this._api.postRequest('Cart/Save', { token: wx.getStorageSync('token'), stock, goods_id }).then(res => {
-      wx.setStorageSync('cartNum', res.data.data)
-      wx.setTabBarBadge({//tabbar右上角添加文本
-        index: 2, ////tabbar下标
-        text: res.data.data.toString()	//显示的内容
-      })
+      if (res.data.data) {
+        wx.setStorageSync('cartNum', res.data.data)
+        wx.setTabBarBadge({//tabbar右上角添加文本
+          index: 2, ////tabbar下标
+          text: res.data.data.toString()	//显示的内容
+        })
+      }
       return res.data;
     })
   }
@@ -685,6 +687,12 @@ class request {
     return this._api.postRequest('order/logistics', { token: wx.getStorageSync('token'), express_id: id, express_number: number }).then(res=>{
       return res.data
     });
+  }
+  // 退货物流登记
+  aftersaledelivery({id, name, number}){
+    return this._api.postRequest('order/aftersaledelivery', { token: wx.getStorageSync('token'), id, express_name: name, express_number: number}).then(res=>{
+      return res.data
+    })
   }
 }
 export default request

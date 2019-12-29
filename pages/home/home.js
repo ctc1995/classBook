@@ -235,6 +235,7 @@ Page({
           title: '没有更多了',
           icon: 'none'
         })
+        return;
       }
       self.setData({
         goodList: self.data.goodList.concat(res.data.data),

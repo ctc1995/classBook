@@ -7,7 +7,7 @@ Page({
    */
   data: {
     formData: {},
-    sex: ["男", "女"],
+    sex: ["女", "男"],
     sexIndex: 0,
     region: ['', '', ''],
     canGetCode: true,

@@ -43,6 +43,7 @@ class api {
    * 网络请求
    */
   requestAll(url, data, header, method) {
+    const self = this;
     wx.showLoading({
       title: '加载中',
     });
@@ -56,6 +57,11 @@ class api {
           if (res.statusCode === 200) {
             //200: 服务端业务处理正常结束
             resolve(res)
+            // if (res.data.code == -400 && res.data.msg.includes('登录失效')){
+            //   wx.navigateTo({
+            //     url: 'pages/home/home',
+            //   })
+            // }
           }  else {
             //其它错误，提示用户错误信息
             if (this._errorHandler != null) {

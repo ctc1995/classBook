@@ -119,7 +119,12 @@ Page({
     // 实际URL
     uploaderList2: [],
     uploaderNum: 0,
-    showUpload: true
+    showUpload: true,
+    isLogis: false,
+    // 快递名称
+    logisName: "",
+    // 快递单号
+    logisNumber: "",
   },
 
   /**
@@ -132,6 +137,11 @@ Page({
     if (status == 4 || status == 3){
       self.setData({
         reasonTypeObj: self.data.reasonTypeObj.concat([{ id: 1, name: '退款退货' }])
+      })
+    } else if (status == 99) {
+      self.setData({
+        isLogis: true,
+        shouhouId: options.id
       })
     }
     eventChannel.on('acceptOrder', function (data) {
@@ -156,46 +166,80 @@ Page({
    */
   onReady: function () {
   },
-  submit:function(){
-    let obj = {
-      order_id: this.data.order_id,
-      order_detail_id: this.data.order_detail_id,
-      // 退款金额
-      money: this.data.money,
-      // 退款方式
-      reasonType: this.data.reasonType.id,
-      // 退款原因
-      reason: this.data.reason.name,
-      // 退款说明
-      remake: this.data.remake,
-      // 凭证图片
-      images: this.data.uploaderList2
-    }
-    if (this.data.reasonType.id == 1){
-      obj.number = this.data.number;
-    }
-    app.request.postOrserAftersale(obj).then(res=>{
-      console.log(res);
-      if (res.code == 0) {
-        wx.showToast({
-          title: '提交成功',
-          success(res) {
-            var pages = getCurrentPages();
-            var prevPage = pages[pages.length - 2];  //上一个页面
-            prevPage.setData({ isRunOnShow: 0 })//设置数据
-            setTimeout(() => {
-              wx.navigateBack({
-                delta: 2
-              }) }, 1500);
-          }
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none',
-        })
-      }
+  bindLogisName: function(e){
+    this.setData({
+      logisName: e.detail.value
     })
+  },
+  bindLogisNumber: function(e){
+    this.setData({
+      logisNumber: e.detail.value
+    })
+  },
+  submit:function(){
+    if(this.data.isLogis){
+      app.request.aftersaledelivery({ id: this.data.shouhouId, name: this.data.logisName, number: this.data.logisNumber}).then(res=>{
+        console.log(res);
+        if (res.code == 0) {
+          wx.showToast({
+            title: '提交成功',
+            success(res) {
+              setTimeout(() => {
+                wx.navigateTo({
+                  url: '../orderManager/orderManager?type=all&index=0',
+                })
+              }, 1500);
+            }
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+          })
+        }
+      })
+    } else {
+      let obj = {
+        order_id: this.data.order_id,
+        order_detail_id: this.data.order_detail_id,
+        // 退款金额
+        money: this.data.money,
+        // 退款方式
+        reasonType: this.data.reasonType.id,
+        // 退款原因
+        reason: this.data.reason.name,
+        // 退款说明
+        remake: this.data.remake,
+        // 凭证图片
+        images: this.data.uploaderList2
+      }
+      if (this.data.reasonType.id == 1) {
+        obj.number = this.data.number;
+      }
+      app.request.postOrserAftersale(obj).then(res => {
+        console.log(res);
+        if (res.code == 0) {
+          wx.showToast({
+            title: '提交成功',
+            success(res) {
+              var pages = getCurrentPages();
+              var prevPage = pages[pages.length - 2];  //上一个页面
+              prevPage.setData({ isRunOnShow: 0 })//设置数据
+              setTimeout(() => {
+                wx.navigateBack({
+                  delta: 2
+                })
+              }, 1500);
+            }
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+          })
+        }
+      })
+    }
   },
   bindMoney(e) {
     var money = e.detail.value && e.detail.value.match(/\d+/g).join('');

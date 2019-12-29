@@ -71,6 +71,7 @@ Page({
           title: '没有更多了',
           icon: 'none'
         })
+        return
       }
       this.setData({
         goodList: self.data.goodList.concat(res.data.data),

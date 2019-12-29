@@ -8,6 +8,8 @@ Page({
   data: {
     goodList: [],
     keywords: '',
+    more: true,
+    page: 2
   },
 
   /**
@@ -73,7 +75,25 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    const self = this;
+    app.request.getSearch({
+      number: 20,
+      page: self.data.page,
+      keywords: self.data.keywords
+    }).then(res => {
+      if (res.data.data.length == 0) {
+        wx.showToast({
+          title: '没有更多了',
+          icon: 'none'
+        })
+        return;
+      }
+      self.setData({
+        goodList: self.data.goodList.concat(res.data.data),
+        page: self.data.page + 1
+      })
+      console.log(res);
+    })
   },
 
   /**

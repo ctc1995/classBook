@@ -79,7 +79,7 @@ Page({
   search: function(e) {
     console.log(e.detail);
     app.request.getSearch({
-      number: 999,
+      number: 20,
       page: 1,
       keywords: e.detail.value
     }).then(res => {
@@ -140,6 +140,7 @@ Page({
           title: '没有更多了',
           icon: 'none'
         })
+        return;
       }
       this.setData({
         goodList: self.data.goodList.concat(res.data.data),

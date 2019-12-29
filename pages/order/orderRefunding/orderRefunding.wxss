@@ -63,6 +63,13 @@
   display: flex;
   flex-wrap: wrap;
 }
+.tips{
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  padding: 0 36rpx;
+  color: #777;
+}
 .submit{
   width: 750rpx;
   height: 75rpx;

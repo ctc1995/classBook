@@ -165,9 +165,13 @@ Page({
         })
         return;
       }
+      let picUrl = [];
+      res.data.photo.forEach(item=>{
+        picUrl.push(item.images)
+      })
       self.setData({
         goods: res.data,
-        'goods.picUrl': [res.data.home_recommended_images, res.data.images],
+        'goods.picUrl': picUrl,
         is_favor: res.data.is_favor
       })
       if (options.boss) {
@@ -190,8 +194,9 @@ Page({
       }
     })
     app.request.getRelatedRecommendations(options.bookId).then(res=>{
+      console.log(res);
       self.setData({
-        goodList: res.data.data.data
+        goodList: res.data
       })
     })
   },

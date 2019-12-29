@@ -33,6 +33,10 @@ Component({
       type: Boolean,
       value: false
     },
+    shouhouDetail: {
+      type: Boolean,
+      value: true
+    },
     status: {
       type: Number,
       value: ''
@@ -64,7 +68,6 @@ Component({
 
     // 撤销申请
     cancel(e) {
-      console.log(e)
       wx.showModal({
         content: '撤销售后申请',
         success(res) {
@@ -85,6 +88,15 @@ Component({
     logisticsMark(e) {
       wx.navigateTo({
         url: '../orderRefundProcess/orderRefundProcess?id=' + e.target.dataset.id,
+      })
+    },
+    // 售后详情
+    receipt(e) {
+      wx.navigateTo({
+        url: '../orderRefundProcess/orderRefundProcess',
+        success: function (res) {
+          res.eventChannel.emit("acceptOrder", e.target.dataset.info)
+        }
       })
     },
     // 商品详情

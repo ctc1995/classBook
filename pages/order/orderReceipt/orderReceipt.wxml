@@ -66,7 +66,7 @@
       </button>
     </view>
   </view>
-  <view class="order_footer" wx:if="{{orderInfo.status == '0' || orderInfo.status == '7-0' || orderInfo.status == '7-1' || orderInfo.status == '7-2'}}">
+  <view class="order_footer" wx:if="{{orderInfo.status == '0'}}">
     <view class="total_money" wx:if="{{orderInfo.status == '0'}}">
       <view class="money">
         <text class="unit">￥</text>{{orderInfo.price}}
@@ -76,6 +76,6 @@
     <button class="btn btn_primary" bindtap="buy" wx:if="{{orderInfo.status == '0'}}">立即支付</button>
     <view wx:if="{{orderInfo.status != '0'}}"></view>
     <!-- <button class="btn btn_default" bindtap="cancel" wx:if="{{orderInfo.status == '7-0' || orderInfo.status == '7-1' || orderInfo.status == '7-2'}}">撤销申请</button> -->
-    <button class="btn btn_default" bindtap="logisticsMark" wx:if="{{orderInfo.status == '7-1'}}">物流登记</button>
+    <!-- <button class="btn btn_default" bindtap="logisticsMark" wx:if="{{orderInfo.status == '7-1'}}">物流登记</button> -->
   </view>
 </view>

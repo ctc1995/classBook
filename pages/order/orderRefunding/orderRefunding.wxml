@@ -1,10 +1,10 @@
 <!--pages/order/orderRefunding/orderRefunding.wxml-->
 <view class="page_refund">
   <view class="order_detail">
-    <orderGoods buy-goods-list="{{buyGoodsList}}"  money="{{false}}"></orderGoods>
+    <orderGoods buy-goods-list="{{buyGoodsList}}"  money="{{false}}" shouhouDetail="{{false}}"></orderGoods>
   </view>
-  <i class="line"></i>
-  <view class="refund_info">
+  <i class="line" wx:if="{{!isLogis}}"></i>
+  <view class="refund_info" wx:if="{{!isLogis}}">
     <view>
       <span>退款金额<span style="color: red;">*</span></span>
       <input style="text-align: right;" type="digit" placeholder="最大退款金额 {{orderMaxMoney}}元" value="{{orderMaxMoney}}" bindblur="bindMoney" disabled="true"></input>
@@ -34,8 +34,7 @@
       <input class="remake" type="text" placeholder="请输入退款说明" bindblur="bindRemake"></input>
     </view>
   </view>
-  <i class="line"></i>
-  <view class="upload_pic">
+  <view class="upload_pic" wx:if="{{!isLogis}}">
     <view class='title'>图片上传 {{uploaderNum}}/3</view>
     <view class='ui_uploader_cell content'>
       <view class='ui_uploader_item' wx:for="{{uploaderList1}}" wx:key="{{index}}">
@@ -43,6 +42,19 @@
         <image bindtap='showImg' mode="aspectFit" data-index="{{index}}" src='{{item}}'></image>
       </view>
       <view class='ui_uploader' bindtap='upload' wx:if="{{showUpload}}"></view>
+    </view>
+  </view>
+  <view class="tips" wx:if="{{isLogis}}">
+    请正确填写快递信息，以免出现退货确认失败问题
+  </view>
+  <view class="refund_info" wx:if="{{isLogis}}">
+    <view>
+      <span>快递公司<span style="color: red;">*</span></span>
+      <input style="text-align: right;" placeholder="请填写快递公司" value="{{logisName}}" bindblur="bindLogisName"></input>
+    </view>
+    <view>
+      <span>快递单号<span style="color: red;">*</span></span>
+      <input style="text-align: right;" placeholder="请填写快递单号" value="{{logisNumber}}" bindblur="bindLogisNumber"></input>
     </view>
   </view>
   <button class="btn btn_primary submit" bindtap="submit">提交申请</button>

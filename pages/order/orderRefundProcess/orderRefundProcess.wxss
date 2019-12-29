@@ -138,3 +138,19 @@
   display: inline-block;
   margin-right: 16rpx;
 }
+.order_action{
+  width: 750rpx;
+  height: 100rpx;
+  background-color: #fff;
+  border-top: 1px solid #dedede;
+  position: fixed;
+  bottom: 0;
+  padding: 0 36rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+}
+.order_action .btn+.btn{
+  margin-left: 40rpx;
+}

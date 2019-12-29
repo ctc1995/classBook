@@ -22,6 +22,7 @@ Page({
     ids: [],
     // 优惠券id
     coupon_id: '',
+    disable: true
   },
 
   /**
@@ -138,93 +139,108 @@ Page({
   },
   // 调起微信支付
   buy(){
-    var self = this;
-    let orderObj = { 
-      address_id: this.data.base.address.id,
-      ids: this.data.ids,
-      payment_id: this.data.payment_id,
-      coupon_id: this.data.coupon_id,
-      user_note: this.data.remakes,
-      buy_type: this.data.buyType
-    }
-    if (this.data.buyType == 'goods'){
-      orderObj.stock = 1
-      orderObj.goods_id = this.data.goodsId
-      orderObj.wid = this.data.wid
-    }
-    app.request.buyAdd(orderObj).then(res=>{
-      console.log(res);
-      let orderInfo = res.data.order;
-      if(res.code == 0){
-        wx.request({
-          url: app.request.payOrder(orderInfo.id, orderInfo.payment_id),
-          method: "POST",
-          data: {
-            id: orderInfo.id,
-            payment_id: orderInfo.payment_id,
-          },
-          dataType: "json",
-          success: res => {
-            wx.hideLoading();
-            console.log(res);
-            if (res.data.code == 0) {
-              wx.requestPayment({
-                timeStamp: res.data.data.timeStamp,
-                nonceStr: res.data.data.nonceStr,
-                package: res.data.data.package,
-                signType: res.data.data.signType,
-                paySign: res.data.data.paySign,
-                success: function (res) {
-                  console.log(res);
-                  // 数据设置
-                  orderInfo['status'] = 2;
-                  orderInfo['status_name'] = '待发货';
-                  wx.redirectTo({
-                    url: '../orderReceipt/orderReceipt?id=' + orderInfo.id,
-                  })
-                },
-                fail: function (res) {
-                  wx.showToast({
-                    title: "支付失败",
-                    icon: 'none',
-                    complete(){
-                      wx.redirectTo({
-                        url: '../orderReceipt/orderReceipt?id=' + orderInfo.id,
-                      })
-                    }
-                  })
-                }
-              });
-            } else {
+    if(this.data.disable){
+      this.setData({
+        disable: false
+      })
+      var self = this;
+      let orderObj = {
+        address_id: this.data.base.address.id,
+        ids: this.data.ids,
+        payment_id: this.data.payment_id,
+        coupon_id: this.data.coupon_id,
+        user_note: this.data.remakes,
+        buy_type: this.data.buyType
+      }
+      if (this.data.buyType == 'goods') {
+        orderObj.stock = 1
+        orderObj.goods_id = this.data.goodsId
+        orderObj.wid = this.data.wid
+      }
+      app.request.buyAdd(orderObj).then(res => {
+        console.log(res);
+        let orderInfo = res.data.order;
+        if (res.code == 0) {
+          wx.request({
+            url: app.request.payOrder(orderInfo.id, orderInfo.payment_id),
+            method: "POST",
+            data: {
+              id: orderInfo.id,
+              payment_id: orderInfo.payment_id,
+            },
+            dataType: "json",
+            success: res => {
+              wx.hideLoading();
+              console.log(res);
+              if (res.data.code == 0) {
+                wx.requestPayment({
+                  timeStamp: res.data.data.timeStamp,
+                  nonceStr: res.data.data.nonceStr,
+                  package: res.data.data.package,
+                  signType: res.data.data.signType,
+                  paySign: res.data.data.paySign,
+                  success: function (res) {
+                    console.log(res);
+                    // 数据设置
+                    orderInfo['status'] = 2;
+                    orderInfo['status_name'] = '待发货';
+                    wx.redirectTo({
+                      url: '../orderReceipt/orderReceipt?id=' + orderInfo.id,
+                    })
+                  },
+                  fail: function (res) {
+                    wx.showToast({
+                      title: "支付失败",
+                      icon: 'none',
+                      complete() {
+                        wx.redirectTo({
+                          url: '../orderReceipt/orderReceipt?id=' + orderInfo.id,
+                        })
+                      }
+                    })
+                  }
+                });
+              } else {
+                wx.showToast({
+                  title: res.data.msg,
+                })
+              }
+            },
+            fail: () => {
+              wx.hideLoading();
               wx.showToast({
-                title: res.data.msg,
+                title: "服务器请求出错,拉起支付失败！",
+              })
+              setTimeout(() => {
+                wx.navigateTo({
+                  url: 'page/order/orderManager/orderManager?type=pendPay&index=1',
+                })
+              }, 500)
+            },
+            complete: ()=>{
+              self.setData({
+                disable: true
               })
             }
-          },
-          fail: () => {
-            wx.hideLoading();
-            wx.showToast({
-              title: "服务器请求出错,拉起支付失败！",
-            })
-            setTimeout(()=>{
-              wx.navigateTo({
-                url: 'page/order/orderManager/orderManager?type=pendPay&index=1',
-              })
-            },500)
-          }
-        });
-      } else {
+          });
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      }).catch(error => {
+        self.setData({
+          disable: true
+        })
         wx.showToast({
-          title: res.msg,
+          title: '下单失败，请重试',
           icon: 'none'
         })
-      }
-    }).catch(error=>{
-      wx.showToast({
-        title: '下单失败，请重试',
-        icon: 'none'
       })
-    })
+    } else {
+      return;
+    }
   },
   /**
    * 生命周期函数--监听页面显示

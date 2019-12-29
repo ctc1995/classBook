@@ -27,13 +27,14 @@ Page({
         address: '广东省深圳市南山区粤海街道9109号三诺智慧大厦'
       }
     },
+    tuihuo:{},
     countDown: '',
     process:{
       5:{
         title: "您已成功发起退款申请，请耐心等待商家处理",
         content: [
           "商家同意或者超时未处理，系统将退款给您", 
-          "如果商家拒绝，您可以修改退款申请后再次发起，商家会重新处理"
+          "如果被拒绝，您可以联系客服，客服将会为您处理"
         ]
       },
       6: {
@@ -42,27 +43,79 @@ Page({
           "未与商家协商一致，请勿使用到付或平邮，以免商家拒签货物",
           "交易的钱款还在平台中间账户，确保您的资金安全",
           "请填写真实物流信息，逾期未填写，退货申请将撤销",
-          "平台提供官方寄件服务（上门取件），退货有保障",
         ]
       }
-    }
+    },
+    receiptInfo: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      "orderInfo.id": options.id
+    const eventChannel = this.getOpenerEventChannel(), self = this;
+    eventChannel.on('acceptOrder', function (data) {
+      console.log(data);
+      data.orderaftersale.status = '7-' + data.orderaftersale.status
+      if(data.company) {
+        self.setData({
+          tuihuo: {
+            name: data.company.warehouse_name,
+            phone: data.company.phone,
+            address: `${data.company.province_name}${data.company.city_name}${data.company.exparea_name}${data.company.address}`
+          }
+        })
+      }
+      self.setData({
+        receiptInfo: data.orderaftersale,
+        buyGoodsList: [data]
+      })
     })
-    app.request.getOrderDetail(options.id, 1).then(res=>{
-      console.log(res);
+    // this.setData({
+    //   "orderInfo.id": options.id
+    // })
+    // app.request.getOrderDetail(options.id, 1).then(res=>{
+    //   console.log(res);
+    // })
+  },
+  // 撤销售后
+  cancel(){
+    const self = this;
+    console.log(self.data.receiptInfo);
+    wx.showModal({
+      content: '撤销售后申请',
+      success(res) {
+        if (res.confirm) {
+          app.request.aftersaleCancel(self.data.receiptInfo.id).then(res => {
+            console.log(res);
+            wx.showToast({
+              title: res.msg,
+            })
+            setTimeout(() => {
+              wx.navigateBack({
+                delta: 2
+              })
+            }, 1500);
+          })
+        } else if (res.cancel) {
+        }
+      }
     })
   },
-
+  // 物流登记
+  logis(){
+    console.log('logis');
+    const self = this;
+    wx.navigateTo({
+      url: '../orderRefunding/orderRefunding?status=99&id=' + this.data.receiptInfo.id,
+      success: function (res) {
+        res.eventChannel.emit("acceptOrder", self.data.buyGoodsList[0])
+      }
+    })
+  },
   callPhone() {
     wx.makePhoneCall({
-      phoneNumber: '15018504589' //仅为示例，并非真实的电话号码
+      phoneNumber: wx.getStorageSync('phone')
     })
   },
   /**
@@ -102,7 +155,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      orderStatus: app.globalData.orderStatus
+    })
   },
 
   /**
