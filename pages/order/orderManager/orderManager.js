@@ -202,12 +202,22 @@ Page({
   },
   // 订单详情
   detail(e){
-    var self = this, orderIndex = e.currentTarget.dataset.index;
+    const self = this, orderIndex = e.currentTarget.dataset.index;
     wx.navigateTo({
-      url: '../orderReceipt/orderReceipt',
-      success: function (res) {
-        res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
-      }
+      url: '../orderReceipt/orderReceipt?id=' + self.data.orderList[orderIndex].id,
+      // success: function (res) {
+      //   res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
+      // }
+    })
+  },
+  // 查看物流
+  logistics(e) {
+    const self = this, orderIndex = e.currentTarget.dataset.index;
+    wx.navigateTo({
+      url: '../orderReceipt/orderReceipt?id=' + self.data.orderList[orderIndex].id,
+      // success: function (res) {
+      //   res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
+      // }
     })
   },
   // 立即支付
@@ -299,17 +309,6 @@ Page({
         this.setData({
           topTips: res.msg
         })
-      }
-    })
-  },
-  // 查看物流
-  logistics(e){
-    var orderIndex = e.currentTarget.dataset.index;
-    var self = this;
-    wx.navigateTo({
-      url: '../orderReceipt/orderReceipt',
-      success: function (res) {
-        res.eventChannel.emit("acceptOrder", self.data.orderList[orderIndex])
       }
     })
   },
