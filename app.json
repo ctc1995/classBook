@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/goods/goods",
     "pages/about/about",
     "pages/search/search",
     "pages/inviteHistory/inviteHistory",
@@ -16,7 +17,6 @@
     "pages/info/info",
     "pages/order/orderConfirm/orderConfirm",
     "pages/logs/logs",
-    "pages/goods/goods",
     "pages/allClass/allClass",
     "pages/bookMenu/bookMenu",
     "pages/bookMenuList/bookMenuList",

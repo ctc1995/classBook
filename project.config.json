@@ -21,7 +21,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.3",
+	"libVersion": "2.9.4",
 	"appid": "wx913722e4e031bb60",
 	"projectname": "class-book",
 	"debugOptions": {
@@ -55,10 +55,10 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "分享进入页面",
-					"pathName": "pages/home/home",
-					"query": "ref=123",
+					"id": 0,
+					"name": "分享进入商品页面",
+					"pathName": "pages/goods/goods",
+					"query": "bookId=463526",
 					"scene": 1007
 				}
 			]

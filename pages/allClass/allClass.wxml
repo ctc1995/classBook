@@ -1,11 +1,14 @@
 <!--pages/allClass/allClass.wxml-->
 <view class="page_all_class">
     <view class="mod_book_list" wx:for="{{allClassList}}">
-      <h2 class="title">{{item.name}}</h2>
-      <div class="list">
-        <span class="item" wx:for="{{item.items}}" bindtap="navToList" data-item="{{item}}">
-          {{item.name}}
-        </span>
-      </div>
+      <view class="first_class">{{item.name}}</view>
+      <view class="second_class" wx:for="{{item.items}}">
+        <h2 class="title">{{item.name}}</h2>
+          <div class="list">
+            <span class="item" wx:for="{{item.items}}" bindtap="navToList" data-item="{{item}}">
+              {{item.name}}
+            </span>
+          </div>
+      </view>
     </view>
 </view>

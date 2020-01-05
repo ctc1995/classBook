@@ -76,6 +76,16 @@ App({
               }
             }
           })
+        } else {
+          // wx.switchTab({
+          //   url: '../home/home',
+          //   complete: function () {
+          //     wx.showToast({
+          //       title: '为了方便您的使用，请先登录！',
+          //       icon: 'none'
+          //     })
+          //   }
+          // })
         }
       }
     })

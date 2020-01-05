@@ -140,8 +140,8 @@ class request {
     })
   }
   // 根据分类获取书籍
-  getGoodsCategoryList(id) {
-    return this._api.postRequest('goods/GoodsCategoryList', { category_id: id }).then(res=>{
+  getGoodsCategoryList({ id, page=1, number=10}) {
+    return this._api.postRequest('goods/GoodsCategoryList', { category_id: id, page, number }).then(res=>{
       if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {

@@ -19,11 +19,12 @@
           <span class="price_unit" wx:if="{{curTabId == 'all'}}">￥</span>
           <span class="real_price" wx:if="{{curTabId == 'all'}}">{{item.price}}</span>
           <span wx:if="{{curTabId == 'all'}}">/{{item.original_price}}</span>
-          <view class="stepper {{item.inventory <2 ? 'disable':''}}"  wx:if="{{item.inventory != 0 && curTabId != 'remind'}}">
+          <view class="stepper {{item.inventory <2 ? 'disable':''}}" wx:if="{{item.inventory != 0 && curTabId != 'remind'}}">
             <view class="oprate" catchtap='bindMinus' data-index='{{index}}'>-</view>
             <input bindinput='bindManual' type="number" maxlength="3" value='{{item.stock}}' data-index='{{index}}' disabled="{{item.inventory <2}}"></input>
             <view class="oprate" catchtap='bindPlus' data-index='{{index}}'>+</view>
           </view>
+          <span class="stock" wx:elif="{{item.inventory == 0}}">无货</span>
           <span class="stock" bindtap="cancelRemind" data-index="{{index}}" wx:else>取消提醒</span>
         </p>
       </section>

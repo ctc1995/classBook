@@ -30,6 +30,7 @@ Page({
         '百世物流已揽件',
       ],
     },
+    orderId: 0,
     isRunOnShow: 1,
     buyGoodsList: [],
     orderStatus: {},
@@ -49,6 +50,7 @@ Page({
     if(options.id){
       app.request.getOrderDetail(options.id).then(res => {
         self.setData({
+          orderId: options.id,
           orderInfo: res.data,
           buyGoodsList: res.data.items,
           orderStatus: appInstance.globalData.orderStatus,
@@ -272,6 +274,7 @@ Page({
         })
       })
     }
+    this.onLoad({ id: this.data.orderId })
   },
 
   /**
@@ -292,6 +295,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.onLoad({id: this.data.orderId})
     setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 

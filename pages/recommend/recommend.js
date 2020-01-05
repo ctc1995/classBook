@@ -31,18 +31,20 @@ Page({
     if (options.type){
       this.setData({
         type: options.type
-      })
+      }) 
       this.getGoodsRecommend(options.type, 10, this.data.page)
     } else {
       const eventChannel = this.getOpenerEventChannel(), self = this;
       eventChannel.on('sendData', function (data) {
         self.setData({
           title: '分类-' + data.name,
-          bookClass: data.items
+          bookClass: data.items,
+          classId: data.id
         })
-        app.request.getGoodsCategoryList(data.id).then(res=>{
+        app.request.getGoodsCategoryList({id: data.id}).then(res=>{
           self.setData({
-            goodList: res.data.data
+            goodList: res.data.data,
+            page: self.data.page + 1
           })
         })
       })
@@ -109,7 +111,7 @@ Page({
         break;
     }
     wx.setNavigationBarTitle({
-      title
+      title: this.data.title||title
     })
   },
 
@@ -134,7 +136,24 @@ Page({
     this.setData({
       page: 1
     })
-    this.onLoad(this.data.type)
+    const self = this;
+    if (this.data.classId) {
+      app.request.getGoodsCategoryList({ id: self.data.classId, page: self.data.page }).then(res => {
+        if (res.data.data.length == 0) {
+          wx.showToast({
+            title: '没有更多了',
+            icon: 'none'
+          })
+          return
+        }
+        self.setData({
+          goodList: res.data.data,
+          page: self.data.page + 1
+        })
+      })
+    } else {
+      this.onLoad(this.data.type)
+    }
     setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 
@@ -142,7 +161,24 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getGoodsRecommend(this.data.type, 10, this.data.page)
+    const self = this;
+    if (this.data.classId) {
+      app.request.getGoodsCategoryList({ id: self.data.classId, page: self.data.page }).then(res => {
+        if (res.data.data.length == 0) {
+          wx.showToast({
+            title: '没有更多了',
+            icon: 'none'
+          })
+          return
+        }
+        self.setData({
+          goodList: self.data.goodList.concat(res.data.data),
+          page: self.data.page + 1
+        })
+      })
+    } else {
+      this.getGoodsRecommend(this.data.type, 10, this.data.page)
+    }
   },
 
   /**

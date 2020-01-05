@@ -180,7 +180,7 @@ Page({
     })
   },
   submit: function () {
-    const self = this;
+    const self = this, _PAGE = getCurrentPages(), prevPage = _PAGE[_PAGE.length - 2];
     if (this.data.request) {
       return;
     }
@@ -188,6 +188,7 @@ Page({
       request: true
     })
     if(this.data.isLogis){
+      // 提交退货登记
       app.request.aftersaledelivery({ id: this.data.shouhouId, name: this.data.logisName, number: this.data.logisNumber}).then(res=>{
         console.log(res);
         this.setData({
@@ -198,9 +199,10 @@ Page({
             title: '提交成功',
             success(res) {
               setTimeout(() => {
-                wx.redirectTo({
-                  url: '../orderReceipt/orderReceipt?id=' + self.data.orderId,
+                prevPage.setData({
+                  orderId: self.data.orderId
                 })
+                wx.navigateBack({delta:1})
               }, 1500);
             }
           })
@@ -212,6 +214,7 @@ Page({
         }
       })
     } else {
+      // 提交售后申请
       let obj = {
         order_id: this.data.order_id,
         order_detail_id: this.data.order_detail_id,
@@ -236,9 +239,10 @@ Page({
             title: '提交成功',
             success(res) {
               setTimeout(() => {
-                wx.redirectTo({
-                  url: '../orderReceipt/orderReceipt?id=' + self.data.orderId,
+                prevPage.setData({
+                  orderId: self.data.orderId
                 })
+                wx.navigateBack({ delta: 1 })
               }, 1500);
             },
             complete() {

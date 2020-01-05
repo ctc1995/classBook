@@ -72,11 +72,11 @@ Page({
         'rankList[0].list': res.data.data
       })
     })
-    app.request.getAuthList({ page: this.data.authPage}).then(res=>{
+    app.request.getAuthList({ page: 1}).then(res=>{
       console.log(res);
       self.setData({
         authList: res.data.data,
-        authPage: self.data.authPage+1
+        authPage: 2
       })
     })
   },

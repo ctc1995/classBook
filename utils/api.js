@@ -55,13 +55,25 @@ class api {
         method: method,
         success: (res => {
           if (res.statusCode === 200) {
-            //200: 服务端业务处理正常结束
-            resolve(res)
-            // if (res.data.code == -400 && res.data.msg.includes('登录失效')){
-            //   wx.navigateTo({
-            //     url: 'pages/home/home',
-            //   })
-            // }
+            if (res.data.code == -400 || res.code == -400) {
+              wx.switchTab({
+                url: '../home/home',
+                success: function(){
+                  const _PAGE = getCurrentPages();
+                  wx.setStorageSync('_page', '/'+_PAGE[_PAGE.length - 1].route)
+                  wx.setStorageSync('_query', _PAGE[_PAGE.length - 1].options)
+                },
+                complete: function(){
+                  wx.showToast({
+                    title: '为了方便您的使用，请先登录！',
+                    icon: 'none'
+                  })
+                }
+              })
+            } else {
+              //200: 服务端业务处理正常结束
+              resolve(res)
+            }
           }  else {
             //其它错误，提示用户错误信息
             if (this._errorHandler != null) {

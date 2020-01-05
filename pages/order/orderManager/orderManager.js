@@ -212,7 +212,6 @@ Page({
   },
   // 立即支付
   toPaid(e) {
-    console.log(this.data.request);
     if (this.data.request) {
       return;
     }

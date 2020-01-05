@@ -123,7 +123,6 @@ Page({
     
   },
   getUserInfo: function(e) {
-    console.log(e)
     this.pageInit();
     wx.showTabBar();
     app.globalData.userInfo = e.detail.userInfo
@@ -139,6 +138,20 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+    const _page = wx.getStorageSync('_page'), _query = wx.getStorageSync('_query')
+    if(_page){
+      let url = _page;
+      if (_query){
+        url += '?'
+        for (let [k, v] of Object.entries(_query)) {
+          url += `${k}=${v}&`
+        }
+        url = url.substring(0, url.length-1)
+      }
+      wx.navigateTo({
+        url,
+      })
+    }
   },
 
   swiperChange: function(e) {

@@ -39,7 +39,7 @@
   <view class="goods_detail">
     <p class="detail_item">
       <span class="unit">作者</span>
-      <span class="txt">{{goods.author_name}}</span>
+      <span class="txt">{{goods.author}}</span>
     </p>
     <p class="detail_item">
       <span class="unit">出版社</span>
@@ -69,7 +69,7 @@
       </view>
     </p> -->
   </view>
-  <i class="line"></i>
+  <!-- <i class="line"></i>
   <view class="good_action">
     <p class="need_link_icon action" wx:if="{{goods.isbn != 0}}">
       更多品相
@@ -79,20 +79,20 @@
         </view>
       </picker>
     </p>
-    <!-- <p class="need_link_icon action">
+    <p class="need_link_icon action">
       <image src="../../assets/images/dingwei.png"></image>
       <picker class="address" mode="region" bindchange="bindRegionChange" value="{{region}}">
         <view class="picker">
           送至：{{region[0]}} {{region[1]}} {{region[2]}}
         </view>
       </picker>
-    </p> -->
-  </view>
+    </p>
+  </view> -->
   <h2 class="line_title">图文详情</h2>
   <view class="goods_detail">
     <p class="detail_item">
       <span class="unit">货号</span>
-      <span class="txt">{{goods.id}}</span>
+      <span class="txt">{{goods.shelf_number}}</span>
     </p>
     <p class="detail_item">
       <span class="unit">商品分类</span>
@@ -108,7 +108,7 @@
       <span class="txt">{{goods.openbook || 32}}开</span>
     </p>
   </view>
-  <view class="goods_detail_image" wx:if="{{item.images_b}}">
+  <view class="goods_detail_image">
     <image src="{{item.images_b}}" mode="widthFix" wx:for="{{goods.photo}}"></image>
     <!-- <image src="../../assets/images/test_detail_image.png" mode="widthFix"></image> -->
   </view>

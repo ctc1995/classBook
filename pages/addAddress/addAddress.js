@@ -1,5 +1,13 @@
 // pages/addAddress/addAddress.js
 const app = new getApp();
+const debounce = (func, wait) => {
+  let timer;
+
+  return () => {
+    clearTimeout(timer);
+    timer = setTimeout(func, wait);
+  };
+};
 Page({
 
   /**
