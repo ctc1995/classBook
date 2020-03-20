@@ -187,8 +187,6 @@ Page({
           })
           self.setData({
             goodsProd: res.data,
-            'goods.price_container.price': res.data[0].price,
-            'goods.price': res.data[0].price
           })
         })
       }

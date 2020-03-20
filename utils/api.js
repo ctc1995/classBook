@@ -1,6 +1,9 @@
 class api {
   constructor() {
-    this._baseUrl = 'https://dianshu.chaoshang666.com/index.php/api/'
+    // prod
+    this._baseUrl = 'https://kongz.com/index.php/api/'
+    // test
+    // this._baseUrl = 'https://dianshu.chaoshang666.com/index.php/api/'
     this._header = {}
   }
 

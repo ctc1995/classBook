@@ -22,8 +22,9 @@
     </view>
     <view class="auth_item" wx:for="{{authList}}" wx:key="{{index}}">
       <image class="auth_ava" src="{{item.head_img}}" mode="aspectFit"/>
-      <p class="auth_name">
-        <span title="{{item.name}}">{{item.name}}</span>
+      <p class="auth_name" title="{{item.name}}">
+        {{item.name}}
+        <!-- <span title="{{item.name}}">{{item.name}}</span> -->
         <!-- <span class="{{item.like? 'like': ''}}">
           {{item.follow_num}}
           <image src="../../assets/images/{{item.like? 'sel-like2x.png' : 'like22x.png'}}"/>

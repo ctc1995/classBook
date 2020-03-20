@@ -11,7 +11,7 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    ref: null,
+    referrer: null,
     // 轮播图片
     swiperPics: [],
     // swiperPics: ['swiper.png', 'swiper.png','swiper.png'],
@@ -50,9 +50,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      ref: options.ref
+    console.log(options);
+    const scene = decodeURIComponent(options.scene || "").split("&");
+    let sceneObj = {};
+    scene.map(item=>{
+      let sceneItem = item.split("=")
+      sceneObj[sceneItem[0]] = sceneItem[1];
     })
+    if (sceneObj.referrer) {
+      this.setData({
+        referrer: sceneObj.referrer
+      })
+      app.globalData.referrer = sceneObj.referrer
+    }
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -86,13 +96,11 @@ Page({
         }
       }
     })
-    console.log(this.data.userInfo);
   },
   pageInit: function () {
     var self = this;
     // Banner
     app.request.getBanner().then(res => {
-      console.log(res);
       self.setData({
         swiperPics: res.data
       })
@@ -102,7 +110,6 @@ Page({
       number: 3,
       page: 1
     }).then(res=>{
-      console.log(res);
       self.setData({
         recommendList: res.data.data
       })
@@ -114,7 +121,6 @@ Page({
       number: 10,
       page: self.data.page
     }).then(res=>{
-      console.log(res);
       this.setData({
         goodList: res.data.data,
         page: self.data.page+1
@@ -161,8 +167,6 @@ Page({
   },
   // 进入书单
   goBookMenu(e){
-    console.log(e.currentTarget.dataset.item)
-
     var self = this;
     wx.navigateTo({
       url: '../bookMenu/bookMenu?bookMenuId=' + e.currentTarget.dataset.item.id,
@@ -173,7 +177,6 @@ Page({
   },
   // 加购
   addShopCar(e) {
-    console.log(e);
     app.request.addCart({ goods_id: e.currentTarget.dataset.book.id}).then(res=>{
       console.log(res);
       wx.showToast({

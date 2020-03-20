@@ -317,14 +317,14 @@ Page({
     if (this.data.request) {
       return;
     }
-    this.setData({
-      request: true
-    })
     var orderIndex = e.currentTarget.dataset.index, self = this;
     wx.showModal({
       content: '确认收货',
       success(res) {
         if (res.confirm) {
+          this.setData({
+            request: true
+          })
           app.request.orderCollect(self.data.orderList[orderIndex].id).then(res=>{
             console.log(res);
             if (res.code == 0) {

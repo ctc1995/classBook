@@ -32,7 +32,8 @@
     "pages/aboutMe/aboutMe",
     "pages/coupon/coupon",
     "pages/searchRes/searchRes",
-    "pages/attention/attention"
+    "pages/attention/attention",
+    "pages/inviteImg/inviteImg"
   ],
   "window": {
     "backgroundTextStyle": "light",

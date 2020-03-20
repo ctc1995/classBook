@@ -4,10 +4,10 @@
   <view class="content">
     <text class="li">累计邀请 5 位好友成功注册,即可免费获得一本书</text>
     <text class="li">邀请Ta成为书友，阅读同一类书，共同成长</text>
-    <button class="btn btn_primary btn_invite">立即邀请</button>
+    <button class="btn btn_primary btn_invite" bindtap="invite">立即邀请</button>
     <navigator class="need_link_icon invite_history" url="../inviteHistory/inviteHistory">
       <image src="../../assets/images/invite.png" mode="widthFix" style="display:inline-block; width:32rpx; margin-right: 20rpx;"></image>
-      已成功邀请<span>20</span>位好友，共获得<span>20</span>本书
+      已成功邀请<span>{{invitaSuccessNum}}</span>位好友，共获得<span>{{exchangeTotalNum}}</span>本书
     </navigator>
     <view class="rules">
       <text class="li">邀请规则说明</text>

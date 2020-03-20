@@ -1,0 +1,12 @@
+<!--pages/inviteImg/inviteImg.wxml-->
+<view class="invite_img">
+  <view class="img_card">
+    <view class="ava">
+      <open-data class="ava" type="userAvatarUrl"></open-data>
+    </view>
+    <text class="slogan">将典书分享给朋友，将获得推广奖励</text>
+    <text class="slogan">叫上朋友，来典书一起看书吧！</text>
+    <image class="mini_code" src="{{inviteImg}}" data-url="{{inviteImg}}" bindlongpress="saveImage"></image>
+    <text class="tips">长按小程序码　即可保存到相册</text>
+  </view>
+</view>

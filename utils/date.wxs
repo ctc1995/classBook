@@ -1,5 +1,6 @@
 var formatDate = function (datetime) {
-  return [datetime.substring(5, 10), datetime.substring(11, 16)]
+  var dateMap = datetime.split(" ");
+  return [dateMap[0].substring(5, 10), dateMap[1].substring(0, 10)]
 }
 module.exports = {
   formatDate: formatDate

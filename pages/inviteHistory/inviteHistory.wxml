@@ -2,11 +2,11 @@
 <view class="page_invitehis">
   <view class="invite_total">
     <view class="total_item">
-      <view><text>{{invite.invita_success_num}}</text>(人)</view>
+      <view><text>{{invite.invita_success_num || 0}}</text>(人)</view>
       <view>成功邀请</view>
     </view>
     <view class="total_item">
-      <view><text>{{invite.exchange_total_num}}</text>(本)</view>
+      <view><text>{{invite.exchange_total_num || 0}}</text>(本)</view>
       <view>总奖励</view>
     </view>
   </view>

@@ -1,11 +1,36 @@
 // pages/invite/invite.js
+//获取应用实例
+const app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    access_token: '28_4iUlOL04D0LYw_jnuhNMIuBt6WaipcCmd0dunRVk0pSy4ZageGG83nX6LzvvX-2KQbTaxGmZElm3TAiD3WG98kWtve1dGRbFkAmZyOSDEBePvh2Js4WdCZjqYLIvRHflvSScqtUhntu9K-jYTPFdAAALHX'
+    // 推广二维码地址
+    imgUrl: '',
+    // 成功邀请数
+    invitaSuccessNum: 0,
+    // 兑换数
+    exchangeTotalNum: 0
+  },
+
+  // 立即邀请
+  invite: function () {
+    app.request.inviteCode().then(res=>{
+      let imgUrl = res.replace('"', '').replace(/[\\]/g, '');
+      this.setData({
+        imgUrl,
+      })
+      wx.navigateTo({
+        url: '../inviteImg/inviteImg?inviteImg=' + imgUrl,
+        // success: function (res) {
+        //   res.eventChannel.emit("acceptbookMenu", e.currentTarget.dataset.item)
+        // }
+      })
+      console.log(res.replace('"', '').replace(/[\\]/g, ''));
+    })
   },
 
   /**
@@ -13,16 +38,11 @@ Page({
    */
   onLoad: function (options) {
     const self = this;
-    wx.request({
-      url: 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=' + self.access_token,
-      data: {
-        access_token: self.access_token,
-        scene: 'ovwpL5MOUPrgYeD0HWLmt6pKq2PM'
-      },
-      method: 'POST',
-      success(res){
-        console.log(res);
-      },
+    app.request.invitation().then(res=>{
+      self.setData({
+        invitaSuccessNum: res.invita_success_num,
+        exchangeTotalNum: res.exchange_total_num
+      })
     })
   },
 

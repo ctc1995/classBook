@@ -178,9 +178,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    app.request.getOrderDetail(this.data.orderInfo.id, 1).then(res => {
-      console.log(res);
-    })
+    // app.request.getOrderDetail(this.data.orderInfo.id, 1).then(res => {
+    //   console.log(res);
+    // })
     setTimeout(() => { wx.stopPullDownRefresh(); }, 1000)
   },
 

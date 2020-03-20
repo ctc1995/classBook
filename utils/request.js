@@ -685,13 +685,54 @@ class request {
   // 物流
   orderLogistics(id, number) {
     return this._api.postRequest('order/logistics', { token: wx.getStorageSync('token'), express_id: id, express_number: number }).then(res=>{
-      return res.data
+      // if (res.code == 0 || res.data.code == 0) {
+        return res.data
+      // } else {
+      //   wx.showToast({
+      //     title: res.data.msg,
+      //     icon: 'none'
+      //   })
+      // }
     });
   }
   // 退货物流登记
   aftersaledelivery({id, name, number}){
     return this._api.postRequest('order/aftersaledelivery', { token: wx.getStorageSync('token'), id, express_name: name, express_number: number}).then(res=>{
+      // if (res.code == 0 || res.data.code == 0) {
+        return res.data
+      // } else {
+      //   wx.showToast({
+      //     title: res.data.msg,
+      //     icon: 'none'
+      //   })
+      // }
+    })
+  }
+  // 邀请二维码
+  inviteCode() {
+    return this._api.postRequest('user/get_qrcode', { token: wx.getStorageSync('token')}).then(res=>{
       return res.data
+      // if (res.code == 0 || res.data.code == 0) {
+      //   return res.data
+      // } else {
+      //   wx.showToast({
+      //     title: res.data.msg,
+      //     icon: 'none'
+      //   })
+      // }
+    })
+  }
+  // 邀请记录
+  invitation() {
+    return this._api.postRequest('user/invitation', { token: wx.getStorageSync('token') }).then(res => {
+      // if (res.code == 0 || res.data.code == 0) {
+        return res.data
+    //   } else {
+    //     wx.showToast({
+    //       title: res.data.msg,
+    //       icon: 'none'
+    //     })
+    //   }
     })
   }
 }
