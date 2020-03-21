@@ -658,8 +658,8 @@ class request {
   // 提交退换
   postOrserAftersale({ order_id, order_detail_id, money, reasonType, reason, remake, number, images }){
     return this._api.postRequest('order/Create', { token: wx.getStorageSync('token'), order_id, order_detail_id, type: reasonType, price: money, reason, msg: remake, number, images }).then(res=>{
-      if(res.code == 0 || res.data.code == 0) {
-        return res.data
+      if(res.code === 0 || res.data.code === 0) {
+        return res
       } else {
         wx.showToast({
           title: res.data.msg,

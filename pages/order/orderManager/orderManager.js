@@ -57,10 +57,6 @@ Page({
       })
     }
   },
-  /**
-   * TODO：
-   * 整体订单流程未完成
-   */
   tapDialogButton: function(e){
     const that = this;
     if (e.detail.index) {
@@ -322,7 +318,7 @@ Page({
       content: '确认收货',
       success(res) {
         if (res.confirm) {
-          this.setData({
+          self.setData({
             request: true
           })
           app.request.orderCollect(self.data.orderList[orderIndex].id).then(res=>{
@@ -336,7 +332,7 @@ Page({
                 noMore: false,
                 page: 1
               })
-              self.onShow();
+              setTimeout(() => { self.onShow(); }, 800)
             }
             // self.onLoad()
           })

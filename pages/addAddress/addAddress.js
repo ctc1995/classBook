@@ -46,6 +46,7 @@ Page({
     currentAddressId: null,
   },
 
+
   formInputChange(e) {
     console.log(e);
     const { field } = e.currentTarget.dataset

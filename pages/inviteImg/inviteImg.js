@@ -16,6 +16,7 @@ Page({
     this.setData({
       inviteImg: options.inviteImg
     })
+    wx.hideShareMenu()
   },
   // 长按保存图片
   saveImg(e) {

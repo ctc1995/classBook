@@ -191,7 +191,7 @@ Page({
       // 提交退货登记
       app.request.aftersaledelivery({ id: this.data.shouhouId, name: this.data.logisName, number: this.data.logisNumber}).then(res=>{
         console.log(res);
-        this.setData({
+        self.setData({
           request: false
         })
         if (res.code == 0) {
@@ -234,27 +234,19 @@ Page({
       }
       app.request.postOrserAftersale(obj).then(res => {
         console.log(res);
-        if (res.code == 0) {
+        self.setData({
+          request: false
+        })
+        if (res) {
           wx.showToast({
             title: '提交成功',
             success(res) {
               setTimeout(() => {
-                prevPage.setData({
-                  orderId: self.data.orderId
+                wx.redirectTo({
+                  url: '../orderReceipt/orderReceipt?id=' + self.data.order_id,
                 })
-                wx.navigateBack({ delta: 1 })
               }, 1500);
             },
-            complete() {
-              self.setData({
-                request: false
-              })
-            }
-          })
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none',
           })
         }
       })

@@ -139,6 +139,13 @@ Page({
   },
   // 调起微信支付
   buy(){
+    if (!(this.data.base.address)) {
+      wx.showToast({
+        title: '请填写收货地址',
+        icon: 'none'
+      })
+      return;
+    }
     if(this.data.disable){
       this.setData({
         disable: false
