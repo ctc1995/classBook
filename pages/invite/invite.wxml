@@ -7,7 +7,7 @@
     <button class="btn btn_primary btn_invite" bindtap="invite">立即邀请</button>
     <navigator class="need_link_icon invite_history" url="../inviteHistory/inviteHistory">
       <image src="../../assets/images/invite.png" mode="widthFix" style="display:inline-block; width:32rpx; margin-right: 20rpx;"></image>
-      已成功邀请<span>{{invitaSuccessNum}}</span>位好友，共获得<span>{{exchangeTotalNum}}</span>本书
+      已成功邀请<span>{{invitaSuccessNum || 0}}</span>位好友，共获得<span>{{exchangeTotalNum || 0}}</span>本书
     </navigator>
     <view class="rules">
       <text class="li">邀请规则说明</text>

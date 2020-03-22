@@ -13,6 +13,7 @@ Page({
     canGetCode: true,
     code: '',
     error: '',
+    region: [],
   },
 
   /**
@@ -32,6 +33,16 @@ Page({
     })
   },
 
+  // 地址级联返回
+  regionChange: function (e) {
+    console.log(e.detail)
+    this.setData({
+      [`formData.province`]: e.detail[0],
+      [`formData.city`]: e.detail[1],
+      [`formData.area`]: e.detail[2],
+    })
+  },
+  
   bindDateChange: function (e) {
     this.setData({
       date: e.detail.value,

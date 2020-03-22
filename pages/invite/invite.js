@@ -40,8 +40,8 @@ Page({
     const self = this;
     app.request.invitation().then(res=>{
       self.setData({
-        invitaSuccessNum: res.invita_success_num,
-        exchangeTotalNum: res.exchange_total_num
+        invitaSuccessNum: res.data.invita_success_num,
+        exchangeTotalNum: res.data.exchange_total_num
       })
     })
   },

@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/goods/goods",
+    "pages/addAddress/addAddress",
     "pages/about/about",
+    "pages/goods/goods",
     "pages/search/search",
     "pages/inviteHistory/inviteHistory",
     "pages/invite/invite",
     "pages/mission/mission",
     "pages/shopCar/shopCar",
-    "pages/addAddress/addAddress",
     "pages/address/address",
     "pages/bookshelf/bookshelf",
     "pages/discovery/discovery",

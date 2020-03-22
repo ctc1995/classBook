@@ -136,7 +136,7 @@ Page({
       openid: wx.getStorageSync('openid'),
       encrypted_data: e.detail.encryptedData,
       iv: e.detail.iv,
-      referrer: this.data.ref,
+      referrer: this.data.referrer,
     }).then(res => {
       wx.setStorageSync('token', res.data.token)
     })

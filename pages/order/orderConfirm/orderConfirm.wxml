@@ -1,4 +1,5 @@
 <!--pages/order/orderConfirm/orderConfirm.wxml-->
+<wxs src="../../../utils/toFixed.wxs" module="we" />
 <view class="page_order_confirm">
   <view class="need_link_icon order_delivery" bindtap="changeAddress">
     <p class="address" wx:if="{{!base.address}}">暂无地址，点击进入新建地址</p>
@@ -10,8 +11,8 @@
   </view>
   <i class="line"></i>
   <view class="order_detail">
-      <orderGoods buy-goods-list="{{goods_list}}"></orderGoods>
-    <view class="need_link_icon delivery_method" bindtap="chooseCoupon">
+    <orderGoods buy-goods-list="{{goods_list}}"></orderGoods>
+    <view class="need_link_icon delivery_method" data-price="{{base.total_price}}" bindtap="chooseCoupon">
       <text class="line_title">优惠券</text>
       <text class="method" wx:if="{{extension_data[0].price == 0}}">包邮券</text>
       <text class="method" wx:elif="{{extension_data[0].price != 0 && extension_data[1]}}">{{extension_data[1].tips}}</text>
@@ -26,7 +27,7 @@
       <input maxlength="100" placeholder="选填，请先和商家协商一致" bindinput="bindKeyRemakes"></input>
     </view>
     <view class="goods_total">
-        共计 {{base.buy_count}} 件商品，应付总金额<text class="money">￥{{base.actual_price}}</text>元
+        共计 {{base.buy_count}} 件商品，应付总金额<text class="money">￥{{we.toFixed(base.actual_price)}}</text>元
     </view>
   </view>
   <view class="tips">
@@ -38,9 +39,9 @@
   <view class="order_footer">
     <view class="total_money">
       <view class="money">
-        <text class="unit">￥</text>{{base.actual_price}}
+        <text class="unit">￥</text>{{we.toFixed(base.actual_price)}}
       </view>
-      <text class="total_tips">共{{base.buy_count}}件，含运费: ￥{{base.increase_price}}</text>
+      <text class="total_tips">共{{base.buy_count}}件，含运费: ￥{{we.toFixed(base.increase_price)}}</text>
     </view>
     <button class="btn btn_primary" bindtap="buy">去支付</button>
   </view>

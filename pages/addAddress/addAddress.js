@@ -42,7 +42,7 @@ Page({
       'county_name': '',
       'is_default': false,
     },
-    region: ['', '', ''],
+    region: [],
     currentAddressId: null,
   },
 
@@ -54,13 +54,13 @@ Page({
       [`formData.${field}`]: e.detail.value
     })
   },
-  bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  // 地址级联返回
+  regionChange: function(e) {
+    console.log(e.detail)
     this.setData({
-      region: e.detail.value,
-      'formData.province_name': e.detail.value[0],
-      'formData.city_name': e.detail.value[1],
-      'formData.county_name': e.detail.value[2]
+      'formData.province_name': e.detail[0],
+      'formData.city_name': e.detail[1],
+      'formData.county_name': e.detail[2]
     })
   },
   switchChange:function(e){

@@ -104,8 +104,8 @@ Page({
     })
   },
   // 选择优惠券
-  chooseCoupon() {
-    const self = this;
+  chooseCoupon(e) {
+    const self = this, totalPrice = e.currentTarget.dataset.price;
     wx.navigateTo({
       url: '../../coupon/coupon',
       events: {
@@ -133,7 +133,7 @@ Page({
       },
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', true)
+        res.eventChannel.emit('acceptDataFromOpenerPage', { isUse: true, totalPrice: totalPrice})
       }
     })
   },

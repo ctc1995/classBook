@@ -1,0 +1,12 @@
+<!--component/region/region.wxml-->
+
+<picker mode="multiSelector" 
+        bindchange="bindMultiPickerChange" 
+        bindcolumnchange="bindMultiPickerColumnChange" 
+        value="{{multiIndex}}"
+        range="{{objectMultiArray}}"
+        range-key="{{'name'}}">
+  <view class="picker">
+    {{multiIndex.length ? objectMultiArray[0][multiIndex[0]].name +'，'+objectMultiArray[1][multiIndex[1]].name +'，'+objectMultiArray[2][multiIndex[2]].name : defaultRegion[0] + '，' + defaultRegion[1] + '，' + defaultRegion[2]}}
+  </view>
+</picker>

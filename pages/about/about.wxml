@@ -11,7 +11,7 @@
       <p class="phone">{{about.mobile || '绑定手机号，到货早知道'}}</p>
     </div>
   </navigator>
-  <image class="about_banner" src="http://dianshu.chaoshang666.com{{about.advertisement}}" mode="widthFix"></image>
+  <image class="about_banner" src="{{'https://kongz.com' + about.advertisement}}" mode="widthFix"></image>
   <view class="my_order">
     <p class="title">
       我的订单

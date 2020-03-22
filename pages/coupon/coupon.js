@@ -45,7 +45,8 @@ Page({
     const eventChannel = this.getOpenerEventChannel(), self = this;
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
       self.setData({
-        isUse: data
+        isUse: data.isUse,
+        totalPrice: data.totalPrice
       })
     })
     app.request.getCoupon().then(res=>{
@@ -67,8 +68,15 @@ Page({
   // 选择优惠券
   chooseCoupon: function(e){
     console.log(e);
-    const eventChannel = this.getOpenerEventChannel()
-    eventChannel.emit('acceptDataFromOpenedPage', e.currentTarget.dataset.item);
+    const eventChannel = this.getOpenerEventChannel(), couponItem = e.currentTarget.dataset.item
+    if (+couponItem.coupon.where_order_price > this.data.totalPrice) {
+      wx.showToast({
+        title: '订单未达到优惠卷使用条件',
+        icon: 'none'
+      })
+      return false;
+    }
+    eventChannel.emit('acceptDataFromOpenedPage', couponItem);
     wx.navigateBack()
   },
   /**

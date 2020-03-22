@@ -1,7 +1,7 @@
 <!-- pages/bookMenu.wxml -->
 <view class="page_book_menu">
   <view class="header">
-    <image class="header_image" wx:if="{{bookMenu.layout}}" src="http://dianshu.chaoshang666.com{{bookMenu.layout}}" mode="widthFix"></image>
+    <image class="header_image" wx:if="{{bookMenu.layout}}" src="{{bookMenu.layout}}" mode="widthFix"></image>
     <image class="header_image" wx:else src="../../assets/images/bookmenu/header-bg.png" mode="widthFix"></image>
     <view class="book_menu_detail">
       <p class="book_menu_title">{{bookMenu.title}}</p>
@@ -27,7 +27,7 @@
   <view class="mod_good">
     <div class="book_list">
       <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}">
-        <navigator class="book_content" url="../goods/goods?bookId={{item.id}}">
+        <navigator class="book_content" url="../goods/goods?bookId={{item.goods_id}}">
           <image src="{{item.images}}" mode="aspectFit"></image>
           <section class="book_detail">
             <section class="book_info">

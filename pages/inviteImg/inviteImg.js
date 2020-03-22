@@ -19,15 +19,27 @@ Page({
     wx.hideShareMenu()
   },
   // 长按保存图片
-  saveImg(e) {
+  saveImage(e) {
     let url = e.currentTarget.dataset.url;
-    wx.saveImageToPhotosAlbum({
-      filePath: url,
-      success(res) {
-        console.log(res);
-      },
-      fail(res) {
-        console.log(res);
+    console.log(url);
+    wx.downloadFile({
+      url,
+      success: function (res) {
+        let path = res.tempFilePath
+        wx.saveImageToPhotosAlbum({
+          filePath: path,
+          success(res) {
+            console.log(res)
+          },
+          fail(res) {
+            console.log(res)
+          },
+          complete(res) {
+            console.log(res)
+          }
+        })
+      }, fail: function (res) {
+        console.log(res)
       }
     })
   },

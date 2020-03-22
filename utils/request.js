@@ -43,6 +43,10 @@ class request {
   getAccessToken(){
     return this._api.getRequest('user/access_token').then(res=> res.data)
   }
+  // 获取地址
+  getRegion(pid){
+    return this._api.getRequest(`Region/Index${pid ? '?pid='+pid: ''}`).then(res=> res.data)
+  }
   /**
    * Banner图
    */
@@ -454,7 +458,7 @@ class request {
    */
   //购物车页面
   getCartIndex() {
-    return this._api.postRequest('Cart/Index', { token: wx.getStorageSync('token') }).then(res=>{
+    return this._api.postRequest('Cart/Index', { token: wx.getStorageSync('token'), page: 1 }).then(res=>{
       if(res.code == 0 || res.data.code == 0) {
         return res.data
       } else {

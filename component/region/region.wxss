@@ -1,0 +1,5 @@
+/* component/region/region.wxss */
+.picker{
+  min-height: 48rpx;
+  background-color: #FFFFFF;
+}

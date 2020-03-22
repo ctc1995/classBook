@@ -8,39 +8,39 @@ Page({
    */
   data: {
     invite:{
-      "invitation": [
-        {
-          'username': '袁敏',
-          'mobile': '13640978507',
-          'add_time': '2019-6-4 23:23:32',
-        },
-        {
-          'username': '袁敏',
-          'mobile': '13640978507',
-          'add_time': '2019-6-4 23:23:32',
-        }],
-      "invita_total_num": "10",
-      "invita_success_num": "4",
-      'exchange_total_num':'3',
-      'exchange_num':'3',
-      'admin_count_give':'3',
-      'admin_max_receive':'3',
-      "user_exchange":[
-        {
-          'user_id': 1,
-          'goods_id': 3,
-          'title': '手机',
-          'add_time': '2019-6-7 12:34:22',
-          'status': 1
-        },
-        {
-          'user_id': 1,
-          'goods_id': 3,
-          'title': '手机',
-          'add_time': '2019-6-7 12:34:22',
-          'status': 1
-        }
-      ]
+      // "invitation": [
+      //   {
+      //     'username': '袁敏',
+      //     'mobile': '13640978507',
+      //     'add_time': '2019-6-4 23:23:32',
+      //   },
+      //   {
+      //     'username': '袁敏',
+      //     'mobile': '13640978507',
+      //     'add_time': '2019-6-4 23:23:32',
+      //   }],
+      // "invita_total_num": "10",
+      // "invita_success_num": "4",
+      // 'exchange_total_num':'3',
+      // 'exchange_num':'3',
+      // 'admin_count_give':'3',
+      // 'admin_max_receive':'3',
+      // "user_exchange":[
+      //   {
+      //     'user_id': 1,
+      //     'goods_id': 3,
+      //     'title': '手机',
+      //     'add_time': '2019-6-7 12:34:22',
+      //     'status': 1
+      //   },
+      //   {
+      //     'user_id': 1,
+      //     'goods_id': 3,
+      //     'title': '手机',
+      //     'add_time': '2019-6-7 12:34:22',
+      //     'status': 1
+      //   }
+      // ]
     }
   },
 
@@ -50,8 +50,9 @@ Page({
   onLoad: function (options) {
     const self = this;
     app.request.invitation().then(res => {
+      console.log(res);
       self.setData({
-        invite: res
+        invite: res.data
       })
     })
   },

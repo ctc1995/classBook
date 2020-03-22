@@ -5,6 +5,7 @@
     "mp-toptips": "../../weui/toptips/toptips",
     "mp-cells": "../../weui/cells/cells",
     "mp-cell": "../../weui/cell/cell",
-    "mp-form": "../../weui/form/form" 
+    "mp-form": "../../weui/form/form",
+    "region": "../../component/region/region" 
   }
 }
