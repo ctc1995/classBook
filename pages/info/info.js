@@ -20,8 +20,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.regionComponent = this.selectComponent("#region")
     app.request.getAbout().then(res => {
-      console.log(res);
       this.setData({
         'formData.avatar': res.data.avatar,
         'formData.nickname': res.data.nickname,
@@ -30,6 +30,7 @@ Page({
         'formData.mobile': res.data.mobile,
         region: [res.data.province, res.data.city, res.data.area]
       })
+      this.regionComponent.updataRate(this.data.region);
     })
   },
 

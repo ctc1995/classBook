@@ -19,6 +19,8 @@
 }
 .header .book_menu_detail{
   position: absolute;
+  bottom: 0;
+  left: 0;
   background-color: rgba(0,0,0,0.45);
   color: #fff;
   width: 750rpx;

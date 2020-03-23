@@ -472,7 +472,7 @@ class request {
   // 到货提醒
   getCartArri(goods_id = null, isbn = undefined, title = undefined, images = undefined) {
     let obj = { token: wx.getStorageSync('token') }
-    if (isbn) {
+    if (title || goods_id) {
       Object.assign(obj, { goods_id, isbn, title, images })
     } else {
       Object.assign(obj, { page: 1, number: 20 })

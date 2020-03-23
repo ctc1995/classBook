@@ -1,6 +1,6 @@
 <!--component/orderGoods/orderGoods.wxml-->
 <view class="goods_list">
-  <view class="goods" wx:for="{{buyGoodsList}}" wx:key="{{index}}">
+  <view class="goods" wx:for="{{buyGoodsList}}" wx:key="{{index}}" wx:if="{{item.goods_id || item.id}}">
     <image src="{{item.images}}" mode="aspectFit" bindtap="detail" data-index="{{index}}"></image>
     <view class="title_attr" bindtap="detail" data-index="{{index}}">
       <text class="good_title">{{item.title}}</text>

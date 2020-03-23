@@ -36,7 +36,7 @@
           <view class="weui-label">地区</view>
         </view>
         <view class="weui-cell__bd">
-          <region region="region" bind:regionChange="regionChange"> </region>
+          <region id="region" bind:regionChange="regionChange"> </region>
           <!-- <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
             <view class="weui-input">
               {{region[0]}} {{region[1]}} {{region[2]}}

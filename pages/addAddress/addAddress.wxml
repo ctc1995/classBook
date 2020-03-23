@@ -13,7 +13,7 @@
           <view class="weui-label">所在区域</view>
         </view>
         <view class="weui-cell__bd">
-          <region region="region" bind:regionChange="regionChange"> </region>
+          <region id="region" bind:regionChange="regionChange"> </region>
           <!-- <picker class="address" mode="region" bindchange="bindRegionChange" value="{{region}}">
             <view class="picker" style="height: 56rpx;">
               {{region[0]}} {{region[1]}} {{region[2]}}

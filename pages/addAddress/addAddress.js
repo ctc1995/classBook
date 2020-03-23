@@ -126,6 +126,7 @@ Page({
    */
   onLoad: function(options) {
     const that = this;
+    this.regionComponent = this.selectComponent("#region")
     this.setData({
       currentAddressId: options.id
     })
@@ -136,6 +137,7 @@ Page({
         formData: res.data,
         region: [res.data.province_name, res.data.city_name, res.data.county_name]
       })
+      that.regionComponent.updataRate(that.data.region);
       console.log(that.data.formData)
     })
     console.log(this.data.currentAddressId)

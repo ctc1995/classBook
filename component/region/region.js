@@ -2,21 +2,10 @@
 const app = new getApp();
 Component({
   /**
-   * 组件的属性列表
-   */
-  properties: {
-    region: {
-      type: Array,
-      value: []
-    },
-  },
-
-  /**
    * 生命周期
    */
   lifetimes: {
     attached: function () {
-      console.log(this.properties.region)
       // 在组件实例进入页面节点树时执行
       const self = this;
       let objectMultiArray = [], reqPromise = [];
@@ -46,15 +35,6 @@ Component({
       // 在组件实例被从页面节点树移除时执行
     },
   },
-  // 数据监听
-  observers: {
-    'region': function (region) {
-      console.log(region);
-      this.setData({
-        defaultRegion: region
-      })
-    }
-  },
   /**
    * 组件的初始数据
    */
@@ -68,6 +48,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    updataRate: function (data) {
+      this.setData({
+        defaultRegion: data
+      })
+    },
     getRegion: function (pid) {
       return app.request.getRegion(pid).then(res => {
         return res.data;
