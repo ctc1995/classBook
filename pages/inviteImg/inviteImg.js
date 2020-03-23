@@ -18,10 +18,48 @@ Page({
     })
     wx.hideShareMenu()
   },
-  // 长按保存图片
-  saveImage(e) {
-    let url = e.currentTarget.dataset.url;
+  // 长按小程序码
+  bindLongPress(e) {
+    let url = e.currentTarget.dataset.url, self = this;
     console.log(url);
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          console.log(0)
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success() {
+              self.saveImage(url)
+            },
+            fail() {
+              wx.showToast({
+                title: '保存小程序码需要授权',
+                icon: 'none'
+              })
+            }
+          })
+        } else {
+          console.log(1)
+          wx.showModal({
+            title: '保存小程序码',
+            content: '是否允许将小程序码保存到相册',
+            success(res) {
+              if (res.confirm) {
+                self.saveImage(url)
+              } else if (res.cancel) {
+                wx.showToast({
+                  title: '已取消将小程序码保存到相册',
+                  icon: 'none'
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+  },
+  // 保存图片
+  saveImage(url) {
     wx.downloadFile({
       url,
       success: function (res) {

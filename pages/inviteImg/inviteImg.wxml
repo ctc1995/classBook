@@ -6,7 +6,7 @@
     </view>
     <text class="slogan">将页面截屏并分享给朋友，将获得推广奖励</text>
     <text class="slogan">叫上朋友，来典书一起看书吧！</text>
-    <image class="mini_code" src="{{inviteImg}}" data-url="{{inviteImg}}" bindlongpress="saveImage"></image>
+    <image class="mini_code" src="{{inviteImg}}" data-url="{{inviteImg}}" bindlongpress="bindLongPress"></image>
     <text class="tips">长按小程序码　即可保存到相册</text>
   </view>
 </view>
