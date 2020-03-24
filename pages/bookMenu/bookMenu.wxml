@@ -26,8 +26,8 @@
   <!-- <i class="line"></i> -->
   <view class="mod_good">
     <div class="book_list">
-      <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}" wx:if="{{item.goods_id}}">
-        <navigator class="book_content" url="../goods/goods?bookId={{item.goods_id}}">
+      <section class="book_item" wx:for="{{goodList}}" wx:key="{{index}}" wx:if="{{item.goods_id || item.id}}">
+        <navigator class="book_content" url="../goods/goods?bookId={{item.goods_id || item.id}}">
           <image src="{{item.images}}" mode="aspectFit"></image>
           <section class="book_detail">
             <section class="book_info">
