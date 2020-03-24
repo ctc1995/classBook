@@ -74,7 +74,8 @@ Page({
   // 加购
   addShopCar(e) {
     console.log(e);
-    app.request.addCart({ goods_id: e.currentTarget.dataset.book.id }).then(res => {
+    let book = e.currentTarget.dataset.book;
+    app.request.addCart({ goods_id: book.id || book.goods_id}).then(res => {
       console.log(res);
       wx.showToast({
         title: '加入购物车成功',

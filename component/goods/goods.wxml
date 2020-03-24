@@ -1,5 +1,5 @@
 <!--component/goods/goods.wxml-->
-<section class="book_item" wx:for="{{goods}}" wx:key="{{index}}" wx:if="{{item.goods_id}}">
+<section class="book_item" wx:for="{{goods}}" wx:key="{{index}}" wx:if="{{item.goods_id || item.id}}">
   <navigator hover-class="none" class="book_content" url="../goods/goods?bookId={{item.goods_id || item.id}}">
     <image src="{{item.images.indexOf('http') == -1? 'http://kongz.com'+item.images:item.images}}" mode="aspectFit"></image>
     <section class="book_detail">
