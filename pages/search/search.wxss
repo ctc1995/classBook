@@ -10,7 +10,7 @@
     flex-wrap: wrap;
 }
 .mod_book_list .item{
-    width: 212rpx;
+    width: 211rpx;
     padding: 10rpx 0;
     margin-bottom: 30rpx;
     border-radius: 20rpx;
