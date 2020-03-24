@@ -8,8 +8,8 @@ Page({
   data: {
     bookMenu:{
       id: 1008,
-      title: '典书书单',
-      info: '很多人追求财务自由，其实就是因为缺少对生活的掌控能力，让自己陷入生活的重压，那么要怎么样提高我们对生活的掌控力呢？',
+      title: '',
+      info: '',
       like: true,
       likeCount: 29090,
       shareCount: 2883
