@@ -5,7 +5,7 @@
     <section class="book_detail">
       <section class="book_info">
         <p class="book_title">{{item.title}}</p>
-        <p class="book_auth" wx:if="{{item.author_name}}">{{item.author_name}}</p>
+        <p class="book_auth">{{item.author_name || '未知'}}</p>
         <p class="book_rate" wx:if="{{item.rate}}">豆瓣评分：{{item.rate}}</p>
         <p class="book_rate" wx:if="{{!item.rate && item.qualit}}">成色：{{item.quality}}</p>
       </section>

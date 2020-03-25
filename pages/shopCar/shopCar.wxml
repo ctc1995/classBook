@@ -11,7 +11,7 @@
         <navigator hover-class="none" url="../goods/goods?bookId={{item.goods_id || item.id}}">
           <section class="book_info">
             <p class="book_title">{{item.title}}</p>
-            <p class="book_auth">{{item.author_name}}</p>
+            <p class="book_auth">{{item.author_name || '未知'}}</p>
             <!-- <p class="book_rate">豆瓣评分：{{item.rate}}</p> -->
           </section>
         </navigator>
