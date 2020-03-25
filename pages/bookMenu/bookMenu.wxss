@@ -5,12 +5,12 @@
 }
 .header{
   width: 750rpx;
-  min-height: 608rpx;
+  /* min-height: 608rpx; */
   color: #333;
+  /* background-color: rgb(54,54,54); */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   position: relative;
 }
 .header .header_image{

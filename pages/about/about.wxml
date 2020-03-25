@@ -11,7 +11,8 @@
       <p class="phone">{{about.mobile || '绑定手机号，到货早知道'}}</p>
     </div>
   </navigator>
-  <image class="about_banner" src="{{'https://kongz.com' + about.advertisement}}" mode="widthFix"></image>
+  <image class="about_banner" src="{{about.advertisement.indexOf('http') == -1 ? 'https://kongz.com' + about.advertisement : about.advertisement}}" mode="widthFix"></image>
+  <!-- <image class="about_banner" src="{{'https://kongz.com' + about.advertisement}}" mode="widthFix"></image> -->
   <view class="my_order">
     <p class="title">
       我的订单
