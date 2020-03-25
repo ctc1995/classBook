@@ -39,7 +39,7 @@
   <view class="goods_detail">
     <p class="detail_item">
       <span class="unit">作者</span>
-      <span class="txt">{{goods.author}}</span>
+      <span class="txt">{{goods.author_name || '未知'}}</span>
     </p>
     <p class="detail_item">
       <span class="unit">出版社</span>

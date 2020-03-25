@@ -4,7 +4,7 @@
     <image src="../../assets/images/friend.png" mode="widthFix"></image>
     <view class="title_info">
       <text class="title">邀请好友</text>
-      <text class="info">每成功邀请3位，即可免费获取原价30的书籍</text>
+      <text class="info">每成功邀请5位，即可免费获取原价30的书籍</text>
     </view>
   </navigator>
   <navigator class="need_link_icon mission_item" url="../attention/attention">

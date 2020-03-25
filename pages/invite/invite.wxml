@@ -11,7 +11,7 @@
     </navigator>
     <view class="rules">
       <text class="li">邀请规则说明</text>
-      <text class="rule">1、每邀请3位的新人好友，即可获得免费书奖励，最高可得5本书，多要请的无效；</text>
+      <text class="rule">1、每邀请5位的新人好友，即可获得免费书奖励，最高可得5本书，多邀请的无效；</text>
       <text class="rule">2、书籍奖励将在您累计邀请的新用户成功注册小程序后与客服联系，可在邀请奖励明细中查看；</text>
       <text class="rule">3、您的好友必须是典书的新用户，并成功绑定手机号，才能获得奖励；</text>
       <text class="rule">4、活动最终解释权归典书所有。</text>
